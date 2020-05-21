@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "1057017974128",
+    "firebase_url": "https://swt-p-ss20-profcollector.firebaseio.com",
+    "project_id": "swt-p-ss20-profcollector",
+    "storage_bucket": "swt-p-ss20-profcollector.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057017974128:android:f2b822e5791f24404993b5",
+        "android_client_info": {
+          "package_name": "com.THM.Dixit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057017974128-glb0kfdi59q0564of9f6ltne5n0dn6j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCatc8f3mMpw3KwemTinC55CdmB7G0hl4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057017974128-glb0kfdi59q0564of9f6ltne5n0dn6j3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057017974128-t5hdu36hc0ga8plgga0ot3d13cjlga8s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.SWT-PSS20ProfCollector"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057017974128:android:dd8f08b945d75cef4993b5",
+        "android_client_info": {
+          "package_name": "com.THM.MMOFrameWork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057017974128-glb0kfdi59q0564of9f6ltne5n0dn6j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCatc8f3mMpw3KwemTinC55CdmB7G0hl4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057017974128-glb0kfdi59q0564of9f6ltne5n0dn6j3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057017974128-t5hdu36hc0ga8plgga0ot3d13cjlga8s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.SWT-PSS20ProfCollector"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

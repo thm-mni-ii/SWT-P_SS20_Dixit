@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 3d8577d7e046f01eb9bec3b47715dc3b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BioRhyme
+  fontNames:
+  - BioRhyme
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f89b317539f136d199d0ee0341b21e27, type: 3}
+  - {fileID: 12800000, guid: d163bb470930e0ee9bd42c24f3aed5b9, type: 3}
+  - {fileID: 12800000, guid: 71e7b5f94a7f9535ebafc4dc13238993, type: 3}
+  - {fileID: 12800000, guid: 60b34f8bc043e6dbdb46cadf7d94e668, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

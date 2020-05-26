@@ -1,9 +1,14 @@
-﻿using System.Collections;
+﻿/* created by: SWT-P_SS_20_Dixit */
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// The GameManger keeps track of all given Answers and Changes the curren Phase of the Game.
+/// It only exists on the Server.
+/// </summary>
 public class GameManager : NetworkBehaviour
 {
     private Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
@@ -14,19 +19,29 @@ public class GameManager : NetworkBehaviour
     private enum Phase { WriteAnswer, ChoseAnswer }
     private Phase currentPhase;
 
-    public void Start()
+    /// <summary>
+    /// Called when the GameManger starts on the Server.
+    /// </summary>
+    public override void OnStartServer()
     {
         networkManager = NetworkManager.singleton;
 
         currentPhase = Phase.WriteAnswer;
     }
 
-    public List<Player> GetPlayers()
+    /// <summary>
+    /// Gets the list of Players in the current Game.
+    /// <returns>The list of players.</returns>
+    /// </summary>
+    private List<Player> GetPlayers()
     {
         return NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>()).ToList();
     }
 
 
+    /// <summary>
+    /// Logs the given Answer of a Player during the WriteAnwer Phase.
+    /// </summary>
     public void LogAnswer(NetworkIdentity player, string answer)
     {
         answers.Add(player, answer);
@@ -37,6 +52,9 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Logs the choosen Answer of a Player during the ChoseAnswer Phase.
+    /// </summary>
     public void LogAnswer(NetworkIdentity player, int choice)
     {
         choices.Add(player, choice);
@@ -46,6 +64,9 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes Phase in the GameManager and calls the Corresponding RPC-Call
+    /// </summary>
     private void ChangePhase()
     {
         switch (currentPhase)

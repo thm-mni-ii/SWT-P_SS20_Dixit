@@ -777,31 +777,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuenstionCard (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6959784890192377207, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959784890192377207, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959784890192377207, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959784890192377207, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959784890192377207, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8686469769191165856, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
         type: 3}
       propertyPath: m_Mesh

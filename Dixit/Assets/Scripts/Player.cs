@@ -21,9 +21,9 @@ public class Player : NetworkBehaviour
     /// </summary>
     public override void OnStartLocalPlayer()
     {
-        var nm = NetowrkManager.singleton.gameObject;
+        var nm = GameServer.singleton.gameObject;
 
-        gameManager = nm.GetComponent<NetowrkManager>().gameManager.GetComponent<GameManager>();
+        gameManager = nm.GetComponent<GameServer>().gameManager.GetComponent<GameManager>();
     }
 
     /// <summary>

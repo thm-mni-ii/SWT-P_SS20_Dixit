@@ -24,4 +24,9 @@ public class PlayerInput : MonoBehaviour
     {
         LocalPlayer.CmdGiveAnswer(answer);
     }
+
+    public void SelectAnswer()
+    {
+        LocalPlayer.CmdChooseAnswer(1);
+    }
 }

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435095666381955178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.470164, y: 1.152577, z: -0.9060359}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +62,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  gameManager: {fileID: 4423061819860707258, guid: 2c16eab075ec1a30a98e00d2f287541a,
-    type: 3}
-  gameManagerPrefab: {fileID: 449457969102196780, guid: 2c16eab075ec1a30a98e00d2f287541a,
-    type: 3}

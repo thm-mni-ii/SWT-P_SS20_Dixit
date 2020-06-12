@@ -78,11 +78,13 @@ public class GameServer : NetworkManager
         localPlayerInfo = new PlayerInfo("Mustermann", true);
     }
 
+/*
     public GameManager gameManager {get; private set;}
 
-    public override void OnStartServer() { 
+    public override void OnServerSceneChanged(string scene) { 
         var gm = UnityEngine.Object.Instantiate(spawnPrefabs[0]);
         NetworkServer.Spawn(gm);
         gameManager = gm.GetComponent<GameManager>();
-    }
+        Debug.Log("wurde aufgerufen! Szene: "+scene);
+    }*/
 }

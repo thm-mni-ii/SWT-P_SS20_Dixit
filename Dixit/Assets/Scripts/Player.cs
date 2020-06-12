@@ -14,16 +14,14 @@ public class Player : NetworkBehaviour
     private int points {get; set;}
     private string playerName {get; set;}
 
-    private GameManager gameManager;
+    public GameManager gameManager;
 
     /// <summary>
     /// Called when the local Player Object has been set up
     /// </summary>
     public override void OnStartLocalPlayer()
     {
-        var nm = GameServer.singleton.gameObject;
-
-        gameManager = nm.GetComponent<GameServer>().gameManager.GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     /// <summary>

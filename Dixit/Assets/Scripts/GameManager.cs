@@ -19,6 +19,9 @@ public class GameManager : NetworkBehaviour
     private enum Phase { WriteAnswer, ChoseAnswer }
     private Phase currentPhase;
 
+    public string questionSetID = "VM3C9CvZZeiv6fetjdmq";
+    public QuestionSet questionSet;
+
     /// <summary>
     /// Called when the GameManger starts on the Server.
     /// </summary>
@@ -27,6 +30,15 @@ public class GameManager : NetworkBehaviour
         networkManager = NetworkManager.singleton;
 
         currentPhase = Phase.WriteAnswer;
+
+        QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWith((task) => {
+            if(task.IsFaulted){
+                Debug.LogException(task.Exception);
+            }else{
+                questionSet = task.Result;
+                //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.question));
+            }
+        });
     }
 
     /// <summary>
@@ -73,23 +85,13 @@ public class GameManager : NetworkBehaviour
         {
             case Phase.WriteAnswer:
                 currentPhase = Phase.ChoseAnswer;
-                RpcChangePhase();
                 break;
             case Phase.ChoseAnswer:
                 currentPhase = Phase.WriteAnswer;
-                RpcChangePhase();
                 break;
             default:
                 break;
         }
-    }
-
-    /// <summary>
-    /// Changes the Scene on every Client to the correct Phase
-    /// </summary>
-    [ClientRpc]
-    public void RpcChangePhase()
-    {
         foreach (var a in GetPlayers())
         {
            Debug.Log(a.netId);

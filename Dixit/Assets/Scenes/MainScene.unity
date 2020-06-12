@@ -563,11 +563,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 698334709}
-    - target: {fileID: 1632766247892056463, guid: c6c8b40c827157b309aef091b64d162c,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9127835124013797395, guid: c6c8b40c827157b309aef091b64d162c,
         type: 3}
       propertyPath: m_Name

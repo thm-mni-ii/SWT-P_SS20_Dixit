@@ -12,10 +12,8 @@ using Mirror;
 public class PlayerInput : MonoBehaviour
 {
     private Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
-
     public Player LocalPlayer => _localPlayer.Value;
 
-    
     /// <summary>
     /// Calls the GiveAnswer Command on the local Player.
     /// <param name="answer">The given Answer.</param>
@@ -23,6 +21,10 @@ public class PlayerInput : MonoBehaviour
     public void GiveAnswer(string answer)
     {
         LocalPlayer.CmdGiveAnswer(answer);
+    }
+
+    public void GiveAnswer(TMPro.TMP_InputField answer){
+        GiveAnswer(answer.text);
     }
 
     public void SelectAnswer()

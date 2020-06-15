@@ -15,7 +15,7 @@ public class PlayerInput : MonoBehaviour
 
     public Player LocalPlayer => _localPlayer.Value;
 
-    
+
     /// <summary>
     /// Calls the GiveAnswer Command on the local Player.
     /// <param name="answer">The given Answer.</param>

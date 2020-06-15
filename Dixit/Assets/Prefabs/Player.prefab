@@ -62,7 +62,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  gameManager: {fileID: 4423061819860707258, guid: 2c16eab075ec1a30a98e00d2f287541a,
-    type: 3}
-  gameManagerPrefab: {fileID: 449457969102196780, guid: 2c16eab075ec1a30a98e00d2f287541a,
-    type: 3}

@@ -13,11 +13,15 @@ public class GameManager : NetworkBehaviour
 {
     private Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private Dictionary<NetworkIdentity, int> choices = new Dictionary<NetworkIdentity, int>();
-    
+
     private NetworkManager networkManager;
-    
+
     private enum Phase { WriteAnswer, ChoseAnswer }
     private Phase currentPhase;
+
+    //Will be set by Game Host later on
+    public string questionSetID = "VM3C9CvZZeiv6fetjdmq";
+    public QuestionSet questionSet;
 
     /// <summary>
     /// Called when the GameManger starts on the Server.
@@ -27,6 +31,20 @@ public class GameManager : NetworkBehaviour
         networkManager = NetworkManager.singleton;
 
         currentPhase = Phase.WriteAnswer;
+
+        // Initializes QuestionSet from given ID
+        QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWith((task) =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogException(task.Exception);
+            }
+            else
+            {
+                questionSet = task.Result;
+                //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.question));
+            }
+        });
     }
 
     /// <summary>
@@ -73,26 +91,16 @@ public class GameManager : NetworkBehaviour
         {
             case Phase.WriteAnswer:
                 currentPhase = Phase.ChoseAnswer;
-                RpcChangePhase();
                 break;
             case Phase.ChoseAnswer:
                 currentPhase = Phase.WriteAnswer;
-                RpcChangePhase();
                 break;
             default:
                 break;
         }
-    }
-
-    /// <summary>
-    /// Changes the Scene on every Client to the correct Phase
-    /// </summary>
-    [ClientRpc]
-    public void RpcChangePhase()
-    {
         foreach (var a in GetPlayers())
         {
-           Debug.Log(a.netId);
+            Debug.Log(a.netId);
         }
     }
 }

@@ -28,7 +28,7 @@ public class GameServer : NetworkManager
     private PlayerInfo localPlayerInfo;
 
     public PlayerInfo LocalPlayerInfo => localPlayerInfo;
-    
+
     /// <summary>
     /// Start is called before the first frame update.
     /// The server loads the player info of the local player, if:
@@ -62,11 +62,11 @@ public class GameServer : NetworkManager
     private void LoadPlayerInfo()
     {
         StreamReader file = new StreamReader(Application.dataPath + @"\..\..\..\" + FILE_NAME);
-        localPlayerInfo = (PlayerInfo)JsonUtility.FromJson(file.ReadLine(),typeof(PlayerInfo));
+        localPlayerInfo = (PlayerInfo)JsonUtility.FromJson(file.ReadLine(), typeof(PlayerInfo));
         file.Close();
         File.Delete(FILE_NAME);
     }
-    
+
     /// <summary>
     /// Sets mockup player info.
     /// The actual info is irrelevant. It does NOT matter if the info says the player is host.
@@ -78,13 +78,4 @@ public class GameServer : NetworkManager
         localPlayerInfo = new PlayerInfo("Mustermann", true);
     }
 
-/*
-    public GameManager gameManager {get; private set;}
-
-    public override void OnServerSceneChanged(string scene) { 
-        var gm = UnityEngine.Object.Instantiate(spawnPrefabs[0]);
-        NetworkServer.Spawn(gm);
-        gameManager = gm.GetComponent<GameManager>();
-        Debug.Log("wurde aufgerufen! Szene: "+scene);
-    }*/
 }

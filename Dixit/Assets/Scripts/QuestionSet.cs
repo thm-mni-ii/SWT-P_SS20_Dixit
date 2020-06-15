@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/* created by: SWT-P_SS_20_Dixit */
+using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using System;
@@ -10,46 +11,58 @@ using Firebase.Extensions;
 using Firebase.Database;
 using Firebase.Unity.Editor;
 
+
+/// <summary>
+/// Represents a QuestionSet in the Game.
+/// Communicates with database to retrieve a QuestionSet and its Questions.
+/// </summary>
 [FirestoreData]
 public class QuestionSet
 {
-  [FirestoreProperty]
-  public List<DocumentReference> Questions { get; set; }
-[FirestoreProperty]
-  public string Docent { get; set; }
-  [FirestoreProperty]
-  public string Module { get; set; }
-  [FirestoreProperty]
-  public string Name { get; set; }
-  public int QuestionCount => Questions.Count;
+    //Questions are stored as references and can later be accessed with getQuestion(...)
+    [FirestoreProperty]
+    public List<DocumentReference> Questions { get; set; }
 
-  public static async Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db){
-    DocumentReference docRef = db.Collection("questionSets").Document(questionSetID);
-    QuestionSet questionSet=null;
+    [FirestoreProperty]
+    public string Docent { get; set; }
 
-    return await docRef.GetSnapshotAsync().ContinueWith<QuestionSet>((task) =>
+    [FirestoreProperty]
+    public string Module { get; set; }
+
+    [FirestoreProperty]
+    public string Name { get; set; }
+
+    public int QuestionCount => Questions.Count;
+
+    /// <summary>
+    /// Retrieves QuestionSet data from the database from ID
+    /// Returns data as QuestionSet Object 
+    /// </summary>
+    public static async Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db)
     {
-      if(task.IsFaulted)
-      Debug.Log(task.Exception);
+        DocumentReference docRef = db.Collection("questionSets").Document(questionSetID);
 
-      var snapshot = task.Result;
-      if (snapshot.Exists)
-      {
-        Debug.Log(string.Format("Document data for QuestionSet document {0} :", snapshot.Id));
+        return await docRef.GetSnapshotAsync().ContinueWith<QuestionSet>((task) =>
+        {
+            if (task.IsFaulted) throw task.Exception;
 
-        questionSet = snapshot.ConvertTo<QuestionSet>();
-        
-      }
-      else
-      {
-        Debug.Log(string.Format("QuestionSet document {0} does not exist!", snapshot.Id));
-      }
-      return questionSet;
-    });
-  }
+            var snapshot = task.Result;
+            if (!snapshot.Exists)
+            {
+                Debug.Log(string.Format("QuestionSet document {0} does not exist!", snapshot.Id));
+                return null;
+            }
+            return snapshot.ConvertTo<QuestionSet>();
+        });
+    }
 
-  public async Task<Question> GetQuestion(int index){
-    return await Question.RetrieveQuestion(Questions[index]).ContinueWith(task => task.Result);
-  }
+    /// <summary>
+    /// Retrieves question data from DocumentReference stored in Questions
+    /// Returns data as Question Object 
+    /// </summary>
+    public async Task<Question> GetQuestion(int index)
+    {
+        return await Question.RetrieveQuestion(Questions[index]).ContinueWith(task => task.Result);
+    }
 
 }

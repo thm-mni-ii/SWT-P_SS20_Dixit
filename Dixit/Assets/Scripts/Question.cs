@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/* created by: SWT-P_SS_20_Dixit */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -9,6 +10,11 @@ using Firebase.Extensions;
 using Firebase.Database;
 using Firebase.Unity.Editor;
 
+
+/// <summary>
+/// Represents a Question in the Game.
+/// Communicates with database to retrieve questions.
+/// </summary>
 [FirestoreData]
 public class Question
 {
@@ -18,30 +24,23 @@ public class Question
     [FirestoreProperty]
     public string answer { get; set; }
 
+    /// <summary>
+    /// Retrieves question data from the database from DocumentReference
+    /// Returns data as Question Object 
+    /// </summary>
     public static async Task<Question> RetrieveQuestion(DocumentReference reference)
     {
-        Question question=null;
         return await reference.GetSnapshotAsync().ContinueWith<Question>((task) =>
         {
-            if (task.IsFaulted)
-                Debug.Log(task.Exception);
+            if (task.IsFaulted) throw task.Exception;
 
             var snapshot = task.Result;
-            if (snapshot.Exists)
-            {
-                Debug.Log(string.Format("Document data for Question document {0} :", snapshot.Id));
-
-                question = snapshot.ConvertTo<Question>();
-
-                Debug.Log(question.question);
-                Debug.Log(question.answer);
-            }
-            else
+            if (!snapshot.Exists)
             {
                 Debug.Log(string.Format("Question document {0} does not exist!", snapshot.Id));
+                return null;
             }
-            return question;
+            return snapshot.ConvertTo<Question>();
         });
     }
-
 }

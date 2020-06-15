@@ -11,8 +11,8 @@ using Mirror;
 /// </summary>
 public class Player : NetworkBehaviour
 {
-    private int points {get; set;}
-    private string playerName {get; set;}
+    private int points { get; set; }
+    private string playerName { get; set; }
 
     public GameManager gameManager;
 

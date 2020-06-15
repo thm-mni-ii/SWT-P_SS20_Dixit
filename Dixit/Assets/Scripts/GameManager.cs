@@ -13,12 +13,13 @@ public class GameManager : NetworkBehaviour
 {
     private Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private Dictionary<NetworkIdentity, int> choices = new Dictionary<NetworkIdentity, int>();
-    
+
     private NetworkManager networkManager;
-    
+
     private enum Phase { WriteAnswer, ChoseAnswer }
     private Phase currentPhase;
 
+    //Will be set by Game Host later on
     public string questionSetID = "VM3C9CvZZeiv6fetjdmq";
     public QuestionSet questionSet;
 
@@ -31,10 +32,15 @@ public class GameManager : NetworkBehaviour
 
         currentPhase = Phase.WriteAnswer;
 
-        QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWith((task) => {
-            if(task.IsFaulted){
+        // Initializes QuestionSet from given ID
+        QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWith((task) =>
+        {
+            if (task.IsFaulted)
+            {
                 Debug.LogException(task.Exception);
-            }else{
+            }
+            else
+            {
                 questionSet = task.Result;
                 //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.question));
             }
@@ -94,7 +100,7 @@ public class GameManager : NetworkBehaviour
         }
         foreach (var a in GetPlayers())
         {
-           Debug.Log(a.netId);
+            Debug.Log(a.netId);
         }
     }
 }

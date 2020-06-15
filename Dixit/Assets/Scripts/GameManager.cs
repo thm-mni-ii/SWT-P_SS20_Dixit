@@ -20,7 +20,7 @@ public class GameManager : NetworkBehaviour
     private Phase currentPhase;
 
     //Will be set by Game Host later on
-    public string questionSetID = "VM3C9CvZZeiv6fetjdmq";
+    public string questionSetID = "0";
     public QuestionSet questionSet;
 
     /// <summary>
@@ -42,7 +42,7 @@ public class GameManager : NetworkBehaviour
             else
             {
                 questionSet = task.Result;
-                //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.question));
+                //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.QuestionText));
             }
         });
     }

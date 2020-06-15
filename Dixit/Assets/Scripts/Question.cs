@@ -19,10 +19,13 @@ using Firebase.Unity.Editor;
 public class Question
 {
     [FirestoreProperty]
-    public string question { get; set; }
+    public string QuestionText { get; set; }
 
     [FirestoreProperty]
-    public string answer { get; set; }
+    public int Difficulty { get; set; }
+
+    [FirestoreProperty]
+    public string Answer { get; set; }
 
     /// <summary>
     /// Retrieves question data from the database from DocumentReference

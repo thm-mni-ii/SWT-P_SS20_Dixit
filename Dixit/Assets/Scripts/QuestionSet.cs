@@ -40,7 +40,7 @@ public class QuestionSet
     /// </summary>
     public static async Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db)
     {
-        DocumentReference docRef = db.Collection("questionSets").Document(questionSetID);
+        DocumentReference docRef = db.Collection("QuestionSets").Document(questionSetID);
 
         return await docRef.GetSnapshotAsync().ContinueWith<QuestionSet>((task) =>
         {

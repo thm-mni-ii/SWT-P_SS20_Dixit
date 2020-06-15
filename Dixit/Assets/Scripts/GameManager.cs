@@ -63,6 +63,7 @@ public class GameManager : NetworkBehaviour
     public void LogAnswer(NetworkIdentity player, string answer)
     {
         answers.Add(player, answer);
+        Debug.Log(answer);
 
         if (answers.Count == networkManager.numPlayers)
         {
@@ -98,9 +99,13 @@ public class GameManager : NetworkBehaviour
             default:
                 break;
         }
-        foreach (var a in GetPlayers())
+        SendAnswers();
+    }
+
+    private void SendAnswers(){
+        foreach (var player in GetPlayers())
         {
-            Debug.Log(a.netId);
+            player.RpcRenderAnswers(answers.Values.ToArray());
         }
     }
 }

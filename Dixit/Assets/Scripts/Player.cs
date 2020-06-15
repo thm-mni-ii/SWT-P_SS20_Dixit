@@ -44,4 +44,9 @@ public class Player : NetworkBehaviour
         gameManager.LogAnswer(this.netIdentity, answer);
     }
 
+    [ClientRpc]
+    public void RpcRenderAnswers(string[] answers){
+        foreach(var a in answers)
+        Debug.Log(a);
+    }
 }

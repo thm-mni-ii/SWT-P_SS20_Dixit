@@ -13,13 +13,14 @@ public class Player : NetworkBehaviour
 {
     private int points { get; set; }
     private string playerName { get; set; }
+    public GameObject m_cardPrefab;
 
     public GameManager gameManager;
 
     /// <summary>
     /// Called when the local Player Object has been set up
     /// </summary>
-    public override void OnStartLocalPlayer()
+    public override void OnStartServer()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
@@ -46,7 +47,28 @@ public class Player : NetworkBehaviour
 
     [ClientRpc]
     public void RpcRenderAnswers(string[] answers){
-        foreach(var a in answers)
-        Debug.Log(a);
+        
+        var startX = (answers.Length * 125 + (answers.Length -1) * 20) / 2;
+
+        for(int i = 0; i < answers.Length; i++)
+        {
+
+            var xPosition = startX -  62.5 - i * 145;
+
+            var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( (float)  xPosition , -100, -2), Quaternion.Euler(0,0,0));
+            card.GetComponentInChildren<Transform>().Find("WriteAnswer").gameObject.SetActive(false);
+            card.GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.SetActive(true);
+
+
+            card.GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
+                .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = answers[i];
+                
+            card.gameObject.SetActive(true);
+        }
+        
+
+        
+
     }
+
 }

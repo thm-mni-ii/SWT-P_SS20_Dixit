@@ -87,8 +87,9 @@ public class GameManager : NetworkBehaviour
         //render input card at client
         var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( 0 , -100, -1), Quaternion.identity);
 
-        card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("WriteAnswer").gameObject.SetActive(true);
-        card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.SetActive(false);
+        var textTransform =  card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
+        textTransform.Find("WriteAnswer").gameObject.SetActive(true);
+        textTransform.Find("SelectAnswer").gameObject.SetActive(false);
             
         card.gameObject.SetActive(true);
 
@@ -165,11 +166,13 @@ public class GameManager : NetworkBehaviour
             var xPosition = startX -  62.5 - i * 145;
 
             var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( (float)  xPosition , -100, -2), Quaternion.Euler(0,0,0));
-            card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("WriteAnswer").gameObject.SetActive(false);
-            card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.SetActive(true);
+            
+            var textTransform =  card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
+            textTransform.Find("WriteAnswer").gameObject.SetActive(false);
+            textTransform.Find("SelectAnswer").gameObject.SetActive(true);
 
 
-            card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
+            textTransform.Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
                 .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = answerTexts[i];
                 
             card.gameObject.SetActive(true);

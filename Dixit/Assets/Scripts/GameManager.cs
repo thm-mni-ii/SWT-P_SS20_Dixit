@@ -1,5 +1,4 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
-using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +13,11 @@ using Firebase.Extensions;
 /// </summary>
 public class GameManager : NetworkBehaviour
 {
-    private Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
-    private Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
-    private Dictionary<NetworkIdentity, int> points = new Dictionary<NetworkIdentity, int>();
+    private readonly Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
+    private readonly Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
+    private readonly Dictionary<NetworkIdentity, int> points = new Dictionary<NetworkIdentity, int>();
 
-    private NetworkManager networkManager;
+    private NetworkManager NetworkManager => NetworkManager.singleton;
 
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
@@ -32,81 +31,55 @@ public class GameManager : NetworkBehaviour
 
     //Will be set by Game Host later on
     public string questionSetID = "0";
-    public QuestionSet questionSet;
+    public QuestionSet QuestionSet => loadQuestionSet.Result;
 
-    private Task loadQuestionSet;
+    private Task<QuestionSet> loadQuestionSet;
 
     /// <summary>
     /// Called when the GameManger starts on the Server.
     /// </summary>
     public override void OnStartServer()
     {
-        networkManager = NetworkManager.singleton;
-
         // Initializes QuestionSet from given ID
-        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWithOnMainThread((task) =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.LogException(task.Exception);
-            }
-            else
-            {
-                questionSet = task.Result;
-                //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.QuestionText));
-               
-            }
-
-        }).ContinueWith( a => {
-            if (a.IsFaulted)
-            {
-                Debug.LogException(a.Exception);
-            }
-        }); 
-             
+        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB).ContinueWithLogException();
     }
-    public void StartGame(){
-        
+
+    public void StartGame()
+    {
         loadQuestionSet.ContinueWithOnMainThread(t => StartRound());
-          
     }
 
-    private void StartRound(){
-
+    private void StartRound()
+    {
         currentPhase = Phase.WriteAnswer;
-        
-        questionSet.GetQuestion(0).ContinueWithOnMainThread(l => {
+
+        QuestionSet.GetQuestion(0).ContinueWithLogException().ContinueWithOnMainThread(l =>
+        {
             Debug.Log(l.Result.QuestionText);
             answers.Add(this.netIdentity, l.Result.Answer);
-            WriteAnswerPhase(l.Result);  
-        }).ContinueWith( a => {
-            if (a.IsFaulted)
-            {
-                Debug.LogException(a.Exception);
-            }
+            WriteAnswerPhase(l.Result);
         });
-       
     }
 
     private void WriteAnswerPhase(Question question)
     {
         //render question cards at client
-        var cardGo = Instantiate(m_questionCardPrefab, new Vector3(0, 100, -1),  Quaternion.identity);
+        var cardGo = Instantiate(m_questionCardPrefab, new Vector3(0, 100, -1), Quaternion.identity);
         var card = cardGo.GetComponent<Card>();
         card.text = question.QuestionText;
         card.type = Card.CardType.Question;
-      
+
         NetworkServer.Spawn(cardGo);
 
 
         //render input card at client
-        cardGo = Instantiate(m_cardPrefab, new Vector3( 0 , -100, -1), Quaternion.identity);
+        cardGo = Instantiate(m_cardPrefab, new Vector3(0, -100, -1), Quaternion.identity);
         card = cardGo.GetComponent<Card>();
         card.text = question.QuestionText;
         card.type = Card.CardType.Input;
-       
+
         NetworkServer.Spawn(cardGo);
-        
+
         // start timer
         timer.StartTimer(timerForGiveAnswer);
 
@@ -115,13 +88,13 @@ public class GameManager : NetworkBehaviour
     }
 
     private void ChooseAnswerPhase()
-    {  
+    {
         //delete input card at client
         Player.LocalPlayer.RpcDeleteInputCard();
 
         //Send answers to clients
         SendAnswers();
-        
+
         // start timer
         timer.StartTimer(timerToChooseAnswer);
 
@@ -153,11 +126,8 @@ public class GameManager : NetworkBehaviour
     /// Gets the list of Players in the current Game.
     /// <returns>The list of players.</returns>
     /// </summary>
-    private List<Player> GetPlayers()
-    {
-        return NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>()).ToList();
-    }
-
+    private List<Player> GetPlayers() =>
+        NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>()).ToList();
 
     /// <summary>
     /// Logs the given Answer of a Player during the WriteAnwer Phase.
@@ -167,7 +137,7 @@ public class GameManager : NetworkBehaviour
         answers.Add(player, answer);
         Debug.Log(answer);
 
-        if (answers.Count == networkManager.numPlayers)
+        if (answers.Count == NetworkManager.numPlayers)
         {
             //ChangePhase();
         }
@@ -179,7 +149,7 @@ public class GameManager : NetworkBehaviour
     public void LogAnswer(NetworkIdentity player, NetworkIdentity choice)
     {
         choices.Add(player, choice);
-        if (answers.Count == networkManager.numPlayers)
+        if (answers.Count == NetworkManager.numPlayers)
         {
             //ChangePhase();
         }
@@ -211,21 +181,20 @@ public class GameManager : NetworkBehaviour
     private void SendAnswers()
     {
 
-        var startX = (answers.ToArray().Length * 125 + (answers.ToArray().Length -1) * 20) / 2;
+        var startX = (answers.ToArray().Length * 125 + (answers.ToArray().Length - 1) * 20) / 2;
 
-        var xPosition = startX -  62.5;
-        
-        foreach(var answer in answers)
+        var xPosition = startX - 62.5;
+
+        foreach (var answer in answers)
         {
-
-            var cardGo = Instantiate(m_cardPrefab, new Vector3((float) xPosition, -100, -2), Quaternion.Euler(0,0,0));
+            var cardGo = Instantiate(m_cardPrefab, new Vector3((float)xPosition, -100, -2), Quaternion.Euler(0, 0, 0));
             var card = cardGo.GetComponent<Card>();
             card.text = answer.Value;
             card.choosen = answer.Key;
             card.type = Card.CardType.Answer;
 
             NetworkServer.Spawn(cardGo);
-            xPosition -=  145;
-        }    
+            xPosition -= 145;
+        }
     }
 }

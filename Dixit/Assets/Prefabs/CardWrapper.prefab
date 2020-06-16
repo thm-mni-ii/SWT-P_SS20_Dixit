@@ -99,6 +99,7 @@ MonoBehaviour:
   syncInterval: 0.1
   anim: {fileID: 0}
   text: 
+  choosen: 0
   type: 0
 --- !u!1001 &5727529173985177579
 PrefabInstance:
@@ -134,6 +135,22 @@ PrefabInstance:
     - target: {fileID: 773034931, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 773034931, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 773034931, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 773034931, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 773034931, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.a
+      value: 0.5019608
       objectReference: {fileID: 0}
     - target: {fileID: 1090543624, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
       propertyPath: m_Camera

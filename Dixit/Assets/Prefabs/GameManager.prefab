@@ -118,6 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  m_cardPrefab: {fileID: 9127835124013797395, guid: c6c8b40c827157b309aef091b64d162c,
+  m_cardPrefab: {fileID: 5975223065403753017, guid: 0f46702ca30561c00ab8197fa964e4c7,
     type: 3}
-  questionSetID: VM3C9CvZZeiv6fetjdmq
+  m_questionCardPrefab: {fileID: 1191448203220248124, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
+    type: 3}
+  questionSetID: 0

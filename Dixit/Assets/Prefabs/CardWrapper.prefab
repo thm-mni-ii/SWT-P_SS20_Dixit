@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 5975223065403753019}
   - component: {fileID: 5975223065403753018}
   - component: {fileID: 5975223065403753020}
+  - component: {fileID: 3206570142010750918}
   m_Layer: 0
-  m_Name: CardWrapper 1
+  m_Name: CardWrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,6 +66,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 5975223065403753018}
+--- !u!114 &3206570142010750918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975223065403753017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &5727529173985177579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,10 +121,25 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1632766247892056463, guid: c6c8b40c827157b309aef091b64d162c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643257137806422907, guid: c6c8b40c827157b309aef091b64d162c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316462447962058462, guid: c6c8b40c827157b309aef091b64d162c,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9127835124013797395, guid: c6c8b40c827157b309aef091b64d162c,
         type: 3}
       propertyPath: m_Name
-      value: Card (1)
+      value: Card
       objectReference: {fileID: 0}
     - target: {fileID: 9127835124013797407, guid: c6c8b40c827157b309aef091b64d162c,
         type: 3}
@@ -163,6 +195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144472569667699895, guid: c6c8b40c827157b309aef091b64d162c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6c8b40c827157b309aef091b64d162c, type: 3}

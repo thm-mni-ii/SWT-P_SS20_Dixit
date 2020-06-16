@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Mirror;
+using Firebase.Extensions;
+
 
 /// <summary>
 /// The GameManger keeps track of all given Answers and Changes the curren Phase of the Game.
@@ -34,7 +36,7 @@ public class GameManager : NetworkBehaviour
         networkManager = NetworkManager.singleton;
 
         // Initializes QuestionSet from given ID
-        QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWith((task) =>
+        QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWithOnMainThread((task) =>
         {
             if (task.IsFaulted)
             {
@@ -44,32 +46,57 @@ public class GameManager : NetworkBehaviour
             {
                 questionSet = task.Result;
                 //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.QuestionText));
-                StartRound();
+                StartRound();  
             }
 
-        });        
+        }).ContinueWith( a => {
+            if (a.IsFaulted)
+            {
+                Debug.LogException(a.Exception);
+            }
+        }); 
+             
     }
 
     private void StartRound(){
 
         currentPhase = Phase.WriteAnswer;
         
-        questionSet.GetQuestion(0).ContinueWith(l => {
-            Debug.Log(l.Result.QuestionText);  
-            WriteAnswerPhase(l.Result);
+        questionSet.GetQuestion(0).ContinueWithOnMainThread(l => {
+            Debug.Log(l.Result.QuestionText);
+            WriteAnswerPhase(l.Result);  
+        }).ContinueWith( a => {
+            if (a.IsFaulted)
+            {
+                Debug.LogException(a.Exception);
+            }
         });
        
     }
 
     private void WriteAnswerPhase(Question question){
-
-        //get question
-
-       
-    
+        //render question cards at client
+        var questionCard = (GameObject) Instantiate (m_questionCardPrefab, new Vector3(0, 100, -1),  Quaternion.identity);
         
+        questionCard.GetComponentInChildren<Transform>().Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = question.QuestionText;
+        questionCard.gameObject.SetActive(true);
        
+        NetworkServer.Spawn(questionCard);
 
+
+        //render input card at client
+        var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( 0 , -100, -1), Quaternion.identity);
+
+        card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("WriteAnswer").gameObject.SetActive(true);
+        card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.SetActive(false);
+            
+        card.gameObject.SetActive(true);
+
+        NetworkServer.Spawn(card);
+
+        //ToDo: start timer
+
+        //wait for all players to send answer or get timeout
 
     }
 
@@ -138,11 +165,11 @@ public class GameManager : NetworkBehaviour
             var xPosition = startX -  62.5 - i * 145;
 
             var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( (float)  xPosition , -100, -2), Quaternion.Euler(0,0,0));
-            card.GetComponentInChildren<Transform>().Find("WriteAnswer").gameObject.SetActive(false);
-            card.GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.SetActive(true);
+            card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("WriteAnswer").gameObject.SetActive(false);
+            card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.SetActive(true);
 
 
-            card.GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
+            card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
                 .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = answerTexts[i];
                 
             card.gameObject.SetActive(true);

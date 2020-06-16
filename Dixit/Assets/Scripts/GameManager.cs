@@ -21,7 +21,7 @@ public class GameManager : NetworkBehaviour
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
 
-    private enum Phase { WriteAnswer, ChoseAnswer }
+    private enum Phase { WriteAnswer, ChoseAnswer, Evaluation }
     private Phase currentPhase;
 
     //Will be set by Game Host later on
@@ -110,7 +110,16 @@ public class GameManager : NetworkBehaviour
         //delete input card at client
         Player.LocalPlayer.RpcDeleteInputCard();
 
+        //Send answers to clients
         SendAnswers();
+
+        //ToDo: start timer
+
+
+    }
+
+    private void EvaluationPhase (){
+        // do stuff
     }
 
     /// <summary>
@@ -161,6 +170,10 @@ public class GameManager : NetworkBehaviour
                 ChooseAnswerPhase();
                 break;
             case Phase.ChoseAnswer:
+                currentPhase = Phase.Evaluation;
+                EvaluationPhase();
+                break;
+            case Phase.Evaluation:
                 currentPhase = Phase.WriteAnswer;
                 break;
             default:
@@ -178,7 +191,7 @@ public class GameManager : NetworkBehaviour
         {
             var xPosition = startX -  62.5 - i * 145;
 
-            var cardGo = (GameObject) Instantiate (m_cardPrefab, new Vector3( (float)  xPosition , -100, -2), Quaternion.Euler(0,0,0));
+            var cardGo = Instantiate(m_cardPrefab, new Vector3((float) xPosition, -100, -2), Quaternion.Euler(0,0,0));
             var card = cardGo.GetComponent<Card>();
             card.text = answerTexts[i];
             card.type = Card.CardType.Answer;

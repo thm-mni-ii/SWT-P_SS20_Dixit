@@ -113,6 +113,7 @@ public class GameManager : NetworkBehaviour
         //wait for all players to send answer or get timeout
 
     }
+
     private void ChooseAnswerPhase()
     {  
         //delete input card at client
@@ -145,6 +146,7 @@ public class GameManager : NetworkBehaviour
         foreach (var p in points){
             Debug.Log(p.Key.netId + " Points: " + p.Value);
         }
+        Player.LocalPlayer.RpcHighlightCard(this.netIdentity);
     }
 
     /// <summary>

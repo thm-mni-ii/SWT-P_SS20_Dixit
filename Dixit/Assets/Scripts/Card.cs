@@ -5,14 +5,16 @@ public class Card : NetworkBehaviour
 {
     [SerializeField] private Animator anim;
 
-    [SyncVar]
+    [SyncVar, HideInInspector]
     public string text;
-    [SyncVar]
+    [SyncVar, HideInInspector]
     public NetworkIdentity choosen;
 
-    [SyncVar]
+    [SyncVar, HideInInspector]
     public CardType type;
     public enum CardType {Input, Question, Answer};
+
+    public Material correctColour;
 
     public override void OnStartClient(){
         gameObject.tag = type + "Card";
@@ -57,8 +59,13 @@ public class Card : NetworkBehaviour
         anim.Play("UnflipCardChild");
     }
 
-    public void HighlightChoosen(Material highlighted)
+    public void HighlightCard(Material highlighted)
     {
         GetComponentInChildren<Transform>().Find("Card").GetComponent<MeshRenderer>().material = highlighted;
+    }
+
+    public void HighlightCorrect()
+    {
+        HighlightCard(correctColour);
     }
 }

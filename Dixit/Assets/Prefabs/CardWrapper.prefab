@@ -101,6 +101,7 @@ MonoBehaviour:
   text: 
   choosen: {fileID: 0}
   type: 0
+  correctColour: {fileID: 2100000, guid: a623cd2b4b99b435fbd39a63ff88948f, type: 2}
 --- !u!1001 &5727529173985177579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 7064150458332934108}
     - target: {fileID: 300234296, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: HighlightChoosen
+      value: HighlightCard
       objectReference: {fileID: 0}
     - target: {fileID: 300234296, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName

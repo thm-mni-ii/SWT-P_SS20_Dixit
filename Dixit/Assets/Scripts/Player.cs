@@ -1,5 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +52,19 @@ public class Player : NetworkBehaviour
     public void RpcDeleteInputCard()
     {
         Destroy(GameObject.FindGameObjectsWithTag("InputCard")[0]);
+    }
+
+    [ClientRpc]
+    public void RpcHighlightCard(NetworkIdentity correctCard)
+    {
+        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
+        foreach(var card in cards)
+        {
+            if(card.choosen == correctCard)
+            {
+                card.HighlightCorrect();
+            }
+        }
     }
 
 }

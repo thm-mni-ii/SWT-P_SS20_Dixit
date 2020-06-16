@@ -16,6 +16,7 @@ public class GameManager : NetworkBehaviour
 {
     private Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
+    private Dictionary<NetworkIdentity, int> points = new Dictionary<NetworkIdentity, int>();
 
     private NetworkManager networkManager;
 
@@ -128,7 +129,22 @@ public class GameManager : NetworkBehaviour
 
     private void EvaluationPhase()
     {
-        // do stuff
+        // eval points
+        foreach (var choice in choices){
+            if(choice.Key != this.netIdentity && !points.ContainsKey(choice.Key)) points.Add(choice.Key, 0);
+            if(choice.Value != this.netIdentity && !points.ContainsKey(choice.Value)) points.Add(choice.Value, 0);
+
+            //player choose right answer -> +3 points
+            if (choice.Value == this.netIdentity) points[choice.Key] += 3;
+            //player choose own anser -> -1 point
+            else if (choice.Key == choice.Value) points[choice.Key] -= 1;
+            //player choose answer of other player -> other player get +1 point
+            else  points[choice.Value] += 1;    
+        }
+
+        foreach (var p in points){
+            Debug.Log(p.Key.netId + " Points: " + p.Value);
+        }
     }
 
     /// <summary>

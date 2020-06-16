@@ -157,6 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  m_cardPrefab: {fileID: 0}
+  m_questionCardPrefab: {fileID: 0}
   questionSetID: VM3C9CvZZeiv6fetjdmq
 --- !u!81 &698334708
 AudioListener:
@@ -237,6 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  m_cardPrefab: {fileID: 0}
+  m_questionCardPrefab: {fileID: 0}
   questionSetID: VM3C9CvZZeiv6fetjdmq
 --- !u!114 &698334712
 MonoBehaviour:
@@ -378,7 +382,7 @@ PrefabInstance:
       objectReference: {fileID: 698334709}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f61ee8159d5c422a89ff5cf088723f5b, type: 3}
---- !u!1001 &875420933
+--- !u!1001 &935824950
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -448,12 +452,12 @@ PrefabInstance:
     - target: {fileID: 7671125721170828994, guid: 2c16eab075ec1a30a98e00d2f287541a,
         type: 3}
       propertyPath: sceneId
-      value: 406415540
+      value: 3384850807
       objectReference: {fileID: 0}
     - target: {fileID: 7877368652304546529, guid: 2c16eab075ec1a30a98e00d2f287541a,
         type: 3}
-      propertyPath: questionSetID
-      value: 0
+      propertyPath: m_questionCardPrefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c16eab075ec1a30a98e00d2f287541a, type: 3}
@@ -663,6 +667,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1789284000428048693, guid: 0f46702ca30561c00ab8197fa964e4c7,
+        type: 3}
+      propertyPath: sceneId
+      value: 4104085808
+      objectReference: {fileID: 0}
     - target: {fileID: 5727529175075704803, guid: 0f46702ca30561c00ab8197fa964e4c7,
         type: 3}
       propertyPath: m_Camera
@@ -727,6 +736,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769546277173664912, guid: 0f46702ca30561c00ab8197fa964e4c7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f46702ca30561c00ab8197fa964e4c7, type: 3}

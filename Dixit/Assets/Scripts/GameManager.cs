@@ -16,6 +16,9 @@ public class GameManager : NetworkBehaviour
 
     private NetworkManager networkManager;
 
+    public GameObject m_cardPrefab;
+    public GameObject m_questionCardPrefab;
+
     private enum Phase { WriteAnswer, ChoseAnswer }
     private Phase currentPhase;
 
@@ -30,8 +33,6 @@ public class GameManager : NetworkBehaviour
     {
         networkManager = NetworkManager.singleton;
 
-        currentPhase = Phase.WriteAnswer;
-
         // Initializes QuestionSet from given ID
         QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWith((task) =>
         {
@@ -43,8 +44,33 @@ public class GameManager : NetworkBehaviour
             {
                 questionSet = task.Result;
                 //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.QuestionText));
+                StartRound();
             }
+
+        });        
+    }
+
+    private void StartRound(){
+
+        currentPhase = Phase.WriteAnswer;
+        
+        questionSet.GetQuestion(0).ContinueWith(l => {
+            Debug.Log(l.Result.QuestionText);  
+            WriteAnswerPhase(l.Result);
         });
+       
+    }
+
+    private void WriteAnswerPhase(Question question){
+
+        //get question
+
+       
+    
+        
+       
+
+
     }
 
     /// <summary>
@@ -103,9 +129,26 @@ public class GameManager : NetworkBehaviour
     }
 
     private void SendAnswers(){
-        foreach (var player in GetPlayers())
+        var answerTexts = answers.Values.ToArray();
+
+        var startX = (answerTexts.Length * 125 + (answerTexts.Length -1) * 20) / 2;
+
+        for(int i = 0; i < answerTexts.Length; i++)
         {
-            player.RpcRenderAnswers(answers.Values.ToArray());
+            var xPosition = startX -  62.5 - i * 145;
+
+            var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( (float)  xPosition , -100, -2), Quaternion.Euler(0,0,0));
+            card.GetComponentInChildren<Transform>().Find("WriteAnswer").gameObject.SetActive(false);
+            card.GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.SetActive(true);
+
+
+            card.GetComponentInChildren<Transform>().Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
+                .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = answerTexts[i];
+                
+            card.gameObject.SetActive(true);
+
+            NetworkServer.Spawn(card);
         }
+        
     }
 }

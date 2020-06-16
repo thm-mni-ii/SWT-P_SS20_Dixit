@@ -25,7 +25,8 @@ public class GameManager : NetworkBehaviour
     private Phase currentPhase;
 
     public CountdownTimer timer;
-    public int timerStartTime = 10;
+    public int timerForGiveAnswer = 10;
+    public int timerToChooseAnswer = 15;
 
     //Will be set by Game Host later on
     public string questionSetID = "0";
@@ -103,7 +104,9 @@ public class GameManager : NetworkBehaviour
        
         NetworkServer.Spawn(cardGo);
         
-        timer.StartTimer(timerStartTime);
+        // start timer
+        timer.StartTimer(timerForGiveAnswer);
+
         //wait for all players to send answer or get timeout
 
     }
@@ -115,7 +118,8 @@ public class GameManager : NetworkBehaviour
         //Send answers to clients
         SendAnswers();
         
-        //ToDo: start timer
+        // start timer
+        timer.StartTimer(timerToChooseAnswer);
 
 
     }

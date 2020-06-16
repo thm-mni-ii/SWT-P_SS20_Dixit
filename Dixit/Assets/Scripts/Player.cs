@@ -42,7 +42,7 @@ public class Player : NetworkBehaviour
     /// <param name="answer">The Answer</param>
     /// </summary>
     [Command]
-    public void CmdChooseAnswer(int answer)
+    public void CmdChooseAnswer(NetworkIdentity answer)
     {
         gameManager.LogAnswer(this.netIdentity, answer);
     }

@@ -14,7 +14,7 @@ using Firebase.Extensions;
 public class GameManager : NetworkBehaviour
 {
     private Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
-    private Dictionary<NetworkIdentity, int> choices = new Dictionary<NetworkIdentity, int>();
+    private Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
 
     private NetworkManager networkManager;
 
@@ -124,7 +124,8 @@ public class GameManager : NetworkBehaviour
 
     }
 
-    private void EvaluationPhase (){
+    private void EvaluationPhase()
+    {
         // do stuff
     }
 
@@ -155,7 +156,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Logs the choosen Answer of a Player during the ChoseAnswer Phase.
     /// </summary>
-    public void LogAnswer(NetworkIdentity player, int choice)
+    public void LogAnswer(NetworkIdentity player, NetworkIdentity choice)
     {
         choices.Add(player, choice);
         if (answers.Count == networkManager.numPlayers)
@@ -189,21 +190,22 @@ public class GameManager : NetworkBehaviour
 
     private void SendAnswers()
     {
-        var answerTexts = answers.Values.ToArray();
 
-        var startX = (answerTexts.Length * 125 + (answerTexts.Length -1) * 20) / 2;
+        var startX = (answers.ToArray().Length * 125 + (answers.ToArray().Length -1) * 20) / 2;
 
-        for(int i = 0; i < answerTexts.Length; i++)
+        var xPosition = startX -  62.5;
+        
+        foreach(var answer in answers)
         {
-            var xPosition = startX -  62.5 - i * 145;
 
             var cardGo = Instantiate(m_cardPrefab, new Vector3((float) xPosition, -100, -2), Quaternion.Euler(0,0,0));
             var card = cardGo.GetComponent<Card>();
-            card.text = answerTexts[i];
-            card.choosen = i;
+            card.text = answer.Value;
+            card.choosen = answer.Key;
             card.type = Card.CardType.Answer;
 
             NetworkServer.Spawn(cardGo);
+            xPosition -=  145;
         }    
     }
 }

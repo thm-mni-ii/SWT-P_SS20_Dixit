@@ -1,4 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
+using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,7 @@ public class GameManager : NetworkBehaviour
         
         questionSet.GetQuestion(0).ContinueWithOnMainThread(l => {
             Debug.Log(l.Result.QuestionText);
+            answers.Add(this.netIdentity, l.Result.Answer);
             WriteAnswerPhase(l.Result);  
         }).ContinueWith( a => {
             if (a.IsFaulted)
@@ -189,7 +191,10 @@ public class GameManager : NetworkBehaviour
 
     private void SendAnswers()
     {
-        var answerTexts = answers.Values.ToArray();
+        var answerTextsSort = answers.Values.ToArray();
+
+        System.Random rnd=new System.Random();
+        string[] answerTexts = answerTextsSort.OrderBy(x => rnd.Next() ).ToArray();  
 
         var startX = (answerTexts.Length * 125 + (answerTexts.Length -1) * 20) / 2;
 

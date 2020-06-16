@@ -1,5 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
-using System.Collections;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -28,6 +28,8 @@ public class GameManager : NetworkBehaviour
     public string questionSetID = "0";
     public QuestionSet questionSet;
 
+    private Task loadQuestionSet;
+
     /// <summary>
     /// Called when the GameManger starts on the Server.
     /// </summary>
@@ -36,7 +38,7 @@ public class GameManager : NetworkBehaviour
         networkManager = NetworkManager.singleton;
 
         // Initializes QuestionSet from given ID
-        QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWithOnMainThread((task) =>
+        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().db).ContinueWithOnMainThread((task) =>
         {
             if (task.IsFaulted)
             {
@@ -46,7 +48,7 @@ public class GameManager : NetworkBehaviour
             {
                 questionSet = task.Result;
                 //How to get actual question text: questionSet.GetQuestion(0).ContinueWith(l => Debug.Log(l.Result.QuestionText));
-                StartRound();  
+               
             }
 
         }).ContinueWith( a => {
@@ -56,6 +58,11 @@ public class GameManager : NetworkBehaviour
             }
         }); 
              
+    }
+    public void StartGame(){
+        
+        loadQuestionSet.ContinueWithOnMainThread(t => StartRound());
+          
     }
 
     private void StartRound(){
@@ -74,26 +81,24 @@ public class GameManager : NetworkBehaviour
        
     }
 
-    private void WriteAnswerPhase(Question question){
+    private void WriteAnswerPhase(Question question)
+    {
         //render question cards at client
-        var questionCard = (GameObject) Instantiate (m_questionCardPrefab, new Vector3(0, 100, -1),  Quaternion.identity);
-        
-        questionCard.GetComponentInChildren<Transform>().Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = question.QuestionText;
-        questionCard.gameObject.SetActive(true);
-       
-        NetworkServer.Spawn(questionCard);
+        var cardGo = Instantiate(m_questionCardPrefab, new Vector3(0, 100, -1),  Quaternion.identity);
+        var card = cardGo.GetComponent<Card>();
+        card.text = question.QuestionText;
+        card.type = Card.CardType.Question;
+      
+        NetworkServer.Spawn(cardGo);
 
 
         //render input card at client
-        var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( 0 , -100, -1), Quaternion.identity);
-
-        var textTransform =  card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
-        textTransform.Find("WriteAnswer").gameObject.SetActive(true);
-        textTransform.Find("SelectAnswer").gameObject.SetActive(false);
-            
-        card.gameObject.SetActive(true);
-
-        NetworkServer.Spawn(card);
+        cardGo = Instantiate(m_cardPrefab, new Vector3( 0 , -100, -1), Quaternion.identity);
+        card = cardGo.GetComponent<Card>();
+        card.text = question.QuestionText;
+        card.type = Card.CardType.Input;
+       
+        NetworkServer.Spawn(cardGo);
 
         //ToDo: start timer
 
@@ -156,7 +161,8 @@ public class GameManager : NetworkBehaviour
         SendAnswers();
     }
 
-    private void SendAnswers(){
+    private void SendAnswers()
+    {
         var answerTexts = answers.Values.ToArray();
 
         var startX = (answerTexts.Length * 125 + (answerTexts.Length -1) * 20) / 2;
@@ -165,20 +171,12 @@ public class GameManager : NetworkBehaviour
         {
             var xPosition = startX -  62.5 - i * 145;
 
-            var card = (GameObject) Instantiate (m_cardPrefab, new Vector3( (float)  xPosition , -100, -2), Quaternion.Euler(0,0,0));
-            
-            var textTransform =  card.GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
-            textTransform.Find("WriteAnswer").gameObject.SetActive(false);
-            textTransform.Find("SelectAnswer").gameObject.SetActive(true);
+            var cardGo = (GameObject) Instantiate (m_cardPrefab, new Vector3( (float)  xPosition , -100, -2), Quaternion.Euler(0,0,0));
+            var card = cardGo.GetComponent<Card>();
+            card.text = answerTexts[i];
+            card.type = Card.CardType.Answer;
 
-
-            textTransform.Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
-                .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = answerTexts[i];
-                
-            card.gameObject.SetActive(true);
-
-            NetworkServer.Spawn(card);
-        }
-        
+            NetworkServer.Spawn(cardGo);
+        }    
     }
 }

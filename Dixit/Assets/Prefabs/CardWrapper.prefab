@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5975223065403753018}
   - component: {fileID: 5975223065403753020}
   - component: {fileID: 3206570142010750918}
+  - component: {fileID: 7064150458332934108}
   m_Layer: 0
   m_Name: CardWrapper
   m_TagString: Untagged
@@ -82,6 +83,23 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &7064150458332934108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975223065403753017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4eaac4e69e1bc0b3bfc1c3dfc5b7b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  anim: {fileID: 0}
+  text: 
+  type: 0
 --- !u!1001 &5727529173985177579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1090543624, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
       propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460815667323787652, guid: c6c8b40c827157b309aef091b64d162c,
+        type: 3}
+      propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1632766247892056463, guid: c6c8b40c827157b309aef091b64d162c,

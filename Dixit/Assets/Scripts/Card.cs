@@ -56,4 +56,9 @@ public class Card : NetworkBehaviour
     {
         anim.Play("UnflipCardChild");
     }
+
+    public void HighlightChoosen(Material highlighted)
+    {
+        GetComponentInChildren<Transform>().Find("Card").GetComponent<MeshRenderer>().material = highlighted;
+    }
 }

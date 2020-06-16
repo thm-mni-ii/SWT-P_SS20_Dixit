@@ -7,6 +7,7 @@ public class Card : NetworkBehaviour
 
     [SyncVar]
     public string text;
+    public int choosen;
 
     [SyncVar]
     public CardType type;

@@ -194,6 +194,7 @@ public class GameManager : NetworkBehaviour
             var cardGo = Instantiate(m_cardPrefab, new Vector3((float) xPosition, -100, -2), Quaternion.Euler(0,0,0));
             var card = cardGo.GetComponent<Card>();
             card.text = answerTexts[i];
+            card.choosen = i;
             card.type = Card.CardType.Answer;
 
             NetworkServer.Spawn(cardGo);

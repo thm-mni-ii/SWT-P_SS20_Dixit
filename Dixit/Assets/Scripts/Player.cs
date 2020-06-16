@@ -1,5 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,9 @@ using Mirror;
 /// </summary>
 public class Player : NetworkBehaviour
 {
+    private static Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
+    public static Player LocalPlayer => _localPlayer.Value;
+
     private int points { get; set; }
     private string playerName { get; set; }
 
@@ -42,6 +45,12 @@ public class Player : NetworkBehaviour
     public void CmdChooseAnswer(int answer)
     {
         gameManager.LogAnswer(this.netIdentity, answer);
+    }
+
+    [ClientRpc]
+    public void RpcDeleteInputCard()
+    {
+        Destroy(GameObject.FindGameObjectsWithTag("InputCard")[0]);
     }
 
 }

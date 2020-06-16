@@ -13,6 +13,8 @@ public class Card : NetworkBehaviour
     public enum CardType {Input, Question, Answer};
 
     public override void OnStartClient(){
+        gameObject.tag = type + "Card";
+
         switch (type)
         {
             case CardType.Input:

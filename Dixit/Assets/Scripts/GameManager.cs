@@ -105,6 +105,13 @@ public class GameManager : NetworkBehaviour
         //wait for all players to send answer or get timeout
 
     }
+    private void ChooseAnswerPhase()
+    {  
+        //delete input card at client
+        Player.LocalPlayer.RpcDeleteInputCard();
+
+        SendAnswers();
+    }
 
     /// <summary>
     /// Gets the list of Players in the current Game.
@@ -151,6 +158,7 @@ public class GameManager : NetworkBehaviour
         {
             case Phase.WriteAnswer:
                 currentPhase = Phase.ChoseAnswer;
+                ChooseAnswerPhase();
                 break;
             case Phase.ChoseAnswer:
                 currentPhase = Phase.WriteAnswer;
@@ -158,7 +166,6 @@ public class GameManager : NetworkBehaviour
             default:
                 break;
         }
-        SendAnswers();
     }
 
     private void SendAnswers()

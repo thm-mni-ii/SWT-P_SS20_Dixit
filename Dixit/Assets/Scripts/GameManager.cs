@@ -24,6 +24,9 @@ public class GameManager : NetworkBehaviour
     private enum Phase { WriteAnswer, ChoseAnswer, Evaluation }
     private Phase currentPhase;
 
+    public CountdownTimer timer;
+    public int timerStartTime = 10;
+
     //Will be set by Game Host later on
     public string questionSetID = "0";
     public QuestionSet questionSet;
@@ -99,9 +102,8 @@ public class GameManager : NetworkBehaviour
         card.type = Card.CardType.Input;
        
         NetworkServer.Spawn(cardGo);
-
-        //ToDo: start timer
-
+        
+        timer.StartTimer(timerStartTime);
         //wait for all players to send answer or get timeout
 
     }
@@ -112,7 +114,7 @@ public class GameManager : NetworkBehaviour
 
         //Send answers to clients
         SendAnswers();
-
+        
         //ToDo: start timer
 
 
@@ -142,7 +144,7 @@ public class GameManager : NetworkBehaviour
 
         if (answers.Count == networkManager.numPlayers)
         {
-            ChangePhase();
+            //ChangePhase();
         }
     }
 
@@ -154,14 +156,14 @@ public class GameManager : NetworkBehaviour
         choices.Add(player, choice);
         if (answers.Count == networkManager.numPlayers)
         {
-            ChangePhase();
+            //ChangePhase();
         }
     }
 
     /// <summary>
     /// Changes Phase in the GameManager and calls the Corresponding RPC-Call
     /// </summary>
-    private void ChangePhase()
+    public void ChangePhase()
     {
         switch (currentPhase)
         {

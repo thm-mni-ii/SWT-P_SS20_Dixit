@@ -21,7 +21,7 @@ public class CountdownTimer : NetworkBehaviour
         }
     }
 
-    void StartTimer(int startingTime)
+    public void StartTimer(int startingTime)
     {
         _timer = startingTime;
         timerTextField.text = _timer + "s";

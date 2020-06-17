@@ -38,11 +38,11 @@ public class QuestionSet
     /// Retrieves QuestionSet data from the database from ID
     /// Returns data as QuestionSet Object 
     /// </summary>
-    public static async Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db)
+    public static Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db)
     {
         DocumentReference docRef = db.Collection("QuestionSets").Document(questionSetID);
 
-        return await docRef.GetSnapshotAsync().ContinueWith<QuestionSet>((task) =>
+        return docRef.GetSnapshotAsync().ContinueWith<QuestionSet>((task) =>
         {
             if (task.IsFaulted) throw task.Exception;
 
@@ -60,9 +60,9 @@ public class QuestionSet
     /// Retrieves question data from DocumentReference stored in Questions
     /// Returns data as Question Object 
     /// </summary>
-    public async Task<Question> GetQuestion(int index)
+    public Task<Question> GetQuestion(int index)
     {
-        return await Question.RetrieveQuestion(Questions[index]).ContinueWith(task => task.Result);
+        return Question.RetrieveQuestion(Questions[index]).ContinueWith(task => task.Result);
     }
 
 }

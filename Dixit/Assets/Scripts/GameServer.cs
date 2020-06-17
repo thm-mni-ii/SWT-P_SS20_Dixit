@@ -26,6 +26,7 @@ public class GameServer : NetworkManager
     /// Stores the information of the player that started the game.
     /// </summary>
     private PlayerInfo localPlayerInfo;
+    public int playersWantToPlay = 2;
 
     public PlayerInfo LocalPlayerInfo => localPlayerInfo;
 
@@ -53,6 +54,17 @@ public class GameServer : NetworkManager
             StartClient();
         }
         */
+    }
+
+    public override void OnServerAddPlayer(NetworkConnection conn)
+    {
+        base.OnServerAddPlayer(conn);
+    
+        if(numPlayers == playersWantToPlay)
+        {
+            GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>(); 
+            gameManager.StartGame();       
+        }
     }
 
     /// <summary>

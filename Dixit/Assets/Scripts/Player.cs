@@ -1,5 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
-using System.Collections;
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,9 @@ using Mirror;
 /// </summary>
 public class Player : NetworkBehaviour
 {
+    private static Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
+    public static Player LocalPlayer => _localPlayer.Value;
+
     private int points { get; set; }
     private string playerName { get; set; }
 
@@ -19,7 +23,7 @@ public class Player : NetworkBehaviour
     /// <summary>
     /// Called when the local Player Object has been set up
     /// </summary>
-    public override void OnStartLocalPlayer()
+    public override void OnStartServer()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
@@ -39,9 +43,28 @@ public class Player : NetworkBehaviour
     /// <param name="answer">The Answer</param>
     /// </summary>
     [Command]
-    public void CmdChooseAnswer(int answer)
+    public void CmdChooseAnswer(NetworkIdentity answer)
     {
         gameManager.LogAnswer(this.netIdentity, answer);
+    }
+
+    [ClientRpc]
+    public void RpcDeleteInputCard()
+    {
+        Destroy(GameObject.FindGameObjectsWithTag("InputCard")[0]);
+    }
+
+    [ClientRpc]
+    public void RpcHighlightCard(NetworkIdentity correctCard)
+    {
+        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
+        foreach(var card in cards)
+        {
+            if(card.choosen == correctCard)
+            {
+                card.HighlightCorrect();
+            }
+        }
     }
 
 }

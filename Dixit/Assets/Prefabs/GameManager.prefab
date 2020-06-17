@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449457969102196780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.470164, y: 1.152577, z: -0.9060359}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,3 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  m_cardPrefab: {fileID: 5975223065403753017, guid: 0f46702ca30561c00ab8197fa964e4c7,
+    type: 3}
+  m_questionCardPrefab: {fileID: 1191448203220248124, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
+    type: 3}
+  questionSetID: 0

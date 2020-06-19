@@ -16,6 +16,7 @@ public class GameManager : NetworkBehaviour
     private readonly Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private readonly Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
     private readonly Dictionary<NetworkIdentity, int> points = new Dictionary<NetworkIdentity, int>();
+    private readonly MultivalDictionaty<NetworkIdentity, NetworkIdentity> sameAnswers = new MultivalDictionaty<NetworkIdentity, NetworkIdentity>();
 
     private NetworkManager NetworkManager => NetworkManager.singleton;
 
@@ -111,12 +112,23 @@ public class GameManager : NetworkBehaviour
             //player choose right answer -> +3 points
             if (choice.Value == this.netIdentity) points[choice.Key] += 3;
             //player choose own anser -> -1 point
-            else if (choice.Key == choice.Value) points[choice.Key] -= 1;
+            else if (choice.Key == choice.Value
+                || (sameAnswers.ContainsKey(choice.Value) && sameAnswers[choice.Value].Contains(choice.Key))) points[choice.Key] -= 1;
             //player choose answer of other player -> other player get +1 point
-            else  points[choice.Value] += 1;    
+            else
+            {
+                points[choice.Value] += 1;
+                if(!sameAnswers.ContainsKey(choice.Value)) return;
+
+                foreach (var player in sameAnswers[choice.Value])
+                {
+                    points[choice.Value] += 1;
+                }
+            }
         }
 
-        foreach (var p in points){
+        foreach (var p in points)
+        {
             Debug.Log(p.Key.netId + " Points: " + p.Value);
         }
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity);
@@ -134,6 +146,19 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void LogAnswer(NetworkIdentity player, string answer)
     {
+        foreach(var givenAnswer in answers)
+        {
+            if(answer == givenAnswer.Value)
+            {
+                Debug.Log("same Answer!");
+
+                if(givenAnswer.Key != this.netIdentity)
+                    sameAnswers.Add(givenAnswer.Key, player);
+
+                return;
+            }
+        }
+
         answers.Add(player, answer);
         Debug.Log(answer);
 
@@ -196,5 +221,16 @@ public class GameManager : NetworkBehaviour
             NetworkServer.Spawn(cardGo);
             xPosition -= 145;
         }
+    }
+}
+
+class MultivalDictionaty<TKey, TValue> : Dictionary<TKey, List<TValue>>
+{
+    public void Add(TKey key, TValue value)
+    {
+        if(!this.ContainsKey(key))
+            this.Add(key, new List<TValue>());
+
+        this[key].Add(value);
     }
 }

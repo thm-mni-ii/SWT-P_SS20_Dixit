@@ -1,4 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
+using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,18 @@ public class GameManager : NetworkBehaviour
     private Phase currentPhase;
 
     public CountdownTimer timer;
-    public int timerForGiveAnswer = 10;
+    public int timerForGiveAnswer = 20;
     public int timerToChooseAnswer = 15;
+
+    public int numberOfRounds = 3;
+    private int currentRound;
 
     //Will be set by Game Host later on
     public string questionSetID = "0";
     public QuestionSet QuestionSet => loadQuestionSet.Result;
+
+    //contains an array with all random, different indexes of the questions for the game
+    private int[] indexesOfQuestion;
 
     private Task<QuestionSet> loadQuestionSet;
 
@@ -47,14 +54,24 @@ public class GameManager : NetworkBehaviour
 
     public void StartGame()
     {
-        loadQuestionSet.ContinueWithOnMainThread(t => StartRound());
+        currentRound = 0;
+        //wait until the question set is loaded
+        loadQuestionSet.ContinueWithOnMainThread(t =>
+        {  
+            //get random idx array for questions
+            indexesOfQuestion = getRandomQuestionIdxArray(QuestionSet.QuestionCount);
+
+            //Start the firt round
+            StartRound();
+        });       
     }
 
     private void StartRound()
     {
         currentPhase = Phase.WriteAnswer;
 
-        QuestionSet.GetQuestion(0).ContinueWithLogException().ContinueWithOnMainThread(l =>
+        //get Question for the current round
+        QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(l =>
         {
             Debug.Log(l.Result.QuestionText);
             answers.Add(this.netIdentity, l.Result.Answer);
@@ -221,6 +238,28 @@ public class GameManager : NetworkBehaviour
             NetworkServer.Spawn(cardGo);
             xPosition -= 145;
         }
+    }
+
+    public int[] getRandomQuestionIdxArray(int maxIdx){
+
+        //initialize array for question indexes with -1 for all values
+        var randomQuestionIdxArray = new int[numberOfRounds];
+        for (int i = 0; i < numberOfRounds; i++) randomQuestionIdxArray[i] = -1;
+
+        for (int i = 0; i < numberOfRounds; i++)
+            {
+                //get a random value with in not in the array yet and place it in the array for the round 
+                var randomQuestionIdx = 0;
+                do
+                {
+                    randomQuestionIdx = UnityEngine.Random.Range(0,maxIdx); 
+
+                } while (Array.IndexOf(randomQuestionIdxArray, randomQuestionIdx)>=0);
+                 
+                randomQuestionIdxArray[i] = randomQuestionIdx;
+            }
+
+        return randomQuestionIdxArray;
     }
 }
 

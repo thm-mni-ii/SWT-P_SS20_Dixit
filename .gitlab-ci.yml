@@ -1,0 +1,24 @@
+image: alpine
+
+before_script:
+  - apk update
+  - apk add doxygen ttf-freefont graphviz # pdf2svg
+
+variables:
+  DOXYGEN_DIR: Documentation/doxygen
+
+test:
+  script:
+    - doxygen ${DOXYGEN_DIR}/Doxyfile
+  except:
+    - master
+  
+pages:
+  script:
+    - doxygen ${DOXYGEN_DIR}/Doxyfile
+    - mv ${DOXYGEN_DIR}/html/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

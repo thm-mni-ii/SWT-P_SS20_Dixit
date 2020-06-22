@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
+using TMPro;
 
 
 /// <summary>
@@ -16,8 +17,12 @@ public class GameManager : NetworkBehaviour
     private readonly Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private readonly Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
     private readonly Dictionary<NetworkIdentity, int> points = new Dictionary<NetworkIdentity, int>();
+    private List<KeyValuePair<NetworkIdentity, int>> pointsList;
+    public GameObject[] PlayerCanvasEntry = new GameObject[5];
 
     private NetworkManager NetworkManager => NetworkManager.singleton;
+
+    private int PlayerCount => GetPlayers().Count; 
 
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
@@ -120,6 +125,20 @@ public class GameManager : NetworkBehaviour
             Debug.Log(p.Key.netId + " Points: " + p.Value);
         }
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity);
+        pointsList = points.ToList();
+        pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
+        RpcUpdatePlayerCanvas();
+    }
+
+    [ClientRpc]
+    private void RpcUpdatePlayerCanvas(){
+        int idx = PlayerCount-1;
+        foreach (KeyValuePair<NetworkIdentity, int> points in pointsList){
+            TextMeshProUGUI[] entry = PlayerCanvasEntry[idx].GetComponentsInChildren<TextMeshProUGUI>();
+            entry[0].text = points.Key.GetComponent<Player>().playerName;
+            entry[1].text = points.Value.ToString();
+            idx--;
+        }
     }
 
     /// <summary>

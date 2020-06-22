@@ -16,7 +16,7 @@ public class Player : NetworkBehaviour
     public static Player LocalPlayer => _localPlayer.Value;
 
     private int points { get; set; }
-    private string playerName { get; set; }
+    public string playerName { get; private set; }
 
     public GameManager gameManager;
 

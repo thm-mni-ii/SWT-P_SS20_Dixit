@@ -2,21 +2,24 @@ image: alpine
 
 before_script:
   - apk update
-  - apk add doxygen ttf-freefont graphviz # pdf2svg
+  - apk add git doxygen ttf-freefont graphviz # pdf2svg
+  - git remote add upstream $GIT_UPSTREAM_URL
+  - git pull upstream $CI_COMMIT_REF_NAME
 
 variables:
+  GIT_SUBMODULE_STRATEGY: normal
   DOXYGEN_DIR: Documentation/doxygen
 
 test:
   script:
-    - doxygen ${DOXYGEN_DIR}/Doxyfile
+    - doxygen $DOXYGEN_DIR/Doxyfile
   except:
     - master
   
 pages:
   script:
-    - doxygen ${DOXYGEN_DIR}/Doxyfile
-    - mv ${DOXYGEN_DIR}/html/ public/
+    - doxygen $DOXYGEN_DIR/Doxyfile
+    - mv $DOXYGEN_DIR/html/ public/
   artifacts:
     paths:
       - public

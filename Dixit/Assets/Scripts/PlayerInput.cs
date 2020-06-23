@@ -29,4 +29,9 @@ public class PlayerInput : MonoBehaviour
         var card = GetComponentInParent<Card>();
         Player.LocalPlayer.CmdChooseAnswer(card.choosen);
     }
+
+    public void ClickContinueButton(){
+        this.GetComponent<Button>().interactable = false;
+        Player.LocalPlayer.CmdPlayerIsReady();
+    }
 }

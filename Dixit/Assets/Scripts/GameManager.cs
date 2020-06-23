@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Mirror;
@@ -28,6 +29,7 @@ public class GameManager : NetworkBehaviour
 
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
+    public GameObject m_scoreResultOverlay;
 
     private enum Phase { WriteAnswer, ChoseAnswer, Evaluation }
     private Phase currentPhase;
@@ -36,7 +38,7 @@ public class GameManager : NetworkBehaviour
     public int timerForGiveAnswer = 30;
     public int timerToChooseAnswer = 20;
 
-    public int numberOfRounds = 3;
+    public int numberOfRounds = 1;
     private int currentRound;
 
     //Will be set by Game Host later on
@@ -45,6 +47,7 @@ public class GameManager : NetworkBehaviour
 
     //contains an array with all random, different indexes of the questions for the game
     private int[] indexesOfQuestion;
+    private int playersReady=0;
 
     private Task<QuestionSet> loadQuestionSet;
 
@@ -73,8 +76,8 @@ public class GameManager : NetworkBehaviour
                 index++;
             }
         }
-
-        currentRound = 0;
+        
+        currentRound = -1;
         //wait until the question set is loaded
         loadQuestionSet.ContinueWithOnMainThread(t =>
         {  
@@ -87,7 +90,16 @@ public class GameManager : NetworkBehaviour
     }
 
     private void StartRound()
-    {
+    {  
+        Player.LocalPlayer.RpcResultOverlaySetActive(false);
+
+        currentRound++;
+
+        if (currentRound >= numberOfRounds){
+            EndOfGame();
+            return;
+        }
+        
         currentPhase = Phase.WriteAnswer;
 
         //get Question for the current round
@@ -97,6 +109,18 @@ public class GameManager : NetworkBehaviour
             answers.Add(this.netIdentity, l.Result.Answer);
             WriteAnswerPhase(l.Result);
         });
+    }
+
+    private void EndOfGame(){
+
+        Debug.Log("End Of Game");
+        //TODO: show total scores
+
+        //TODO: add scores to framework/ player Info
+        
+        //TODO: New Game?
+        
+        //else Quit!
     }
 
     private void WriteAnswerPhase(Question question)
@@ -159,6 +183,8 @@ public class GameManager : NetworkBehaviour
         pointsList = points.ToList();
         pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
         UpdatePlayerCanvas();
+
+        StartCoroutine(waitAndShowResults());
     }
 
     /// <summary>
@@ -174,6 +200,32 @@ public class GameManager : NetworkBehaviour
                 idx--;
             }
         }
+
+    }
+
+    private IEnumerator waitAndShowResults()
+    {
+        yield return new WaitForSeconds(3);
+        Player.LocalPlayer.RpcResultOverlaySetActive(true);
+    }
+
+    public void LogPlayerIsReady()
+    {
+        playersReady++;
+        if (NetworkManager.singleton.numPlayers == playersReady){
+            playersReady=0;
+            CleanUpEvalPhase();
+            ChangePhase();
+        }
+    }
+
+    private void CleanUpEvalPhase(){
+        Player.LocalPlayer.RpcDeleteQuestionCard();
+        Player.LocalPlayer.RpcDeleteAllAnswerCards();
+
+        answers.Clear();
+        choices.Clear();
+
     }
 
     /// <summary>
@@ -225,7 +277,7 @@ public class GameManager : NetworkBehaviour
                 EvaluationPhase();
                 break;
             case Phase.Evaluation:
-                currentPhase = Phase.WriteAnswer;
+                StartRound();
                 break;
             default:
                 break;

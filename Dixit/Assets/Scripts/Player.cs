@@ -22,6 +22,7 @@ public class Player : NetworkBehaviour
     public GameManager gameManager;
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
     public Canvas PlayerCanvas;
+    private GameObject resultOverlayCanvas;
 
     /// <summary>
     /// Called when the local Player Object has been set up
@@ -38,6 +39,9 @@ public class Player : NetworkBehaviour
         PlayerCanvasEntry[2]=GameObject.Find("Player3rd");
         PlayerCanvasEntry[3]=GameObject.Find("Player4th");
         PlayerCanvasEntry[4]=GameObject.Find("Player5th");
+        
+        resultOverlayCanvas = GameObject.FindGameObjectsWithTag("ScoreResultOverlay")[0];
+        resultOverlayCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -60,10 +64,40 @@ public class Player : NetworkBehaviour
         gameManager.LogAnswer(this.netIdentity, answer);
     }
 
+    [Command]
+    public void CmdPlayerIsReady()
+    {
+        gameManager.LogPlayerIsReady();
+    }
+
+    [ClientRpc]
+    public void RpcResultOverlaySetActive(Boolean isActive)
+    {
+       resultOverlayCanvas.transform.GetComponentInChildren<Button>().interactable = true;
+       resultOverlayCanvas.SetActive(isActive);
+    }
+
     [ClientRpc]
     public void RpcDeleteInputCard()
     {
         Destroy(GameObject.FindGameObjectsWithTag("InputCard")[0]);
+    }
+
+    [ClientRpc]
+    public void RpcDeleteQuestionCard()
+    {
+        Destroy(GameObject.FindGameObjectsWithTag("QuestionCard")[0]);
+    }
+
+    [ClientRpc]
+    public void RpcDeleteAllAnswerCards()
+    {
+        var answerCards = GameObject.FindGameObjectsWithTag("AnswerCard");
+
+        for (int i = 0; i < answerCards.Length; i++)
+        {
+            Destroy(answerCards[i]);
+        }
     }
 
     [ClientRpc]

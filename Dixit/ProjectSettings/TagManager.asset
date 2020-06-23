@@ -7,6 +7,7 @@ TagManager:
   - InputCard
   - AnswerCard
   - QuestionCard
+  - ScoreResultOverlay
   layers:
   - Default
   - TransparentFX

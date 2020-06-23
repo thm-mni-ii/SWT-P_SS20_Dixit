@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
+using TMPro;
 
 /// <summary>
 /// Represents a Player in the Game.
@@ -16,9 +17,11 @@ public class Player : NetworkBehaviour
     public static Player LocalPlayer => _localPlayer.Value;
 
     private int points { get; set; }
-    private string playerName { get; set; }
+    public string playerName { get; set; }
 
     public GameManager gameManager;
+    public GameObject[] PlayerCanvasEntry = new GameObject[5];
+    public Canvas PlayerCanvas;
 
     /// <summary>
     /// Called when the local Player Object has been set up
@@ -26,6 +29,15 @@ public class Player : NetworkBehaviour
     public override void OnStartServer()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    public override void OnStartClient(){
+        PlayerCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>().GetComponentsInChildren<Canvas>()[0];
+        PlayerCanvasEntry[0]=GameObject.Find("Player1st");
+        PlayerCanvasEntry[1]=GameObject.Find("Player2nd");
+        PlayerCanvasEntry[2]=GameObject.Find("Player3rd");
+        PlayerCanvasEntry[3]=GameObject.Find("Player4th");
+        PlayerCanvasEntry[4]=GameObject.Find("Player5th");
     }
 
     /// <summary>
@@ -65,6 +77,16 @@ public class Player : NetworkBehaviour
                 card.HighlightCorrect();
             }
         }
+    }
+
+    /// <summary>
+    /// Updates a PlayerCanvasEntry with given index, playername and score
+    /// </summary>
+    [TargetRpc]
+    public void TargetUpdatePlayerCanvasEntry(int idx, String player, String points){
+        TextMeshProUGUI[] entry = PlayerCanvasEntry[idx].GetComponentsInChildren<TextMeshProUGUI>();
+        entry[0].text = player;
+        entry[1].text = points;
     }
 
 }

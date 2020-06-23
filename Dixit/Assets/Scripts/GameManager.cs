@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
+using TMPro;
 
 
 /// <summary>
@@ -16,9 +17,14 @@ public class GameManager : NetworkBehaviour
 {
     private readonly Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private readonly Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
-    private readonly Dictionary<NetworkIdentity, int> points = new Dictionary<NetworkIdentity, int>();
+    private Dictionary<NetworkIdentity, int> points { get; set; }
+
+    //for storing points sorted by value
+    private List<KeyValuePair<NetworkIdentity, int>> pointsList;
 
     private NetworkManager NetworkManager => NetworkManager.singleton;
+
+    private int PlayerCount => GetPlayers().Count; 
 
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
@@ -27,8 +33,8 @@ public class GameManager : NetworkBehaviour
     private Phase currentPhase;
 
     public CountdownTimer timer;
-    public int timerForGiveAnswer = 20;
-    public int timerToChooseAnswer = 15;
+    public int timerForGiveAnswer = 30;
+    public int timerToChooseAnswer = 20;
 
     public int numberOfRounds = 3;
     private int currentRound;
@@ -47,12 +53,27 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public override void OnStartServer()
     {
+        points = new Dictionary<NetworkIdentity, int>();
         // Initializes QuestionSet from given ID
         loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB).ContinueWithLogException();
     }
 
     public void StartGame()
     {
+        //Sets dummy playernames and initializes PlayerCanvas (TODO: setting and getting actual names)
+        int idx=1;
+        foreach(Player p in GetPlayers()){
+            p.playerName = "Player"+idx;
+            idx++;
+        }
+        foreach(Player p1 in GetPlayers()){
+            int index=0;
+            foreach(Player p2 in GetPlayers()){
+                p1.TargetUpdatePlayerCanvasEntry(index,p2.playerName, "0");
+                index++;
+            }
+        }
+
         currentRound = 0;
         //wait until the question set is loaded
         loadQuestionSet.ContinueWithOnMainThread(t =>
@@ -114,8 +135,6 @@ public class GameManager : NetworkBehaviour
 
         // start timer
         timer.StartTimer(timerToChooseAnswer);
-
-
     }
 
     private void EvaluationPhase()
@@ -137,6 +156,24 @@ public class GameManager : NetworkBehaviour
             Debug.Log(p.Key.netId + " Points: " + p.Value);
         }
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity);
+        pointsList = points.ToList();
+        pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
+        UpdatePlayerCanvas();
+    }
+
+    /// <summary>
+    /// Updates PlayerCanvas with new scores and ranking in all clients
+    /// </summary>
+    private void UpdatePlayerCanvas(){
+        foreach(Player p in GetPlayers()){
+            int idx = PlayerCount-1;
+            foreach (KeyValuePair<NetworkIdentity, int> points in pointsList){
+                String player = points.Key.GetComponent<Player>().playerName;
+                String playerPoints = points.Value.ToString();
+                p.TargetUpdatePlayerCanvasEntry(idx, player, playerPoints);
+                idx--;
+            }
+        }
     }
 
     /// <summary>

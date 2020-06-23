@@ -18,7 +18,6 @@ public class Card : NetworkBehaviour
 
     public override void OnStartClient(){
         gameObject.tag = type + "Card";
-
         switch (type)
         {
             case CardType.Input:

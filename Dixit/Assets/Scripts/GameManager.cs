@@ -17,7 +17,8 @@ public class GameManager : NetworkBehaviour
 {
     private readonly Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private readonly Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
-    private readonly Dictionary<NetworkIdentity, int> points = new Dictionary<NetworkIdentity, int>();
+    private Dictionary<NetworkIdentity, int> points { get; set; }
+
     private List<KeyValuePair<NetworkIdentity, int>> pointsList;
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
 
@@ -32,8 +33,8 @@ public class GameManager : NetworkBehaviour
     private Phase currentPhase;
 
     public CountdownTimer timer;
-    public int timerForGiveAnswer = 20;
-    public int timerToChooseAnswer = 15;
+    public int timerForGiveAnswer = 30;
+    public int timerToChooseAnswer = 20;
 
     public int numberOfRounds = 3;
     private int currentRound;
@@ -52,12 +53,24 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public override void OnStartServer()
     {
+        points = new Dictionary<NetworkIdentity, int>();
         // Initializes QuestionSet from given ID
         loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB).ContinueWithLogException();
     }
 
     public void StartGame()
     {
+        //Sets dummy playernames and initializes PlayerCanvas (TODO: setting and getting actual names)
+        int idx=1;
+        foreach(Player p in GetPlayers()){
+            p.playerName = "Player"+idx;
+            PlayerCanvasEntry[idx-1].SetActive(true);
+            TextMeshProUGUI[] entry = PlayerCanvasEntry[idx-1].GetComponentsInChildren<TextMeshProUGUI>();
+            entry[0].text = p.playerName;
+            entry[1].text = "0";
+            idx++;
+        }
+
         currentRound = 0;
         //wait until the question set is loaded
         loadQuestionSet.ContinueWithOnMainThread(t =>
@@ -119,8 +132,6 @@ public class GameManager : NetworkBehaviour
 
         // start timer
         timer.StartTimer(timerToChooseAnswer);
-
-
     }
 
     private void EvaluationPhase()
@@ -151,6 +162,7 @@ public class GameManager : NetworkBehaviour
     private void RpcUpdatePlayerCanvas(){
         int idx = PlayerCount-1;
         foreach (KeyValuePair<NetworkIdentity, int> points in pointsList){
+            PlayerCanvasEntry[idx].SetActive(true);
             TextMeshProUGUI[] entry = PlayerCanvasEntry[idx].GetComponentsInChildren<TextMeshProUGUI>();
             entry[0].text = points.Key.GetComponent<Player>().playerName;
             entry[1].text = points.Value.ToString();

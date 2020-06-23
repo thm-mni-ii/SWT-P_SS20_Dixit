@@ -38,7 +38,7 @@ public class GameManager : NetworkBehaviour
     public int timerForGiveAnswer = 30;
     public int timerToChooseAnswer = 20;
 
-    public int numberOfRounds = 1;
+    public int numberOfRounds = 3;
     private int currentRound;
 
     //Will be set by Game Host later on

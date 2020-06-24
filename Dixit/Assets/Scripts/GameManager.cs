@@ -7,8 +7,6 @@ using System.Linq;
 using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
-using TMPro;
-
 
 /// <summary>
 /// The GameManger keeps track of all given Answers and Changes the curren Phase of the Game.
@@ -19,9 +17,11 @@ public class GameManager : NetworkBehaviour
     private readonly Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
     private readonly Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
     private Dictionary<NetworkIdentity, int> points { get; set; }
+    private Dictionary<NetworkIdentity, int> roundPoints { get; set; }
 
     //for storing points sorted by value
     private List<KeyValuePair<NetworkIdentity, int>> pointsList;
+    private List<KeyValuePair<NetworkIdentity, int>> roundPointsList;
 
     private NetworkManager NetworkManager => NetworkManager.singleton;
 
@@ -77,6 +77,15 @@ public class GameManager : NetworkBehaviour
             }
         }
         
+        foreach(Player p1 in GetPlayers()){
+            int index=0;
+            p1.TargetUpdateScoreHeader(1);
+            foreach(Player p2 in GetPlayers()){
+                p1.TargetUpdateTextPanelEntry(index,p2.playerName, "0");
+                index++;
+            }
+        }
+
         currentRound = -1;
         //wait until the question set is loaded
         loadQuestionSet.ContinueWithOnMainThread(t =>
@@ -163,6 +172,7 @@ public class GameManager : NetworkBehaviour
 
     private void EvaluationPhase()
     {
+        roundPoints = new Dictionary<NetworkIdentity, int>();
         // eval points
         foreach (var choice in choices){
             if(choice.Key != this.netIdentity && !points.ContainsKey(choice.Key)) points.Add(choice.Key, 0);
@@ -173,15 +183,30 @@ public class GameManager : NetworkBehaviour
             //player choose own anser -> -1 point
             else if (choice.Key == choice.Value) points[choice.Key] -= 1;
             //player choose answer of other player -> other player get +1 point
-            else  points[choice.Value] += 1;    
+            else  points[choice.Value] += 1; 
+
+            if(choice.Key != this.netIdentity && !roundPoints.ContainsKey(choice.Key)) roundPoints.Add(choice.Key, 0);
+            if(choice.Value != this.netIdentity && !roundPoints.ContainsKey(choice.Value)) roundPoints.Add(choice.Value, 0);
+
+            //player choose right answer -> +3 points
+            if (choice.Value == this.netIdentity) roundPoints[choice.Key] += 3;
+            //player choose own anser -> -1 point
+            else if (choice.Key == choice.Value) roundPoints[choice.Key] -= 1;
+            //player choose answer of other player -> other player get +1 point
+            else  roundPoints[choice.Value] += 1;       
         }
 
         foreach (var p in points){
             Debug.Log(p.Key.netId + " Points: " + p.Value);
         }
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity);
+
         pointsList = points.ToList();
         pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
+        roundPointsList = roundPoints.ToList();
+        roundPointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
+
+        UpdateScoreResultsOverlay();
         UpdatePlayerCanvas();
 
         StartCoroutine(waitAndShowResults());
@@ -226,6 +251,22 @@ public class GameManager : NetworkBehaviour
         answers.Clear();
         choices.Clear();
 
+    }
+
+    /// <summary>
+    /// Updates ScoreResultsOverlay with new scores and ranking in all clients
+    /// </summary>
+    private void UpdateScoreResultsOverlay(){
+        foreach(Player p in GetPlayers()){
+            p.TargetUpdateScoreHeader(currentRound+1);
+            int idx = PlayerCount-1;
+            foreach (KeyValuePair<NetworkIdentity, int> roundPoints in roundPointsList){
+                String player = roundPoints.Key.GetComponent<Player>().playerName;
+                String playerPoints = roundPoints.Value.ToString();
+                p.TargetUpdateTextPanelEntry(idx, player, playerPoints);
+                idx--;
+            }
+        }
     }
 
     /// <summary>

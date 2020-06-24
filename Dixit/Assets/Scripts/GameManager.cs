@@ -68,26 +68,25 @@ public class GameManager : NetworkBehaviour
     {
         //Sets dummy playernames and initializes PlayerCanvas (TODO: setting and getting actual names)
         int idx=1;
-        foreach(Player p in GetPlayers()){
+        foreach(Player p in GetPlayers())
+        {
             p.playerName = "Player"+idx;
             idx++;
+
+            points.Add(p.netIdentity, 0);
         }
-        foreach(Player p1 in GetPlayers()){
-            int index=0;
-            foreach(Player p2 in GetPlayers()){
-                p1.TargetUpdatePlayerCanvasEntry(index,p2.playerName, "0");
-                index++;
-            }
-        }
-        
-        foreach(Player p1 in GetPlayers()){
+        foreach(Player p1 in GetPlayers())
+        {
             int index=0;
             p1.TargetUpdateScoreHeader(1);
-            foreach(Player p2 in GetPlayers()){
+            foreach(Player p2 in GetPlayers())
+            {
+                p1.TargetUpdatePlayerCanvasEntry(index,p2.playerName, "0");
                 p1.TargetUpdateTextPanelEntry(index,p2.playerName, 0);
                 index++;
             }
         }
+        
 
         currentRound = -1;
         //wait until the question set is loaded
@@ -103,13 +102,19 @@ public class GameManager : NetworkBehaviour
 
     private void StartRound()
     {  
-        foreach(Player p in GetPlayers()){
+        roundPoints = new Dictionary<NetworkIdentity, int>();
+        foreach(var p in GetPlayers())
+           roundPoints.Add(p.netIdentity, 0);
+           
+        foreach(Player p in GetPlayers())
+        {
             p.TargetResultOverlaySetActive(false);
         }
         
         currentRound++;
 
-        if (currentRound >= numberOfRounds){
+        if (currentRound >= numberOfRounds)
+        {
             EndOfGame();
             return;
         }
@@ -177,60 +182,45 @@ public class GameManager : NetworkBehaviour
 
     private void EvaluationPhase()
     {
-        roundPoints = new Dictionary<NetworkIdentity, int>();
-        // eval points
-        foreach (var choice in choices){
-            if(choice.Key != this.netIdentity && !points.ContainsKey(choice.Key)) points.Add(choice.Key, 0);
-            if(choice.Value != this.netIdentity && !points.ContainsKey(choice.Value)) points.Add(choice.Value, 0);
-
-            //player choose right answer -> +3 points
-            if (choice.Value == this.netIdentity) points[choice.Key] += 3;
-            //player choose own anser -> -1 point
-            else if (choice.Key == choice.Value
-                || (sameAnswers.ContainsKey(choice.Value) && sameAnswers[choice.Value].Contains(choice.Key))) points[choice.Key] -= 1;
-            //player choose answer of other player -> other player get +1 point
-            else
-            {
-                points[choice.Value] += 1;
-                if(!sameAnswers.ContainsKey(choice.Value)) return;
-
-                foreach (var player in sameAnswers[choice.Value])
-                {
-                    points[choice.Value] += 1;
-                }
-            }
-
-            if(choice.Key != this.netIdentity && !roundPoints.ContainsKey(choice.Key)) roundPoints.Add(choice.Key, 0);
-            if(choice.Value != this.netIdentity && !roundPoints.ContainsKey(choice.Value)) roundPoints.Add(choice.Value, 0);
-
-            //player choose right answer -> +3 points
-            if (choice.Value == this.netIdentity) roundPoints[choice.Key] += 3;
-            //player choose own anser -> -1 point
-            else if (choice.Key == choice.Value 
-                || (sameAnswers.ContainsKey(choice.Value) && sameAnswers[choice.Value].Contains(choice.Key))) roundPoints[choice.Key] -= 1;
-            //player choose answer of other player -> other player get +1 point
-            else
-            {
-                roundPoints[choice.Value] += 1;       
-                if(!sameAnswers.ContainsKey(choice.Value)) return;
-
-                foreach (var player in sameAnswers[choice.Value])
-                {
-                    roundPoints[choice.Value] += 1;
-                }
-            }
-        }
-
-        foreach (var p in points)
+        // All players who gave the correct answer get -1 points
+        if(sameAnswers.ContainsKey(this.netIdentity))
         {
-            Debug.Log(p.Key.netId + " Points: " + p.Value);
+            foreach(var p in sameAnswers[this.netIdentity])
+            {
+               roundPoints[p] -= 1;
+            }
         }
+        // eval points
+        foreach (var choice in choices)
+        {
+            //player choose own answer -> -1 point
+            if (ClickedOnOwnAnswer(choice.Key, choice.Value))
+            {
+                    roundPoints[choice.Key] -= 1;
+            }
+            //player choose right answer -> +3 points
+            else if (choice.Value == this.netIdentity) 
+            {
+                roundPoints[choice.Key] += 3;
+            }
+            else
+            {
+                //player choose answer of other player -> other player get +1 point
+                roundPoints[choice.Value] += 1;
+                //all players who gave this anwer get +1 point
+                if(sameAnswers.ContainsKey(choice.Value))
+                {
+                    foreach (var p in sameAnswers[choice.Value])
+                        roundPoints[p] += 1;
+                }
+            }
+        }
+        
+        foreach (var p in roundPoints)
+            points[p.Key] += p.Value;
+
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity);
 
-        pointsList = points.ToList();
-        pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
-        roundPointsList = roundPoints.ToList();
-        roundPointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
 
         UpdateScoreResultsOverlay();
         UpdatePlayerCanvas();
@@ -238,10 +228,15 @@ public class GameManager : NetworkBehaviour
         StartCoroutine(waitAndShowResults());
     }
 
+    private bool ClickedOnOwnAnswer(NetworkIdentity clicker, NetworkIdentity clickedOn) =>
+        clicker == clickedOn || sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker);
+
     /// <summary>
     /// Updates PlayerCanvas with new scores and ranking in all clients
     /// </summary>
     private void UpdatePlayerCanvas(){
+        pointsList = points.ToList();
+        pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
         foreach(Player p in GetPlayers()){
             int idx = PlayerCount-1;
             foreach (KeyValuePair<NetworkIdentity, int> points in pointsList){
@@ -285,6 +280,8 @@ public class GameManager : NetworkBehaviour
     /// Updates ScoreResultsOverlay with new scores and ranking in all clients
     /// </summary>
     private void UpdateScoreResultsOverlay(){
+        roundPointsList = roundPoints.ToList();
+        roundPointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
         foreach(Player p in GetPlayers()){
             p.TargetUpdateScoreHeader(currentRound+1);
             int idx = PlayerCount-1;
@@ -311,24 +308,15 @@ public class GameManager : NetworkBehaviour
     {
         foreach(var givenAnswer in answers)
         {
-            if(answer == givenAnswer.Value)
+            if(answer.ToLower() == givenAnswer.Value.ToLower())
             {
-                Debug.Log("same Answer!");
-
-                if(givenAnswer.Key != this.netIdentity)
-                    sameAnswers.Add(givenAnswer.Key, player);
+                sameAnswers.Add(givenAnswer.Key, player);
 
                 return;
             }
         }
 
         answers.Add(player, answer);
-        Debug.Log(answer);
-
-        if (answers.Count == NetworkManager.numPlayers)
-        {
-            //ChangePhase();
-        }
     }
 
     /// <summary>
@@ -337,10 +325,6 @@ public class GameManager : NetworkBehaviour
     public void LogAnswer(NetworkIdentity player, NetworkIdentity choice)
     {
         choices.Add(player, choice);
-        if (answers.Count == NetworkManager.numPlayers)
-        {
-            //ChangePhase();
-        }
     }
 
     /// <summary>

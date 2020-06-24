@@ -81,7 +81,7 @@ public class GameManager : NetworkBehaviour
             int index=0;
             p1.TargetUpdateScoreHeader(1);
             foreach(Player p2 in GetPlayers()){
-                p1.TargetUpdateTextPanelEntry(index,p2.playerName, "0");
+                p1.TargetUpdateTextPanelEntry(index,p2.playerName, 0);
                 index++;
             }
         }
@@ -100,8 +100,10 @@ public class GameManager : NetworkBehaviour
 
     private void StartRound()
     {  
-        Player.LocalPlayer.RpcResultOverlaySetActive(false);
-
+        foreach(Player p in GetPlayers()){
+            p.TargetResultOverlaySetActive(false);
+        }
+        
         currentRound++;
 
         if (currentRound >= numberOfRounds){
@@ -231,7 +233,9 @@ public class GameManager : NetworkBehaviour
     private IEnumerator waitAndShowResults()
     {
         yield return new WaitForSeconds(3);
-        Player.LocalPlayer.RpcResultOverlaySetActive(true);
+        foreach(Player p in GetPlayers()){
+            p.TargetResultOverlaySetActive(true);
+        }
     }
 
     public void LogPlayerIsReady()
@@ -262,7 +266,7 @@ public class GameManager : NetworkBehaviour
             int idx = PlayerCount-1;
             foreach (KeyValuePair<NetworkIdentity, int> roundPoints in roundPointsList){
                 String player = roundPoints.Key.GetComponent<Player>().playerName;
-                String playerPoints = roundPoints.Value.ToString();
+                int playerPoints = roundPoints.Value;
                 p.TargetUpdateTextPanelEntry(idx, player, playerPoints);
                 idx--;
             }

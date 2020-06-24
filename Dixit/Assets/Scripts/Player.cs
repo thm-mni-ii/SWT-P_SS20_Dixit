@@ -55,6 +55,7 @@ public class Player : NetworkBehaviour
         TextPanelEntry[4] = GameObject.Find("Player5");
 
         resultOverlayCanvas.SetActive(false);
+        Debug.Log("OnStartLocalPlayer  "+resultOverlayCanvas);
     }
 
     /// <summary>
@@ -83,9 +84,10 @@ public class Player : NetworkBehaviour
         gameManager.LogPlayerIsReady();
     }
 
-    [ClientRpc]
-    public void RpcResultOverlaySetActive(Boolean isActive)
+    [TargetRpc]
+    public void TargetResultOverlaySetActive(Boolean isActive)
     {
+        Debug.Log("TargetResultOverlaySetActive  "+resultOverlayCanvas);
        resultOverlayCanvas.GetComponentInChildren<Button>().interactable = true;
        resultOverlayCanvas.SetActive(isActive);
     }
@@ -140,11 +142,11 @@ public class Player : NetworkBehaviour
     /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
     /// </summary>
     [TargetRpc]
-    public void TargetUpdateTextPanelEntry(int idx, String player, String points){
+    public void TargetUpdateTextPanelEntry(int idx, String player, int points){
         TextMeshProUGUI[] entry = TextPanelEntry[idx].GetComponentsInChildren<TextMeshProUGUI>(true);
         entry[0].enabled = true;
         entry[1].text = player;
-        entry[2].text = points;
+        entry[2].text = (points>0)?"+"+points:points+"";
     }
 
     /// <summary>

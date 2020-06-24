@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Mirror;
 
@@ -15,9 +16,18 @@ public class Card : NetworkBehaviour
     public enum CardType {Input, Question, Answer};
 
     public Material correctColour;
+    private Vector3 _slideVector;
+
+    [SyncVar, HideInInspector]
+    public bool startFacedown = false;
 
     public override void OnStartClient(){
         gameObject.tag = type + "Card";
+        if (startFacedown)
+        {
+            InstantFlipFacedown();
+        }
+
         switch (type)
         {
             case CardType.Input:
@@ -48,14 +58,77 @@ public class Card : NetworkBehaviour
         }
     }
 
-    public void Flip()
+    public void InstantFlipFacedown()
     {
-        anim.Play("FlipCardChild");
+        anim.Play("InstantFlipFacedown");
     }
 
-    public void Unflip()
+    public void InstantFlipFaceup()
     {
-        anim.Play("UnflipCardChild");
+        anim.Play("InstantFlipFaceup");
+    }
+    
+    public void FlipFacedown()
+    {
+        anim.Play("FlipFacedown");
+    }
+
+    public void FlipFaceup()
+    {
+        anim.Play("FlipFaceup");
+    }
+    
+    public void FlipFacedown(float time)
+    {
+        Invoke(nameof(FlipFacedown),time);
+    }
+
+    public void FlipFaceup(float time)
+    {
+        Invoke(nameof(FlipFaceup),time);
+    }
+    
+    [ClientRpc]
+    public void RpcFlip(bool toFacedown, bool instantly, float time)
+    {
+        if (toFacedown)
+        {
+            if (instantly)
+            {
+                InstantFlipFacedown();
+            }
+            else
+            {
+                FlipFacedown(time);
+            }
+        }
+        else
+        {
+            if (instantly)
+            {
+                InstantFlipFaceup();
+            }
+            else
+            {
+                FlipFaceup(time);
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSlideToPosition(Vector3 vector3)
+    {
+        _slideVector = vector3;
+        StartCoroutine("SlideToPosition");
+    }
+
+    private IEnumerator SlideToPosition()
+    {
+        while (transform.position != _slideVector)
+        {
+            transform.position = Vector3.Lerp(transform.position, _slideVector,Time.deltaTime*10);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 
     public void HighlightCard(Material highlighted)

@@ -8,6 +8,7 @@ using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
 using TMPro;
+using Random = UnityEngine.Random;
 
 
 /// <summary>
@@ -291,7 +292,12 @@ public class GameManager : NetworkBehaviour
 
         var xPosition = startX - 62.5;
         int index = 0;
-        foreach (var answer in answers)
+        
+        KeyValuePair<NetworkIdentity, string>[] answersArray = answers.ToArray();
+        
+        ShuffleArray(answersArray);
+        
+        foreach (var answer in answersArray)
         {
             var cardGo = Instantiate(m_cardPrefab, new Vector3(0, -100, -(2+1*index)), Quaternion.Euler(0, 0, 0));
             var card = cardGo.GetComponent<Card>();
@@ -307,6 +313,18 @@ public class GameManager : NetworkBehaviour
             xPosition -= 145;
             
             index++;
+        }
+    }
+    
+    private void ShuffleArray<T>(T[] array)
+    {
+        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
+        for (int t = 0; t < array.Length; t++ )
+        {
+            T tmp = array[t];
+            int r = Random.Range(t, array.Length);
+            array[t] = array[r];
+            array[r] = tmp;
         }
     }
 

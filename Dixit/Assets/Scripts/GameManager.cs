@@ -290,17 +290,23 @@ public class GameManager : NetworkBehaviour
         var startX = (answers.ToArray().Length * 125 + (answers.ToArray().Length - 1) * 20) / 2;
 
         var xPosition = startX - 62.5;
-
+        int index = 0;
         foreach (var answer in answers)
         {
-            var cardGo = Instantiate(m_cardPrefab, new Vector3((float)xPosition, -100, -2), Quaternion.Euler(0, 0, 0));
+            var cardGo = Instantiate(m_cardPrefab, new Vector3(0, -100, -(2+1*index)), Quaternion.Euler(0, 0, 0));
             var card = cardGo.GetComponent<Card>();
             card.text = answer.Value;
             card.choosen = answer.Key;
             card.type = Card.CardType.Answer;
+            card.startFacedown = true;
 
             NetworkServer.Spawn(cardGo);
+            card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));
+            card.RpcFlip(false,false,(float)(index*0.2+1));
+            
             xPosition -= 145;
+            
+            index++;
         }
     }
 

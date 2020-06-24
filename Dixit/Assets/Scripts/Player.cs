@@ -23,6 +23,9 @@ public class Player : NetworkBehaviour
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
     public Canvas PlayerCanvas;
     private GameObject resultOverlayCanvas;
+    public Canvas TextPanel;
+    public GameObject[] TextPanelEntry = new GameObject[5];
+    private TextMeshProUGUI ScoreHeader;
 
     /// <summary>
     /// Called when the local Player Object has been set up
@@ -32,16 +35,27 @@ public class Player : NetworkBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    public override void OnStartClient(){
-        PlayerCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>().GetComponentsInChildren<Canvas>()[0];
-        PlayerCanvasEntry[0]=GameObject.Find("Player1st");
-        PlayerCanvasEntry[1]=GameObject.Find("Player2nd");
-        PlayerCanvasEntry[2]=GameObject.Find("Player3rd");
-        PlayerCanvasEntry[3]=GameObject.Find("Player4th");
-        PlayerCanvasEntry[4]=GameObject.Find("Player5th");
-        
-        resultOverlayCanvas = GameObject.FindGameObjectsWithTag("ScoreResultOverlay")[0];
+    public override void OnStartLocalPlayer(){
+        //Initialize all variables necessary for PlayerCanvas control
+        PlayerCanvasEntry[0] = GameObject.Find("Player1st");
+        PlayerCanvasEntry[1] = GameObject.Find("Player2nd");
+        PlayerCanvasEntry[2] = GameObject.Find("Player3rd");
+        PlayerCanvasEntry[3] = GameObject.Find("Player4th");
+        PlayerCanvasEntry[4] = GameObject.Find("Player5th");
+
+        //Initialize all variables necessary for ScoreCanvas control
+        resultOverlayCanvas = GameObject.FindGameObjectWithTag("ScoreResultOverlay");
+        GameObject BGPanel = GameObject.Find("BGPanel");
+        ScoreHeader = BGPanel.GetComponentInChildren<TextMeshProUGUI>();
+        TextPanel = BGPanel.GetComponentInChildren<Canvas>();
+        TextPanelEntry[0] = GameObject.Find("Player1");
+        TextPanelEntry[1] = GameObject.Find("Player2");
+        TextPanelEntry[2] = GameObject.Find("Player3");
+        TextPanelEntry[3] = GameObject.Find("Player4");
+        TextPanelEntry[4] = GameObject.Find("Player5");
+
         resultOverlayCanvas.SetActive(false);
+        Debug.Log("OnStartLocalPlayer  "+resultOverlayCanvas);
     }
 
     /// <summary>
@@ -70,10 +84,11 @@ public class Player : NetworkBehaviour
         gameManager.LogPlayerIsReady();
     }
 
-    [ClientRpc]
-    public void RpcResultOverlaySetActive(Boolean isActive)
+    [TargetRpc]
+    public void TargetResultOverlaySetActive(Boolean isActive)
     {
-       resultOverlayCanvas.transform.GetComponentInChildren<Button>().interactable = true;
+        Debug.Log("TargetResultOverlaySetActive  "+resultOverlayCanvas);
+       resultOverlayCanvas.GetComponentInChildren<Button>().interactable = true;
        resultOverlayCanvas.SetActive(isActive);
     }
 
@@ -121,6 +136,25 @@ public class Player : NetworkBehaviour
         TextMeshProUGUI[] entry = PlayerCanvasEntry[idx].GetComponentsInChildren<TextMeshProUGUI>();
         entry[0].text = player;
         entry[1].text = points;
+    }
+
+    /// <summary>
+    /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
+    /// </summary>
+    [TargetRpc]
+    public void TargetUpdateTextPanelEntry(int idx, String player, int points){
+        TextMeshProUGUI[] entry = TextPanelEntry[idx].GetComponentsInChildren<TextMeshProUGUI>(true);
+        entry[0].enabled = true;
+        entry[1].text = player;
+        entry[2].text = (points>0)?"+"+points:points+"";
+    }
+
+    /// <summary>
+    /// Updates a ScoreHeader (in ScoreResultOverlay) with given roundNumber
+    /// </summary>
+    [TargetRpc]
+    public void TargetUpdateScoreHeader(int roundNumber){
+        ScoreHeader.text = "~ Scores Round "+roundNumber+" ~";
     }
 
 }

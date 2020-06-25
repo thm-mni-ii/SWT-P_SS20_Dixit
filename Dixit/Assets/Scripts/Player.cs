@@ -1,7 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
@@ -13,17 +12,14 @@ using TMPro;
 /// </summary>
 public class Player : NetworkBehaviour
 {
-    private static Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
+    private static readonly Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
     public static Player LocalPlayer => _localPlayer.Value;
 
-    private int points { get; set; }
-    public string playerName { get; set; }
+    public string PlayerName { get; set; }
 
     public GameManager gameManager;
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
-    public Canvas PlayerCanvas;
     private GameObject resultOverlayCanvas;
-    public Canvas TextPanel;
     public GameObject[] TextPanelEntry = new GameObject[5];
     private TextMeshProUGUI ScoreHeader;
 
@@ -35,7 +31,8 @@ public class Player : NetworkBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    public override void OnStartLocalPlayer(){
+    public override void OnStartLocalPlayer()
+    {
         //Initialize all variables necessary for PlayerCanvas control
         PlayerCanvasEntry[0] = GameObject.Find("Player1st");
         PlayerCanvasEntry[1] = GameObject.Find("Player2nd");
@@ -47,7 +44,7 @@ public class Player : NetworkBehaviour
         resultOverlayCanvas = GameObject.FindGameObjectWithTag("ScoreResultOverlay");
         GameObject BGPanel = GameObject.Find("BGPanel");
         ScoreHeader = BGPanel.GetComponentInChildren<TextMeshProUGUI>();
-        TextPanel = BGPanel.GetComponentInChildren<Canvas>();
+
         TextPanelEntry[0] = GameObject.Find("Player1");
         TextPanelEntry[1] = GameObject.Find("Player2");
         TextPanelEntry[2] = GameObject.Find("Player3");
@@ -55,7 +52,7 @@ public class Player : NetworkBehaviour
         TextPanelEntry[4] = GameObject.Find("Player5");
 
         resultOverlayCanvas.SetActive(false);
-        Debug.Log("OnStartLocalPlayer  "+resultOverlayCanvas);
+        Debug.Log("OnStartLocalPlayer  " + resultOverlayCanvas);
     }
 
     /// <summary>
@@ -85,11 +82,11 @@ public class Player : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void TargetResultOverlaySetActive(Boolean isActive)
+    public void TargetResultOverlaySetActive(bool isActive)
     {
-        Debug.Log("TargetResultOverlaySetActive  "+resultOverlayCanvas);
-       resultOverlayCanvas.GetComponentInChildren<Button>().interactable = true;
-       resultOverlayCanvas.SetActive(isActive);
+        Debug.Log("TargetResultOverlaySetActive  " + resultOverlayCanvas);
+        resultOverlayCanvas.GetComponentInChildren<Button>().interactable = true;
+        resultOverlayCanvas.SetActive(isActive);
     }
 
     [ClientRpc]
@@ -119,9 +116,9 @@ public class Player : NetworkBehaviour
     public void RpcHighlightCard(UInt32 correctCard)
     {
         var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
-        foreach(var card in cards)
+        foreach (var card in cards)
         {
-            if(card.choosen == correctCard)
+            if (card.id == correctCard)
             {
                 card.HighlightCorrect();
             }
@@ -132,7 +129,8 @@ public class Player : NetworkBehaviour
     /// Updates a PlayerCanvasEntry with given index, playername and score
     /// </summary>
     [TargetRpc]
-    public void TargetUpdatePlayerCanvasEntry(int idx, String player, String points){
+    public void TargetUpdatePlayerCanvasEntry(int idx, string player, string points)
+    {
         TextMeshProUGUI[] entry = PlayerCanvasEntry[idx].GetComponentsInChildren<TextMeshProUGUI>();
         entry[0].text = player;
         entry[1].text = points;
@@ -142,19 +140,21 @@ public class Player : NetworkBehaviour
     /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
     /// </summary>
     [TargetRpc]
-    public void TargetUpdateTextPanelEntry(int idx, String player, int points){
+    public void TargetUpdateTextPanelEntry(int idx, string player, int points)
+    {
         TextMeshProUGUI[] entry = TextPanelEntry[idx].GetComponentsInChildren<TextMeshProUGUI>(true);
         entry[0].enabled = true;
         entry[1].text = player;
-        entry[2].text = (points>0)?"+"+points:points+"";
+        entry[2].text = ((points > 0) ? "+" : "") + points;
     }
 
     /// <summary>
     /// Updates a ScoreHeader (in ScoreResultOverlay) with given roundNumber
     /// </summary>
     [TargetRpc]
-    public void TargetUpdateScoreHeader(int roundNumber){
-        ScoreHeader.text = "~ Scores Round "+roundNumber+" ~";
+    public void TargetUpdateScoreHeader(int roundNumber)
+    {
+        ScoreHeader.text = "~ Scores Round " + roundNumber + " ~";
     }
 
 }

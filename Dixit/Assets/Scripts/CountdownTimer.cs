@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class CountdownTimer : NetworkBehaviour
 {
     [SerializeField] private Text timerTextField;
-    public UnityEvent OnTimeout= new UnityEvent();
+    public UnityEvent OnTimeout = new UnityEvent();
     private int _timer;
 
-    void passSecond() //Only ever happens on Server (Hopefully)
+    [Server]
+    private void passSecond()
     {
         _timer--;
         timerTextField.text = _timer + "s";
@@ -21,6 +22,7 @@ public class CountdownTimer : NetworkBehaviour
         }
     }
 
+    [Server]
     public void StartTimer(int startingTime)
     {
         _timer = startingTime;
@@ -32,7 +34,7 @@ public class CountdownTimer : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcUpdateTimerTextfield(int timer)
+    private void RpcUpdateTimerTextfield(int timer)
     {
         timerTextField.text = timer + "s";
     }

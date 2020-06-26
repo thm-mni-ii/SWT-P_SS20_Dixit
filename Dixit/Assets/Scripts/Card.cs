@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Mirror;
@@ -9,7 +10,7 @@ public class Card : NetworkBehaviour
     [SyncVar, HideInInspector]
     public string text;
     [SyncVar, HideInInspector]
-    public NetworkIdentity choosen;
+    public UInt32 choosen;
 
     [SyncVar, HideInInspector]
     public CardType type;

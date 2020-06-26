@@ -16,15 +16,15 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class GameManager : NetworkBehaviour
 {
-    private readonly Dictionary<NetworkIdentity, string> answers = new Dictionary<NetworkIdentity, string>();
-    private readonly Dictionary<NetworkIdentity, NetworkIdentity> choices = new Dictionary<NetworkIdentity, NetworkIdentity>();
-    private Dictionary<NetworkIdentity, int> points { get; set; }
-    private Dictionary<NetworkIdentity, int> roundPoints { get; set; }
+    private readonly Dictionary<UInt32, string> answers = new Dictionary<UInt32, string>();
+    private readonly Dictionary<UInt32, UInt32> choices = new Dictionary<UInt32, UInt32>();
+    private Dictionary<UInt32, int> points { get; set; }
+    private Dictionary<UInt32, int> roundPoints { get; set; }
 
     //for storing points sorted by value
-    private List<KeyValuePair<NetworkIdentity, int>> pointsList;
-    private List<KeyValuePair<NetworkIdentity, int>> roundPointsList;
-    private readonly MultivalDictionaty<NetworkIdentity, NetworkIdentity> sameAnswers = new MultivalDictionaty<NetworkIdentity, NetworkIdentity>();
+    private List<KeyValuePair<UInt32, int>> pointsList;
+    private List<KeyValuePair<UInt32, int>> roundPointsList;
+    private readonly MultivalDictionaty<UInt32, UInt32> sameAnswers = new MultivalDictionaty<UInt32, UInt32>();
 
     private NetworkManager NetworkManager => NetworkManager.singleton;
 
@@ -59,7 +59,7 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public override void OnStartServer()
     {
-        points = new Dictionary<NetworkIdentity, int>();
+        points = new Dictionary<UInt32, int>();
         // Initializes QuestionSet from given ID
         loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB).ContinueWithLogException();
     }
@@ -73,7 +73,7 @@ public class GameManager : NetworkBehaviour
             p.playerName = "Player"+idx;
             idx++;
 
-            points.Add(p.netIdentity, 0);
+            points.Add(p.netIdentity.netId, 0);
         }
         foreach(Player p1 in GetPlayers())
         {
@@ -102,9 +102,9 @@ public class GameManager : NetworkBehaviour
 
     private void StartRound()
     {  
-        roundPoints = new Dictionary<NetworkIdentity, int>();
+        roundPoints = new Dictionary<UInt32, int>();
         foreach(var p in GetPlayers())
-           roundPoints.Add(p.netIdentity, 0);
+           roundPoints.Add(p.netIdentity.netId, 0);
            
         foreach(Player p in GetPlayers())
         {
@@ -125,7 +125,7 @@ public class GameManager : NetworkBehaviour
         QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(l =>
         {
             Debug.Log(l.Result.QuestionText);
-            answers.Add(this.netIdentity, l.Result.Answer);
+            answers.Add(this.netIdentity.netId, l.Result.Answer);
             WriteAnswerPhase(l.Result);
         });
     }
@@ -183,9 +183,9 @@ public class GameManager : NetworkBehaviour
     private void EvaluationPhase()
     {
         // All players who gave the correct answer get -1 points
-        if(sameAnswers.ContainsKey(this.netIdentity))
+        if(sameAnswers.ContainsKey(this.netId))
         {
-            foreach(var p in sameAnswers[this.netIdentity])
+            foreach(var p in sameAnswers[this.netId])
             {
                roundPoints[p] -= 1;
             }
@@ -199,7 +199,7 @@ public class GameManager : NetworkBehaviour
                     roundPoints[choice.Key] -= 1;
             }
             //player choose right answer -> +3 points
-            else if (choice.Value == this.netIdentity) 
+            else if (choice.Value == this.netId) 
             {
                 roundPoints[choice.Key] += 3;
             }
@@ -219,7 +219,7 @@ public class GameManager : NetworkBehaviour
         foreach (var p in roundPoints)
             points[p.Key] += p.Value;
 
-        Player.LocalPlayer.RpcHighlightCard(this.netIdentity);
+        Player.LocalPlayer.RpcHighlightCard(this.netIdentity.netId);
 
 
         UpdateScoreResultsOverlay();
@@ -228,7 +228,7 @@ public class GameManager : NetworkBehaviour
         StartCoroutine(waitAndShowResults());
     }
 
-    private bool ClickedOnOwnAnswer(NetworkIdentity clicker, NetworkIdentity clickedOn) =>
+    private bool ClickedOnOwnAnswer(UInt32 clicker, UInt32 clickedOn) =>
         clicker == clickedOn || sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker);
 
     /// <summary>
@@ -239,8 +239,8 @@ public class GameManager : NetworkBehaviour
         pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
         foreach(Player p in GetPlayers()){
             int idx = PlayerCount-1;
-            foreach (KeyValuePair<NetworkIdentity, int> points in pointsList){
-                String player = points.Key.GetComponent<Player>().playerName;
+            foreach (KeyValuePair<UInt32, int> points in pointsList){
+                String player = GetIdentity(points.Key).GetComponent<Player>().playerName;
                 String playerPoints = points.Value.ToString();
                 p.TargetUpdatePlayerCanvasEntry(idx, player, playerPoints);
                 idx--;
@@ -285,8 +285,8 @@ public class GameManager : NetworkBehaviour
         foreach(Player p in GetPlayers()){
             p.TargetUpdateScoreHeader(currentRound+1);
             int idx = PlayerCount-1;
-            foreach (KeyValuePair<NetworkIdentity, int> roundPoints in roundPointsList){
-                String player = roundPoints.Key.GetComponent<Player>().playerName;
+            foreach (KeyValuePair<UInt32, int> roundPoints in roundPointsList){
+                String player = GetIdentity(roundPoints.Key).GetComponent<Player>().playerName;
                 int playerPoints = roundPoints.Value;
                 p.TargetUpdateTextPanelEntry(idx, player, playerPoints);
                 idx--;
@@ -302,9 +302,17 @@ public class GameManager : NetworkBehaviour
         NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>()).ToList();
 
     /// <summary>
+    /// Gets the NetworkIdentity component of an object with the specified netId
+    /// <param name="netId"> The Identity to be searched for </param>
+    /// <returns> The NetworkIdentity </returns>
+    /// </summary>
+    private NetworkIdentity GetIdentity(UInt32 netId) =>
+       NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
+
+    /// <summary>
     /// Logs the given Answer of a Player during the WriteAnwer Phase.
     /// </summary>
-    public void LogAnswer(NetworkIdentity player, string answer)
+    public void LogAnswer(UInt32 player, string answer)
     {
         foreach(var givenAnswer in answers)
         {
@@ -322,7 +330,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Logs the choosen Answer of a Player during the ChoseAnswer Phase.
     /// </summary>
-    public void LogAnswer(NetworkIdentity player, NetworkIdentity choice)
+    public void LogAnswer(UInt32 player, UInt32 choice)
     {
         choices.Add(player, choice);
     }
@@ -358,7 +366,7 @@ public class GameManager : NetworkBehaviour
         var xPosition = startX - 62.5;
         int index = 0;
         
-        KeyValuePair<NetworkIdentity, string>[] answersArray = answers.ToArray();
+        KeyValuePair<UInt32, string>[] answersArray = answers.ToArray();
         
         ShuffleArray(answersArray);
         

@@ -65,7 +65,7 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdGiveAnswer(string answer)
     {
-        gameManager.LogAnswer(this.netIdentity, answer);
+        gameManager.LogAnswer(this.netIdentity.netId, answer);
     }
 
     /// <summary>
@@ -73,9 +73,9 @@ public class Player : NetworkBehaviour
     /// <param name="answer">The Answer</param>
     /// </summary>
     [Command]
-    public void CmdChooseAnswer(NetworkIdentity answer)
+    public void CmdChooseAnswer(UInt32 answer)
     {
-        gameManager.LogAnswer(this.netIdentity, answer);
+        gameManager.LogAnswer(this.netIdentity.netId, answer);
     }
 
     [Command]
@@ -116,7 +116,7 @@ public class Player : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcHighlightCard(NetworkIdentity correctCard)
+    public void RpcHighlightCard(UInt32 correctCard)
     {
         var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
         foreach(var card in cards)

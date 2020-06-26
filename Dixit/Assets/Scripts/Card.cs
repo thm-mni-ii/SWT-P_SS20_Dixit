@@ -17,10 +17,18 @@ public class Card : NetworkBehaviour
     public enum CardType { Input, Question, Answer };
 
     public Material correctColour;
+    public Material defalutColor;
     private Vector3 _slideVector;
 
     [SyncVar, HideInInspector]
     public bool startFacedown = false;
+
+    [SerializeField]
+    private GameObject writeAnswerGo;
+    [SerializeField]
+    private GameObject selectAnswerGo;
+    [SerializeField]
+    private GameObject selectAnswerBtn;
 
     public override void OnStartClient()
     {
@@ -34,9 +42,8 @@ public class Card : NetworkBehaviour
         {
             case CardType.Input:
                 {
-                    var textTransform = GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
-                    textTransform.Find("WriteAnswer").gameObject.SetActive(true);
-                    textTransform.Find("SelectAnswer").gameObject.SetActive(false);
+                    writeAnswerGo.SetActive(true);
+                    selectAnswerGo.SetActive(false);
                     break;
                 }
             case CardType.Question:
@@ -46,12 +53,10 @@ public class Card : NetworkBehaviour
                 }
             case CardType.Answer:
                 {
-                    var textTransform = GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
-                    textTransform.Find("WriteAnswer").gameObject.SetActive(false);
-                    textTransform.Find("SelectAnswer").gameObject.SetActive(true);
+                    writeAnswerGo.SetActive(false);
+                    selectAnswerGo.SetActive(true);
 
-
-                    textTransform.Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
+                    selectAnswerGo.GetComponentInChildren<Transform>()
                         .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = text;
                     break;
                 }
@@ -141,5 +146,15 @@ public class Card : NetworkBehaviour
     public void HighlightCorrect()
     {
         HighlightCard(correctColour);
+    }
+
+    public void HighlightReset()
+    {
+        HighlightCard(defalutColor);
+    }
+
+    public void DisableSelectInput()
+    {
+        selectAnswerBtn.SetActive(false);
     }
 }

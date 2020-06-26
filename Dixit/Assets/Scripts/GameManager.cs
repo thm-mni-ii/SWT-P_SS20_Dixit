@@ -317,6 +317,12 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void LogAnswer(UInt32 player, string answer)
     {
+        if (currentPhase != Phase.WriteAnswer)
+        {
+            Debug.LogWarning($"LogAnswer (WriteAnswer Phase) called during {currentPhase} by player {player}!");
+            return;
+        }
+
         foreach (var givenAnswer in answers)
         {
             if (answer.ToLower() == givenAnswer.Value.ToLower())
@@ -335,7 +341,16 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void LogAnswer(UInt32 player, UInt32 choice)
     {
-        choices.Add(player, choice);
+        if (currentPhase != Phase.ChoseAnswer)
+        {
+            Debug.LogWarning($"LogAnswer (ChoseAnswer Phase) called during {currentPhase} by player {player}!");
+            return;
+        }
+
+        if (choices.ContainsKey(player))
+            choices[player] = choice;
+        else
+            choices.Add(player, choice);
     }
 
     /// <summary>

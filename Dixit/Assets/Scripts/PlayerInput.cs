@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviour
     public void SelectAnswer()
     {
         var card = GetComponentInParent<Card>();
-        Player.LocalPlayer.CmdChooseAnswer(card.id);
+        Player.LocalPlayer.ChooseAnswer(card);
     }
 
     public void ClickContinueButton(){

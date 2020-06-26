@@ -23,6 +23,8 @@ public class Player : NetworkBehaviour
     public GameObject[] TextPanelEntry = new GameObject[5];
     private TextMeshProUGUI ScoreHeader;
 
+    private Card selectedCard = null;
+
     /// <summary>
     /// Called when the local Player Object has been set up
     /// </summary>
@@ -70,9 +72,16 @@ public class Player : NetworkBehaviour
     /// <param name="answer">The Answer</param>
     /// </summary>
     [Command]
-    public void CmdChooseAnswer(UInt32 answer)
+    private void CmdChooseAnswer(UInt32 answer)
     {
         gameManager.LogAnswer(this.netIdentity.netId, answer);
+    }
+
+    public void ChooseAnswer(Card card)
+    {
+        selectedCard?.HighlightReset();
+        selectedCard = card;
+        CmdChooseAnswer(card.id);
     }
 
     [Command]
@@ -87,6 +96,7 @@ public class Player : NetworkBehaviour
         Debug.Log("TargetResultOverlaySetActive  " + resultOverlayCanvas);
         resultOverlayCanvas.GetComponentInChildren<Button>().interactable = true;
         resultOverlayCanvas.SetActive(isActive);
+        selectedCard = null;
     }
 
     [ClientRpc]
@@ -118,6 +128,8 @@ public class Player : NetworkBehaviour
         var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
         foreach (var card in cards)
         {
+            card.DisableSelectInput();
+
             if (card.id == correctCard)
             {
                 card.HighlightCorrect();

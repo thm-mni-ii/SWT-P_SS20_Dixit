@@ -18,17 +18,15 @@ public class GameManager : NetworkBehaviour
 {
     private readonly Dictionary<UInt32, string> answers = new Dictionary<UInt32, string>();
     private readonly Dictionary<UInt32, UInt32> choices = new Dictionary<UInt32, UInt32>();
-    private Dictionary<UInt32, int> points { get; set; }
-    private Dictionary<UInt32, int> roundPoints { get; set; }
+    private readonly Dictionary<UInt32, int> points = new Dictionary<UInt32, int>();
+    private readonly Dictionary<UInt32, int> roundPoints = new Dictionary<UInt32, int>();
 
     //for storing points sorted by value
     private List<KeyValuePair<UInt32, int>> pointsList;
     private List<KeyValuePair<UInt32, int>> roundPointsList;
     private readonly MultivalDictionaty<UInt32, UInt32> sameAnswers = new MultivalDictionaty<UInt32, UInt32>();
 
-    private NetworkManager NetworkManager => NetworkManager.singleton;
-
-    private int PlayerCount => GetPlayers().Count; 
+    private int PlayerCount => GetPlayers().Count;
 
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
@@ -50,7 +48,7 @@ public class GameManager : NetworkBehaviour
 
     //contains an array with all random, different indexes of the questions for the game
     private int[] indexesOfQuestion;
-    private int playersReady=0;
+    private int playersReady = 0;
 
     private Task<QuestionSet> loadQuestionSet;
 
@@ -59,7 +57,6 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public override void OnStartServer()
     {
-        points = new Dictionary<UInt32, int>();
         // Initializes QuestionSet from given ID
         loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB).ContinueWithLogException();
     }
@@ -67,50 +64,44 @@ public class GameManager : NetworkBehaviour
     public void StartGame()
     {
         //Sets dummy playernames and initializes PlayerCanvas (TODO: setting and getting actual names)
-        int idx=1;
-        foreach(Player p in GetPlayers())
+        foreach ((Player p, int idx) in GetPlayers().Select(ValueTuple.Create<Player, int>))
         {
-            p.playerName = "Player"+idx;
-            idx++;
+            p.PlayerName = "Player" + idx;
 
             points.Add(p.netIdentity.netId, 0);
+            roundPoints.Add(p.netIdentity.netId, 0);
         }
-        foreach(Player p1 in GetPlayers())
+        foreach (Player p1 in GetPlayers())
         {
-            int index=0;
             p1.TargetUpdateScoreHeader(1);
-            foreach(Player p2 in GetPlayers())
+            foreach ((Player p2, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
             {
-                p1.TargetUpdatePlayerCanvasEntry(index,p2.playerName, "0");
-                p1.TargetUpdateTextPanelEntry(index,p2.playerName, 0);
-                index++;
+                p1.TargetUpdatePlayerCanvasEntry(index, p2.PlayerName, "0");
+                p1.TargetUpdateTextPanelEntry(index, p2.PlayerName, 0);
             }
         }
-        
+
 
         currentRound = -1;
         //wait until the question set is loaded
         loadQuestionSet.ContinueWithOnMainThread(t =>
-        {  
+        {
             //get random idx array for questions
-            indexesOfQuestion = getRandomQuestionIdxArray(QuestionSet.QuestionCount);
+            indexesOfQuestion = GetRandomQuestionIdxArray(QuestionSet.QuestionCount);
 
-            //Start the firt round
+            //Start the first round
+            currentPhase = Phase.WriteAnswer;
             StartRound();
-        });       
+        });
     }
 
     private void StartRound()
-    {  
-        roundPoints = new Dictionary<UInt32, int>();
-        foreach(var p in GetPlayers())
-           roundPoints.Add(p.netIdentity.netId, 0);
-           
-        foreach(Player p in GetPlayers())
+    {
+        foreach (Player p in GetPlayers())
         {
             p.TargetResultOverlaySetActive(false);
         }
-        
+
         currentRound++;
 
         if (currentRound >= numberOfRounds)
@@ -118,8 +109,6 @@ public class GameManager : NetworkBehaviour
             EndOfGame();
             return;
         }
-        
-        currentPhase = Phase.WriteAnswer;
 
         //get Question for the current round
         QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(l =>
@@ -130,15 +119,16 @@ public class GameManager : NetworkBehaviour
         });
     }
 
-    private void EndOfGame(){
+    private void EndOfGame()
+    {
 
         Debug.Log("End Of Game");
         //TODO: show total scores
 
         //TODO: add scores to framework/ player Info
-        
+
         //TODO: New Game?
-        
+
         //else Quit!
     }
 
@@ -183,39 +173,43 @@ public class GameManager : NetworkBehaviour
     private void EvaluationPhase()
     {
         // All players who gave the correct answer get -1 points
-        if(sameAnswers.ContainsKey(this.netId))
+        if (sameAnswers.ContainsKey(this.netId))
         {
-            foreach(var p in sameAnswers[this.netId])
+            foreach (var p in sameAnswers[this.netId])
             {
-               roundPoints[p] -= 1;
+                roundPoints[p] -= 1;
             }
         }
+
         // eval points
         foreach (var choice in choices)
         {
+            UInt32 playerId = choice.Key;
+            UInt32 answerId = choice.Value;
+
             //player choose own answer -> -1 point
-            if (ClickedOnOwnAnswer(choice.Key, choice.Value))
+            if (ClickedOnOwnAnswer(playerId, answerId))
             {
-                    roundPoints[choice.Key] -= 1;
+                roundPoints[playerId] -= 1;
             }
             //player choose right answer -> +3 points
-            else if (choice.Value == this.netId) 
+            else if (answerId == this.netId)
             {
-                roundPoints[choice.Key] += 3;
+                roundPoints[playerId] += 3;
             }
             else
             {
                 //player choose answer of other player -> other player get +1 point
-                roundPoints[choice.Value] += 1;
+                roundPoints[answerId] += 1;
                 //all players who gave this anwer get +1 point
-                if(sameAnswers.ContainsKey(choice.Value))
+                if (sameAnswers.ContainsKey(answerId))
                 {
-                    foreach (var p in sameAnswers[choice.Value])
+                    foreach (UInt32 p in sameAnswers[answerId])
                         roundPoints[p] += 1;
                 }
             }
         }
-        
+
         foreach (var p in roundPoints)
             points[p.Key] += p.Value;
 
@@ -225,34 +219,37 @@ public class GameManager : NetworkBehaviour
         UpdateScoreResultsOverlay();
         UpdatePlayerCanvas();
 
-        StartCoroutine(waitAndShowResults());
+        StartCoroutine(WaitAndShowResults());
     }
 
     private bool ClickedOnOwnAnswer(UInt32 clicker, UInt32 clickedOn) =>
-        clicker == clickedOn || sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker);
+        (clicker == clickedOn) || (sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker));
 
     /// <summary>
     /// Updates PlayerCanvas with new scores and ranking in all clients
     /// </summary>
-    private void UpdatePlayerCanvas(){
+    private void UpdatePlayerCanvas()
+    {
         pointsList = points.ToList();
-        pointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
-        foreach(Player p in GetPlayers()){
-            int idx = PlayerCount-1;
-            foreach (KeyValuePair<UInt32, int> points in pointsList){
-                String player = GetIdentity(points.Key).GetComponent<Player>().playerName;
-                String playerPoints = points.Value.ToString();
+        pointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+        foreach (Player p in GetPlayers())
+        {
+            int idx = PlayerCount - 1;
+            foreach (KeyValuePair<UInt32, int> points in pointsList)
+            {
+                string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
+                string playerPoints = points.Value.ToString();
                 p.TargetUpdatePlayerCanvasEntry(idx, player, playerPoints);
                 idx--;
             }
         }
-
     }
 
-    private IEnumerator waitAndShowResults()
+    private IEnumerator WaitAndShowResults()
     {
         yield return new WaitForSeconds(3);
-        foreach(Player p in GetPlayers()){
+        foreach (Player p in GetPlayers())
+        {
             p.TargetResultOverlaySetActive(true);
         }
     }
@@ -260,33 +257,39 @@ public class GameManager : NetworkBehaviour
     public void LogPlayerIsReady()
     {
         playersReady++;
-        if (NetworkManager.singleton.numPlayers == playersReady){
-            playersReady=0;
+        if (NetworkManager.singleton.numPlayers == playersReady)
+        {
+            playersReady = 0;
             CleanUpEvalPhase();
             ChangePhase();
         }
     }
 
-    private void CleanUpEvalPhase(){
+    private void CleanUpEvalPhase()
+    {
         Player.LocalPlayer.RpcDeleteQuestionCard();
         Player.LocalPlayer.RpcDeleteAllAnswerCards();
 
         answers.Clear();
         choices.Clear();
-
+        foreach (UInt32 p in roundPoints.Keys.ToArray())
+            roundPoints[p] = 0;
     }
 
     /// <summary>
     /// Updates ScoreResultsOverlay with new scores and ranking in all clients
     /// </summary>
-    private void UpdateScoreResultsOverlay(){
+    private void UpdateScoreResultsOverlay()
+    {
         roundPointsList = roundPoints.ToList();
-        roundPointsList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
-        foreach(Player p in GetPlayers()){
-            p.TargetUpdateScoreHeader(currentRound+1);
-            int idx = PlayerCount-1;
-            foreach (KeyValuePair<UInt32, int> roundPoints in roundPointsList){
-                String player = GetIdentity(roundPoints.Key).GetComponent<Player>().playerName;
+        roundPointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+        foreach (Player p in GetPlayers())
+        {
+            p.TargetUpdateScoreHeader(currentRound + 1);
+            int idx = PlayerCount - 1;
+            foreach (KeyValuePair<UInt32, int> roundPoints in roundPointsList)
+            {
+                string player = GetIdentity(roundPoints.Key).GetComponent<Player>().PlayerName;
                 int playerPoints = roundPoints.Value;
                 p.TargetUpdateTextPanelEntry(idx, player, playerPoints);
                 idx--;
@@ -314,9 +317,15 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void LogAnswer(UInt32 player, string answer)
     {
-        foreach(var givenAnswer in answers)
+        if (currentPhase != Phase.WriteAnswer)
         {
-            if(answer.ToLower() == givenAnswer.Value.ToLower())
+            Debug.LogWarning($"LogAnswer (WriteAnswer Phase) called during {currentPhase} by player {player}!");
+            return;
+        }
+
+        foreach (var givenAnswer in answers)
+        {
+            if (answer.ToLower() == givenAnswer.Value.ToLower())
             {
                 sameAnswers.Add(givenAnswer.Key, player);
 
@@ -332,7 +341,16 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void LogAnswer(UInt32 player, UInt32 choice)
     {
-        choices.Add(player, choice);
+        if (currentPhase != Phase.ChoseAnswer)
+        {
+            Debug.LogWarning($"LogAnswer (ChoseAnswer Phase) called during {currentPhase} by player {player}!");
+            return;
+        }
+
+        if (choices.ContainsKey(player))
+            choices[player] = choice;
+        else
+            choices.Add(player, choice);
     }
 
     /// <summary>
@@ -340,20 +358,21 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void ChangePhase()
     {
+        currentPhase = (Phase)((int)(currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
+
         switch (currentPhase)
         {
             case Phase.WriteAnswer:
-                currentPhase = Phase.ChoseAnswer;
-                ChooseAnswerPhase();
-                break;
-            case Phase.ChoseAnswer:
-                currentPhase = Phase.Evaluation;
-                EvaluationPhase();
-                break;
-            case Phase.Evaluation:
                 StartRound();
                 break;
+            case Phase.ChoseAnswer:
+                ChooseAnswerPhase();
+                break;
+            case Phase.Evaluation:
+                EvaluationPhase();
+                break;
             default:
+                Debug.LogError("Unknown Phase: " + currentPhase);
                 break;
         }
     }
@@ -361,38 +380,39 @@ public class GameManager : NetworkBehaviour
     private void SendAnswers()
     {
 
-        var startX = (answers.ToArray().Length * 125 + (answers.ToArray().Length - 1) * 20) / 2;
+        double startX = ((answers.Count * 125) + ((answers.Count - 1) * 20)) / 2;
 
-        var xPosition = startX - 62.5;
+        double xPosition = startX - 62.5;
         int index = 0;
-        
-        KeyValuePair<UInt32, string>[] answersArray = answers.ToArray();
-        
+
+        var answersArray = answers.ToArray();
+
         ShuffleArray(answersArray);
-        
+
         foreach (var answer in answersArray)
         {
-            var cardGo = Instantiate(m_cardPrefab, new Vector3(0, -100, -(2+1*index)), Quaternion.Euler(0, 0, 0));
+            var cardGo = Instantiate(m_cardPrefab, new Vector3(0, -100, -(2 + index)), Quaternion.Euler(0, 0, 0));
             var card = cardGo.GetComponent<Card>();
+
             card.text = answer.Value;
-            card.choosen = answer.Key;
+            card.id = answer.Key;
             card.type = Card.CardType.Answer;
             card.startFacedown = true;
 
             NetworkServer.Spawn(cardGo);
             card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));
-            card.RpcFlip(false,false,(float)(index*0.2+1));
-            
+            card.RpcFlip(false, false, (float)((index * 0.2) + 1));
+
             xPosition -= 145;
-            
+
             index++;
         }
     }
-    
+
     private void ShuffleArray<T>(T[] array)
     {
         // Knuth shuffle algorithm :: courtesy of Wikipedia :)
-        for (int t = 0; t < array.Length; t++ )
+        for (int t = 0; t < array.Length; t++)
         {
             T tmp = array[t];
             int r = Random.Range(t, array.Length);
@@ -401,26 +421,24 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public int[] getRandomQuestionIdxArray(int maxIdx){
-
-        //initialize array for question indexes with -1 for all values
-        var randomQuestionIdxArray = new int[numberOfRounds];
-        for (int i = 0; i < numberOfRounds; i++) randomQuestionIdxArray[i] = -1;
+    public int[] GetRandomQuestionIdxArray(int maxIdx)
+    {
+        var randomQuestionIdxList = new List<int>(numberOfRounds);
 
         for (int i = 0; i < numberOfRounds; i++)
+        {
+            //get a random value which is not in the array yet and place it in the array for the round 
+            int randomQuestionIdx;
+            do
             {
-                //get a random value with in not in the array yet and place it in the array for the round 
-                var randomQuestionIdx = 0;
-                do
-                {
-                    randomQuestionIdx = UnityEngine.Random.Range(0,maxIdx); 
+                randomQuestionIdx = Random.Range(0, maxIdx);
 
-                } while (Array.IndexOf(randomQuestionIdxArray, randomQuestionIdx)>=0);
-                 
-                randomQuestionIdxArray[i] = randomQuestionIdx;
-            }
+            } while (randomQuestionIdxList.Contains(randomQuestionIdx));
 
-        return randomQuestionIdxArray;
+            randomQuestionIdxList.Add(randomQuestionIdx);
+        }
+
+        return randomQuestionIdxList.ToArray();
     }
 }
 
@@ -428,7 +446,7 @@ class MultivalDictionaty<TKey, TValue> : Dictionary<TKey, List<TValue>>
 {
     public void Add(TKey key, TValue value)
     {
-        if(!this.ContainsKey(key))
+        if (!this.ContainsKey(key))
             this.Add(key, new List<TValue>());
 
         this[key].Add(value);

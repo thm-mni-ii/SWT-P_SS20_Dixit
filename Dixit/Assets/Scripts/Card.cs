@@ -10,19 +10,28 @@ public class Card : NetworkBehaviour
     [SyncVar, HideInInspector]
     public string text;
     [SyncVar, HideInInspector]
-    public UInt32 choosen;
+    public UInt32 id;
 
     [SyncVar, HideInInspector]
     public CardType type;
-    public enum CardType {Input, Question, Answer};
+    public enum CardType { Input, Question, Answer };
 
     public Material correctColour;
+    public Material defalutColor;
     private Vector3 _slideVector;
 
     [SyncVar, HideInInspector]
     public bool startFacedown = false;
 
-    public override void OnStartClient(){
+    [SerializeField]
+    private GameObject writeAnswerGo;
+    [SerializeField]
+    private GameObject selectAnswerGo;
+    [SerializeField]
+    private GameObject selectAnswerBtn;
+
+    public override void OnStartClient()
+    {
         gameObject.tag = type + "Card";
         if (startFacedown)
         {
@@ -33,9 +42,8 @@ public class Card : NetworkBehaviour
         {
             case CardType.Input:
                 {
-                    var textTransform =  GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
-                    textTransform.Find("WriteAnswer").gameObject.SetActive(true);
-                    textTransform.Find("SelectAnswer").gameObject.SetActive(false);
+                    writeAnswerGo.SetActive(true);
+                    selectAnswerGo.SetActive(false);
                     break;
                 }
             case CardType.Question:
@@ -45,12 +53,10 @@ public class Card : NetworkBehaviour
                 }
             case CardType.Answer:
                 {
-                    var textTransform = GetComponentInChildren<Transform>().Find("Card").GetComponentInChildren<Transform>();
-                    textTransform.Find("WriteAnswer").gameObject.SetActive(false);
-                    textTransform.Find("SelectAnswer").gameObject.SetActive(true);
+                    writeAnswerGo.SetActive(false);
+                    selectAnswerGo.SetActive(true);
 
-
-                    textTransform.Find("SelectAnswer").gameObject.GetComponentInChildren<Transform>()
+                    selectAnswerGo.GetComponentInChildren<Transform>()
                         .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = text;
                     break;
                 }
@@ -68,7 +74,7 @@ public class Card : NetworkBehaviour
     {
         anim.Play("InstantFlipFaceup");
     }
-    
+
     public void FlipFacedown()
     {
         anim.Play("FlipFacedown");
@@ -78,17 +84,17 @@ public class Card : NetworkBehaviour
     {
         anim.Play("FlipFaceup");
     }
-    
+
     public void FlipFacedown(float time)
     {
-        Invoke(nameof(FlipFacedown),time);
+        Invoke(nameof(FlipFacedown), time);
     }
 
     public void FlipFaceup(float time)
     {
-        Invoke(nameof(FlipFaceup),time);
+        Invoke(nameof(FlipFaceup), time);
     }
-    
+
     [ClientRpc]
     public void RpcFlip(bool toFacedown, bool instantly, float time)
     {
@@ -127,7 +133,7 @@ public class Card : NetworkBehaviour
     {
         while (transform.position != _slideVector)
         {
-            transform.position = Vector3.Lerp(transform.position, _slideVector,Time.deltaTime*10);
+            transform.position = Vector3.Lerp(transform.position, _slideVector, Time.deltaTime * 10);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
@@ -140,5 +146,15 @@ public class Card : NetworkBehaviour
     public void HighlightCorrect()
     {
         HighlightCard(correctColour);
+    }
+
+    public void HighlightReset()
+    {
+        HighlightCard(defalutColor);
+    }
+
+    public void DisableSelectInput()
+    {
+        selectAnswerBtn.SetActive(false);
     }
 }

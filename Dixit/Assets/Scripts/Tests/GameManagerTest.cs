@@ -9,7 +9,7 @@ namespace Tests
 {
     public class GameManagerTest
     {
-         private GameManager gameManager;
+        private GameManager gameManager;
 
         [SetUp]
         public void Setup()
@@ -29,18 +29,16 @@ namespace Tests
         {
             for (int m = 0; m < 100; m++)
             {
-                var randomQuestions= gameManager.getRandomQuestionIdxArray(30);
+                var randomQuestions = gameManager.GetRandomQuestionIdxArray(30);
 
                 for (int i = 0; i < randomQuestions.Length; i++)
                 {
-                    for (int k = 0; k < i ; k++)
+                    for (int k = 0; k < i; k++)
                     {
                         Assert.AreNotEqual(randomQuestions[k], randomQuestions[i]);
                     }
                 }
             }
-
         }
     }
-    
 }

@@ -632,6 +632,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
         type: 3}
+      propertyPath: OnTimeout.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
       propertyPath: OnTimeout.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 935824951}
@@ -650,6 +655,16 @@ PrefabInstance:
       propertyPath: timerTextField
       value: 
       objectReference: {fileID: 775535043}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeout.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeout.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1868799606364295462, guid: fb32b5b48b0699552a6965344e6ac06c,
         type: 3}
       propertyPath: m_LocalPosition.x

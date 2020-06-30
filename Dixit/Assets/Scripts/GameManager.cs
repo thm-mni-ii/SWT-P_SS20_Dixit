@@ -66,8 +66,6 @@ public class GameManager : NetworkBehaviour
         //Sets dummy playernames and initializes PlayerCanvas (TODO: setting and getting actual names)
         foreach ((Player p, int idx) in GetPlayers().Select(ValueTuple.Create<Player, int>))
         {
-            p.PlayerName = "Player" + idx;
-
             points.Add(p.netIdentity.netId, 0);
             roundPoints.Add(p.netIdentity.netId, 0);
         }

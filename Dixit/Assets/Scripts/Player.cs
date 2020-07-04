@@ -166,7 +166,7 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetUpdateScoreHeader(int roundNumber)
     {
-        ScoreHeader.text = "~ Scores Round " + roundNumber + " ~";
+        ScoreHeader.text = "~ Punkte in Runde " + roundNumber + " ~";
     }
 
 }

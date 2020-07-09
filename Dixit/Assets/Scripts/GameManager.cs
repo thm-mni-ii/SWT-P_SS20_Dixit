@@ -158,17 +158,36 @@ public class GameManager : NetworkBehaviour
 
     private void ChooseAnswerPhase()
     {
+        // check if any player gave no answer
+        foreach (var p in GetPlayers()){
+            if (!GaveAnswer(p))
+            {   
+                // if player gave no answer, he gets -1 points
+                GetPoints(p.netId, -1);
+                //send Message to this player
+                p.TargetSendNotification("Es muss eine Antwort abgegeben werden.");
+                UpdatePlayerCanvas();
+            }
+
+            if(AnswerIsEmpty(p.netId)) answers.Remove(p.netId);
+        }
+
         //delete input card at client
         Player.LocalPlayer.RpcDeleteInputCard();
 
+        // if not enough answer are given, to play the round, show the correct answer and go to the next phase
         if(answers.Count<3)
         {
             string correctAnswer = answers[this.netId];
             answers.Clear();
             answers.Add(this.netId, correctAnswer);
 
-            /*TODO: Messagesystem Alert not enough answers, resolve round and show correct answer */
-            
+            //Messagesystem Alert not enough answers, resolve round and show correct answer
+            foreach (var p in GetPlayers())
+            {
+                p.TargetSendNotification("Es wurden nicht genug Antworten abgegeben.");
+            }
+
             //Send answer to clients
             SendAnswers();
             StartCoroutine(WaitAndChangePhase());
@@ -184,15 +203,6 @@ public class GameManager : NetworkBehaviour
 
     private void EvaluationPhase()
     {
-        // All players who gave the correct answer get -1 points
-        if (sameAnswers.ContainsKey(this.netId))
-        {
-            foreach (var p in sameAnswers[this.netId])
-            {
-                roundPoints[p] -= 1;
-            }
-        }
-
         // eval points
         foreach (var choice in choices)
         {
@@ -202,28 +212,25 @@ public class GameManager : NetworkBehaviour
             //player choose own answer -> -1 point
             if (ClickedOnOwnAnswer(playerId, answerId))
             {
-                roundPoints[playerId] -= 1;
+                GetPoints(playerId, -1);
             }
             //player choose right answer -> +3 points
             else if (answerId == this.netId)
             {
-                roundPoints[playerId] += 3;
+                GetPoints(playerId, 3);
             }
             else
             {
                 //player choose answer of other player -> other player get +1 point
-                roundPoints[answerId] += 1;
+                GetPoints(playerId, 1);
                 //all players who gave this anwer get +1 point
                 if (sameAnswers.ContainsKey(answerId))
                 {
                     foreach (UInt32 p in sameAnswers[answerId])
-                        roundPoints[p] += 1;
+                        GetPoints(playerId, 1);
                 }
             }
         }
-
-        foreach (var p in roundPoints)
-            points[p.Key] += p.Value;
 
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity.netId);
 
@@ -236,6 +243,12 @@ public class GameManager : NetworkBehaviour
 
     private bool ClickedOnOwnAnswer(UInt32 clicker, UInt32 clickedOn) =>
         (clicker == clickedOn) || (sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker));
+
+    private bool GaveAnswer(Player p) =>
+            (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
+
+    private bool AnswerIsEmpty(UInt32 p) =>
+        (answers.ContainsKey(p) && answers[p] != "");
 
     /// <summary>
     /// Updates PlayerCanvas with new scores and ranking in all clients
@@ -319,6 +332,11 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    private void GetPoints(UInt32 player, int newPoints){
+        roundPoints[player] += newPoints;
+        points[player] += newPoints;
+    }
+
     /// <summary>
     /// Gets the list of Players in the current Game.
     /// <returns>The list of players.</returns>
@@ -337,12 +355,23 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Logs the given Answer of a Player during the WriteAnwer Phase.
     /// </summary>
-    public void LogAnswer(UInt32 player, string answer)
+    public void LogAnswer(UInt32 playerId, string answer)
     {
+        var player = GetIdentity(playerId).GetComponent<Player>();
         if (currentPhase != Phase.WriteAnswer)
         {
-            Debug.LogWarning($"LogAnswer (WriteAnswer Phase) called during {currentPhase} by player {player}!");
+            Debug.LogWarning($"LogAnswer (WriteAnswer Phase) called during {currentPhase} by player {playerId}!");
             return;
+        }
+
+        // check if any player gave no answer
+        if(answer == "")
+        {
+            // if player gave no answer, he gets -1 points
+            GetPoints(playerId, -1);
+            //send Message to this player
+            player.TargetSendNotification("Es muss eine Antwort abgegeben werden.");
+            UpdatePlayerCanvas();
         }
 
         //filter out duplicate answers
@@ -350,13 +379,21 @@ public class GameManager : NetworkBehaviour
         {
             if (answer.ToLower() == givenAnswer.Value.ToLower())
             {
-                sameAnswers.Add(givenAnswer.Key, player);
+                // if player gave correct answer, the player get -1 points
+                if(givenAnswer.Key == this.netId){
+                    GetPoints(playerId, -1);
+                    //send notification
+                    player.TargetSendNotification("Es muss eine falsche Antwort abgegeben werden.");
+                    UpdatePlayerCanvas();
+                }
+                    
+                sameAnswers.Add(givenAnswer.Key, playerId);
 
                 return;
             }
         }
 
-        answers.Add(player, answer);
+        answers.Add(playerId, answer);
     }
 
     /// <summary>

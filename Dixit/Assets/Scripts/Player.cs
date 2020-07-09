@@ -1,5 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,10 +21,12 @@ public class Player : NetworkBehaviour
     public GameManager gameManager;
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
     private GameObject resultOverlayCanvas;
+    private GameObject notifictionCanvas;
     public GameObject[] TextPanelEntry = new GameObject[5];
     private TextMeshProUGUI ScoreHeader;
 
     private Card selectedCard = null;
+    private bool messageActive = false;
 
     /// <summary>
     /// Called when the local Player Object has been set up
@@ -55,6 +58,10 @@ public class Player : NetworkBehaviour
 
         resultOverlayCanvas.SetActive(false);
         Debug.Log("OnStartLocalPlayer  " + resultOverlayCanvas);
+
+        //Initialzie notification system#
+        notifictionCanvas = GameObject.Find("NotificationCanvas");
+        notifictionCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -167,6 +174,39 @@ public class Player : NetworkBehaviour
     public void TargetUpdateScoreHeader(int roundNumber)
     {
         ScoreHeader.text = "~ Punkte in Runde " + roundNumber + " ~";
+    }
+
+    [TargetRpc]
+    public void TargetSendNotification(string massage)
+    {
+        var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
+        notifiction.text = messageActive?  notifiction.text + "\n---\n" + massage  : massage;
+        StartCoroutine(showNotificationAndWait(5));
+    }
+
+    private IEnumerator showNotificationAndWait(int time)
+    {
+        notifictionCanvas.SetActive(true);
+
+        if(messageActive)
+        {
+            var wait = System.Diagnostics.Stopwatch.StartNew();
+            while (messageActive)
+            {
+                yield return null;
+            }
+            notifictionCanvas.SetActive(true);
+            //var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
+            //notifiction.text = notifiction.text.Substring(notifiction.text.IndexOf('\n') + 1);
+            wait.Stop();
+
+            time -= (int) (wait.ElapsedMilliseconds / 1000);
+        }
+
+        messageActive = true;
+        yield return new WaitForSeconds(time);
+        notifictionCanvas.SetActive(false);
+        messageActive = false;
     }
 
 }

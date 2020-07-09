@@ -63,7 +63,7 @@ public class GameManager : NetworkBehaviour
 
     public void StartGame()
     {
-        //Sets dummy playernames and initializes PlayerCanvas (TODO: setting and getting actual names)
+        //initializes PlayerCanvas
         foreach ((Player p, int idx) in GetPlayers().Select(ValueTuple.Create<Player, int>))
         {
             points.Add(p.netIdentity.netId, 0);
@@ -161,6 +161,20 @@ public class GameManager : NetworkBehaviour
         //delete input card at client
         Player.LocalPlayer.RpcDeleteInputCard();
 
+        if(answers.Count<3)
+        {
+            string correctAnswer = answers[this.netId];
+            answers.Clear();
+            answers.Add(this.netId, correctAnswer);
+
+            /*TODO: Messagesystem Alert not enough answers, resolve round and show correct answer */
+            
+            //Send answer to clients
+            SendAnswers();
+            StartCoroutine(WaitAndChangePhase());
+            return;
+        }
+
         //Send answers to clients
         SendAnswers();
 
@@ -245,12 +259,21 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator WaitAndShowResults()
     {
-        yield return new WaitForSeconds(3);
+        int secs = 3;
+        if(answers.Count==1) secs = 5;
+        yield return new WaitForSeconds(secs);
         foreach (Player p in GetPlayers())
         {
             p.TargetResultOverlaySetActive(true);
         }
     }
+
+    private IEnumerator WaitAndChangePhase()
+    {
+        yield return new WaitForSeconds(1);
+        ChangePhase();
+    }
+
 
     public void LogPlayerIsReady()
     {
@@ -270,6 +293,7 @@ public class GameManager : NetworkBehaviour
 
         answers.Clear();
         choices.Clear();
+        sameAnswers.Clear();
         foreach (UInt32 p in roundPoints.Keys.ToArray())
             roundPoints[p] = 0;
     }
@@ -321,6 +345,7 @@ public class GameManager : NetworkBehaviour
             return;
         }
 
+        //filter out duplicate answers
         foreach (var givenAnswer in answers)
         {
             if (answer.ToLower() == givenAnswer.Value.ToLower())

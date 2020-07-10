@@ -196,8 +196,6 @@ public class Player : NetworkBehaviour
                 yield return null;
             }
             notifictionCanvas.SetActive(true);
-            //var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
-            //notifiction.text = notifiction.text.Substring(notifiction.text.IndexOf('\n') + 1);
             wait.Stop();
 
             time -= (int) (wait.ElapsedMilliseconds / 1000);

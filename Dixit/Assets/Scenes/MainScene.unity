@@ -642,6 +642,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
         type: 3}
+      propertyPath: OnTimeoutGiveAnswer.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutSelectAnswer.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutScoreScreen.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
       propertyPath: OnTimeout.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 935824951}
@@ -669,6 +684,81 @@ PrefabInstance:
         type: 3}
       propertyPath: OnTimeout.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutGiveAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutGiveAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutGiveAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 935824951}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutSelectAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutSelectAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutScoreScreen.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutScoreScreen.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutSelectAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 935824951}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutScoreScreen.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 935824951}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutGiveAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangePhase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutGiveAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutSelectAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangePhase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutSelectAnswer.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutScoreScreen.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InitiateCleanUpEvalPhase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
+        type: 3}
+      propertyPath: OnTimeoutScoreScreen.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1868799606364295462, guid: fb32b5b48b0699552a6965344e6ac06c,
         type: 3}
@@ -1032,17 +1122,17 @@ PrefabInstance:
     - target: {fileID: 3721439148932882089, guid: 2c16eab075ec1a30a98e00d2f287541a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3721439148932882089, guid: 2c16eab075ec1a30a98e00d2f287541a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3721439148932882089, guid: 2c16eab075ec1a30a98e00d2f287541a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3721439148932882089, guid: 2c16eab075ec1a30a98e00d2f287541a,
         type: 3}

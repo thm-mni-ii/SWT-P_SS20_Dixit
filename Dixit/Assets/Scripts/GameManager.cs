@@ -1,4 +1,4 @@
-﻿﻿/* created by: SWT-P_SS_20_Dixit */
+﻿/* created by: SWT-P_SS_20_Dixit */
 
 using System;
 using System.Threading.Tasks;
@@ -164,29 +164,36 @@ public class GameManager : NetworkBehaviour
 
         StartCoroutine(nameof(CheckEarlyTimeout));
         timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
-
-
+        
         //wait for all players to send answer or get timeout
     }
 
-    private IEnumerator CheckEarlyTimeout()
+    private IEnumerator CheckEarlyTimeout(Phase forPhase)
     {
-        while (!((currentPhase == Phase.WriteAnswer && answers.Count >= PlayerCount + 1) ||
-                 (currentPhase == Phase.ChoseAnswer && choices.Count >= PlayerCount) ||
-                 (currentPhase == Phase.Evaluation && NetworkManager.singleton.numPlayers == playersReady)))
+        bool done = false;
+        while (currentPhase == forPhase && !done)
         {
-            yield return new WaitForSeconds(1f);
+            if (forPhase == Phase.WriteAnswer && answers.Count >= PlayerCount + 1 ||
+                forPhase == Phase.ChoseAnswer && choices.Count >= PlayerCount || forPhase == Phase.Evaluation &&
+                NetworkManager.singleton.numPlayers == playersReady)
+            {
+                timer.StopTimer();
+                done = true;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1f);
+            }
         }
-
-        timer.StopTimer();
     }
 
     private void ChooseAnswerPhase()
     {
         // check if any player gave no answer
-        foreach (var p in GetPlayers()){
+        foreach (var p in GetPlayers())
+        {
             if (!GaveAnswer(p))
-            {   
+            {
                 // if player gave no answer, he gets -1 points
                 GetPoints(p.netId, -1);
                 //send Message to this player
@@ -194,14 +201,14 @@ public class GameManager : NetworkBehaviour
                 UpdatePlayerCanvas();
             }
 
-            if(AnswerIsEmpty(p.netId)) answers.Remove(p.netId);
+            if (AnswerIsEmpty(p.netId)) answers.Remove(p.netId);
         }
 
         //delete input card at client
         Player.LocalPlayer.RpcDeleteInputCard();
 
         // if not enough answer are given, to play the round, show the correct answer and go to the next phase
-        if(answers.Count<3)
+        if (answers.Count < 3)
         {
             string correctAnswer = answers[this.netId];
             answers.Clear();
@@ -264,14 +271,13 @@ public class GameManager : NetworkBehaviour
         UpdatePlayerCanvas();
 
         StartCoroutine(WaitAndShowResults());
-        
     }
 
     private bool ClickedOnOwnAnswer(UInt32 clicker, UInt32 clickedOn) =>
         (clicker == clickedOn) || (sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker));
 
     private bool GaveAnswer(Player p) =>
-            (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
+        (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
 
     private bool AnswerIsEmpty(UInt32 p) =>
         (answers.ContainsKey(p) && answers[p] != "");
@@ -301,7 +307,7 @@ public class GameManager : NetworkBehaviour
         StartCoroutine(nameof(CheckEarlyTimeout));
         timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
         int secs = 3;
-        if(answers.Count==1) secs = 5;
+        if (answers.Count == 1) secs = 5;
         yield return new WaitForSeconds(secs);
         foreach (Player p in GetPlayers())
         {
@@ -365,7 +371,8 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    private void GetPoints(UInt32 player, int newPoints){
+    private void GetPoints(UInt32 player, int newPoints)
+    {
         roundPoints[player] += newPoints;
         points[player] += newPoints;
     }
@@ -398,7 +405,7 @@ public class GameManager : NetworkBehaviour
         }
 
         // check if any player gave no answer
-        if(answer == "")
+        if (answer == "")
         {
             // if player gave no answer, he gets -1 points
             GetPoints(playerId, -1);
@@ -413,13 +420,14 @@ public class GameManager : NetworkBehaviour
             if (answer.ToLower() == givenAnswer.Value.ToLower())
             {
                 // if player gave correct answer, the player get -1 points
-                if(givenAnswer.Key == this.netId){
+                if (givenAnswer.Key == this.netId)
+                {
                     GetPoints(playerId, -1);
                     //send notification
                     player.TargetSendNotification("Es muss eine falsche Antwort abgegeben werden.");
                     UpdatePlayerCanvas();
                 }
-                    
+
                 sameAnswers.Add(givenAnswer.Key, playerId);
 
                 return;

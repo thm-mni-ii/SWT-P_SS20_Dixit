@@ -449,6 +449,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreResultsOverlay
       objectReference: {fileID: 0}
+    - target: {fileID: 6398685927968754599, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6846551886779996817, guid: f88226e001e7c6b478b8ff5f1177e5d8,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -834,6 +839,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509522603, guid: f61ee8159d5c422a89ff5cf088723f5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 187.79999
+      objectReference: {fileID: 0}
     - target: {fileID: 747145164811176752, guid: f61ee8159d5c422a89ff5cf088723f5b,
         type: 3}
       propertyPath: m_Name

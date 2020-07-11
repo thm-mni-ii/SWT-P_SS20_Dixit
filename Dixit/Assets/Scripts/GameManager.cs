@@ -222,12 +222,12 @@ public class GameManager : NetworkBehaviour
             else
             {
                 //player choose answer of other player -> other player get +1 point
-                GetPoints(playerId, 1);
+                GetPoints(answerId, 1);
                 //all players who gave this anwer get +1 point
                 if (sameAnswers.ContainsKey(answerId))
                 {
                     foreach (UInt32 p in sameAnswers[answerId])
-                        GetPoints(playerId, 1);
+                        GetPoints(p, 1);
                 }
             }
         }
@@ -248,7 +248,7 @@ public class GameManager : NetworkBehaviour
             (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
 
     private bool AnswerIsEmpty(UInt32 p) =>
-        (answers.ContainsKey(p) && answers[p] != "");
+        (answers.ContainsKey(p) && answers[p] == "");
 
     /// <summary>
     /// Updates PlayerCanvas with new scores and ranking in all clients

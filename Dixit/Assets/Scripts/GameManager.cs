@@ -1,9 +1,11 @@
-﻿/* created by: SWT-P_SS_20_Dixit */
+﻿﻿/* created by: SWT-P_SS_20_Dixit */
+
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using System.Timers;
 using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
@@ -32,12 +34,19 @@ public class GameManager : NetworkBehaviour
     public GameObject m_questionCardPrefab;
     public GameObject m_scoreResultOverlay;
 
-    private enum Phase { WriteAnswer, ChoseAnswer, Evaluation }
+    private enum Phase
+    {
+        WriteAnswer,
+        ChoseAnswer,
+        Evaluation
+    }
+
     private Phase currentPhase;
 
     public CountdownTimer timer;
     public int timerForGiveAnswer = 30;
     public int timerToChooseAnswer = 20;
+    public int timerToCheckResults = 10;
 
     public int numberOfRounds = 3;
     private int currentRound;
@@ -58,7 +67,8 @@ public class GameManager : NetworkBehaviour
     public override void OnStartServer()
     {
         // Initializes QuestionSet from given ID
-        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB).ContinueWithLogException();
+        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB)
+            .ContinueWithLogException();
     }
 
     public void StartGame()
@@ -69,6 +79,7 @@ public class GameManager : NetworkBehaviour
             points.Add(p.netIdentity.netId, 0);
             roundPoints.Add(p.netIdentity.netId, 0);
         }
+
         foreach (Player p1 in GetPlayers())
         {
             p1.TargetUpdateScoreHeader(1);
@@ -109,17 +120,17 @@ public class GameManager : NetworkBehaviour
         }
 
         //get Question for the current round
-        QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(l =>
-        {
-            Debug.Log(l.Result.QuestionText);
-            answers.Add(this.netIdentity.netId, l.Result.Answer);
-            WriteAnswerPhase(l.Result);
-        });
+        QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(
+            l =>
+            {
+                Debug.Log(l.Result.QuestionText);
+                answers.Add(this.netIdentity.netId, l.Result.Answer);
+                WriteAnswerPhase(l.Result);
+            });
     }
 
     private void EndOfGame()
     {
-
         Debug.Log("End Of Game");
         //TODO: show total scores
 
@@ -150,10 +161,24 @@ public class GameManager : NetworkBehaviour
         NetworkServer.Spawn(cardGo);
 
         // start timer
-        timer.StartTimer(timerForGiveAnswer);
+
+        StartCoroutine(nameof(CheckEarlyTimeout));
+        timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
+
 
         //wait for all players to send answer or get timeout
+    }
 
+    private IEnumerator CheckEarlyTimeout()
+    {
+        while (!((currentPhase == Phase.WriteAnswer && answers.Count >= PlayerCount + 1) ||
+                 (currentPhase == Phase.ChoseAnswer && choices.Count >= PlayerCount) ||
+                 (currentPhase == Phase.Evaluation && NetworkManager.singleton.numPlayers == playersReady)))
+        {
+            yield return new WaitForSeconds(1f);
+        }
+
+        timer.StopTimer();
     }
 
     private void ChooseAnswerPhase()
@@ -165,7 +190,8 @@ public class GameManager : NetworkBehaviour
         SendAnswers();
 
         // start timer
-        timer.StartTimer(timerToChooseAnswer);
+        //StartCoroutine(nameof(CheckEarlyTimeout));
+        timer.StartTimer(timerToChooseAnswer, CountdownTimer.timerModes.selectAnswer);
     }
 
     private void EvaluationPhase()
@@ -213,11 +239,11 @@ public class GameManager : NetworkBehaviour
 
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity.netId);
 
-
         UpdateScoreResultsOverlay();
         UpdatePlayerCanvas();
 
         StartCoroutine(WaitAndShowResults());
+        
     }
 
     private bool ClickedOnOwnAnswer(UInt32 clicker, UInt32 clickedOn) =>
@@ -245,6 +271,8 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator WaitAndShowResults()
     {
+        StartCoroutine(nameof(CheckEarlyTimeout));
+        timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
         yield return new WaitForSeconds(3);
         foreach (Player p in GetPlayers())
         {
@@ -257,10 +285,15 @@ public class GameManager : NetworkBehaviour
         playersReady++;
         if (NetworkManager.singleton.numPlayers == playersReady)
         {
-            playersReady = 0;
-            CleanUpEvalPhase();
-            ChangePhase();
+            timer.StopTimer();
         }
+    }
+
+    public void InitiateCleanUpEvalPhase()
+    {
+        playersReady = 0;
+        CleanUpEvalPhase();
+        ChangePhase();
     }
 
     private void CleanUpEvalPhase()
@@ -308,7 +341,7 @@ public class GameManager : NetworkBehaviour
     /// <returns> The NetworkIdentity </returns>
     /// </summary>
     private NetworkIdentity GetIdentity(UInt32 netId) =>
-       NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
+        NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
 
     /// <summary>
     /// Logs the given Answer of a Player during the WriteAnwer Phase.
@@ -356,7 +389,7 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void ChangePhase()
     {
-        currentPhase = (Phase)((int)(currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
+        currentPhase = (Phase) ((int) (currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
 
         switch (currentPhase)
         {
@@ -377,7 +410,6 @@ public class GameManager : NetworkBehaviour
 
     private void SendAnswers()
     {
-
         double startX = ((answers.Count * 125) + ((answers.Count - 1) * 20)) / 2;
 
         double xPosition = startX - 62.5;
@@ -398,8 +430,8 @@ public class GameManager : NetworkBehaviour
             card.startFacedown = true;
 
             NetworkServer.Spawn(cardGo);
-            card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));
-            card.RpcFlip(false, false, (float)((index * 0.2) + 1));
+            card.RpcSlideToPosition(new Vector3((float) xPosition, -100, -2));
+            card.RpcFlip(false, false, (float) ((index * 0.2) + 1));
 
             xPosition -= 145;
 
@@ -430,7 +462,6 @@ public class GameManager : NetworkBehaviour
             do
             {
                 randomQuestionIdx = Random.Range(0, maxIdx);
-
             } while (randomQuestionIdxList.Contains(randomQuestionIdx));
 
             randomQuestionIdxList.Add(randomQuestionIdx);

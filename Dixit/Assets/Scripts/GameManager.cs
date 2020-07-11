@@ -162,7 +162,7 @@ public class GameManager : NetworkBehaviour
 
         // start timer
 
-        StartCoroutine(nameof(CheckEarlyTimeout));
+        StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
         timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
         
         //wait for all players to send answer or get timeout
@@ -230,7 +230,6 @@ public class GameManager : NetworkBehaviour
         SendAnswers();
 
         // start timer
-        //StartCoroutine(nameof(CheckEarlyTimeout));
         timer.StartTimer(timerToChooseAnswer, CountdownTimer.timerModes.selectAnswer);
     }
 
@@ -304,7 +303,7 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator WaitAndShowResults()
     {
-        StartCoroutine(nameof(CheckEarlyTimeout));
+        StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
         timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
         int secs = 3;
         if (answers.Count == 1) secs = 5;

@@ -26,7 +26,7 @@ public class GameManager : NetworkBehaviour
     private List<KeyValuePair<UInt32, int>> roundPointsList;
     private readonly MultivalDictionaty<UInt32, UInt32> sameAnswers = new MultivalDictionaty<UInt32, UInt32>();
 
-    private int PlayerCount => GetPlayers().Count;
+    private int PlayerCount => GetPlayers().Count();
 
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
@@ -75,7 +75,7 @@ public class GameManager : NetworkBehaviour
             foreach ((Player p2, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
             {
                 p1.TargetUpdatePlayerCanvasEntry(index, p2.PlayerName, "0");
-                p1.TargetUpdateTextPanelEntry(index, p2.PlayerName, 0);
+                p1.UpdateTextPanelEntry(index, p2.PlayerName, 0);
             }
         }
 
@@ -124,11 +124,10 @@ public class GameManager : NetworkBehaviour
 
         // show total scores
         foreach(Player p1 in GetPlayers()) {
-            int index=0;
             p1.TargetUpdateScoreHeaderGameEnd();
-            foreach(Player p2 in GetPlayers()) {
-                p1.TargetUpdateTextPanelEntry(index,p2.PlayerName, points[p2.netIdentity.netId]);
-                index++;
+            foreach ((Player p2, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
+            {
+                p1.UpdateTextPanelEntryGameEnd(index,p2.PlayerName, points[p2.netIdentity.netId]);
             }
             p1.TargetResultOverlaySetActive(true);
         }
@@ -336,7 +335,7 @@ public class GameManager : NetworkBehaviour
             {
                 string player = GetIdentity(roundPoints.Key).GetComponent<Player>().PlayerName;
                 int playerPoints = roundPoints.Value;
-                p.TargetUpdateTextPanelEntry(idx, player, playerPoints);
+                p.UpdateTextPanelEntry(idx, player, playerPoints);
                 idx--;
             }
         }
@@ -351,8 +350,8 @@ public class GameManager : NetworkBehaviour
     /// Gets the list of Players in the current Game.
     /// <returns>The list of players.</returns>
     /// </summary>
-    private List<Player> GetPlayers() =>
-        NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>()).ToList();
+    private IEnumerable<Player> GetPlayers() =>
+        NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>());
 
     /// <summary>
     /// Gets the NetworkIdentity component of an object with the specified netId

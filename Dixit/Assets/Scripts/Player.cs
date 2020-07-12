@@ -153,14 +153,33 @@ public class Player : NetworkBehaviour
 
     /// <summary>
     /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
+    /// Shows a + befor positive values.
+    /// For round point view.
+    /// </summary>
+    [Server]
+    public void UpdateTextPanelEntry(int idx, string player, int points) =>
+        TargetUpdateTextPanelEntry(idx, player, points, false);
+
+    /// <summary>
+    /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
+    /// Shows no + before positive values.
+    /// For final point view.
+    /// </summary>
+    [Server]
+    public void UpdateTextPanelEntryGameEnd(int idx, string player, int points) =>
+        TargetUpdateTextPanelEntry(idx, player, points, true);
+
+    /// <summary>
+    /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score.
+    /// Shows a + befor positive values if gameEnd is false.
     /// </summary>
     [TargetRpc]
-    public void TargetUpdateTextPanelEntry(int idx, string player, int points)
+    private void TargetUpdateTextPanelEntry(int idx, string player, int points, bool gameEnd)
     {
         TextMeshProUGUI[] entry = TextPanelEntry[idx].GetComponentsInChildren<TextMeshProUGUI>(true);
         entry[0].enabled = true;
         entry[1].text = player;
-        entry[2].text = ((points > 0) ? "+" : "") + points;
+        entry[2].text = ((!gameEnd && points > 0) ? "+" : "") + points;
     }
 
     /// <summary>

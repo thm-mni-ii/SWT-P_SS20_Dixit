@@ -36,30 +36,26 @@ public class Player : NetworkBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
+    [Client]
     public override void OnStartLocalPlayer()
     {
         //Initialize all variables necessary for PlayerCanvas control
-        PlayerCanvasEntry[0] = GameObject.Find("Player1st");
-        PlayerCanvasEntry[1] = GameObject.Find("Player2nd");
-        PlayerCanvasEntry[2] = GameObject.Find("Player3rd");
-        PlayerCanvasEntry[3] = GameObject.Find("Player4th");
-        PlayerCanvasEntry[4] = GameObject.Find("Player5th");
+        for (int i = 0; i < PlayerCanvasEntry.Length; i++) {
+            PlayerCanvasEntry[i] = GameObject.Find($"PlayerCanvasPlayer{i+1}");
+        }
 
         //Initialize all variables necessary for ScoreCanvas control
         resultOverlayCanvas = GameObject.FindGameObjectWithTag("ScoreResultOverlay");
         GameObject BGPanel = GameObject.Find("BGPanel");
         ScoreHeader = BGPanel.GetComponentInChildren<TextMeshProUGUI>();
 
-        TextPanelEntry[0] = GameObject.Find("Player1");
-        TextPanelEntry[1] = GameObject.Find("Player2");
-        TextPanelEntry[2] = GameObject.Find("Player3");
-        TextPanelEntry[3] = GameObject.Find("Player4");
-        TextPanelEntry[4] = GameObject.Find("Player5");
+        for (int i = 0; i < TextPanelEntry.Length; i++) {
+            TextPanelEntry[i] = GameObject.Find($"ScoreResultOverlayPlayer{i+1}");
+        }
 
         resultOverlayCanvas.SetActive(false);
-        Debug.Log("OnStartLocalPlayer  " + resultOverlayCanvas);
 
-        //Initialzie notification system#
+        //Initialzie notification system
         notifictionCanvas = GameObject.Find("NotificationCanvas");
         notifictionCanvas.SetActive(false);
     }
@@ -84,6 +80,7 @@ public class Player : NetworkBehaviour
         gameManager.LogAnswer(this.netIdentity.netId, answer);
     }
 
+    [Client]
     public void ChooseAnswer(Card card)
     {
         selectedCard?.HighlightReset();
@@ -100,7 +97,6 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetResultOverlaySetActive(bool isActive)
     {
-        Debug.Log("TargetResultOverlaySetActive  " + resultOverlayCanvas);
         resultOverlayCanvas.GetComponentInChildren<Button>().interactable = true;
         resultOverlayCanvas.SetActive(isActive);
         selectedCard = null;
@@ -173,7 +169,16 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetUpdateScoreHeader(int roundNumber)
     {
-        ScoreHeader.text = "~ Punkte in Runde " + roundNumber + " ~";
+        ScoreHeader.text = $"~ Punkte in Runde {roundNumber} ~";
+    }
+
+    /// <summary>
+    /// Updates a ScoreHeader (in ScoreResultOverlay) for the end of the game
+    /// </summary>
+    [TargetRpc]
+    public void TargetUpdateScoreHeaderGameEnd()
+    {
+        ScoreHeader.text = "~ Gesamtpunkte ~";
     }
 
     [TargetRpc]
@@ -184,6 +189,7 @@ public class Player : NetworkBehaviour
         StartCoroutine(showNotificationAndWait(5));
     }
 
+    [Client]
     private IEnumerator showNotificationAndWait(int time)
     {
         notifictionCanvas.SetActive(true);

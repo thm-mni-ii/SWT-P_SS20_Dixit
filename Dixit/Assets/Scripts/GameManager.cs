@@ -104,7 +104,7 @@ public class GameManager : NetworkBehaviour
 
         if (currentRound >= numberOfRounds)
         {
-            EndOfGame();
+            EndGame();
             return;
         }
 
@@ -117,11 +117,21 @@ public class GameManager : NetworkBehaviour
         });
     }
 
-    private void EndOfGame()
+    private void EndGame()
     {
 
         Debug.Log("End Of Game");
-        //TODO: show total scores
+
+        // show total scores
+        foreach(Player p1 in GetPlayers()) {
+            int index=0;
+            p1.TargetUpdateScoreHeaderGameEnd();
+            foreach(Player p2 in GetPlayers()) {
+                p1.TargetUpdateTextPanelEntry(index,p2.PlayerName, points[p2.netIdentity.netId]);
+                index++;
+            }
+            p1.TargetResultOverlaySetActive(true);
+        }
 
         //TODO: add scores to framework/ player Info
 
@@ -161,7 +171,7 @@ public class GameManager : NetworkBehaviour
         // check if any player gave no answer
         foreach (var p in GetPlayers()){
             if (!GaveAnswer(p))
-            {   
+            {
                 // if player gave no answer, he gets -1 points
                 GetPoints(p.netId, -1);
                 //send Message to this player
@@ -386,7 +396,7 @@ public class GameManager : NetworkBehaviour
                     player.TargetSendNotification("Es muss eine falsche Antwort abgegeben werden.");
                     UpdatePlayerCanvas();
                 }
-                    
+
                 sameAnswers.Add(givenAnswer.Key, playerId);
 
                 return;
@@ -487,7 +497,7 @@ public class GameManager : NetworkBehaviour
 
         for (int i = 0; i < numberOfRounds; i++)
         {
-            //get a random value which is not in the array yet and place it in the array for the round 
+            //get a random value which is not in the array yet and place it in the array for the round
             int randomQuestionIdx;
             do
             {

@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+ /// <summary>
+ /// A timer that can be run in multiple modes, different events are triggered based on what mode it's in.
+ /// Only a single timer can run at once.
+ /// </summary>
 public class CountdownTimer : NetworkBehaviour
 {
     [SerializeField] private Text timerTextField;
@@ -23,6 +27,9 @@ public class CountdownTimer : NetworkBehaviour
 
     private timerModes timerMode;
 
+    /// <summary>
+    /// This method is called every second once the timer starts
+    /// </summary>
     [Server]
     private void passSecond()
     {
@@ -53,6 +60,9 @@ public class CountdownTimer : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// This method starts the timer at <c>startingTime</c> in seconds in the mode <c>timerMode</c>
+    /// </summary>
     [Server]
     public void StartTimer(int startingTime, timerModes timerMode = timerModes.defaultMode)
     {
@@ -67,6 +77,9 @@ public class CountdownTimer : NetworkBehaviour
             }
         }
     }
+    /// <summary>
+    /// Sets the timer to 0 causing the timeout event to be triggered
+    /// </summary>
     [Server]
     public void StopTimer()
     {

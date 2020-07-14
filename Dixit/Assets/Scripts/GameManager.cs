@@ -1,9 +1,11 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
+
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using System.Timers;
 using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
@@ -32,12 +34,19 @@ public class GameManager : NetworkBehaviour
     public GameObject m_questionCardPrefab;
     public GameObject m_scoreResultOverlay;
 
-    private enum Phase { WriteAnswer, ChoseAnswer, Evaluation }
+    private enum Phase
+    {
+        WriteAnswer,
+        ChoseAnswer,
+        Evaluation
+    }
+
     private Phase currentPhase;
 
     public CountdownTimer timer;
     public int timerForGiveAnswer = 30;
     public int timerToChooseAnswer = 20;
+    public int timerToCheckResults = 10;
 
     public int numberOfRounds = 3;
     private int currentRound;
@@ -58,7 +67,8 @@ public class GameManager : NetworkBehaviour
     public override void OnStartServer()
     {
         // Initializes QuestionSet from given ID
-        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB).ContinueWithLogException();
+        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB)
+            .ContinueWithLogException();
     }
 
     public void StartGame()
@@ -69,6 +79,7 @@ public class GameManager : NetworkBehaviour
             points.Add(p.netIdentity.netId, 0);
             roundPoints.Add(p.netIdentity.netId, 0);
         }
+
         foreach (Player p1 in GetPlayers())
         {
             p1.TargetUpdateScoreHeader(1);
@@ -109,17 +120,17 @@ public class GameManager : NetworkBehaviour
         }
 
         //get Question for the current round
-        QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(l =>
-        {
-            Debug.Log(l.Result.QuestionText);
-            answers.Add(this.netIdentity.netId, l.Result.Answer);
-            WriteAnswerPhase(l.Result);
-        });
+        QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(
+            l =>
+            {
+                Debug.Log(l.Result.QuestionText);
+                answers.Add(this.netIdentity.netId, l.Result.Answer);
+                WriteAnswerPhase(l.Result);
+            });
     }
 
     private void EndOfGame()
     {
-
         Debug.Log("End Of Game");
         //TODO: show total scores
 
@@ -150,18 +161,39 @@ public class GameManager : NetworkBehaviour
         NetworkServer.Spawn(cardGo);
 
         // start timer
-        timer.StartTimer(timerForGiveAnswer);
 
+        StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
+        timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
+        
         //wait for all players to send answer or get timeout
+    }
 
+    private IEnumerator CheckEarlyTimeout(Phase forPhase)
+    {
+        bool done = false;
+        while (currentPhase == forPhase && !done)
+        {
+            if (forPhase == Phase.WriteAnswer && answers.Count >= PlayerCount + 1 ||
+                forPhase == Phase.ChoseAnswer && choices.Count >= PlayerCount || forPhase == Phase.Evaluation &&
+                NetworkManager.singleton.numPlayers == playersReady)
+            {
+                timer.StopTimer();
+                done = true;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1f);
+            }
+        }
     }
 
     private void ChooseAnswerPhase()
     {
         // check if any player gave no answer
-        foreach (var p in GetPlayers()){
+        foreach (var p in GetPlayers())
+        {
             if (!GaveAnswer(p))
-            {   
+            {
                 // if player gave no answer, he gets -1 points
                 GetPoints(p.netId, -1);
                 //send Message to this player
@@ -169,14 +201,14 @@ public class GameManager : NetworkBehaviour
                 UpdatePlayerCanvas();
             }
 
-            if(AnswerIsEmpty(p.netId)) answers.Remove(p.netId);
+            if (AnswerIsEmpty(p.netId)) answers.Remove(p.netId);
         }
 
         //delete input card at client
         Player.LocalPlayer.RpcDeleteInputCard();
 
         // if not enough answer are given, to play the round, show the correct answer and go to the next phase
-        if(answers.Count<3)
+        if (answers.Count < 3)
         {
             string correctAnswer = answers[this.netId];
             answers.Clear();
@@ -198,7 +230,7 @@ public class GameManager : NetworkBehaviour
         SendAnswers();
 
         // start timer
-        timer.StartTimer(timerToChooseAnswer);
+        timer.StartTimer(timerToChooseAnswer, CountdownTimer.timerModes.selectAnswer);
     }
 
     private void EvaluationPhase()
@@ -234,7 +266,6 @@ public class GameManager : NetworkBehaviour
 
         Player.LocalPlayer.RpcHighlightCard(this.netIdentity.netId);
 
-
         UpdateScoreResultsOverlay();
         UpdatePlayerCanvas();
 
@@ -245,7 +276,7 @@ public class GameManager : NetworkBehaviour
         (clicker == clickedOn) || (sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker));
 
     private bool GaveAnswer(Player p) =>
-            (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
+        (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
 
     private bool AnswerIsEmpty(UInt32 p) =>
         (answers.ContainsKey(p) && answers[p] == "");
@@ -272,8 +303,10 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator WaitAndShowResults()
     {
+        StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
+        timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
         int secs = 3;
-        if(answers.Count==1) secs = 5;
+        if (answers.Count == 1) secs = 5;
         yield return new WaitForSeconds(secs);
         foreach (Player p in GetPlayers())
         {
@@ -293,10 +326,15 @@ public class GameManager : NetworkBehaviour
         playersReady++;
         if (NetworkManager.singleton.numPlayers == playersReady)
         {
-            playersReady = 0;
-            CleanUpEvalPhase();
-            ChangePhase();
+            timer.StopTimer();
         }
+    }
+
+    public void InitiateCleanUpEvalPhase()
+    {
+        playersReady = 0;
+        CleanUpEvalPhase();
+        ChangePhase();
     }
 
     private void CleanUpEvalPhase()
@@ -332,7 +370,8 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    private void GetPoints(UInt32 player, int newPoints){
+    private void GetPoints(UInt32 player, int newPoints)
+    {
         roundPoints[player] += newPoints;
         points[player] += newPoints;
     }
@@ -350,7 +389,7 @@ public class GameManager : NetworkBehaviour
     /// <returns> The NetworkIdentity </returns>
     /// </summary>
     private NetworkIdentity GetIdentity(UInt32 netId) =>
-       NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
+        NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
 
     /// <summary>
     /// Logs the given Answer of a Player during the WriteAnwer Phase.
@@ -365,7 +404,7 @@ public class GameManager : NetworkBehaviour
         }
 
         // check if any player gave no answer
-        if(answer == "")
+        if (answer == "")
         {
             // if player gave no answer, he gets -1 points
             GetPoints(playerId, -1);
@@ -380,13 +419,14 @@ public class GameManager : NetworkBehaviour
             if (answer.ToLower() == givenAnswer.Value.ToLower())
             {
                 // if player gave correct answer, the player get -1 points
-                if(givenAnswer.Key == this.netId){
+                if (givenAnswer.Key == this.netId)
+                {
                     GetPoints(playerId, -1);
                     //send notification
                     player.TargetSendNotification("Es muss eine falsche Antwort abgegeben werden.");
                     UpdatePlayerCanvas();
                 }
-                    
+
                 sameAnswers.Add(givenAnswer.Key, playerId);
 
                 return;
@@ -418,7 +458,7 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void ChangePhase()
     {
-        currentPhase = (Phase)((int)(currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
+        currentPhase = (Phase) ((int) (currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
 
         switch (currentPhase)
         {
@@ -439,7 +479,6 @@ public class GameManager : NetworkBehaviour
 
     private void SendAnswers()
     {
-
         double startX = ((answers.Count * 125) + ((answers.Count - 1) * 20)) / 2;
 
         double xPosition = startX - 62.5;
@@ -460,8 +499,8 @@ public class GameManager : NetworkBehaviour
             card.startFacedown = true;
 
             NetworkServer.Spawn(cardGo);
-            card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));
-            card.RpcFlip(false, false, (float)((index * 0.2) + 1));
+            card.RpcSlideToPosition(new Vector3((float) xPosition, -100, -2));
+            card.RpcFlip(false, false, (float) ((index * 0.2) + 1));
 
             xPosition -= 145;
 
@@ -492,7 +531,6 @@ public class GameManager : NetworkBehaviour
             do
             {
                 randomQuestionIdx = Random.Range(0, maxIdx);
-
             } while (randomQuestionIdxList.Contains(randomQuestionIdx));
 
             randomQuestionIdxList.Add(randomQuestionIdx);

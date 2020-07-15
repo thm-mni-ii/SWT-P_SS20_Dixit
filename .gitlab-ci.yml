@@ -1,27 +1,48 @@
 image: alpine
 
-before_script:
-  - apk update
-  - apk add git doxygen ttf-freefont graphviz # pdf2svg
-  - git remote add upstream $GIT_UPSTREAM_URL
-  - git pull upstream $CI_COMMIT_REF_NAME
+stages:
+  - build
+  - deploy
 
 variables:
   GIT_SUBMODULE_STRATEGY: normal
   DOXYGEN_DIR: Documentation/doxygen
+  PROJECT_DIR: Dixit
 
-test:
+
+build_docs:
+  stage: build
+  only:
+    changes:
+      - $PROJECT_DIR
+  before_script:
+    - apk update
+    - apk add git doxygen ttf-freefont graphviz # pdf2svg
   script:
     - doxygen $DOXYGEN_DIR/Doxyfile
-  except:
-    - master
-  
-pages:
-  script:
-    - doxygen $DOXYGEN_DIR/Doxyfile
-    - mv $DOXYGEN_DIR/html/ public/
   artifacts:
     paths:
-      - public
+      - $DOXYGEN_DIR/html
+
+
+github_pages:
+  stage: deploy
   only:
-    - master
+    changes:
+      - $PROJECT_DIR
+    refs:
+      - master
+  before_script:
+    - apk update && apk add git
+  script:
+    - git remote add upstream $GIT_UPSTREAM_URL
+    - git fetch upstream
+    - git checkout gh-pages
+    - git pull --ff-only
+    - mv -f $DOXYGEN_DIR/html/* .
+    - rm -rf $DOXYGEN_DIR
+    - git add .
+    - git config user.email $DOCS_COMMIT_EMAIL
+    - git config user.name $DOCS_COMMIT_NAME
+    - git commit -m "Generated Documentation\n\nBuild from $CI_SERVER_NAME $CI_PIPELINE_ID"
+    - git push upstream HEAD:gh-pages

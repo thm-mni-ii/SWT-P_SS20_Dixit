@@ -139,15 +139,28 @@ public class GameManager : NetworkBehaviour
             foreach ((Player p2, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
             {
                 p1.UpdateTextPanelEntryGameEnd(index,p2.PlayerName, points[p2.netIdentity.netId]);
+                p1.TargetToggleRestartExit(true);
             }
             p1.TargetResultOverlaySetActive(true);
         }
 
         //TODO: add scores to framework/ player Info
+    }
 
-        //TODO: New Game?
-
-        //else Quit!
+    public void Restart()
+    {
+        playersReady++;
+        if(NetworkManager.singleton.numPlayers == playersReady)
+        {
+            points.Clear();
+            roundPoints.Clear();
+            foreach(var p in GetPlayers())
+            {
+                p.TargetResultOverlaySetActive(false);
+                p.TargetToggleRestartExit(false);
+            }
+            StartGame();
+        }
     }
 
     private void WriteAnswerPhase(Question question)

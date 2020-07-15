@@ -24,6 +24,9 @@ public class Player : NetworkBehaviour
     private GameObject notifictionCanvas;
     public GameObject[] TextPanelEntry = new GameObject[5];
     private TextMeshProUGUI ScoreHeader;
+    private GameObject exitButton;
+    private GameObject restartButton;
+    private GameObject continueButton;
 
     private Card selectedCard = null;
     private bool messageActive = false;
@@ -52,6 +55,13 @@ public class Player : NetworkBehaviour
         for (int i = 0; i < TextPanelEntry.Length; i++) {
             TextPanelEntry[i] = GameObject.Find($"ScoreResultOverlayPlayer{i+1}");
         }
+
+        exitButton = GameObject.Find("Beenden");
+        restartButton = GameObject.Find("Nochmal");
+        continueButton = GameObject.Find("Weiter");
+
+        exitButton.SetActive(false);
+        restartButton.SetActive(false);
 
         resultOverlayCanvas.SetActive(false);
 
@@ -232,4 +242,22 @@ public class Player : NetworkBehaviour
         messageActive = false;
     }
 
+    public void KillGame()
+    {
+        Application.Quit();
+    }   
+
+    [Command]
+    public void CmdRestart()
+    {
+        gameManager.Restart();
+    }
+
+    [TargetRpc]
+    public void TargetToggleRestartExit(bool isActive)
+    {
+        continueButton.SetActive(!isActive);
+        exitButton.SetActive(isActive);
+        restartButton.SetActive(isActive);
+    }
 }

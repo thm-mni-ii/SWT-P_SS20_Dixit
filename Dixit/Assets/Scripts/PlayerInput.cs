@@ -30,8 +30,21 @@ public class PlayerInput : MonoBehaviour
         Player.LocalPlayer.ChooseAnswer(card);
     }
 
-    public void ClickContinueButton(){
+    public void ClickContinueButton()
+    {
         this.GetComponent<Button>().interactable = false;
         Player.LocalPlayer.CmdPlayerIsReady();
+    }
+
+    public void EndGame()
+    {
+       this.GetComponent<Button>().interactable = false;
+       Player.LocalPlayer.KillGame(); 
+    }
+
+    public void Restart()
+    {
+       this.GetComponent<Button>().interactable = false;
+       Player.LocalPlayer.CmdRestart(); 
     }
 }

@@ -23,7 +23,6 @@ public class Player : NetworkBehaviour
     private GameObject resultOverlayCanvas;
     private GameObject notifictionCanvas;
     public GameObject[] TextPanelEntry = new GameObject[5];
-    private TextMeshProUGUI ScoreHeader;
     private GameObject exitButton;
     private GameObject restartButton;
     private GameObject continueButton;
@@ -50,7 +49,6 @@ public class Player : NetworkBehaviour
         //Initialize all variables necessary for ScoreCanvas control
         resultOverlayCanvas = GameObject.FindGameObjectWithTag("ScoreResultOverlay");
         GameObject BGPanel = GameObject.Find("BGPanel");
-        ScoreHeader = BGPanel.GetComponentInChildren<TextMeshProUGUI>();
 
         for (int i = 0; i < TextPanelEntry.Length; i++) {
             TextPanelEntry[i] = GameObject.Find($"ScoreResultOverlayPlayer{i+1}");
@@ -190,24 +188,6 @@ public class Player : NetworkBehaviour
         entry[0].enabled = true;
         entry[1].text = player;
         entry[2].text = ((!gameEnd && points > 0) ? "+" : "") + points;
-    }
-
-    /// <summary>
-    /// Updates a ScoreHeader (in ScoreResultOverlay) with given roundNumber
-    /// </summary>
-    [TargetRpc]
-    public void TargetUpdateScoreHeader(int roundNumber)
-    {
-        ScoreHeader.text = $"~ Punkte in Runde {roundNumber} ~";
-    }
-
-    /// <summary>
-    /// Updates a ScoreHeader (in ScoreResultOverlay) for the end of the game
-    /// </summary>
-    [TargetRpc]
-    public void TargetUpdateScoreHeaderGameEnd()
-    {
-        ScoreHeader.text = "~ Gesamtpunkte ~";
     }
 
     [TargetRpc]

@@ -33,6 +33,7 @@ public class GameManager : NetworkBehaviour
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
     public GameObject m_scoreResultOverlay;
+    public DisplayManager displayManager;
 
     private enum Phase
     {
@@ -80,9 +81,9 @@ public class GameManager : NetworkBehaviour
             roundPoints.Add(p.netIdentity.netId, 0);
         }
 
+        displayManager.RpcUpdateScoreHeader(1);
         foreach (Player p1 in GetPlayers())
         {
-            p1.TargetUpdateScoreHeader(1);
             foreach ((Player p2, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
             {
                 p1.TargetUpdatePlayerCanvasEntry(index, p2.PlayerName, "0");
@@ -135,7 +136,7 @@ public class GameManager : NetworkBehaviour
 
         // show total scores
         foreach(Player p1 in GetPlayers()) {
-            p1.TargetUpdateScoreHeaderGameEnd();
+            displayManager.RpcUpdateScoreHeaderText("~ Gesamtübersicht ~");
             foreach ((Player p2, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
             {
                 p1.UpdateTextPanelEntryGameEnd(index,p2.PlayerName, points[p2.netIdentity.netId]);
@@ -378,9 +379,9 @@ public class GameManager : NetworkBehaviour
     {
         roundPointsList = roundPoints.ToList();
         roundPointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+        displayManager.RpcUpdateScoreHeader(currentRound + 1);
         foreach (Player p in GetPlayers())
         {
-            p.TargetUpdateScoreHeader(currentRound + 1);
             int idx = PlayerCount - 1;
             foreach (KeyValuePair<UInt32, int> roundPoints in roundPointsList)
             {

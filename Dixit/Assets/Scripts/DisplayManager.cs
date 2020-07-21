@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 using TMPro;
@@ -19,7 +21,6 @@ public class DisplayManager : NetworkBehaviour
     {
         exitButton.SetActive(false);
         restartButton.SetActive(false);
-        resultOverlayCanvas.SetActive(false);
     }
     /// <summary>
     /// Updates a ScoreHeader (in ScoreResultOverlay) with given roundNumber
@@ -93,4 +94,41 @@ public class DisplayManager : NetworkBehaviour
         ClientScene.localPlayer.GetComponent<Player>().SelectedCard = null;
     }
 
+    [ClientRpc]
+    public void RpcDeleteInputCard()
+    {
+        Destroy(GameObject.FindGameObjectsWithTag("InputCard")[0]);
+    }
+
+    [ClientRpc]
+    public void RpcDeleteQuestionCard()
+    {
+        Destroy(GameObject.FindGameObjectsWithTag("QuestionCard")[0]);
+    }
+
+    [ClientRpc]
+    public void RpcDeleteAllAnswerCards()
+    {
+        var answerCards = GameObject.FindGameObjectsWithTag("AnswerCard");
+
+        for (int i = 0; i < answerCards.Length; i++)
+        {
+            Destroy(answerCards[i]);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcHighlightCard(UInt32 correctCard)
+    {
+        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
+        foreach (var card in cards)
+        {
+            card.DisableSelectInput();
+
+            if (card.id == correctCard)
+            {
+                card.HighlightCorrect();
+            }
+        }
+    }
 }

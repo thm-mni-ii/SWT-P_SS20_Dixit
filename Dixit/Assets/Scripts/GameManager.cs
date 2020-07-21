@@ -217,7 +217,7 @@ public class GameManager : NetworkBehaviour
         }
 
         //delete input card at client
-        Player.LocalPlayer.RpcDeleteInputCard();
+        displayManager.RpcDeleteInputCard();
 
         // if not enough answer are given, to play the round, show the correct answer and go to the next phase
         if (answers.Count < 3)
@@ -276,7 +276,7 @@ public class GameManager : NetworkBehaviour
             }
         }
 
-        Player.LocalPlayer.RpcHighlightCard(this.netIdentity.netId);
+        displayManager.RpcHighlightCard(this.netIdentity.netId);
 
         UpdateScoreResultsOverlay();
         UpdatePlayerCanvas();
@@ -348,8 +348,8 @@ public class GameManager : NetworkBehaviour
 
     private void CleanUpEvalPhase()
     {
-        Player.LocalPlayer.RpcDeleteQuestionCard();
-        Player.LocalPlayer.RpcDeleteAllAnswerCards();
+        displayManager.RpcDeleteQuestionCard();
+        displayManager.RpcDeleteAllAnswerCards();
 
         answers.Clear();
         choices.Clear();

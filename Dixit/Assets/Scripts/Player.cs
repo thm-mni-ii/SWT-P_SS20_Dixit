@@ -1,7 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using Mirror;
 using TMPro;
@@ -39,10 +38,6 @@ public class Player : NetworkBehaviour
     [Client]
     public override void OnStartLocalPlayer()
     {
-        //Initialize all variables necessary for ScoreCanvas control
-        GameObject BGPanel = GameObject.Find("BGPanel");
-
-
         //Initialzie notification system
         notifictionCanvas = GameObject.Find("NotificationCanvas");
         notifictionCanvas.SetActive(false);
@@ -82,43 +77,6 @@ public class Player : NetworkBehaviour
         gameManager.LogPlayerIsReady();
     }
 
-    [ClientRpc]
-    public void RpcDeleteInputCard()
-    {
-        Destroy(GameObject.FindGameObjectsWithTag("InputCard")[0]);
-    }
-
-    [ClientRpc]
-    public void RpcDeleteQuestionCard()
-    {
-        Destroy(GameObject.FindGameObjectsWithTag("QuestionCard")[0]);
-    }
-
-    [ClientRpc]
-    public void RpcDeleteAllAnswerCards()
-    {
-        var answerCards = GameObject.FindGameObjectsWithTag("AnswerCard");
-
-        for (int i = 0; i < answerCards.Length; i++)
-        {
-            Destroy(answerCards[i]);
-        }
-    }
-
-    [ClientRpc]
-    public void RpcHighlightCard(UInt32 correctCard)
-    {
-        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
-        foreach (var card in cards)
-        {
-            card.DisableSelectInput();
-
-            if (card.id == correctCard)
-            {
-                card.HighlightCorrect();
-            }
-        }
-    }
 
     [TargetRpc]
     public void TargetSendNotification(string massage)

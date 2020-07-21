@@ -623,6 +623,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &225759684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 751903220991318458, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1227358723152180610, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2520043278566996027, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6066064570729791735, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3036441024673705204, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1768605966795388449, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1242277964585893143, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4006450726499438768, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6398685927968754599, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &236439326 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1868799606364295457, guid: fb32b5b48b0699552a6965344e6ac06c,
@@ -967,6 +1021,22 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   ScoreHeader: {fileID: 225759683}
+  PlayerCanvasEntry:
+  - {fileID: 775535048}
+  - {fileID: 775535047}
+  - {fileID: 775535046}
+  - {fileID: 775535045}
+  - {fileID: 775535044}
+  TextPanelEntry:
+  - {fileID: 225759691}
+  - {fileID: 225759690}
+  - {fileID: 225759689}
+  - {fileID: 225759688}
+  - {fileID: 225759687}
+  resultOverlayCanvas: {fileID: 225759692}
+  exitButton: {fileID: 225759686}
+  restartButton: {fileID: 225759685}
+  continueButton: {fileID: 225759684}
 --- !u!114 &716002894
 MonoBehaviour:
   m_ObjectHideFlags: 0

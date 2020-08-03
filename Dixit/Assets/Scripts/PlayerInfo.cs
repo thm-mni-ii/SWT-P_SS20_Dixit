@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Video;
-
-/// <summary>
+﻿/// <summary>
 /// Simple class for storing player data.
 /// Similar to UserInfo may replace
 /// </summary>

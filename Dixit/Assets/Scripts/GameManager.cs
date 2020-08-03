@@ -29,9 +29,12 @@ public class GameManager : NetworkBehaviour
 
     private int PlayerCount => GetPlayers().Count();
 
+    private static readonly Lazy<GameManager> _instance =
+        new Lazy<GameManager>(() => GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>());
+    public static GameManager Instance => _instance.Value;
+
     public GameObject m_cardPrefab;
     public GameObject m_questionCardPrefab;
-    public GameObject m_scoreResultOverlay;
     public DisplayManager displayManager;
 
     private enum Phase

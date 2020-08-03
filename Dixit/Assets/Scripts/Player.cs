@@ -27,14 +27,14 @@ public class Player : NetworkBehaviour
     /// </summary>
     public override void OnStartServer()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameManager.Instance;
     }
 
     [Client]
     public override void OnStartLocalPlayer()
     {
         //Initialzie notification system
-        notifictionCanvas = GameObject.Find("NotificationCanvas");
+        notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
         notifictionCanvas.SetActive(false);
     }
 

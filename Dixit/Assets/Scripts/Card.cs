@@ -24,11 +24,17 @@ public class Card : NetworkBehaviour
     public bool startFacedown = false;
 
     [SerializeField]
+    private GameObject cardGo;
+    [SerializeField]
     private GameObject writeAnswerGo;
     [SerializeField]
     private GameObject selectAnswerGo;
     [SerializeField]
+    private TMPro.TMP_Text selectAnswerText;
+    [SerializeField]
     private GameObject selectAnswerBtn;
+    [SerializeField]
+    private TMPro.TMP_Text questionText;
 
     public override void OnStartClient()
     {
@@ -48,7 +54,7 @@ public class Card : NetworkBehaviour
                 }
             case CardType.Question:
                 {
-                    GetComponentInChildren<Transform>().Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = text;
+                    questionText.text = text;
                     break;
                 }
             case CardType.Answer:
@@ -56,8 +62,7 @@ public class Card : NetworkBehaviour
                     writeAnswerGo.SetActive(false);
                     selectAnswerGo.SetActive(true);
 
-                    selectAnswerGo.GetComponentInChildren<Transform>()
-                        .Find("Text (TMP)").GetComponent<TMPro.TMP_Text>().text = text;
+                    selectAnswerText.text = text;
                     break;
                 }
             default:
@@ -140,7 +145,7 @@ public class Card : NetworkBehaviour
 
     public void HighlightCard(Material highlighted)
     {
-        GetComponentInChildren<Transform>().Find("Card").GetComponent<MeshRenderer>().material = highlighted;
+        cardGo.GetComponent<MeshRenderer>().material = highlighted;
     }
 
     public void HighlightCorrect()

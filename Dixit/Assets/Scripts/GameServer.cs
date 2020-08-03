@@ -36,11 +36,13 @@ public class GameServer : NetworkManager
     /// Stores the time until disconnect.
     /// </summary>
     private float disconnectTimer;
-    
+
     public PlayerInfo LocalPlayerInfo => localPlayerInfo;
-    public static GameServer Instance => (GameServer) singleton;
+    public static GameServer Instance => (GameServer)singleton;
 
     public int playersWantToPlay = 2;
+
+    public GameManager GameManager;
 
     /// <summary>
     /// Start is called before the first frame update.
@@ -70,7 +72,7 @@ public class GameServer : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
-       Transform startPos = GetStartPosition();
+        Transform startPos = GetStartPosition();
         GameObject player = startPos != null
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
             : Instantiate(playerPrefab);
@@ -79,11 +81,11 @@ public class GameServer : NetworkManager
         p.PlayerName = localPlayerInfo.name;
 
         NetworkServer.AddPlayerForConnection(conn, player);
-        
-        if(numPlayers == playersWantToPlay)
+
+        if (numPlayers == playersWantToPlay)
         {
-            GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>(); 
-            gameManager.StartGame();       
+            GameManager gameManager = GameManager.Instance;
+            gameManager.StartGame();
         }
     }
     /// <summary>
@@ -93,7 +95,7 @@ public class GameServer : NetworkManager
     /// </summary>
     private void Update()
     {
-        if(!localPlayerInfo.isHost && !NetworkClient.isConnected)
+        if (!localPlayerInfo.isHost && !NetworkClient.isConnected)
         {
             disconnectTimer -= Time.deltaTime;
 
@@ -101,7 +103,7 @@ public class GameServer : NetworkManager
             {
                 Application.Quit();
             }
-            
+
             StartClient();
         }
     }
@@ -113,11 +115,11 @@ public class GameServer : NetworkManager
     private void LoadPlayerInfo()
     {
         StreamReader file = new StreamReader(Application.dataPath + @"\..\..\..\Framework\" + FILE_NAME);
-        localPlayerInfo = (PlayerInfo)JsonUtility.FromJson(file.ReadLine(),typeof(PlayerInfo));
+        localPlayerInfo = (PlayerInfo)JsonUtility.FromJson(file.ReadLine(), typeof(PlayerInfo));
         file.Close();
         File.Delete(FILE_NAME);
     }
-    
+
     /// <summary>
     /// Sets mockup player info.
     /// The actual info is irrelevant. It does NOT matter if the info says the player is host.

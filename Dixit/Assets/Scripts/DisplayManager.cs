@@ -12,25 +12,27 @@ public class DisplayManager : NetworkBehaviour
     public GameObject[] TextPanelEntry = new GameObject[5];
 
     public GameObject resultOverlayCanvas;
-    
+
     public GameObject exitButton;
     public GameObject restartButton;
     public GameObject continueButton;
 
-    public void Start()
+    [Client]
+    public override void OnStartLocalPlayer()
     {
         exitButton.SetActive(false);
         restartButton.SetActive(false);
     }
+
     /// <summary>
-    /// Updates a ScoreHeader (in ScoreResultOverlay) with given roundNumber
+    /// Updates the ScoreHeader (in ScoreResultOverlay) with given roundNumber
     /// </summary>
     [Server]
     public void UpdateScoreHeader(int roundNumber) =>
         RpcUpdateScoreHeaderText($"~ Punkte in Runde {roundNumber} ~");
 
     /// <summary>
-    /// Updates a ScoreHeader (in ScoreResultOverlay) with given text
+    /// Updates the ScoreHeader (in ScoreResultOverlay) with given text
     /// </summary>
     [ClientRpc]
     public void RpcUpdateScoreHeaderText(string text) =>
@@ -78,6 +80,9 @@ public class DisplayManager : NetworkBehaviour
         entry[2].text = ((!gameEnd && points > 0) ? "+" : "") + points;
     }
 
+    /// <summary>
+    /// Switches between continue button (isActive = false) and exit + restart buttons (isActive = false).
+    /// </summary>
     [ClientRpc]
     public void RpcToggleRestartExit(bool isActive)
     {
@@ -86,6 +91,9 @@ public class DisplayManager : NetworkBehaviour
         restartButton.SetActive(isActive);
     }
 
+    /// <summary>
+    /// Opens the result overlay for all players.
+    /// </summary>
     [ClientRpc]
     public void RpcResultOverlaySetActive(bool isActive)
     {
@@ -94,18 +102,27 @@ public class DisplayManager : NetworkBehaviour
         ClientScene.localPlayer.GetComponent<Player>().SelectedCard = null;
     }
 
+    /// <summary>
+    /// Removes the input card for all players.
+    /// </summary>
     [ClientRpc]
     public void RpcDeleteInputCard()
     {
         Destroy(GameObject.FindGameObjectsWithTag("InputCard")[0]);
     }
 
+    /// <summary>
+    /// Removes the question card for all players.
+    /// </summary>
     [ClientRpc]
     public void RpcDeleteQuestionCard()
     {
         Destroy(GameObject.FindGameObjectsWithTag("QuestionCard")[0]);
     }
 
+    /// <summary>
+    /// Removes all answer cards for all players.
+    /// </summary>
     [ClientRpc]
     public void RpcDeleteAllAnswerCards()
     {
@@ -117,6 +134,9 @@ public class DisplayManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Highlights the correct answer cards for all players.
+    /// </summary>
     [ClientRpc]
     public void RpcHighlightCard(UInt32 correctCard)
     {

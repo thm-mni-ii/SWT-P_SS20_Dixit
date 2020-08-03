@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-using System.Timers;
 using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
@@ -75,14 +74,14 @@ public class GameManager : NetworkBehaviour
     public void StartGame()
     {
         //initializes PlayerCanvas
-        foreach ((Player p, int idx) in GetPlayers().Select(ValueTuple.Create<Player, int>))
+        foreach ((Player p, int idx) in GetPlayersIndexed())
         {
             points.Add(p.netIdentity.netId, 0);
             roundPoints.Add(p.netIdentity.netId, 0);
         }
 
         displayManager.UpdateScoreHeader(1);
-        foreach ((Player p, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
+        foreach ((Player p, int index) in GetPlayersIndexed())
         {
             displayManager.RpcUpdatePlayerCanvasEntry(index, p.PlayerName, "0");
             displayManager.UpdateTextPanelEntry(index, p.PlayerName, 0);
@@ -130,9 +129,9 @@ public class GameManager : NetworkBehaviour
 
         // show total scores
         displayManager.RpcUpdateScoreHeaderText("~ Gesamtübersicht ~");
-        foreach ((Player p, int index) in GetPlayers().Select(ValueTuple.Create<Player, int>))
+        foreach ((Player p, int index) in GetPlayersIndexed())
         {
-            displayManager.UpdateTextPanelEntryGameEnd(index,p.PlayerName, points[p.netIdentity.netId]);
+            displayManager.UpdateTextPanelEntryGameEnd(index, p.PlayerName, points[p.netIdentity.netId]);
             displayManager.RpcToggleRestartExit(true);
         }
         displayManager.RpcResultOverlaySetActive(true);
@@ -143,7 +142,7 @@ public class GameManager : NetworkBehaviour
     public void Restart()
     {
         playersReady++;
-        if(NetworkManager.singleton.numPlayers == playersReady)
+        if (NetworkManager.singleton.numPlayers == playersReady)
         {
             points.Clear();
             roundPoints.Clear();
@@ -176,7 +175,7 @@ public class GameManager : NetworkBehaviour
 
         StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
         timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
-        
+
         //wait for all players to send answer or get timeout
     }
 
@@ -300,16 +299,14 @@ public class GameManager : NetworkBehaviour
     {
         pointsList = points.ToList();
         pointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
-        foreach (Player p in GetPlayers())
+
+        int idx = PlayerCount - 1;
+        foreach (KeyValuePair<UInt32, int> points in pointsList)
         {
-            int idx = PlayerCount - 1;
-            foreach (KeyValuePair<UInt32, int> points in pointsList)
-            {
-                string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
-                string playerPoints = points.Value.ToString();
-                displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
-                idx--;
-            }
+            string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
+            string playerPoints = points.Value.ToString();
+            displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
+            idx--;
         }
     }
 
@@ -366,16 +363,14 @@ public class GameManager : NetworkBehaviour
         roundPointsList = roundPoints.ToList();
         roundPointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
         displayManager.UpdateScoreHeader(currentRound + 1);
-        foreach (Player p in GetPlayers())
+
+        int idx = PlayerCount - 1;
+        foreach (KeyValuePair<UInt32, int> roundPoints in roundPointsList)
         {
-            int idx = PlayerCount - 1;
-            foreach (KeyValuePair<UInt32, int> roundPoints in roundPointsList)
-            {
-                string player = GetIdentity(roundPoints.Key).GetComponent<Player>().PlayerName;
-                int playerPoints = roundPoints.Value;
-                displayManager.UpdateTextPanelEntry(idx, player, playerPoints);
-                idx--;
-            }
+            string player = GetIdentity(roundPoints.Key).GetComponent<Player>().PlayerName;
+            int playerPoints = roundPoints.Value;
+            displayManager.UpdateTextPanelEntry(idx, player, playerPoints);
+            idx--;
         }
     }
 
@@ -391,6 +386,13 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     private IEnumerable<Player> GetPlayers() =>
         NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>());
+
+    /// <summary>
+    /// Gets the list of Players in the current Game together with their indices.
+    /// <returns>The list of players as IEnumerable of ValueTuple<Player, int>.</returns>
+    /// </summary>
+    private IEnumerable<ValueTuple<Player, int>> GetPlayersIndexed() =>
+        GetPlayers().Select(ValueTuple.Create<Player, int>);
 
     /// <summary>
     /// Gets the NetworkIdentity component of an object with the specified netId
@@ -467,7 +469,7 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void ChangePhase()
     {
-        currentPhase = (Phase) ((int) (currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
+        currentPhase = (Phase)((int)(currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
 
         switch (currentPhase)
         {
@@ -508,8 +510,8 @@ public class GameManager : NetworkBehaviour
             card.startFacedown = true;
 
             NetworkServer.Spawn(cardGo);
-            card.RpcSlideToPosition(new Vector3((float) xPosition, -100, -2));
-            card.RpcFlip(false, false, (float) ((index * 0.2) + 1));
+            card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));
+            card.RpcFlip(false, false, (float)((index * 0.2) + 1));
 
             xPosition -= 145;
 

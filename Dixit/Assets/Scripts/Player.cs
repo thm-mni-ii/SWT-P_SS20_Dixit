@@ -19,12 +19,7 @@ public class Player : NetworkBehaviour
     public GameManager gameManager;
     private GameObject notifictionCanvas;
 
-    private Card _selectedCard = null;
-    public Card SelectedCard
-    {
-        set {_selectedCard = value;}
-        private get {return _selectedCard;}
-    }
+    public Card SelectedCard { set; private get; }
     private bool messageActive = false;
 
     /// <summary>
@@ -82,16 +77,16 @@ public class Player : NetworkBehaviour
     public void TargetSendNotification(string massage)
     {
         var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
-        notifiction.text = messageActive?  notifiction.text + "\n---\n" + massage  : massage;
-        StartCoroutine(showNotificationAndWait(5));
+        notifiction.text = messageActive ? notifiction.text + "\n---\n" + massage : massage;
+        StartCoroutine(ShowNotificationAndWait(5));
     }
 
     [Client]
-    private IEnumerator showNotificationAndWait(int time)
+    private IEnumerator ShowNotificationAndWait(int time)
     {
         notifictionCanvas.SetActive(true);
 
-        if(messageActive)
+        if (messageActive)
         {
             var wait = System.Diagnostics.Stopwatch.StartNew();
             while (messageActive)
@@ -101,7 +96,7 @@ public class Player : NetworkBehaviour
             notifictionCanvas.SetActive(true);
             wait.Stop();
 
-            time -= (int) (wait.ElapsedMilliseconds / 1000);
+            time -= (int)(wait.ElapsedMilliseconds / 1000);
         }
 
         messageActive = true;
@@ -113,7 +108,7 @@ public class Player : NetworkBehaviour
     public void KillGame()
     {
         Application.Quit();
-    }   
+    }
 
     [Command]
     public void CmdRestart()

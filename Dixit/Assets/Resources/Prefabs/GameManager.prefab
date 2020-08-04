@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7877368652304546529}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,4 +122,10 @@ MonoBehaviour:
     type: 3}
   m_questionCardPrefab: {fileID: 1191448203220248124, guid: 2fd74dfdcb8e90f23a6028fae337d3f7,
     type: 3}
+  displayManager: {fileID: 0}
+  timer: {fileID: 0}
+  timerForGiveAnswer: 30
+  timerToChooseAnswer: 20
+  timerToCheckResults: 10
+  numberOfRounds: 3
   questionSetID: 0

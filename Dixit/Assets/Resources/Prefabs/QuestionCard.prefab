@@ -264,9 +264,12 @@ MonoBehaviour:
   correctColour: {fileID: 0}
   defalutColor: {fileID: 0}
   startFacedown: 0
+  cardGo: {fileID: 1191448203220248124}
   writeAnswerGo: {fileID: 0}
   selectAnswerGo: {fileID: 0}
+  selectAnswerText: {fileID: 0}
   selectAnswerBtn: {fileID: 0}
+  questionText: {fileID: 6959784890192377207}
 --- !u!1 &1191448203283306122
 GameObject:
   m_ObjectHideFlags: 0

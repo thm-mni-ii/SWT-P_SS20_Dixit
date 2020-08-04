@@ -8,6 +8,8 @@ TagManager:
   - AnswerCard
   - QuestionCard
   - ScoreResultOverlay
+  - GameManager
+  - NotificationCanvas
   layers:
   - Default
   - TransparentFX

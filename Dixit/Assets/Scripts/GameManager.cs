@@ -29,12 +29,27 @@ public class GameManager : NetworkBehaviour
 
     private int PlayerCount => GetPlayers().Count();
 
+    /// <summary>
+    /// The singleton instance of the GameManager
+    /// </summary>
+    public static GameManager Instance => _instance.Value;
     private static readonly Lazy<GameManager> _instance =
         new Lazy<GameManager>(() => GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>());
-    public static GameManager Instance => _instance.Value;
 
+
+    /// <summary>
+    /// The prefab for answer cards
+    /// </summary>
     public GameObject m_cardPrefab;
+
+    /// <summary>
+    /// The prefab for answer cards
+    /// </summary>
     public GameObject m_questionCardPrefab;
+
+    /// <summary>
+    /// The DisplayManager instance in the scene
+    /// </summary>
     public DisplayManager displayManager;
 
     private enum Phase

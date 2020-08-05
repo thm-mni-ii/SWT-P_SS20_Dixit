@@ -9,7 +9,7 @@ using Firebase.Database;
 using Firebase.Unity.Editor;
 
 /// <summary>
-/// Initializes CloudFirestore Default Instance for later use 
+/// Initializes CloudFirestore Default Instance for later use
 /// </summary>
 public class DatabaseSetup : MonoBehaviour
 {
@@ -22,11 +22,22 @@ public class DatabaseSetup : MonoBehaviour
         return FirebaseFirestore.DefaultInstance;
     });
 
+    /// <summary>
+    /// FirebaseFirestore's DefaultInstance; Connection is initialized at first access.
+    /// <returns>FirebaseFirestore.DefaultInstance</returns>
+    /// </summary>
     public FirebaseFirestore DB => _db.Value;
 }
 
-public static class TaskExtention
+/// <summary>
+/// Some extensions to log exceptions from async tasks
+/// </summary>
+public static class TaskExtension
 {
+    /// <summary>
+    /// Appends a new task, that logs task.Exception if task is faulted.
+    /// <returns>The new Task object</returns>
+    /// </summary>
     public static Task ContinueWithLogException(this Task task) => task.ContinueWith(t =>
         {
             if (t.IsFaulted)
@@ -36,6 +47,11 @@ public static class TaskExtention
         }
     );
 
+    /// <summary>
+    /// Appends a new task, that logs task.Exception if task is faulted.
+    /// The new Task's result is the result of the given Task or (if faulted) the default value of the given type T.
+    /// <returns>The new Task object with the result of the given one</returns>
+    /// </summary>
     public static Task<T> ContinueWithLogException<T>(this Task<T> task) => task.ContinueWith<T>(t =>
         {
             if (t.IsFaulted)

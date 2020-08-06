@@ -20,6 +20,7 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ScoreHeader;
+    public TextMeshProUGUI Explanation;
     /// <summary>
     /// GameObjects corresponding to the playernames and overall scores displayed on top right of the screen
     /// </summary>
@@ -35,6 +36,8 @@ public class DisplayManager : NetworkBehaviour
     /// Canvas for the TextPanelEntry's in the result panel
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
+    public GameObject TextPanel;
+    private int roundnumber=0;
     public GameObject resultOverlayCanvas;
 
     /// <summary>
@@ -52,6 +55,8 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject continueButton;
+    public GameObject explanationButton;
+    public GameObject scoreButton;
 
     public GameObject roundsOverview;
     public GameObject roundsOverview_text;
@@ -68,8 +73,11 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Server]
-    public void UpdateScoreHeader(int roundNumber) =>
+    public void UpdateScoreHeader(int roundNumber)
+    {
+        roundnumber = roundNumber;
         RpcUpdateScoreHeaderText($"~ Punkte in Runde {roundNumber} ~");
+    }
 
     /// <summary>
     /// Updates the ScoreHeader (in ScoreResultOverlay) with given text
@@ -179,6 +187,20 @@ public class DisplayManager : NetworkBehaviour
         roundsOverview.SetActive(isActive);
     }
 
+    [TargetRpc]
+    public void TargetToggleExplanation(bool isActive){
+        explanationButton.SetActive(!isActive);
+        scoreButton.SetActive(isActive);
+        TextPanel.SetActive(!isActive);
+        Explanation.enabled = isActive ? isActive : !isActive;
+        ScoreHeader.text = isActive ? "Wissenswertes" : "~ Punkte in Runde "+roundnumber+" ~";
+    }
+
+    [ClientRpc]
+    public void RpcUpdateExplanation(String explanation)
+    {
+        Explanation.text = explanation;
+    }
 
     /// <summary>
     /// Opens the result overlay for all players.

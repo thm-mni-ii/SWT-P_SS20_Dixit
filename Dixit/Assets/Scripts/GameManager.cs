@@ -193,6 +193,7 @@ public class GameManager : NetworkBehaviour
             {
                 Debug.Log(l.Result.QuestionText);
                 answers.Add(this.netIdentity.netId, l.Result.Answer);
+                displayManager.RpcUpdateExplanation(l.Result.Explanation);
                 WriteAnswerPhase(l.Result);
             });
     }

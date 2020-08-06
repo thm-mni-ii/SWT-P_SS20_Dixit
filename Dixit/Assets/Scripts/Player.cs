@@ -30,7 +30,7 @@ public class Player : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameManager gameManager;
-    private GameObject notifictionCanvas;
+    private GameObject notificationCanvas;
 
     /// <summary>
     /// The currently selected card. Used in the "ChooseAnswer" phase
@@ -52,8 +52,8 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         //Initialzie notification system
-        notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
-        notifictionCanvas.SetActive(false);
+        notificationCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
+        notificationCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -109,8 +109,8 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetSendNotification(string message)
     {
-        var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
-        notifiction.text = messageActive ? notifiction.text + "\n---\n" + message : message;
+        var notification = notificationCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
+        notification.text = messageActive ? notification.text + "\n---\n" + message : message;
         StartCoroutine(ShowNotificationAndWait(5));
     }
 
@@ -121,7 +121,7 @@ public class Player : NetworkBehaviour
     [Client]
     private IEnumerator ShowNotificationAndWait(int time)
     {
-        notifictionCanvas.SetActive(true);
+        notificationCanvas.SetActive(true);
 
         if (messageActive)
         {
@@ -130,7 +130,7 @@ public class Player : NetworkBehaviour
             {
                 yield return null;
             }
-            notifictionCanvas.SetActive(true);
+            notificationCanvas.SetActive(true);
             wait.Stop();
 
             time -= (int)(wait.ElapsedMilliseconds / 1000);
@@ -138,7 +138,7 @@ public class Player : NetworkBehaviour
 
         messageActive = true;
         yield return new WaitForSeconds(time);
-        notifictionCanvas.SetActive(false);
+        notificationCanvas.SetActive(false);
         messageActive = false;
     }
 

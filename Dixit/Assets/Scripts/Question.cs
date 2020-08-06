@@ -31,6 +31,9 @@ public class Question
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
+    public string Explanation { get; set; }
+
+    [FirestoreProperty]
     public string Answer { get; set; }
 
     /// <summary>

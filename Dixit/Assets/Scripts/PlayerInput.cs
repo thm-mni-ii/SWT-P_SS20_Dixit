@@ -70,4 +70,14 @@ public class PlayerInput : MonoBehaviour
        this.GetComponent<Button>().interactable = false;
        Player.LocalPlayer.CmdRestart();
     }
+
+    /// <summary>
+    /// Switches between visible explanation screen and visible score screen
+    /// </summary>
+    public void ToggleExplanation(bool isActive)
+    {
+        DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
+        displaymanager.TargetToggleExplanation(isActive);
+    }
+
 }

@@ -64,6 +64,7 @@ public class DisplayManager : NetworkBehaviour
     [Client]
     public override void OnStartLocalPlayer()
     {
+        explanationButton.SetActive(true);
         exitButton.SetActive(false);
         restartButton.SetActive(false);
     }
@@ -187,15 +188,21 @@ public class DisplayManager : NetworkBehaviour
         roundsOverview.SetActive(isActive);
     }
 
+    /// <summary>
+    /// Switches between visible explanation screen and visible score screen
+    /// </summary>
     [TargetRpc]
     public void TargetToggleExplanation(bool isActive){
         explanationButton.SetActive(!isActive);
         scoreButton.SetActive(isActive);
         TextPanel.SetActive(!isActive);
         Explanation.enabled = isActive ? isActive : !isActive;
-        ScoreHeader.text = isActive ? "Wissenswertes" : "~ Punkte in Runde "+roundnumber+" ~";
+        ScoreHeader.text = isActive ? "~ Wissenswertes ~" : "~ Punkte in Runde "+roundnumber+" ~";
     }
 
+    /// <summary>
+    /// Updates the explanation text content in the overlay
+    /// </summary>
     [ClientRpc]
     public void RpcUpdateExplanation(String explanation)
     {

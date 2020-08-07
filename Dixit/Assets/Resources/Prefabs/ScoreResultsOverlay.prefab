@@ -1534,8 +1534,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 515, y: -204}
-  m_SizeDelta: {x: 100, y: 90}
+  m_AnchoredPosition: {x: 269, y: -101}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4098820771856036448
 CanvasRenderer:
@@ -1584,7 +1584,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1560489912233618567}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 9b9dba090061549409117b378ce23d87, type: 3}
+  m_Texture: {fileID: 2800000, guid: f92f8f806c4afb2479f5e9f578bf51b0, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3913,8 +3913,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 515, y: -204}
-  m_SizeDelta: {x: 100, y: 90}
+  m_AnchoredPosition: {x: 269, y: -101}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2483992416267010905
 CanvasRenderer:
@@ -3963,7 +3963,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6117519677031880470}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4009,7 +4009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7d040012418e1aa41b1eb5977f134c9a, type: 3}
+  m_Texture: {fileID: 2800000, guid: 9495712cd3578dd43aa6455e1d095d12, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

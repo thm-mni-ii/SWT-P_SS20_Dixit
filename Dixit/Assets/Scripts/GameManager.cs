@@ -178,6 +178,7 @@ public class GameManager : NetworkBehaviour
     private void StartRound()
     {
         displayManager.RpcResultOverlaySetActive(false);
+        displayManager.RpcToggleExplanation(false);
 
         currentRound++;
 

@@ -77,7 +77,7 @@ public class PlayerInput : MonoBehaviour
     public void ToggleExplanation(bool isActive)
     {
         DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
-        displaymanager.TargetToggleExplanation(isActive);
+        displaymanager.ToggleExplanation(isActive);
     }
 
 }

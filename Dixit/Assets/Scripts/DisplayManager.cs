@@ -168,6 +168,8 @@ public class DisplayManager : NetworkBehaviour
     public void RpcToggleRestartExit(bool isActive)
     {
         continueButton.SetActive(!isActive);
+        explanationButton.SetActive(!isActive);
+        scoreButton.SetActive(!isActive);
         exitButton.SetActive(isActive);
         restartButton.SetActive(isActive);
 
@@ -191,13 +193,22 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible explanation screen and visible score screen
     /// </summary>
-    [TargetRpc]
-    public void TargetToggleExplanation(bool isActive){
+    public void ToggleExplanation(bool isActive){
         explanationButton.SetActive(!isActive);
         scoreButton.SetActive(isActive);
         TextPanel.SetActive(!isActive);
-        Explanation.enabled = isActive ? isActive : !isActive;
+        Explanation.enabled = isActive;
+        Explanation.gameObject.SetActive(isActive);
         ScoreHeader.text = isActive ? "~ Wissenswertes ~" : "~ Punkte in Runde "+roundnumber+" ~";
+    }
+
+    /// <summary>
+    /// Switches between visible explanation screen and visible score screen for every Player
+    /// </summary>
+    [ClientRpc]
+    public void RpcToggleExplanation(bool isActive)
+    {
+        ToggleExplanation(isActive);
     }
 
     /// <summary>

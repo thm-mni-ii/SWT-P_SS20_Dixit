@@ -1,15 +1,8 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
-using System.Collections;
-using System.Linq;
 using System.Collections.Generic;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using Firebase;
 using Firebase.Firestore;
-using Firebase.Extensions;
-using Firebase.Database;
-using Firebase.Unity.Editor;
 
 
 /// <summary>
@@ -19,30 +12,54 @@ using Firebase.Unity.Editor;
 [FirestoreData]
 public class QuestionSet
 {
-    //Questions are stored as references and can later be accessed with getQuestion(...)
+    /// <summary>
+    /// All Questions in this QuestionSet, stored as references.
+    /// Use GetQuestion(int index) to get a Question object
+    /// </summary>
     [FirestoreProperty]
     public List<DocumentReference> Questions { get; set; }
 
+    /// <summary>
+    /// The docent who created this QuestionSet
+    /// </summary>
     [FirestoreProperty]
     public string Docent { get; set; }
 
+    /// <summary>
+    /// The module this QuestionSet relats to
+    /// </summary>
     [FirestoreProperty]
     public string Module { get; set; }
 
+    /// <summary>
+    /// The name of this QuestionSet
+    /// </summary>
     [FirestoreProperty]
     public string Name { get; set; }
 
+    /// <summary>
+    /// The number of questions in this QuestionSet
+    /// </summary>
     public int QuestionCount => Questions.Count;
 
     /// <summary>
-    /// Retrieves QuestionSet data from the database from ID
-    /// Returns data as QuestionSet Object 
+    /// Retrieves question data from DocumentReference stored in Questions
+    /// Returns data as Question Object
+    /// </summary>
+    public Task<Question> GetQuestion(int index)
+    {
+        return Question.RetrieveQuestion(Questions[index]).ContinueWith(task => task.Result);
+    }
+
+    /// <summary>
+    /// Retrieves QuestionSet with the specified ID from the database
+    /// Returns data as QuestionSet Object
     /// </summary>
     public static Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db)
     {
         DocumentReference docRef = db.Collection("QuestionSets").Document(questionSetID);
 
-        return docRef.GetSnapshotAsync().ContinueWith<QuestionSet>((task) =>
+        return docRef.GetSnapshotAsync().ContinueWith((task) =>
         {
             if (task.IsFaulted) throw task.Exception;
 
@@ -55,14 +72,4 @@ public class QuestionSet
             return snapshot.ConvertTo<QuestionSet>();
         });
     }
-
-    /// <summary>
-    /// Retrieves question data from DocumentReference stored in Questions
-    /// Returns data as Question Object 
-    /// </summary>
-    public Task<Question> GetQuestion(int index)
-    {
-        return Question.RetrieveQuestion(Questions[index]).ContinueWith(task => task.Result);
-    }
-
 }

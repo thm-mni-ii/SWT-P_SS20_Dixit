@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Firebase;
 using Firebase.Firestore;
-using Firebase.Extensions;
-using Firebase.Database;
 using Firebase.Unity.Editor;
 
 /// <summary>
@@ -15,7 +13,7 @@ public class DatabaseSetup : MonoBehaviour
 {
     private readonly Lazy<FirebaseFirestore> _db = new Lazy<FirebaseFirestore>(() =>
     {
-        // Set up the Editor before calling into the database.
+        // Set up the Editor before calling the database.
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://swt-p-ss20-profcollector.firebaseio.com/");
 
         // Get the root reference location of the database.
@@ -52,7 +50,7 @@ public static class TaskExtension
     /// The new Task's result is the result of the given Task or (if faulted) the default value of the given type T.
     /// <returns>The new Task object with the result of the given one</returns>
     /// </summary>
-    public static Task<T> ContinueWithLogException<T>(this Task<T> task) => task.ContinueWith<T>(t =>
+    public static Task<T> ContinueWithLogException<T>(this Task<T> task) => task.ContinueWith(t =>
         {
             if (t.IsFaulted)
             {

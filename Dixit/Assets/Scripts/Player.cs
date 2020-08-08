@@ -12,13 +12,25 @@ using TMPro;
 public class Player : NetworkBehaviour
 {
     private static readonly Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
+    /// <summary>
+    /// The local player in each client
+    /// </summary>
     public static Player LocalPlayer => _localPlayer.Value;
 
+    /// <summary>
+    /// The name of the player
+    /// </summary>
     public string PlayerName { get; set; }
 
+    /// <summary>
+    /// The <c>GameManager</c>
+    /// </summary>
     public GameManager gameManager;
     private GameObject notifictionCanvas;
 
+    /// <summary>
+    /// The currently selected card. Used in the "ChooseAnswer" phase
+    /// </summary>
     public Card SelectedCard { set; private get; }
     private bool messageActive = false;
 
@@ -49,7 +61,7 @@ public class Player : NetworkBehaviour
     }
 
     /// <summary>
-    /// Sends the choosen Answer from a Player to the GameManager
+    /// Sends the chosen Answer from a Player to the GameManager
     /// <param name="answer">The Answer</param>
     /// </summary>
     [Command]
@@ -58,6 +70,9 @@ public class Player : NetworkBehaviour
         gameManager.LogAnswer(this.netIdentity.netId, answer);
     }
 
+    /// <summary>
+    /// Sends the answer selected during the "ChoseAnswer" phase to the <c>GameManager</c>
+    /// </summary>
     [Client]
     public void ChooseAnswer(Card card)
     {
@@ -66,6 +81,9 @@ public class Player : NetworkBehaviour
         CmdChooseAnswer(card.id);
     }
 
+    /// <summary>
+    /// Tells the GameManger that the player clicked on the "Weiter" button
+    /// </summary>
     [Command]
     public void CmdPlayerIsReady()
     {
@@ -73,6 +91,10 @@ public class Player : NetworkBehaviour
     }
 
 
+    /// <summary>
+    /// Displays a Notification to the client
+    /// <param name="message">The content of the notification</param>
+    /// </summary>
     [TargetRpc]
     public void TargetSendNotification(string massage)
     {
@@ -81,6 +103,9 @@ public class Player : NetworkBehaviour
         StartCoroutine(ShowNotificationAndWait(5));
     }
 
+    /// <summary>
+    /// Displays a notification for the given <c>time</c>
+    /// </summary>
     [Client]
     private IEnumerator ShowNotificationAndWait(int time)
     {
@@ -105,11 +130,17 @@ public class Player : NetworkBehaviour
         messageActive = false;
     }
 
+    /// <summary>
+    /// Quits the game
+    /// </summary>
     public void KillGame()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// Tells the server that this clients wants to restart the game
+    /// </summary>
     [Command]
     public void CmdRestart()
     {

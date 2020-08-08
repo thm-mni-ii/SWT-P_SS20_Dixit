@@ -7,14 +7,35 @@ using TMPro;
 
 public class DisplayManager : NetworkBehaviour
 {
+    /// <summary>
+    /// Headline of the score Overlay UI element
+    /// </summary>
     public TextMeshProUGUI ScoreHeader;
+    /// <summary>
+    /// GameObjects corresponding to the playernames and overall scores displayed on top right of the screen
+    /// </summary>
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
+    /// <summary>
+    /// GameObject corresponding to the playernames and round scores on the panel shown at the end of each round
+    /// </summary>
     public GameObject[] TextPanelEntry = new GameObject[5];
 
+    /// <summary>
+    /// Canvas for the TextPanelEntry's in the result panel
+    /// </summary>
     public GameObject resultOverlayCanvas;
 
+    /// <summary>
+    /// The "Beenden" Button on the result panel displayed when the game ends
+    /// </summary>
     public GameObject exitButton;
+    /// <summary>
+    /// The "Nochmal" Button on the result panel displayed when the game ends
+    /// </summary>
     public GameObject restartButton;
+    /// <summary>
+    /// The "Weiter" Button at the bottom of the score overlay panel
+    /// </summary>
     public GameObject continueButton;
 
     [Client]
@@ -51,7 +72,7 @@ public class DisplayManager : NetworkBehaviour
 
     /// <summary>
     /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
-    /// Shows a + befor positive values.
+    /// Shows a + before positive values.
     /// For round point view.
     /// </summary>
     [Server]

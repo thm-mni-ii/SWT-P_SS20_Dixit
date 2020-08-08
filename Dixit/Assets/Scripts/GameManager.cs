@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 
 /// <summary>
-/// The GameManger keeps track of all given Answers and Changes the curren Phase of the Game.
+/// The GameManger keeps track of all given Answers and Changes the current Phase of the Game.
 /// It only exists on the Server.
 /// </summary>
 public class GameManager : NetworkBehaviour
@@ -61,11 +61,26 @@ public class GameManager : NetworkBehaviour
 
     private Phase currentPhase;
 
+    /// <summary>
+    /// The Timer seen on the right of the Screen
+    /// </summary>
     public CountdownTimer timer;
+    /// <summary>
+    /// Initial value of the Timer at the start of the "GiveAnswer" Phase
+    /// </summary>
     public int timerForGiveAnswer = 30;
+    /// <summary>
+    /// Initial value of the Time at the start of the "ChoseAnswer" Phase
+    /// </summary>
     public int timerToChooseAnswer = 20;
+    /// <summary>
+    /// Initial value of the Timer when the score result overlay is diplayed
+    /// </summary>
     public int timerToCheckResults = 10;
 
+    /// <summary>
+    /// The number rounds (i.e Questions) the game should last
+    /// </summary>
     public int numberOfRounds = 3;
     private int currentRound;
 
@@ -89,6 +104,11 @@ public class GameManager : NetworkBehaviour
             .ContinueWithLogException();
     }
 
+    
+    /// <summary>
+    /// Executed when the game should start (after all players joined).
+    /// Writes the playernames in the UI cavaces and loads the chosen question set
+    /// </summary>
     public void StartGame()
     {
         //initializes PlayerCanvas
@@ -119,6 +139,10 @@ public class GameManager : NetworkBehaviour
         });
     }
 
+    /// <summary>
+    /// Executed at the start of each round.
+    /// Hides the result overlay, checks if the game should end and adds the correct answer to <c>answers<\c>
+    /// </summary>
     private void StartRound()
     {
         displayManager.RpcResultOverlaySetActive(false);
@@ -141,6 +165,10 @@ public class GameManager : NetworkBehaviour
             });
     }
 
+    /// <summary>
+    /// Called by <c>StartRound</c> when all rounds have been played.
+    /// Shows an overview of the points awarded in each round and the final scores.
+    /// </summary>
     private void EndGame()
     {
         Debug.Log("End Of Game");
@@ -157,6 +185,10 @@ public class GameManager : NetworkBehaviour
         //TODO: add scores to framework/ player Info
     }
 
+    /// <summary>
+    /// Called when every player has clicked on "Nochmal".
+    /// Clears all points and restarts the game loop.
+    /// </summary>
     public void Restart()
     {
         playersReady++;
@@ -311,7 +343,7 @@ public class GameManager : NetworkBehaviour
         (answers.ContainsKey(p) && answers[p] == "");
 
     /// <summary>
-    /// Updates PlayerCanvas with new scores and ranking in all clients
+    /// Updates the PlayerCanvas with new scores and rankings in all clients
     /// </summary>
     private void UpdatePlayerCanvas()
     {
@@ -345,6 +377,9 @@ public class GameManager : NetworkBehaviour
     }
 
 
+    /// <summary>
+    /// Counts the players who clicked on the "Weiter" Button. When all players clicked on the button, it stops the timer
+    /// </summary>
     public void LogPlayerIsReady()
     {
         playersReady++;
@@ -549,6 +584,11 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates an array of <c>maxIdx</c> length.
+    /// <param name="maxIdx"> The length of the array<\param>
+    /// <returns>The random-number array</returns>
+    /// </summary>
     public int[] GetRandomQuestionIdxArray(int maxIdx)
     {
         var randomQuestionIdxList = new List<int>(numberOfRounds);
@@ -569,8 +609,14 @@ public class GameManager : NetworkBehaviour
     }
 }
 
+    /// <summary>
+    /// A Dictionary that contains Lists of type <c>TValue</c> as Values
+    /// </summary>
 class MultivalDictionaty<TKey, TValue> : Dictionary<TKey, List<TValue>>
 {
+    /// <summary>
+    /// Add add a Value to the Dictionary. If the Key allready exists, add the value to the list of values associated with the key
+    /// </summary>
     public void Add(TKey key, TValue value)
     {
         if (!this.ContainsKey(key))

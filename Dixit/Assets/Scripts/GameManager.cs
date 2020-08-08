@@ -84,8 +84,14 @@ public class GameManager : NetworkBehaviour
     public int numberOfRounds = 3;
     private int currentRound;
 
-    //Will be set by Game Host later on
+    /// <summary>
+    /// The ID of the question set played with. Will be set by Game Host coosing the set.
+    /// </summary>  
     public string questionSetID = "0";
+
+    /// <summary>
+    /// The Question Set load form the database.
+    /// </summary>  
     public QuestionSet QuestionSet => loadQuestionSet.Result;
 
     //contains an array with all random, different indexes of the questions for the game
@@ -389,7 +395,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void InitiateCleanUpEvalPhase()
+    private void InitiateCleanUpEvalPhase()
     {
         playersReady = 0;
         CleanUpEvalPhase();

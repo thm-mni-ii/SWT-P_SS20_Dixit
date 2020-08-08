@@ -32,17 +32,23 @@ github_pages:
       - $PROJECT_DIR
     refs:
       - master
+  variables:
+    GIT_STRATEGY: none
   before_script:
     - apk update && apk add git
   script:
+    - git init
     - git remote add upstream $GIT_UPSTREAM_URL
     - git fetch upstream
     - git checkout gh-pages
     - git pull --ff-only
-    - mv -f $DOXYGEN_DIR/html/* .
+    - git stash push --all -- $DOXYGEN_DIR    # stash artifacts from previous stage
+    - rm -rf *                                # remove old documentation
+    - git stash pop                           # restore artifacts from previous stage
+    - mv $DOXYGEN_DIR/html/* .
     - rm -rf $DOXYGEN_DIR
     - git add .
     - git config user.email $DOCS_COMMIT_EMAIL
     - git config user.name $DOCS_COMMIT_NAME
-    - git commit -m "Generated Documentation\n\nBuild from $CI_SERVER_NAME $CI_PIPELINE_ID"
+    - git commit -m "Generated Documentation" -m "Build from $CI_SERVER_NAME pipeline $CI_PIPELINE_ID"
     - git push upstream HEAD:gh-pages

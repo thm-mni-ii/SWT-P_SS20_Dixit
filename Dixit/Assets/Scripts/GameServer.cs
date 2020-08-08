@@ -34,8 +34,14 @@ public class GameServer : NetworkManager
     public PlayerInfo LocalPlayerInfo => localPlayerInfo;
     public static GameServer Instance => (GameServer)singleton;
 
+    /// <summary>
+    /// The number of player that want to play the game. The Server will wait until that number of players joined the game
+    /// </summary>
     public int playersWantToPlay = 2;
 
+    /// <summary>
+    /// The <c>GameManager</c>
+    /// </summary>
     public GameManager GameManager;
 
     /// <summary>

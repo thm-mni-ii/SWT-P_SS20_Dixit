@@ -3,20 +3,41 @@ using System.Collections;
 using UnityEngine;
 using Mirror;
 
+    /// <summary>
+    /// Represents a card on the playing field.
+    /// A card could have the question written on it, or a possibly correct answer, or it could be the text field where players write their answers.
+    /// </summary>
 public class Card : NetworkBehaviour
 {
     [SerializeField] private Animator anim;
 
+    /// <summary>
+    /// The text written on this card
+    /// </summary>
     [SyncVar, HideInInspector]
     public string text;
+    /// <summary>
+    /// If it is has a possible answer written on it, the <c>netId</c> of the player who gave it
+    /// </summary>
     [SyncVar, HideInInspector]
     public UInt32 id;
 
+    /// <summary>
+    /// Type of a Card.
+    /// A card can be a Question card where the current question is displayed,
+    /// an answer card where a possible answer written on or an input card on which players write there own answers.
+    /// </summary>
     [SyncVar, HideInInspector]
     public CardType type;
     public enum CardType { Input, Question, Answer };
 
+    /// <summary>
+    /// The colour the card turns into when the answer it displayed was correct
+    /// </summary>
     public Material correctColour;
+    /// <summary>
+    /// The default colour of the card
+    /// </summary>
     public Material defalutColor;
     private Vector3 _slideVector;
 

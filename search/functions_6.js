@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['targetupdateplayercanvasentry_51',['TargetUpdatePlayerCanvasEntry',['../class_player.html#a7cf0ed3f6c644fdf04e2c4f5b7d5194f',1,'Player']]],
-  ['targetupdatescoreheader_52',['TargetUpdateScoreHeader',['../class_player.html#a80b6d65b803d783c3a9a65dc0a843f1a',1,'Player']]],
-  ['targetupdatescoreheadergameend_53',['TargetUpdateScoreHeaderGameEnd',['../class_player.html#af6a9fa19b44d6daaeab16743b8e5a849',1,'Player']]]
+  ['updatescoreheader_67',['UpdateScoreHeader',['../class_display_manager.html#a5255018d12b2483111436302136f5719',1,'DisplayManager']]],
+  ['updatetextpanelentry_68',['UpdateTextPanelEntry',['../class_display_manager.html#a381a7618d9651b8ca9adff415b036214',1,'DisplayManager']]],
+  ['updatetextpanelentrygameend_69',['UpdateTextPanelEntryGameEnd',['../class_display_manager.html#a723c5a1bfe2f2dd02cc2f27772fcd2e1',1,'DisplayManager']]]
 ];

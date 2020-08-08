@@ -11,6 +11,7 @@ var hierarchy =
     [ "NetworkBehaviour", null, [
       [ "Card", "class_card.html", null ],
       [ "CountdownTimer", "class_countdown_timer.html", null ],
+      [ "DisplayManager", "class_display_manager.html", null ],
       [ "GameManager", "class_game_manager.html", null ],
       [ "Player", "class_player.html", null ]
     ] ],

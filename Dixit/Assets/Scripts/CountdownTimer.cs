@@ -11,12 +11,32 @@ using UnityEngine.UI;
 public class CountdownTimer : NetworkBehaviour
 {
     [SerializeField] private Text timerTextField;
+
+    /// <summary>
+    /// A Unity Event for the timeout in the giving anwer phase.
+    /// </summary>
     public UnityEvent OnTimeoutGiveAnswer = new UnityEvent();
+
+    /// <summary>
+    /// A Unity Event for the timeout in the select anwer phase
+    /// </summary>
     public UnityEvent OnTimeoutSelectAnswer = new UnityEvent();
+
+    /// <summary>
+    /// A Unity Event for the timeout of the timer in the scroe screen.
+    /// </summary>
     public UnityEvent OnTimeoutScoreScreen = new UnityEvent();
+
+    /// <summary>
+    /// A Unity Event for the default timeout.
+    /// </summary>
     public UnityEvent OnTimeoutDefault = new UnityEvent();
     private int _timer;
 
+    /// <summary>
+    /// The Timer Modes. 
+    /// The differnt Timers are:  giveAnswer, selectAnswer, scoreScreen and a default timer.
+    /// </summary>
     public enum timerModes
     {
         giveAnswer,

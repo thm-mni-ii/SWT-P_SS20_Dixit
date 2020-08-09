@@ -395,7 +395,10 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    private void InitiateCleanUpEvalPhase()
+    /// <summary>
+    /// Clean up after the end of the eval phase
+    /// </summary>
+    public void InitiateCleanUpEvalPhase()
     {
         playersReady = 0;
         CleanUpEvalPhase();

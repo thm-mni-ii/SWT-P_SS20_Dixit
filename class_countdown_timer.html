@@ -103,16 +103,17 @@ Inheritance diagram for CountdownTimer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa4c1404928f4dfdf65f163a7b4a9ee8a"><td class="memItemLeft" align="right" valign="top"><a id="aa4c1404928f4dfdf65f163a7b4a9ee8a"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>timerModes</b> { <b>giveAnswer</b>, 
+<tr class="memitem:aa4c1404928f4dfdf65f163a7b4a9ee8a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#aa4c1404928f4dfdf65f163a7b4a9ee8a">timerModes</a> { <b>giveAnswer</b>, 
 <b>selectAnswer</b>, 
 <b>scoreScreen</b>, 
 <b>defaultMode</b>
  }</td></tr>
+<tr class="memdesc:aa4c1404928f4dfdf65f163a7b4a9ee8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Timer Modes. The differnt Timers are: giveAnswer, selectAnswer, scoreScreen and a default timer.  <a href="class_countdown_timer.html#aa4c1404928f4dfdf65f163a7b4a9ee8a">More...</a><br /></td></tr>
 <tr class="separator:aa4c1404928f4dfdf65f163a7b4a9ee8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab74898de54baea9dc5bb851ad1c1be1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f">StartTimer</a> (int startingTime, timerModes timerMode=timerModes.defaultMode)</td></tr>
+<tr class="memitem:ab74898de54baea9dc5bb851ad1c1be1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f">StartTimer</a> (int startingTime, <a class="el" href="class_countdown_timer.html#aa4c1404928f4dfdf65f163a7b4a9ee8a">timerModes</a> timerMode=timerModes.defaultMode)</td></tr>
 <tr class="memdesc:ab74898de54baea9dc5bb851ad1c1be1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method starts the timer at <code>startingTime</code> in seconds in the mode <code>timerMode</code>  <a href="class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f">More...</a><br /></td></tr>
 <tr class="separator:ab74898de54baea9dc5bb851ad1c1be1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaab26a56e1372c22d07359200847bae6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#aaab26a56e1372c22d07359200847bae6">StopTimer</a> ()</td></tr>
@@ -121,22 +122,47 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a41935cffc3bf2444e5627677b61f9b7d"><td class="memItemLeft" align="right" valign="top"><a id="a41935cffc3bf2444e5627677b61f9b7d"></a>
-UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><b>OnTimeoutGiveAnswer</b> = new UnityEvent()</td></tr>
+<tr class="memitem:a41935cffc3bf2444e5627677b61f9b7d"><td class="memItemLeft" align="right" valign="top">UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#a41935cffc3bf2444e5627677b61f9b7d">OnTimeoutGiveAnswer</a> = new UnityEvent()</td></tr>
+<tr class="memdesc:a41935cffc3bf2444e5627677b61f9b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Unity Event for the timeout in the giving anwer phase.  <a href="class_countdown_timer.html#a41935cffc3bf2444e5627677b61f9b7d">More...</a><br /></td></tr>
 <tr class="separator:a41935cffc3bf2444e5627677b61f9b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b3ff1321039b0fbd58a691bda375d98"><td class="memItemLeft" align="right" valign="top"><a id="a4b3ff1321039b0fbd58a691bda375d98"></a>
-UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><b>OnTimeoutSelectAnswer</b> = new UnityEvent()</td></tr>
+<tr class="memitem:a4b3ff1321039b0fbd58a691bda375d98"><td class="memItemLeft" align="right" valign="top">UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#a4b3ff1321039b0fbd58a691bda375d98">OnTimeoutSelectAnswer</a> = new UnityEvent()</td></tr>
+<tr class="memdesc:a4b3ff1321039b0fbd58a691bda375d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Unity Event for the timeout in the select anwer phase  <a href="class_countdown_timer.html#a4b3ff1321039b0fbd58a691bda375d98">More...</a><br /></td></tr>
 <tr class="separator:a4b3ff1321039b0fbd58a691bda375d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9ac3363a7918558c128e34c176244e1"><td class="memItemLeft" align="right" valign="top"><a id="ab9ac3363a7918558c128e34c176244e1"></a>
-UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><b>OnTimeoutScoreScreen</b> = new UnityEvent()</td></tr>
+<tr class="memitem:ab9ac3363a7918558c128e34c176244e1"><td class="memItemLeft" align="right" valign="top">UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#ab9ac3363a7918558c128e34c176244e1">OnTimeoutScoreScreen</a> = new UnityEvent()</td></tr>
+<tr class="memdesc:ab9ac3363a7918558c128e34c176244e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Unity Event for the timeout of the timer in the scroe screen.  <a href="class_countdown_timer.html#ab9ac3363a7918558c128e34c176244e1">More...</a><br /></td></tr>
 <tr class="separator:ab9ac3363a7918558c128e34c176244e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d45723153631807778f44d8019dd506"><td class="memItemLeft" align="right" valign="top"><a id="a0d45723153631807778f44d8019dd506"></a>
-UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><b>OnTimeoutDefault</b> = new UnityEvent()</td></tr>
+<tr class="memitem:a0d45723153631807778f44d8019dd506"><td class="memItemLeft" align="right" valign="top">UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_countdown_timer.html#a0d45723153631807778f44d8019dd506">OnTimeoutDefault</a> = new UnityEvent()</td></tr>
+<tr class="memdesc:a0d45723153631807778f44d8019dd506"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Unity Event for the default timeout.  <a href="class_countdown_timer.html#a0d45723153631807778f44d8019dd506">More...</a><br /></td></tr>
 <tr class="separator:a0d45723153631807778f44d8019dd506"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A timer that can be run in multiple modes, different events are triggered based on what mode it's in. Only a single timer can run at once. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="aa4c1404928f4dfdf65f163a7b4a9ee8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4c1404928f4dfdf65f163a7b4a9ee8a">&#9670;&nbsp;</a></span>timerModes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_countdown_timer.html#aa4c1404928f4dfdf65f163a7b4a9ee8a">CountdownTimer.timerModes</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Timer Modes. The differnt Timers are: giveAnswer, selectAnswer, scoreScreen and a default timer. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab74898de54baea9dc5bb851ad1c1be1f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab74898de54baea9dc5bb851ad1c1be1f">&#9670;&nbsp;</a></span>StartTimer()</h2>
 
@@ -155,7 +181,7 @@ UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><b>OnTimeoutDefaul
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">timerModes&#160;</td>
+          <td class="paramtype"><a class="el" href="class_countdown_timer.html#aa4c1404928f4dfdf65f163a7b4a9ee8a">timerModes</a>&#160;</td>
           <td class="paramname"><em>timerMode</em> = <code>timerModes.defaultMode</code>&#160;</td>
         </tr>
         <tr>
@@ -202,6 +228,71 @@ UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><b>OnTimeoutDefaul
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0d45723153631807778f44d8019dd506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d45723153631807778f44d8019dd506">&#9670;&nbsp;</a></span>OnTimeoutDefault</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UnityEvent CountdownTimer.OnTimeoutDefault = new UnityEvent()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A Unity Event for the default timeout. </p>
+
+</div>
+</div>
+<a id="a41935cffc3bf2444e5627677b61f9b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41935cffc3bf2444e5627677b61f9b7d">&#9670;&nbsp;</a></span>OnTimeoutGiveAnswer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UnityEvent CountdownTimer.OnTimeoutGiveAnswer = new UnityEvent()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A Unity Event for the timeout in the giving anwer phase. </p>
+
+</div>
+</div>
+<a id="ab9ac3363a7918558c128e34c176244e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9ac3363a7918558c128e34c176244e1">&#9670;&nbsp;</a></span>OnTimeoutScoreScreen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UnityEvent CountdownTimer.OnTimeoutScoreScreen = new UnityEvent()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A Unity Event for the timeout of the timer in the scroe screen. </p>
+
+</div>
+</div>
+<a id="a4b3ff1321039b0fbd58a691bda375d98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b3ff1321039b0fbd58a691bda375d98">&#9670;&nbsp;</a></span>OnTimeoutSelectAnswer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UnityEvent CountdownTimer.OnTimeoutSelectAnswer = new UnityEvent()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A Unity Event for the timeout in the select anwer phase </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Dixit/Assets/Scripts/CountdownTimer.cs</li>
 </ul>
@@ -212,7 +303,7 @@ UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><b>OnTimeoutDefaul
 			<ul>
 				<li class="navelem"><a class="el" href="class_countdown_timer.html">CountdownTimer</a></li>
 				<li class="footer">
-					Generated on Sat Aug 8 2020 15:46:23 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun Aug 9 2020 15:51:53 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

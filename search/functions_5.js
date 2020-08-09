@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['start_64',['Start',['../class_game_server.html#aaf2d9dc28894649bc14dd873b8058e52',1,'GameServer']]],
-  ['starttimer_65',['StartTimer',['../class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f',1,'CountdownTimer']]],
-  ['stoptimer_66',['StopTimer',['../class_countdown_timer.html#aaab26a56e1372c22d07359200847bae6',1,'CountdownTimer']]]
+  ['getquestion_125',['GetQuestion',['../class_question_set.html#aaeb40915049875e84ca365b55695724f',1,'QuestionSet']]],
+  ['getrandomquestionidxarray_126',['GetRandomQuestionIdxArray',['../class_game_manager.html#a12d920e174879f2f78dc774997d68392',1,'GameManager']]],
+  ['giveanswer_127',['GiveAnswer',['../class_player_input.html#a8598733b751ac107666d24b99eb9d567',1,'PlayerInput.GiveAnswer(string answer)'],['../class_player_input.html#a6254aa6cae9760d4e274faaddd84abed',1,'PlayerInput.GiveAnswer(TMPro.TMP_InputField answer)']]]
 ];

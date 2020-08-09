@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['gamemanager_6',['GameManager',['../class_game_manager.html',1,'']]],
-  ['gameserver_7',['GameServer',['../class_game_server.html',1,'']]],
-  ['getquestion_8',['GetQuestion',['../class_question_set.html#aaeb40915049875e84ca365b55695724f',1,'QuestionSet']]],
-  ['giveanswer_9',['GiveAnswer',['../class_player_input.html#a8598733b751ac107666d24b99eb9d567',1,'PlayerInput']]]
+  ['databasesetup_13',['DatabaseSetup',['../class_database_setup.html',1,'']]],
+  ['db_14',['DB',['../class_database_setup.html#a3abc5d37fe6a6d36baafd183769e08c9',1,'DatabaseSetup']]],
+  ['defalutcolor_15',['defalutColor',['../class_card.html#a439e765e63063acb43ee9735eeabe7b7',1,'Card']]],
+  ['difficulty_16',['Difficulty',['../class_question.html#aaf428164bde2ab9d36dda12a63534445',1,'Question']]],
+  ['disableselectinput_17',['DisableSelectInput',['../class_card.html#ac523e3ae4b7066743749db7d8aa85c1a',1,'Card']]],
+  ['displaymanager_18',['DisplayManager',['../class_display_manager.html',1,'DisplayManager'],['../class_game_manager.html#a895d431df4c677d524083afeff5f25a3',1,'GameManager.displayManager()']]],
+  ['docent_19',['Docent',['../class_question_set.html#a0336d0c5e22f594ace3e71d8aa274cd5',1,'QuestionSet']]]
 ];

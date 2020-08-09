@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loganswer_52',['LogAnswer',['../class_game_manager.html#a97ff93538ce04315a174431ec0ff2e55',1,'GameManager.LogAnswer(UInt32 playerId, string answer)'],['../class_game_manager.html#a04341ee720a617a3e79983bd823fc701',1,'GameManager.LogAnswer(UInt32 player, UInt32 choice)']]]
+  ['disableselectinput_121',['DisableSelectInput',['../class_card.html#ac523e3ae4b7066743749db7d8aa85c1a',1,'Card']]]
 ];

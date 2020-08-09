@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['updatescoreheader_32',['UpdateScoreHeader',['../class_display_manager.html#a5255018d12b2483111436302136f5719',1,'DisplayManager']]],
-  ['updatetextpanelentry_33',['UpdateTextPanelEntry',['../class_display_manager.html#a381a7618d9651b8ca9adff415b036214',1,'DisplayManager']]],
-  ['updatetextpanelentrygameend_34',['UpdateTextPanelEntryGameEnd',['../class_display_manager.html#a723c5a1bfe2f2dd02cc2f27772fcd2e1',1,'DisplayManager']]]
+  ['m_5fcardprefab_41',['m_cardPrefab',['../class_game_manager.html#a58b7df38a3af1256bfed9c99c871e678',1,'GameManager']]],
+  ['m_5fquestioncardprefab_42',['m_questionCardPrefab',['../class_game_manager.html#a99610f15d2a91aab0969117e64ed7dc3',1,'GameManager']]],
+  ['module_43',['Module',['../class_question_set.html#adcf8c54fb5758407ccd22857c61c7c70',1,'QuestionSet']]],
+  ['multivaldictionaty_44',['MultivalDictionaty',['../class_multival_dictionaty.html',1,'']]],
+  ['multivaldictionaty_3c_20uint32_2c_20uint32_20_3e_45',['MultivalDictionaty&lt; UInt32, UInt32 &gt;',['../class_multival_dictionaty.html',1,'']]]
 ];

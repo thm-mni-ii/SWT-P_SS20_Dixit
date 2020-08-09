@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['updatescoreheader_67',['UpdateScoreHeader',['../class_display_manager.html#a5255018d12b2483111436302136f5719',1,'DisplayManager']]],
-  ['updatetextpanelentry_68',['UpdateTextPanelEntry',['../class_display_manager.html#a381a7618d9651b8ca9adff415b036214',1,'DisplayManager']]],
-  ['updatetextpanelentrygameend_69',['UpdateTextPanelEntryGameEnd',['../class_display_manager.html#a723c5a1bfe2f2dd02cc2f27772fcd2e1',1,'DisplayManager']]]
+  ['highlightcard_128',['HighlightCard',['../class_card.html#af98dd54e9fc944c3e65336b8131fc9d7',1,'Card']]],
+  ['highlightcorrect_129',['HighlightCorrect',['../class_card.html#a70c5667218ae5d38d2ba218a1aab563a',1,'Card']]],
+  ['highlightreset_130',['HighlightReset',['../class_card.html#ab32a26439efb34096e38f02813783af6',1,'Card']]]
 ];

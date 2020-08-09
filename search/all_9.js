@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['start_29',['Start',['../class_game_server.html#aaf2d9dc28894649bc14dd873b8058e52',1,'GameServer']]],
-  ['starttimer_30',['StartTimer',['../class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f',1,'CountdownTimer']]],
-  ['stoptimer_31',['StopTimer',['../class_countdown_timer.html#aaab26a56e1372c22d07359200847bae6',1,'CountdownTimer']]]
+  ['localplayer_38',['LocalPlayer',['../class_player.html#a738c23fefa8386ec9221d253c4cb23e4',1,'Player']]],
+  ['loganswer_39',['LogAnswer',['../class_game_manager.html#a97ff93538ce04315a174431ec0ff2e55',1,'GameManager.LogAnswer(UInt32 playerId, string answer)'],['../class_game_manager.html#a04341ee720a617a3e79983bd823fc701',1,'GameManager.LogAnswer(UInt32 player, UInt32 choice)']]],
+  ['logplayerisready_40',['LogPlayerIsReady',['../class_game_manager.html#a809853b3aceeac1b7aa0187860e3ab50',1,'GameManager']]]
 ];

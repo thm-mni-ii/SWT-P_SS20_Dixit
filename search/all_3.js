@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['loganswer_10',['LogAnswer',['../class_game_manager.html#a97ff93538ce04315a174431ec0ff2e55',1,'GameManager.LogAnswer(UInt32 playerId, string answer)'],['../class_game_manager.html#a04341ee720a617a3e79983bd823fc701',1,'GameManager.LogAnswer(UInt32 player, UInt32 choice)']]]
+  ['endgame_20',['EndGame',['../class_player_input.html#accb3a231bdd4c6b2d29d978a619e9e6f',1,'PlayerInput']]],
+  ['exitbutton_21',['exitButton',['../class_display_manager.html#a8978d1558f30519e68f4bb0d00cbed55',1,'DisplayManager']]]
 ];

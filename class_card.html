@@ -91,6 +91,9 @@ $(document).ready(function(){initNavTree('class_card.html',''); initResizable();
 <div class="title">Card Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a card on the playing field. A card could have the question written on it, or a possibly correct answer, or it could be the text field where players write their answers.  
+ <a href="class_card.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Card:</div>
 <div class="dyncontent">
@@ -100,75 +103,675 @@ Inheritance diagram for Card:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ab81f3405de6edeb195682d350d4836aa"><td class="memItemLeft" align="right" valign="top"><a id="ab81f3405de6edeb195682d350d4836aa"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>CardType</b> { <b>Input</b>, 
+<tr class="memitem:ab81f3405de6edeb195682d350d4836aa"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ab81f3405de6edeb195682d350d4836aa">CardType</a> { <b>Input</b>, 
 <b>Question</b>, 
 <b>Answer</b>
  }</td></tr>
+<tr class="memdesc:ab81f3405de6edeb195682d350d4836aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of a <a class="el" href="class_card.html" title="Represents a card on the playing field. A card could have the question written on it,...">Card</a>. A card can be a <a class="el" href="class_question.html" title="Represents a Question in the Game. Communicates with database to retrieve questions.">Question</a> card where the current question is displayed, an answer card where a possible answer written on or an input card on which players write there own answers.  <a href="class_card.html#ab81f3405de6edeb195682d350d4836aa">More...</a><br /></td></tr>
 <tr class="separator:ab81f3405de6edeb195682d350d4836aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad98e869c733f57b22d6470a2410a370e"><td class="memItemLeft" align="right" valign="top"><a id="ad98e869c733f57b22d6470a2410a370e"></a>
-override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartClient</b> ()</td></tr>
+<tr class="memitem:ad98e869c733f57b22d6470a2410a370e"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ad98e869c733f57b22d6470a2410a370e">OnStartClient</a> ()</td></tr>
+<tr class="memdesc:ad98e869c733f57b22d6470a2410a370e"><td class="mdescLeft">&#160;</td><td class="mdescRight">On Client Start the <a class="el" href="class_card.html" title="Represents a card on the playing field. A card could have the question written on it,...">Card</a> will be identified and the needed Compentens will be activated, all other deactivated. If the card lies facedown at the beginnig, it will be fliped instantly. On question and answer cards the given text will be written.  <a href="class_card.html#ad98e869c733f57b22d6470a2410a370e">More...</a><br /></td></tr>
 <tr class="separator:ad98e869c733f57b22d6470a2410a370e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb6b9dd5322a448e2829a7ec018dfbe6"><td class="memItemLeft" align="right" valign="top"><a id="acb6b9dd5322a448e2829a7ec018dfbe6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>InstantFlipFacedown</b> ()</td></tr>
+<tr class="memitem:acb6b9dd5322a448e2829a7ec018dfbe6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#acb6b9dd5322a448e2829a7ec018dfbe6">InstantFlipFacedown</a> ()</td></tr>
+<tr class="memdesc:acb6b9dd5322a448e2829a7ec018dfbe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">A instant flip facedown of the card.  <a href="class_card.html#acb6b9dd5322a448e2829a7ec018dfbe6">More...</a><br /></td></tr>
 <tr class="separator:acb6b9dd5322a448e2829a7ec018dfbe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bbc7e8acb3ffc325dafc3f615e8fc67"><td class="memItemLeft" align="right" valign="top"><a id="a2bbc7e8acb3ffc325dafc3f615e8fc67"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>InstantFlipFaceup</b> ()</td></tr>
+<tr class="memitem:a2bbc7e8acb3ffc325dafc3f615e8fc67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a2bbc7e8acb3ffc325dafc3f615e8fc67">InstantFlipFaceup</a> ()</td></tr>
 <tr class="separator:a2bbc7e8acb3ffc325dafc3f615e8fc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae187206d5a3a43ee0de408b4e3e029df"><td class="memItemLeft" align="right" valign="top"><a id="ae187206d5a3a43ee0de408b4e3e029df"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>FlipFacedown</b> ()</td></tr>
+<tr class="memitem:ae187206d5a3a43ee0de408b4e3e029df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ae187206d5a3a43ee0de408b4e3e029df">FlipFacedown</a> ()</td></tr>
+<tr class="memdesc:ae187206d5a3a43ee0de408b4e3e029df"><td class="mdescLeft">&#160;</td><td class="mdescRight">An animated flip facedown of the card.  <a href="class_card.html#ae187206d5a3a43ee0de408b4e3e029df">More...</a><br /></td></tr>
 <tr class="separator:ae187206d5a3a43ee0de408b4e3e029df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa34fb77b35539a427a7d071ab267ac66"><td class="memItemLeft" align="right" valign="top"><a id="aa34fb77b35539a427a7d071ab267ac66"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>FlipFaceup</b> ()</td></tr>
+<tr class="memitem:aa34fb77b35539a427a7d071ab267ac66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#aa34fb77b35539a427a7d071ab267ac66">FlipFaceup</a> ()</td></tr>
+<tr class="memdesc:aa34fb77b35539a427a7d071ab267ac66"><td class="mdescLeft">&#160;</td><td class="mdescRight">An animated flip faceup of the card.  <a href="class_card.html#aa34fb77b35539a427a7d071ab267ac66">More...</a><br /></td></tr>
 <tr class="separator:aa34fb77b35539a427a7d071ab267ac66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8e7a4f7725da0fc3e02bce3c003bebe"><td class="memItemLeft" align="right" valign="top"><a id="ab8e7a4f7725da0fc3e02bce3c003bebe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>FlipFacedown</b> (float time)</td></tr>
+<tr class="memitem:ab8e7a4f7725da0fc3e02bce3c003bebe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ab8e7a4f7725da0fc3e02bce3c003bebe">FlipFacedown</a> (float time)</td></tr>
+<tr class="memdesc:ab8e7a4f7725da0fc3e02bce3c003bebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">An animated flip facedown of the card. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>Defines the delay until the animation starts &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+ <a href="class_card.html#ab8e7a4f7725da0fc3e02bce3c003bebe">More...</a><br /></td></tr>
 <tr class="separator:ab8e7a4f7725da0fc3e02bce3c003bebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9575f8aaf207d8395775e617bd5eebeb"><td class="memItemLeft" align="right" valign="top"><a id="a9575f8aaf207d8395775e617bd5eebeb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>FlipFaceup</b> (float time)</td></tr>
+<tr class="memitem:a9575f8aaf207d8395775e617bd5eebeb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a9575f8aaf207d8395775e617bd5eebeb">FlipFaceup</a> (float time)</td></tr>
+<tr class="memdesc:a9575f8aaf207d8395775e617bd5eebeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">An animated flip faceup of the card. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>Defines the delay until the animation starts &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+ <a href="class_card.html#a9575f8aaf207d8395775e617bd5eebeb">More...</a><br /></td></tr>
 <tr class="separator:a9575f8aaf207d8395775e617bd5eebeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e248eae5f0363abf63fdb0d3bbe44be"><td class="memItemLeft" align="right" valign="top"><a id="a8e248eae5f0363abf63fdb0d3bbe44be"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RpcFlip</b> (bool toFacedown, bool instantly, float time)</td></tr>
+<tr class="memitem:a8e248eae5f0363abf63fdb0d3bbe44be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a8e248eae5f0363abf63fdb0d3bbe44be">RpcFlip</a> (bool toFacedown, bool instantly, float time)</td></tr>
+<tr class="memdesc:a8e248eae5f0363abf63fdb0d3bbe44be"><td class="mdescLeft">&#160;</td><td class="mdescRight">A flip of the card. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">toFacedown</td><td>Defines the rotaion of the flip. If it is true the card flipes from faceup to facedown, else the other way around. &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+ <a href="class_card.html#a8e248eae5f0363abf63fdb0d3bbe44be">More...</a><br /></td></tr>
 <tr class="separator:a8e248eae5f0363abf63fdb0d3bbe44be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78d676acc03df986003007e1a53344f8"><td class="memItemLeft" align="right" valign="top"><a id="a78d676acc03df986003007e1a53344f8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RpcSlideToPosition</b> (Vector3 vector3)</td></tr>
+<tr class="memitem:a78d676acc03df986003007e1a53344f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a78d676acc03df986003007e1a53344f8">RpcSlideToPosition</a> (Vector3 vector3)</td></tr>
+<tr class="memdesc:a78d676acc03df986003007e1a53344f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">An animated slide of a card to a given postion. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vector3</td><td>Defines the postion slied to. &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+ <a href="class_card.html#a78d676acc03df986003007e1a53344f8">More...</a><br /></td></tr>
 <tr class="separator:a78d676acc03df986003007e1a53344f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af98dd54e9fc944c3e65336b8131fc9d7"><td class="memItemLeft" align="right" valign="top"><a id="af98dd54e9fc944c3e65336b8131fc9d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>HighlightCard</b> (Material highlighted)</td></tr>
+<tr class="memitem:af98dd54e9fc944c3e65336b8131fc9d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#af98dd54e9fc944c3e65336b8131fc9d7">HighlightCard</a> (Material highlighted)</td></tr>
+<tr class="memdesc:af98dd54e9fc944c3e65336b8131fc9d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Highlights a card with the given material. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">highlighted</td><td>Defines the material set onto the card. &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+ <a href="class_card.html#af98dd54e9fc944c3e65336b8131fc9d7">More...</a><br /></td></tr>
 <tr class="separator:af98dd54e9fc944c3e65336b8131fc9d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70c5667218ae5d38d2ba218a1aab563a"><td class="memItemLeft" align="right" valign="top"><a id="a70c5667218ae5d38d2ba218a1aab563a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>HighlightCorrect</b> ()</td></tr>
+<tr class="memitem:a70c5667218ae5d38d2ba218a1aab563a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a70c5667218ae5d38d2ba218a1aab563a">HighlightCorrect</a> ()</td></tr>
+<tr class="memdesc:a70c5667218ae5d38d2ba218a1aab563a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Highlights the correct answer card with the color defined in the <a class="el" href="class_card.html#a5aeac40f29a262deb2968709e8f8a5ce">correctColour</a>.  <a href="class_card.html#a70c5667218ae5d38d2ba218a1aab563a">More...</a><br /></td></tr>
 <tr class="separator:a70c5667218ae5d38d2ba218a1aab563a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab32a26439efb34096e38f02813783af6"><td class="memItemLeft" align="right" valign="top"><a id="ab32a26439efb34096e38f02813783af6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>HighlightReset</b> ()</td></tr>
+<tr class="memitem:ab32a26439efb34096e38f02813783af6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ab32a26439efb34096e38f02813783af6">HighlightReset</a> ()</td></tr>
+<tr class="memdesc:ab32a26439efb34096e38f02813783af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the color of the card to the <a class="el" href="class_card.html#a439e765e63063acb43ee9735eeabe7b7">defalutColor</a>.  <a href="class_card.html#ab32a26439efb34096e38f02813783af6">More...</a><br /></td></tr>
 <tr class="separator:ab32a26439efb34096e38f02813783af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac523e3ae4b7066743749db7d8aa85c1a"><td class="memItemLeft" align="right" valign="top"><a id="ac523e3ae4b7066743749db7d8aa85c1a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DisableSelectInput</b> ()</td></tr>
+<tr class="memitem:ac523e3ae4b7066743749db7d8aa85c1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ac523e3ae4b7066743749db7d8aa85c1a">DisableSelectInput</a> ()</td></tr>
+<tr class="memdesc:ac523e3ae4b7066743749db7d8aa85c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the selction of a card.  <a href="class_card.html#ac523e3ae4b7066743749db7d8aa85c1a">More...</a><br /></td></tr>
 <tr class="separator:ac523e3ae4b7066743749db7d8aa85c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7688d0469a1ac65d923ead8373994e85"><td class="memItemLeft" align="right" valign="top"><a id="a7688d0469a1ac65d923ead8373994e85"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>text</b></td></tr>
+<tr class="memitem:a7688d0469a1ac65d923ead8373994e85"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a7688d0469a1ac65d923ead8373994e85">text</a></td></tr>
+<tr class="memdesc:a7688d0469a1ac65d923ead8373994e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">The text written on this card  <a href="class_card.html#a7688d0469a1ac65d923ead8373994e85">More...</a><br /></td></tr>
 <tr class="separator:a7688d0469a1ac65d923ead8373994e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a106fc53dbbcb75c0c4fa89f964f55167"><td class="memItemLeft" align="right" valign="top"><a id="a106fc53dbbcb75c0c4fa89f964f55167"></a>
-UInt32&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memitem:a106fc53dbbcb75c0c4fa89f964f55167"><td class="memItemLeft" align="right" valign="top">UInt32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a106fc53dbbcb75c0c4fa89f964f55167">id</a></td></tr>
+<tr class="memdesc:a106fc53dbbcb75c0c4fa89f964f55167"><td class="mdescLeft">&#160;</td><td class="mdescRight">If it is has a possible answer written on it, the <code>netId</code> of the player who gave it  <a href="class_card.html#a106fc53dbbcb75c0c4fa89f964f55167">More...</a><br /></td></tr>
 <tr class="separator:a106fc53dbbcb75c0c4fa89f964f55167"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1eec501ef5c770decb91a83d18934a7"><td class="memItemLeft" align="right" valign="top"><a id="ad1eec501ef5c770decb91a83d18934a7"></a>
-CardType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="memitem:ad1eec501ef5c770decb91a83d18934a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_card.html#ab81f3405de6edeb195682d350d4836aa">CardType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ad1eec501ef5c770decb91a83d18934a7">type</a></td></tr>
+<tr class="memdesc:ad1eec501ef5c770decb91a83d18934a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Type of the <a class="el" href="class_card.html" title="Represents a card on the playing field. A card could have the question written on it,...">Card</a>.  <a href="class_card.html#ad1eec501ef5c770decb91a83d18934a7">More...</a><br /></td></tr>
 <tr class="separator:ad1eec501ef5c770decb91a83d18934a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aeac40f29a262deb2968709e8f8a5ce"><td class="memItemLeft" align="right" valign="top"><a id="a5aeac40f29a262deb2968709e8f8a5ce"></a>
-Material&#160;</td><td class="memItemRight" valign="bottom"><b>correctColour</b></td></tr>
+<tr class="memitem:a5aeac40f29a262deb2968709e8f8a5ce"><td class="memItemLeft" align="right" valign="top">Material&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a5aeac40f29a262deb2968709e8f8a5ce">correctColour</a></td></tr>
+<tr class="memdesc:a5aeac40f29a262deb2968709e8f8a5ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The colour the card turns into when the answer it displayed was correct  <a href="class_card.html#a5aeac40f29a262deb2968709e8f8a5ce">More...</a><br /></td></tr>
 <tr class="separator:a5aeac40f29a262deb2968709e8f8a5ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a439e765e63063acb43ee9735eeabe7b7"><td class="memItemLeft" align="right" valign="top"><a id="a439e765e63063acb43ee9735eeabe7b7"></a>
-Material&#160;</td><td class="memItemRight" valign="bottom"><b>defalutColor</b></td></tr>
+<tr class="memitem:a439e765e63063acb43ee9735eeabe7b7"><td class="memItemLeft" align="right" valign="top">Material&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a439e765e63063acb43ee9735eeabe7b7">defalutColor</a></td></tr>
+<tr class="memdesc:a439e765e63063acb43ee9735eeabe7b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default colour of the card  <a href="class_card.html#a439e765e63063acb43ee9735eeabe7b7">More...</a><br /></td></tr>
 <tr class="separator:a439e765e63063acb43ee9735eeabe7b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98dd958f8c723435d2153fc0744b79dd"><td class="memItemLeft" align="right" valign="top"><a id="a98dd958f8c723435d2153fc0744b79dd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>startFacedown</b> = false</td></tr>
+<tr class="memitem:a98dd958f8c723435d2153fc0744b79dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a98dd958f8c723435d2153fc0744b79dd">startFacedown</a> = false</td></tr>
+<tr class="memdesc:a98dd958f8c723435d2153fc0744b79dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the rotation of the card at beginning. The default value is false, so it starts frace up.  <a href="class_card.html#a98dd958f8c723435d2153fc0744b79dd">More...</a><br /></td></tr>
 <tr class="separator:a98dd958f8c723435d2153fc0744b79dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a card on the playing field. A card could have the question written on it, or a possibly correct answer, or it could be the text field where players write their answers. </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="ab81f3405de6edeb195682d350d4836aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab81f3405de6edeb195682d350d4836aa">&#9670;&nbsp;</a></span>CardType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_card.html#ab81f3405de6edeb195682d350d4836aa">Card.CardType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type of a <a class="el" href="class_card.html" title="Represents a card on the playing field. A card could have the question written on it,...">Card</a>. A card can be a <a class="el" href="class_question.html" title="Represents a Question in the Game. Communicates with database to retrieve questions.">Question</a> card where the current question is displayed, an answer card where a possible answer written on or an input card on which players write there own answers. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac523e3ae4b7066743749db7d8aa85c1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac523e3ae4b7066743749db7d8aa85c1a">&#9670;&nbsp;</a></span>DisableSelectInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.DisableSelectInput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the selction of a card. </p>
+
+</div>
+</div>
+<a id="ae187206d5a3a43ee0de408b4e3e029df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae187206d5a3a43ee0de408b4e3e029df">&#9670;&nbsp;</a></span>FlipFacedown() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.FlipFacedown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An animated flip facedown of the card. </p>
+
+</div>
+</div>
+<a id="ab8e7a4f7725da0fc3e02bce3c003bebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e7a4f7725da0fc3e02bce3c003bebe">&#9670;&nbsp;</a></span>FlipFacedown() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.FlipFacedown </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An animated flip facedown of the card. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>Defines the delay until the animation starts &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&gt;</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa34fb77b35539a427a7d071ab267ac66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa34fb77b35539a427a7d071ab267ac66">&#9670;&nbsp;</a></span>FlipFaceup() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.FlipFaceup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An animated flip faceup of the card. </p>
+
+</div>
+</div>
+<a id="a9575f8aaf207d8395775e617bd5eebeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9575f8aaf207d8395775e617bd5eebeb">&#9670;&nbsp;</a></span>FlipFaceup() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.FlipFaceup </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An animated flip faceup of the card. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>Defines the delay until the animation starts &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&gt;</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af98dd54e9fc944c3e65336b8131fc9d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af98dd54e9fc944c3e65336b8131fc9d7">&#9670;&nbsp;</a></span>HighlightCard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.HighlightCard </td>
+          <td>(</td>
+          <td class="paramtype">Material&#160;</td>
+          <td class="paramname"><em>highlighted</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Highlights a card with the given material. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">highlighted</td><td>Defines the material set onto the card. &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&gt;</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a70c5667218ae5d38d2ba218a1aab563a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70c5667218ae5d38d2ba218a1aab563a">&#9670;&nbsp;</a></span>HighlightCorrect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.HighlightCorrect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Highlights the correct answer card with the color defined in the <a class="el" href="class_card.html#a5aeac40f29a262deb2968709e8f8a5ce">correctColour</a>. </p>
+
+</div>
+</div>
+<a id="ab32a26439efb34096e38f02813783af6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab32a26439efb34096e38f02813783af6">&#9670;&nbsp;</a></span>HighlightReset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.HighlightReset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets the color of the card to the <a class="el" href="class_card.html#a439e765e63063acb43ee9735eeabe7b7">defalutColor</a>. </p>
+
+</div>
+</div>
+<a id="acb6b9dd5322a448e2829a7ec018dfbe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb6b9dd5322a448e2829a7ec018dfbe6">&#9670;&nbsp;</a></span>InstantFlipFacedown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.InstantFlipFacedown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A instant flip facedown of the card. </p>
+
+</div>
+</div>
+<a id="a2bbc7e8acb3ffc325dafc3f615e8fc67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bbc7e8acb3ffc325dafc3f615e8fc67">&#9670;&nbsp;</a></span>InstantFlipFaceup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.InstantFlipFaceup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p></p>
+<p>A instant flip faceup of the card.</p>
+
+</div>
+</div>
+<a id="ad98e869c733f57b22d6470a2410a370e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad98e869c733f57b22d6470a2410a370e">&#9670;&nbsp;</a></span>OnStartClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void Card.OnStartClient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>On Client Start the <a class="el" href="class_card.html" title="Represents a card on the playing field. A card could have the question written on it,...">Card</a> will be identified and the needed Compentens will be activated, all other deactivated. If the card lies facedown at the beginnig, it will be fliped instantly. On question and answer cards the given text will be written. </p>
+
+</div>
+</div>
+<a id="a8e248eae5f0363abf63fdb0d3bbe44be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e248eae5f0363abf63fdb0d3bbe44be">&#9670;&nbsp;</a></span>RpcFlip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.RpcFlip </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>toFacedown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>instantly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A flip of the card. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">toFacedown</td><td>Defines the rotaion of the flip. If it is true the card flipes from faceup to facedown, else the other way around. &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&gt;</td><td><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">instantly</td><td>Defines wheater the flip in instantly or animated. &lt;</td></tr>
+  </table>
+  </dd>
+</dl>
+&gt; <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>Defines the delay until the animation starts. &lt;</td></tr>
+  </table>
+  </dd>
+</dl>
+&gt;</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a78d676acc03df986003007e1a53344f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d676acc03df986003007e1a53344f8">&#9670;&nbsp;</a></span>RpcSlideToPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.RpcSlideToPosition </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>vector3</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An animated slide of a card to a given postion. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vector3</td><td>Defines the postion slied to. &lt; </td></tr>
+  </table>
+  </dd>
+</dl>
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&gt;</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5aeac40f29a262deb2968709e8f8a5ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aeac40f29a262deb2968709e8f8a5ce">&#9670;&nbsp;</a></span>correctColour</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Material Card.correctColour</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The colour the card turns into when the answer it displayed was correct </p>
+
+</div>
+</div>
+<a id="a439e765e63063acb43ee9735eeabe7b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a439e765e63063acb43ee9735eeabe7b7">&#9670;&nbsp;</a></span>defalutColor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Material Card.defalutColor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The default colour of the card </p>
+
+</div>
+</div>
+<a id="a106fc53dbbcb75c0c4fa89f964f55167"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a106fc53dbbcb75c0c4fa89f964f55167">&#9670;&nbsp;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UInt32 Card.id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If it is has a possible answer written on it, the <code>netId</code> of the player who gave it </p>
+
+</div>
+</div>
+<a id="a98dd958f8c723435d2153fc0744b79dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98dd958f8c723435d2153fc0744b79dd">&#9670;&nbsp;</a></span>startFacedown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Card.startFacedown = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Defines the rotation of the card at beginning. The default value is false, so it starts frace up. </p>
+
+</div>
+</div>
+<a id="a7688d0469a1ac65d923ead8373994e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7688d0469a1ac65d923ead8373994e85">&#9670;&nbsp;</a></span>text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Card.text</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The text written on this card </p>
+
+</div>
+</div>
+<a id="ad1eec501ef5c770decb91a83d18934a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1eec501ef5c770decb91a83d18934a7">&#9670;&nbsp;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_card.html#ab81f3405de6edeb195682d350d4836aa">CardType</a> Card.type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The Type of the <a class="el" href="class_card.html" title="Represents a card on the playing field. A card could have the question written on it,...">Card</a>. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Dixit/Assets/Scripts/Card.cs</li>
 </ul>
@@ -179,7 +782,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>startFacedown</b> = f
 			<ul>
 				<li class="navelem"><a class="el" href="class_card.html">Card</a></li>
 				<li class="footer">
-					Generated on Sat Aug 8 2020 15:46:23 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun Aug 9 2020 15:51:53 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

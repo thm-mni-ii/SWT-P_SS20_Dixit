@@ -15,8 +15,8 @@ public class QuestionSet
 {
     /// <summary>
     /// All Questions in this QuestionSet, stored as references.
-    /// Use GetQuestion(int index) to get a Question object
     /// </summary>
+    /// <remarks>Use GetQuestion(int index) to get a Question object.</remarks>
     /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public List<DocumentReference> Questions { get; set; }
@@ -49,9 +49,9 @@ public class QuestionSet
     public int QuestionCount => Questions.Count;
 
     /// <summary>
-    /// Retrieves question data from DocumentReference stored in Questions
-    /// Returns data as Question Object
+    /// Retrieves question data from DocumentReference stored in #Questions at <paramref name="index" />.
     /// </summary>
+    /// <returns>A Task retriving the requested Question Object</returns>
     /// \author SWT-P_SS_20_Dixit
     public Task<Question> GetQuestion(int index)
     {
@@ -59,8 +59,10 @@ public class QuestionSet
     }
 
     /// <summary>
-    /// Retrieves QuestionSet with the specified ID from the database
+    /// Retrieves QuestionSet with the specified id from the database
     /// Returns data as QuestionSet Object
+    /// <param name="questionSetID">The id of the question set</param>
+    /// <param name="db">The FirebaseFirestore instance, usually <c>FirebaseFirestore.DefaultInstance</c></param>
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public static Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db)

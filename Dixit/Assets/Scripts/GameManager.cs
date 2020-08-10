@@ -15,6 +15,7 @@ using Random = UnityEngine.Random;
 /// The GameManger keeps track of all given Answers and Changes the current Phase of the Game.
 /// It only exists on the Server.
 /// </summary>
+/// \author SWT-P_SS_20_Dixit
 public class GameManager : NetworkBehaviour
 {
     private readonly Dictionary<UInt32, string> answers = new Dictionary<UInt32, string>();
@@ -22,13 +23,17 @@ public class GameManager : NetworkBehaviour
     private readonly Dictionary<UInt32, int> points = new Dictionary<UInt32, int>();
     private Dictionary<UInt32, int>[] roundPoints;
 
-    private readonly MultivalDictionaty<UInt32, UInt32> sameAnswers = new MultivalDictionaty<UInt32, UInt32>();
+    //for storing points sorted by value
+    private List<KeyValuePair<UInt32, int>> pointsList;
+    private List<KeyValuePair<UInt32, int>> roundPointsList;
+    private readonly MultivalDictionary<UInt32, UInt32> sameAnswers = new MultivalDictionary<UInt32, UInt32>();
 
     private int PlayerCount => GetPlayers().Count();
 
     /// <summary>
     /// The singleton instance of the GameManager
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public static GameManager Instance => _instance.Value;
     private static readonly Lazy<GameManager> _instance =
         new Lazy<GameManager>(() => GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>());
@@ -37,16 +42,19 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// The prefab for answer cards
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject m_cardPrefab;
 
     /// <summary>
     /// The prefab for answer cards
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject m_questionCardPrefab;
 
     /// <summary>
     /// The DisplayManager instance in the scene
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public DisplayManager displayManager;
 
     private enum Phase
@@ -61,34 +69,41 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// The Timer seen on the right of the Screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public CountdownTimer timer;
     /// <summary>
     /// Initial value of the Timer at the start of the "GiveAnswer" Phase
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public int timerForGiveAnswer = 30;
     /// <summary>
     /// Initial value of the Time at the start of the "ChoseAnswer" Phase
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public int timerToChooseAnswer = 20;
     /// <summary>
     /// Initial value of the Timer when the score result overlay is diplayed
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public int timerToCheckResults = 10;
 
     /// <summary>
     /// The number rounds (i.e Questions) the game should last
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public int numberOfRounds = 3;
     private int currentRound;
 
     /// <summary>
     /// The ID of the question set played with. Will be set by Game Host coosing the set.
-    /// </summary>  
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public string questionSetID = "0";
 
     /// <summary>
     /// The Question Set load form the database.
-    /// </summary>  
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public QuestionSet QuestionSet => loadQuestionSet.Result;
 
     //contains an array with all random, different indexes of the questions for the game
@@ -100,6 +115,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Called when the GameManger starts on the Server.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public override void OnStartServer()
     {
         // Initializes QuestionSet from given ID
@@ -107,11 +123,12 @@ public class GameManager : NetworkBehaviour
             .ContinueWithLogException();
     }
 
-    
+
     /// <summary>
     /// Executed when the game should start (after all players joined).
     /// Writes the playernames in the UI cavaces and loads the chosen question set
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void StartGame()
     {
         //initializes roundpoints
@@ -128,7 +145,7 @@ public class GameManager : NetworkBehaviour
 
             for (int i = 0; i < numberOfRounds; i++)
             {
-                roundPoints[i].Add(p.netIdentity.netId, 0);   
+                roundPoints[i].Add(p.netIdentity.netId, 0);
             }
         }
 
@@ -157,6 +174,7 @@ public class GameManager : NetworkBehaviour
     /// Executed at the start of each round.
     /// Hides the result overlay, checks if the game should end and adds the correct answer to <c>answers<\c>
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     private void StartRound()
     {
         displayManager.RpcResultOverlaySetActive(false);
@@ -183,6 +201,7 @@ public class GameManager : NetworkBehaviour
     /// Called by <c>StartRound</c> when all rounds have been played.
     /// Shows an overview of the points awarded in each round and the final scores.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     private void EndGame()
     {
         Debug.Log("End Of Game");
@@ -204,6 +223,7 @@ public class GameManager : NetworkBehaviour
     /// Called when every player has clicked on "Nochmal".
     /// Clears all points and restarts the game loop.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void Restart()
     {
         playersReady++;
@@ -212,7 +232,7 @@ public class GameManager : NetworkBehaviour
             points.Clear();
             for (int i = 0; i < numberOfRounds; i++)
             {
-                roundPoints[i].Clear();   
+                roundPoints[i].Clear();
             }
 
             displayManager.RpcToggleRoundsOverview(false, numberOfRounds);
@@ -382,6 +402,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Counts the players who clicked on the "Weiter" Button. When all players clicked on the button, it stops the timer
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void LogPlayerIsReady()
     {
         playersReady++;
@@ -394,6 +415,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Clean up after the end of the eval phase
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void InitiateCleanUpEvalPhase()
     {
         playersReady = 0;
@@ -411,9 +433,10 @@ public class GameManager : NetworkBehaviour
         sameAnswers.Clear();
     }
 
-     /// <summary>
+    /// <summary>
     /// Updates PlayerCanvas with new scores and ranking in all clients
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     private void UpdatePlayerCanvas()
     {
         var pointsList = points.ToList();
@@ -432,6 +455,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Updates ScoreResultsOverlay with new scores and ranking in all clients
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     private void UpdateScoreResultsOverlay(bool gameend)
     {
         var list = gameend? points.ToList() : roundPoints[currentRound].ToList();
@@ -444,7 +468,7 @@ public class GameManager : NetworkBehaviour
             string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
             int playerPoints = points.Value;
             displayManager.UpdateTextPanelEntry(idx, player, playerPoints, gameend);
-            
+
 
             if(gameend)
             {
@@ -469,6 +493,7 @@ public class GameManager : NetworkBehaviour
     /// Gets the list of Players in the current Game.
     /// <returns>The list of players.</returns>
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     private IEnumerable<Player> GetPlayers() =>
         NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>());
 
@@ -476,20 +501,23 @@ public class GameManager : NetworkBehaviour
     /// Gets the list of Players in the current Game together with their indices.
     /// <returns>The list of players as IEnumerable of ValueTuple<Player, int>.</returns>
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     private IEnumerable<ValueTuple<Player, int>> GetPlayersIndexed() =>
         GetPlayers().Select(ValueTuple.Create<Player, int>);
 
     /// <summary>
     /// Gets the NetworkIdentity component of an object with the specified netId
+    /// </summary>
     /// <param name="netId"> The Identity to be searched for </param>
     /// <returns> The NetworkIdentity </returns>
-    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     private NetworkIdentity GetIdentity(UInt32 netId) =>
         NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
 
     /// <summary>
     /// Logs the given Answer of a Player during the WriteAnwer Phase.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void LogAnswer(UInt32 playerId, string answer)
     {
         var player = GetIdentity(playerId).GetComponent<Player>();
@@ -535,6 +563,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Logs the choosen Answer of a Player during the ChoseAnswer Phase.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void LogAnswer(UInt32 player, UInt32 choice)
     {
         if (currentPhase != Phase.ChoseAnswer)
@@ -552,6 +581,7 @@ public class GameManager : NetworkBehaviour
     /// <summary>
     /// Changes Phase in the GameManager and calls the Corresponding RPC-Call
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ChangePhase()
     {
         currentPhase = (Phase)((int)(currentPhase + 1) % Enum.GetValues(typeof(Phase)).Length);
@@ -618,9 +648,10 @@ public class GameManager : NetworkBehaviour
 
     /// <summary>
     /// Generates an array of <c>maxIdx</c> length.
-    /// <param name="maxIdx"> The length of the array<\param>
-    /// <returns>The random-number array</returns>
     /// </summary>
+    /// <param name="maxIdx"> The length of the array</param>
+    /// <returns>The random-number array</returns>
+    /// \author SWT-P_SS_20_Dixit
     public int[] GetRandomQuestionIdxArray(int maxIdx)
     {
         var randomQuestionIdxList = new List<int>(numberOfRounds);
@@ -641,14 +672,16 @@ public class GameManager : NetworkBehaviour
     }
 }
 
-    /// <summary>
-    /// A Dictionary that contains Lists of type <c>TValue</c> as Values
-    /// </summary>
-class MultivalDictionaty<TKey, TValue> : Dictionary<TKey, List<TValue>>
+/// <summary>
+/// A Dictionary that contains Lists of type <c>TValue</c> as Values
+/// </summary>
+/// \author SWT-P_SS_20_Dixit
+class MultivalDictionary<TKey, TValue> : Dictionary<TKey, List<TValue>>
 {
     /// <summary>
     /// Add add a Value to the Dictionary. If the Key allready exists, add the value to the list of values associated with the key
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void Add(TKey key, TValue value)
     {
         if (!this.ContainsKey(key))

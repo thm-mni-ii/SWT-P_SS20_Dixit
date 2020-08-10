@@ -1,34 +1,40 @@
+/* created by: SWT-P_SS_20_Dixit */
 using System;
 using System.Collections;
 using UnityEngine;
 using Mirror;
 
-    /// <summary>
-    /// Represents a card on the playing field.
-    /// A card could have the question written on it, or a possibly correct answer, or it could be the text field where players write their answers.
-    /// </summary>
+/// <summary>
+/// Represents a card on the playing field.
+/// A card could have the question written on it, or a possibly correct answer, or it could be the text field where players write their answers.
+/// </summary>
+/// \author SWT-P_SS_20_Dixit
 public class Card : NetworkBehaviour
-{   
+{
     /// <summary>
     /// The Animator playing the animations of the card
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [SerializeField] private Animator anim;
 
     /// <summary>
     /// The text written on this card
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [SyncVar, HideInInspector]
     public string text;
 
     /// <summary>
     /// If it is has a possible answer written on it, the <c>netId</c> of the player who gave it
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [SyncVar, HideInInspector]
     public UInt32 id;
 
     /// <summary>
     /// The Type of the Card.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [SyncVar, HideInInspector]
     public CardType type;
 
@@ -37,23 +43,27 @@ public class Card : NetworkBehaviour
     /// A card can be a Question card where the current question is displayed,
     /// an answer card where a possible answer written on or an input card on which players write there own answers.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public enum CardType { Input, Question, Answer };
 
     /// <summary>
     /// The colour the card turns into when the answer it displayed was correct
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Material correctColour;
 
     /// <summary>
     /// The default colour of the card
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Material defalutColor;
     private Vector3 _slideVector;
 
     /// <summary>
-    /// Defines the rotation of the card at beginning. 
+    /// Defines the rotation of the card at beginning.
     /// The default value is false, so it starts frace up.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [SyncVar, HideInInspector]
     public bool startFacedown = false;
 
@@ -75,6 +85,7 @@ public class Card : NetworkBehaviour
     /// If the card lies facedown at the beginnig, it will be fliped instantly.
     /// On question and answer cards the given text will be written.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public override void OnStartClient()
     {
         gameObject.tag = type + "Card";
@@ -112,6 +123,7 @@ public class Card : NetworkBehaviour
     /// <summary>
     /// A instant flip facedown of the card.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void InstantFlipFacedown()
     {
         anim.Play("InstantFlipFacedown");
@@ -120,6 +132,7 @@ public class Card : NetworkBehaviour
    /// <summary>
     /// A instant flip faceup of the card.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void InstantFlipFaceup()
     {
         anim.Play("InstantFlipFaceup");
@@ -128,6 +141,7 @@ public class Card : NetworkBehaviour
     /// <summary>
     /// An animated flip facedown of the card.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void FlipFacedown()
     {
         anim.Play("FlipFacedown");
@@ -136,6 +150,7 @@ public class Card : NetworkBehaviour
     /// <summary>
     /// An animated flip faceup of the card.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void FlipFaceup()
     {
         anim.Play("FlipFaceup");
@@ -143,8 +158,9 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// An animated flip facedown of the card.
-    /// <param name="time"> Defines the delay until the animation starts <\param>
     /// </summary>
+    /// <param name="time"> Defines the delay until the animation starts <\param>
+    /// \author SWT-P_SS_20_Dixit
     public void FlipFacedown(float time)
     {
         Invoke(nameof(FlipFacedown), time);
@@ -152,8 +168,9 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// An animated flip faceup of the card.
-    /// <param name="time"> Defines the delay until the animation starts <\param>
     /// </summary>
+    /// <param name="time"> Defines the delay until the animation starts <\param>
+    /// \author SWT-P_SS_20_Dixit
     public void FlipFaceup(float time)
     {
         Invoke(nameof(FlipFaceup), time);
@@ -161,10 +178,11 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// A flip of the card.
+    /// </summary>
     /// <param name="toFacedown"> Defines the rotaion of the flip. If it is true the card flipes from faceup to facedown, else the other way around. <\param>
     /// <param name="instantly"> Defines wheater the flip in instantly or animated. <\param>
     /// <param name="time"> Defines the delay until the animation starts. <\param>
-    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcFlip(bool toFacedown, bool instantly, float time)
     {
@@ -194,8 +212,9 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// An animated slide of a card to a given postion.
-    /// <param name="vector3"> Defines the postion slied to. <\param>
     /// </summary>
+    /// <param name="vector3"> Defines the postion slied to. <\param>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcSlideToPosition(Vector3 vector3)
     {
@@ -214,8 +233,9 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// Highlights a card with the given material.
-    /// <param name="highlighted"> Defines the material set onto the card. <\param>
     /// </summary>
+    /// <param name="highlighted"> Defines the material set onto the card. <\param>
+    /// \author SWT-P_SS_20_Dixit
     public void HighlightCard(Material highlighted)
     {
         cardGo.GetComponent<MeshRenderer>().material = highlighted;
@@ -224,6 +244,7 @@ public class Card : NetworkBehaviour
     /// <summary>
     /// Highlights the correct answer card with the color defined in the <see cref="correctColour">correctColour</see>.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void HighlightCorrect()
     {
         HighlightCard(correctColour);
@@ -232,6 +253,7 @@ public class Card : NetworkBehaviour
     /// <summary>
     /// Resets the color of the card to the <see cref="defalutColor">defalutColor</see>.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void HighlightReset()
     {
         HighlightCard(defalutColor);
@@ -240,6 +262,7 @@ public class Card : NetworkBehaviour
     /// <summary>
     /// Disables the selction of a card.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void DisableSelectInput()
     {
         selectAnswerBtn.SetActive(false);

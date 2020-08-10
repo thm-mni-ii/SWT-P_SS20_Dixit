@@ -37,11 +37,13 @@ public class GameServer : NetworkManager
     /// <summary>
     /// The number of player that want to play the game. The Server will wait until that number of players joined the game
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public int playersWantToPlay = 2;
 
     /// <summary>
     /// The <c>GameManager</c>
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameManager GameManager;
 
     /// <summary>

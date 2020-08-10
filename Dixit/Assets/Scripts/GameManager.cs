@@ -507,9 +507,9 @@ public class GameManager : NetworkBehaviour
 
     /// <summary>
     /// Gets the NetworkIdentity component of an object with the specified netId
+    /// </summary>
     /// <param name="netId"> The Identity to be searched for </param>
     /// <returns> The NetworkIdentity </returns>
-    /// </summary>
     /// \author SWT-P_SS_20_Dixit
     private NetworkIdentity GetIdentity(UInt32 netId) =>
         NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
@@ -648,9 +648,9 @@ public class GameManager : NetworkBehaviour
 
     /// <summary>
     /// Generates an array of <c>maxIdx</c> length.
+    /// </summary>
     /// <param name="maxIdx"> The length of the array</param>
     /// <returns>The random-number array</returns>
-    /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public int[] GetRandomQuestionIdxArray(int maxIdx)
     {

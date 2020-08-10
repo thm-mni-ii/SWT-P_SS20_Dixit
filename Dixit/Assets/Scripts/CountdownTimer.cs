@@ -40,7 +40,7 @@ public class CountdownTimer : NetworkBehaviour
     private int _timer;
 
     /// <summary>
-    /// The Timer Modes. 
+    /// The Timer Modes.
     /// The differnt Timers are:  giveAnswer, selectAnswer, scoreScreen and a default timer.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit

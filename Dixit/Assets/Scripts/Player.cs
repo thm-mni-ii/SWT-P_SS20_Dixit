@@ -58,8 +58,8 @@ public class Player : NetworkBehaviour
 
     /// <summary>
     /// Sends the given Answer from a Player to the GameManager.
-    /// <param name="answer">The Answer.</param>
     /// </summary>
+    /// <param name="answer">The Answer.</param>
     /// \author SWT-P_SS_20_Dixit
     [Command]
     public void CmdGiveAnswer(string answer)
@@ -69,8 +69,8 @@ public class Player : NetworkBehaviour
 
     /// <summary>
     /// Sends the chosen Answer from a Player to the GameManager
-    /// <param name="answer">The Answer</param>
     /// </summary>
+    /// <param name="answer">The Answer</param>
     /// \author SWT-P_SS_20_Dixit
     [Command]
     private void CmdChooseAnswer(UInt32 answer)
@@ -103,8 +103,8 @@ public class Player : NetworkBehaviour
 
     /// <summary>
     /// Displays a Notification to the client
-    /// <param name="message">The content of the notification</param>
     /// </summary>
+    /// <param name="message">The content of the notification</param>
     /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
     public void TargetSendNotification(string message)

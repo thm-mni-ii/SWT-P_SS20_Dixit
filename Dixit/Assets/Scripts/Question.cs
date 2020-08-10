@@ -35,8 +35,8 @@ public class Question
 
     /// <summary>
     /// Retrieves question data from the database.
-    /// <param name="reference">The reference to the question document in the database</param>
     /// </summary>
+    /// <param name="reference">The reference to the question document in the database</param>
     /// <returns>The referenced document as Question Object</returns>
     /// \author SWT-P_SS_20_Dixit
     public static Task<Question> RetrieveQuestion(DocumentReference reference)

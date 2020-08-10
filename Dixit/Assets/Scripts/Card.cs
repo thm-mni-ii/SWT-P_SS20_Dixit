@@ -10,7 +10,7 @@ using Mirror;
 /// </summary>
 /// \author SWT-P_SS_20_Dixit
 public class Card : NetworkBehaviour
-{   
+{
     /// <summary>
     /// The Animator playing the animations of the card
     /// </summary>
@@ -60,7 +60,7 @@ public class Card : NetworkBehaviour
     private Vector3 _slideVector;
 
     /// <summary>
-    /// Defines the rotation of the card at beginning. 
+    /// Defines the rotation of the card at beginning.
     /// The default value is false, so it starts frace up.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -158,8 +158,8 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// An animated flip facedown of the card.
-    /// <param name="time"> Defines the delay until the animation starts <\param>
     /// </summary>
+    /// <param name="time"> Defines the delay until the animation starts <\param>
     /// \author SWT-P_SS_20_Dixit
     public void FlipFacedown(float time)
     {
@@ -168,8 +168,8 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// An animated flip faceup of the card.
-    /// <param name="time"> Defines the delay until the animation starts <\param>
     /// </summary>
+    /// <param name="time"> Defines the delay until the animation starts <\param>
     /// \author SWT-P_SS_20_Dixit
     public void FlipFaceup(float time)
     {
@@ -178,10 +178,10 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// A flip of the card.
+    /// </summary>
     /// <param name="toFacedown"> Defines the rotaion of the flip. If it is true the card flipes from faceup to facedown, else the other way around. <\param>
     /// <param name="instantly"> Defines wheater the flip in instantly or animated. <\param>
     /// <param name="time"> Defines the delay until the animation starts. <\param>
-    /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcFlip(bool toFacedown, bool instantly, float time)
@@ -212,8 +212,8 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// An animated slide of a card to a given postion.
-    /// <param name="vector3"> Defines the postion slied to. <\param>
     /// </summary>
+    /// <param name="vector3"> Defines the postion slied to. <\param>
     /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcSlideToPosition(Vector3 vector3)
@@ -233,8 +233,8 @@ public class Card : NetworkBehaviour
 
     /// <summary>
     /// Highlights a card with the given material.
-    /// <param name="highlighted"> Defines the material set onto the card. <\param>
     /// </summary>
+    /// <param name="highlighted"> Defines the material set onto the card. <\param>
     /// \author SWT-P_SS_20_Dixit
     public void HighlightCard(Material highlighted)
     {

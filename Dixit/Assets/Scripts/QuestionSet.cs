@@ -61,9 +61,9 @@ public class QuestionSet
     /// <summary>
     /// Retrieves QuestionSet with the specified id from the database
     /// Returns data as QuestionSet Object
+    /// </summary>
     /// <param name="questionSetID">The id of the question set</param>
     /// <param name="db">The FirebaseFirestore instance, usually <c>FirebaseFirestore.DefaultInstance</c></param>
-    /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public static Task<QuestionSet> RetrieveQuestionSet(string questionSetID, FirebaseFirestore db)
     {

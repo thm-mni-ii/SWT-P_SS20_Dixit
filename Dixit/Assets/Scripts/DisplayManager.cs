@@ -8,11 +8,11 @@ using UnityEngine.UI;
 using Mirror;
 using TMPro;
 
-    /// <summary>
-    /// Shows, hides and updates UI elements on screen.
-    /// Also deletes and updates cards after they have been spawen by the <c>GameManager</c>.
-    /// \author SWT-P_SS_20_Dixit
-    /// </summary>
+/// <summary>
+/// Shows, hides and updates UI elements on screen.
+/// Also deletes and updates cards after they have been spawen by the <c>GameManager</c>.
+/// \author SWT-P_SS_20_Dixit
+/// </summary>
 public class DisplayManager : NetworkBehaviour
 {
     /// <summary>
@@ -116,7 +116,7 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     [ClientRpc]
     public void RpcSetRoundOverview(bool first, int rounds, int[] roundpoints)
-    { 
+    {
         var text_Component = roundsOverview_text.GetComponent<TMP_Text>();
         var formated = "";
         if(first){
@@ -161,13 +161,13 @@ public class DisplayManager : NetworkBehaviour
         continueButton.SetActive(!isActive);
         exitButton.SetActive(isActive);
         restartButton.SetActive(isActive);
-        
+
         restartButton.GetComponent<Button>().interactable = isActive;
     }
 
     /// <summary>
     /// Shows or hides the points overview of all rounds
-    /// Sets the size of the component automatically by the number of rounds 
+    /// Sets the size of the component automatically by the number of rounds
     /// </summary>
     [ClientRpc]
     public void RpcToggleRoundsOverview(bool isActive, int rounds)

@@ -14,8 +14,8 @@ public class PlayerInput : MonoBehaviour
 
     /// <summary>
     /// Sends the answer the player gave to the server
-    /// <param name="answer">The given Answer.</param>
     /// </summary>
+    /// <param name="answer">The given Answer.</param>
     /// \author SWT-P_SS_20_Dixit
     public void GiveAnswer(string answer)
     {
@@ -24,8 +24,8 @@ public class PlayerInput : MonoBehaviour
 
     /// <summary>
     /// Sends the answer the player gave to the server
-    /// <param name="answer">The text field the answer was written in.</param>
     /// </summary>
+    /// <param name="answer">The text field the answer was written in.</param>
     /// \author SWT-P_SS_20_Dixit
     public void GiveAnswer(TMPro.TMP_InputField answer){
         GiveAnswer(answer.text);
@@ -58,7 +58,7 @@ public class PlayerInput : MonoBehaviour
     public void EndGame()
     {
        this.GetComponent<Button>().interactable = false;
-       Player.LocalPlayer.KillGame(); 
+       Player.LocalPlayer.KillGame();
     }
 
     /// <summary>
@@ -68,6 +68,6 @@ public class PlayerInput : MonoBehaviour
     public void Restart()
     {
        this.GetComponent<Button>().interactable = false;
-       Player.LocalPlayer.CmdRestart(); 
+       Player.LocalPlayer.CmdRestart();
     }
 }

@@ -11,8 +11,10 @@ var searchData=
   ['rpcflip_74',['RpcFlip',['../class_card.html#a8e248eae5f0363abf63fdb0d3bbe44be',1,'Card']]],
   ['rpchighlightcard_75',['RpcHighlightCard',['../class_display_manager.html#a7af22761cd9962f78f9da7644627dee9',1,'DisplayManager']]],
   ['rpcresultoverlaysetactive_76',['RpcResultOverlaySetActive',['../class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2',1,'DisplayManager']]],
-  ['rpcslidetoposition_77',['RpcSlideToPosition',['../class_card.html#a78d676acc03df986003007e1a53344f8',1,'Card']]],
-  ['rpctogglerestartexit_78',['RpcToggleRestartExit',['../class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3',1,'DisplayManager']]],
-  ['rpcupdateplayercanvasentry_79',['RpcUpdatePlayerCanvasEntry',['../class_display_manager.html#acbdf5d0e137d948abe3f321329b057bf',1,'DisplayManager']]],
-  ['rpcupdatescoreheadertext_80',['RpcUpdateScoreHeaderText',['../class_display_manager.html#a98038a87694376a27a208c357d7c606c',1,'DisplayManager']]]
+  ['rpcsetroundoverview_77',['RpcSetRoundOverview',['../class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d',1,'DisplayManager']]],
+  ['rpcslidetoposition_78',['RpcSlideToPosition',['../class_card.html#a78d676acc03df986003007e1a53344f8',1,'Card']]],
+  ['rpctogglerestartexit_79',['RpcToggleRestartExit',['../class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3',1,'DisplayManager']]],
+  ['rpctoggleroundsoverview_80',['RpcToggleRoundsOverview',['../class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6',1,'DisplayManager']]],
+  ['rpcupdateplayercanvasentry_81',['RpcUpdatePlayerCanvasEntry',['../class_display_manager.html#acbdf5d0e137d948abe3f321329b057bf',1,'DisplayManager']]],
+  ['rpcupdatescoreheadertext_82',['RpcUpdateScoreHeaderText',['../class_display_manager.html#a98038a87694376a27a208c357d7c606c',1,'DisplayManager']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['updatescoreheader_98',['UpdateScoreHeader',['../class_display_manager.html#a5255018d12b2483111436302136f5719',1,'DisplayManager']]],
-  ['updatetextpanelentry_99',['UpdateTextPanelEntry',['../class_display_manager.html#a381a7618d9651b8ca9adff415b036214',1,'DisplayManager']]],
-  ['updatetextpanelentrygameend_100',['UpdateTextPanelEntryGameEnd',['../class_display_manager.html#a723c5a1bfe2f2dd02cc2f27772fcd2e1',1,'DisplayManager']]]
+  ['updatescoreheader_100',['UpdateScoreHeader',['../class_display_manager.html#a5255018d12b2483111436302136f5719',1,'DisplayManager']]],
+  ['updatetextpanelentry_101',['UpdateTextPanelEntry',['../class_display_manager.html#aca6c122855927d9978622de6f6ac856b',1,'DisplayManager.UpdateTextPanelEntry(int idx, string player, int points, bool gameend)'],['../class_display_manager.html#a381a7618d9651b8ca9adff415b036214',1,'DisplayManager.UpdateTextPanelEntry(int idx, string player, int points)']]]
 ];

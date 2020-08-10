@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['multivaldictionaty_107',['MultivalDictionaty',['../class_multival_dictionaty.html',1,'']]],
-  ['multivaldictionaty_3c_20uint32_2c_20uint32_20_3e_108',['MultivalDictionaty&lt; UInt32, UInt32 &gt;',['../class_multival_dictionaty.html',1,'']]]
+  ['multivaldictionary_108',['MultivalDictionary',['../class_multival_dictionary.html',1,'']]],
+  ['multivaldictionary_3c_20uint32_2c_20uint32_20_3e_109',['MultivalDictionary&lt; UInt32, UInt32 &gt;',['../class_multival_dictionary.html',1,'']]]
 ];

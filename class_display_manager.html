@@ -90,6 +90,9 @@ $(document).ready(function(){initNavTree('class_display_manager.html',''); initR
 <div class="title">DisplayManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Shows, hides and updates UI elements on screen. Also deletes and updates cards after they have been spawen by the <code><a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a></code>.  
+ <a href="class_display_manager.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for DisplayManager:</div>
 <div class="dyncontent">
@@ -111,15 +114,21 @@ override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartLocal
 <tr class="memitem:acbdf5d0e137d948abe3f321329b057bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#acbdf5d0e137d948abe3f321329b057bf">RpcUpdatePlayerCanvasEntry</a> (int idx, string player, string points)</td></tr>
 <tr class="memdesc:acbdf5d0e137d948abe3f321329b057bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a PlayerCanvasEntry with given index, playername and score  <a href="class_display_manager.html#acbdf5d0e137d948abe3f321329b057bf">More...</a><br /></td></tr>
 <tr class="separator:acbdf5d0e137d948abe3f321329b057bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca6c122855927d9978622de6f6ac856b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#aca6c122855927d9978622de6f6ac856b">UpdateTextPanelEntry</a> (int idx, string player, int points, bool gameend)</td></tr>
+<tr class="memdesc:aca6c122855927d9978622de6f6ac856b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows a + befor positive values. For round point view and final point view.  <a href="class_display_manager.html#aca6c122855927d9978622de6f6ac856b">More...</a><br /></td></tr>
+<tr class="separator:aca6c122855927d9978622de6f6ac856b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a381a7618d9651b8ca9adff415b036214"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a381a7618d9651b8ca9adff415b036214">UpdateTextPanelEntry</a> (int idx, string player, int points)</td></tr>
-<tr class="memdesc:a381a7618d9651b8ca9adff415b036214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows a + before positive values. For round point view.  <a href="class_display_manager.html#a381a7618d9651b8ca9adff415b036214">More...</a><br /></td></tr>
+<tr class="memdesc:a381a7618d9651b8ca9adff415b036214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows no + before positive values. If game is'nt won already.  <a href="class_display_manager.html#a381a7618d9651b8ca9adff415b036214">More...</a><br /></td></tr>
 <tr class="separator:a381a7618d9651b8ca9adff415b036214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a723c5a1bfe2f2dd02cc2f27772fcd2e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a723c5a1bfe2f2dd02cc2f27772fcd2e1">UpdateTextPanelEntryGameEnd</a> (int idx, string player, int points)</td></tr>
-<tr class="memdesc:a723c5a1bfe2f2dd02cc2f27772fcd2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows no + before positive values. For final point view.  <a href="class_display_manager.html#a723c5a1bfe2f2dd02cc2f27772fcd2e1">More...</a><br /></td></tr>
-<tr class="separator:a723c5a1bfe2f2dd02cc2f27772fcd2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad754b0231ab6a69ca6b01bbfed165c5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d">RpcSetRoundOverview</a> (bool first, int rounds, int[] roundpoints)</td></tr>
+<tr class="memdesc:ad754b0231ab6a69ca6b01bbfed165c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets and Formats the overview of all rounds for one player  <a href="class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d">More...</a><br /></td></tr>
+<tr class="separator:ad754b0231ab6a69ca6b01bbfed165c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fb5636f3f56eb8ce6746d153fc4d1f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3">RpcToggleRestartExit</a> (bool isActive)</td></tr>
 <tr class="memdesc:a4fb5636f3f56eb8ce6746d153fc4d1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switches between continue button (isActive = false) and exit + restart buttons (isActive = false).  <a href="class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3">More...</a><br /></td></tr>
 <tr class="separator:a4fb5636f3f56eb8ce6746d153fc4d1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a38e6fa6e724035f8d3e4269805d3c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6">RpcToggleRoundsOverview</a> (bool isActive, int rounds)</td></tr>
+<tr class="memdesc:a2a38e6fa6e724035f8d3e4269805d3c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows or hides the points overview of all rounds Sets the size of the component automatically by the number of rounds  <a href="class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6">More...</a><br /></td></tr>
+<tr class="separator:a2a38e6fa6e724035f8d3e4269805d3c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a358e363cc69ac9b80c50e3800d115fe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2">RpcResultOverlaySetActive</a> (bool isActive)</td></tr>
 <tr class="memdesc:a358e363cc69ac9b80c50e3800d115fe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the result overlay for all players.  <a href="class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2">More...</a><br /></td></tr>
 <tr class="separator:a358e363cc69ac9b80c50e3800d115fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,8 +168,17 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae8b821945ce43f70da98e09a98cfa640"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640">continueButton</a></td></tr>
 <tr class="memdesc:ae8b821945ce43f70da98e09a98cfa640"><td class="mdescLeft">&#160;</td><td class="mdescRight">The "Weiter" Button at the bottom of the score overlay panel  <a href="class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640">More...</a><br /></td></tr>
 <tr class="separator:ae8b821945ce43f70da98e09a98cfa640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32a815e71abfb7ac0b0dba9bdeb23d8e"><td class="memItemLeft" align="right" valign="top"><a id="a32a815e71abfb7ac0b0dba9bdeb23d8e"></a>
+GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>roundsOverview</b></td></tr>
+<tr class="separator:a32a815e71abfb7ac0b0dba9bdeb23d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3573c85f6424d82291fbcfdc256be003"><td class="memItemLeft" align="right" valign="top"><a id="a3573c85f6424d82291fbcfdc256be003"></a>
+GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>roundsOverview_text</b></td></tr>
+<tr class="separator:a3573c85f6424d82291fbcfdc256be003"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Shows, hides and updates UI elements on screen. Also deletes and updates cards after they have been spawen by the <code><a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a></code>. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit</dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a914fd7408e299f64c9ec828a01375115"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a914fd7408e299f64c9ec828a01375115">&#9670;&nbsp;</a></span>RpcDeleteAllAnswerCards()</h2>
 
@@ -185,6 +203,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Removes all answer cards for all players. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -212,6 +231,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Removes the input card for all players. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -239,6 +259,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Removes the question card for all players. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -267,6 +288,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Highlights the correct answer cards for all players. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -295,6 +317,51 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Opens the result overlay for all players. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="ad754b0231ab6a69ca6b01bbfed165c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad754b0231ab6a69ca6b01bbfed165c5d">&#9670;&nbsp;</a></span>RpcSetRoundOverview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayManager.RpcSetRoundOverview </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rounds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int[]&#160;</td>
+          <td class="paramname"><em>roundpoints</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets and Formats the overview of all rounds for one player </p>
 
 </div>
 </div>
@@ -323,6 +390,45 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Switches between continue button (isActive = false) and exit + restart buttons (isActive = false). </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="a2a38e6fa6e724035f8d3e4269805d3c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a38e6fa6e724035f8d3e4269805d3c6">&#9670;&nbsp;</a></span>RpcToggleRoundsOverview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayManager.RpcToggleRoundsOverview </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isActive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rounds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shows or hides the points overview of all rounds Sets the size of the component automatically by the number of rounds </p>
 
 </div>
 </div>
@@ -367,6 +473,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Updates a PlayerCanvasEntry with given index, playername and score </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -387,6 +494,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Updates the ScoreHeader (in ScoreResultOverlay) with given text </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -407,11 +515,12 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Updates the ScoreHeader (in ScoreResultOverlay) with given roundNumber </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
 <a id="a381a7618d9651b8ca9adff415b036214"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a381a7618d9651b8ca9adff415b036214">&#9670;&nbsp;</a></span>UpdateTextPanelEntry()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a381a7618d9651b8ca9adff415b036214">&#9670;&nbsp;</a></span>UpdateTextPanelEntry() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,18 +551,19 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows a + before positive values. For round point view. </p>
+<p>Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows no + before positive values. If game is'nt won already. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
-<a id="a723c5a1bfe2f2dd02cc2f27772fcd2e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a723c5a1bfe2f2dd02cc2f27772fcd2e1">&#9670;&nbsp;</a></span>UpdateTextPanelEntryGameEnd()</h2>
+<a id="aca6c122855927d9978622de6f6ac856b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca6c122855927d9978622de6f6ac856b">&#9670;&nbsp;</a></span>UpdateTextPanelEntry() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void DisplayManager.UpdateTextPanelEntryGameEnd </td>
+          <td class="memname">void DisplayManager.UpdateTextPanelEntry </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>idx</em>, </td>
@@ -468,7 +578,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>points</em>&#160;</td>
+          <td class="paramname"><em>points</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>gameend</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -478,7 +594,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows no + before positive values. For final point view. </p>
+<p>Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score Shows a + befor positive values. For round point view and final point view. </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -496,6 +613,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The "Weiter" Button at the bottom of the score overlay panel </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -512,6 +630,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The "Beenden" Button on the result panel displayed when the game ends </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -528,6 +647,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>GameObjects corresponding to the playernames and overall scores displayed on top right of the screen </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -544,6 +664,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The "Nochmal" Button on the result panel displayed when the game ends </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -560,6 +681,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Canvas for the TextPanelEntry's in the result panel </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -576,6 +698,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Headline of the score Overlay UI element </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -592,6 +715,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>GameObject corresponding to the playernames and round scores on the panel shown at the end of each round </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -605,7 +729,7 @@ Public Attributes</h2></td></tr>
 			<ul>
 				<li class="navelem"><a class="el" href="class_display_manager.html">DisplayManager</a></li>
 				<li class="footer">
-					Generated on Sun Aug 9 2020 15:51:53 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Mon Aug 10 2020 19:53:20 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

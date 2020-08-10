@@ -6,7 +6,7 @@ var annotated_dup =
     [ "DisplayManager", "class_display_manager.html", "class_display_manager" ],
     [ "GameManager", "class_game_manager.html", "class_game_manager" ],
     [ "GameServer", "class_game_server.html", "class_game_server" ],
-    [ "MultivalDictionaty", "class_multival_dictionaty.html", "class_multival_dictionaty" ],
+    [ "MultivalDictionary", "class_multival_dictionary.html", "class_multival_dictionary" ],
     [ "Player", "class_player.html", "class_player" ],
     [ "PlayerInfo", "class_player_info.html", "class_player_info" ],
     [ "PlayerInput", "class_player_input.html", "class_player_input" ],

@@ -8,24 +8,28 @@ using Firebase.Firestore;
 /// Represents a Question in the Game.
 /// Communicates with database to retrieve questions.
 /// </summary>
+/// \author SWT-P_SS_20_Dixit
 [FirestoreData]
 public class Question
 {
     /// <summary>
     /// The Question as string
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public string QuestionText { get; set; }
 
     /// <summary>
     /// The level of difficulty of this question
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public int Difficulty { get; set; }
 
     /// <summary>
     /// The correct answer of this question
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public string Answer { get; set; }
 
@@ -33,6 +37,7 @@ public class Question
     /// Retrieves question data from the database from DocumentReference
     /// Returns data as Question Object
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public static Task<Question> RetrieveQuestion(DocumentReference reference)
     {
         return reference.GetSnapshotAsync().ContinueWith((task) =>

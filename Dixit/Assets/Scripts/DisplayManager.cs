@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* created by: SWT-P_SS_20_Dixit */
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
@@ -12,32 +13,39 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Headline of the score Overlay UI element
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ScoreHeader;
     /// <summary>
     /// GameObjects corresponding to the playernames and overall scores displayed on top right of the screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
     /// <summary>
     /// GameObject corresponding to the playernames and round scores on the panel shown at the end of each round
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject[] TextPanelEntry = new GameObject[5];
 
     /// <summary>
     /// Canvas for the TextPanelEntry's in the result panel
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject resultOverlayCanvas;
 
     /// <summary>
     /// The "Beenden" Button on the result panel displayed when the game ends
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject exitButton;
     /// <summary>
     /// The "Nochmal" Button on the result panel displayed when the game ends
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject restartButton;
     /// <summary>
     /// The "Weiter" Button at the bottom of the score overlay panel
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject continueButton;
 
     public GameObject roundsOverview;
@@ -53,6 +61,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Updates the ScoreHeader (in ScoreResultOverlay) with given roundNumber
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [Server]
     public void UpdateScoreHeader(int roundNumber) =>
         RpcUpdateScoreHeaderText($"~ Punkte in Runde {roundNumber} ~");
@@ -60,6 +69,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Updates the ScoreHeader (in ScoreResultOverlay) with given text
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcUpdateScoreHeaderText(string text) =>
         ScoreHeader.text = text;
@@ -67,6 +77,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Updates a PlayerCanvasEntry with given index, playername and score
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcUpdatePlayerCanvasEntry(int idx, string player, string points)
     {
@@ -80,6 +91,7 @@ public class DisplayManager : NetworkBehaviour
     /// Shows a + befor positive values.
     /// For round point view and final point view.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [Server]
     public void UpdateTextPanelEntry(int idx, string player, int points, bool gameend) =>
         RpcUpdateTextPanelEntry(idx, player, points, gameend);
@@ -89,6 +101,7 @@ public class DisplayManager : NetworkBehaviour
     /// Shows no + before positive values.
     /// If game is'nt won already.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [Server]
     public void UpdateTextPanelEntry(int idx, string player, int points) =>
         RpcUpdateTextPanelEntry(idx, player, points, false);
@@ -123,6 +136,7 @@ public class DisplayManager : NetworkBehaviour
     /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score.
     /// Shows a + before positive values if gameEnd is false.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     private void RpcUpdateTextPanelEntry(int idx, string player, int points, bool gameEnd)
     {
@@ -135,6 +149,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between continue button (isActive = false) and exit + restart buttons (isActive = false).
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcToggleRestartExit(bool isActive)
     {
@@ -163,6 +178,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Opens the result overlay for all players.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcResultOverlaySetActive(bool isActive)
     {
@@ -174,6 +190,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Removes the input card for all players.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcDeleteInputCard()
     {
@@ -183,6 +200,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Removes the question card for all players.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcDeleteQuestionCard()
     {
@@ -192,6 +210,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Removes all answer cards for all players.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcDeleteAllAnswerCards()
     {
@@ -206,6 +225,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Highlights the correct answer cards for all players.
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcHighlightCard(UInt32 correctCard)
     {

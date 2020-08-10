@@ -129,8 +129,6 @@ public class DisplayManager : NetworkBehaviour
         entry[0].enabled = true;
         entry[1].text = player;
         entry[2].text = ((!gameEnd && points > 0) ? "+" : "") + points;
-
-        if(gameEnd) roundsOverview.SetActive(true);
     }
 
     /// <summary>
@@ -142,7 +140,19 @@ public class DisplayManager : NetworkBehaviour
         continueButton.SetActive(!isActive);
         exitButton.SetActive(isActive);
         restartButton.SetActive(isActive);
+        
+        restartButton.GetComponent<Button>().interactable = isActive;
     }
+
+    /// <summary>
+    /// Shows or hides the points overview of all rounds
+    /// </summary>
+    [ClientRpc]
+    public void RpcToggleRoundsOverview(bool isActive)
+    {
+        roundsOverview.SetActive(isActive);
+    }
+
 
     /// <summary>
     /// Opens the result overlay for all players.

@@ -191,6 +191,8 @@ public class GameManager : NetworkBehaviour
         UpdateScoreResultsOverlay(true);
         displayManager.RpcUpdateScoreHeaderText("~ Gesamtübersicht ~");
 
+        displayManager.RpcToggleRoundsOverview(true);
+
         displayManager.RpcToggleRestartExit(true);
 
         displayManager.RpcResultOverlaySetActive(true);
@@ -212,6 +214,8 @@ public class GameManager : NetworkBehaviour
             {
                 roundPoints[i].Clear();   
             }
+
+            displayManager.RpcToggleRoundsOverview(false);
             displayManager.RpcResultOverlaySetActive(false);
             displayManager.RpcToggleRestartExit(false);
             StartGame();
@@ -431,10 +435,10 @@ public class GameManager : NetworkBehaviour
     private void UpdateScoreResultsOverlay(bool gameend)
     {
         var list = gameend? points.ToList() : roundPoints[currentRound].ToList();
-        list.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+        list.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
         displayManager.UpdateScoreHeader(currentRound + 1);
 
-        int idx = PlayerCount - 1;
+        int idx = 0;
         foreach (KeyValuePair<UInt32, int> points in list)
         {
             string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
@@ -448,10 +452,10 @@ public class GameManager : NetworkBehaviour
                 for (int i = 0; i < numberOfRounds; i++)
                     p_roundpoints[i] = roundPoints[i][points.Key];
 
-                displayManager.RpcSetRoundOverview(idx == (PlayerCount-1), numberOfRounds, p_roundpoints);
+                displayManager.RpcSetRoundOverview(idx == 0, numberOfRounds, p_roundpoints);
             }
 
-            idx--;
+            idx++;
         }
     }
 

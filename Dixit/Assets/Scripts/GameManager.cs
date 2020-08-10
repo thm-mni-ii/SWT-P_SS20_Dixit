@@ -191,7 +191,7 @@ public class GameManager : NetworkBehaviour
         UpdateScoreResultsOverlay(true);
         displayManager.RpcUpdateScoreHeaderText("~ Gesamtübersicht ~");
 
-        displayManager.RpcToggleRoundsOverview(true);
+        displayManager.RpcToggleRoundsOverview(true,numberOfRounds);
 
         displayManager.RpcToggleRestartExit(true);
 
@@ -215,7 +215,7 @@ public class GameManager : NetworkBehaviour
                 roundPoints[i].Clear();   
             }
 
-            displayManager.RpcToggleRoundsOverview(false);
+            displayManager.RpcToggleRoundsOverview(false, numberOfRounds);
             displayManager.RpcResultOverlaySetActive(false);
             displayManager.RpcToggleRestartExit(false);
             StartGame();

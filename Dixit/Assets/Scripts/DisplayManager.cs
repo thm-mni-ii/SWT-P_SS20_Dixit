@@ -41,7 +41,7 @@ public class DisplayManager : NetworkBehaviour
     public GameObject continueButton;
 
     public GameObject roundsOverview;
-    public TextMeshProUGUI roundsOverview_text;
+    public GameObject roundsOverview_text;
 
     [Client]
     public override void OnStartLocalPlayer()
@@ -98,10 +98,11 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     [ClientRpc]
     public void RpcSetRoundOverview(bool first, int rounds, int[] roundpoints)
-    {
+    { 
+        var text_Component = roundsOverview_text.GetComponent<TMP_Text>();
         var formated = "";
         if(first){
-            roundsOverview_text.text = "";
+            text_Component.text = "";
             for (int i = 0; i < rounds; i++)
             {
                 formated += "R" + (i+1) + "\t";
@@ -115,7 +116,7 @@ public class DisplayManager : NetworkBehaviour
         }
         formated += "\n\n";
 
-        roundsOverview_text.text += formated;
+        text_Component.text += formated;
     }
 
     /// <summary>
@@ -146,10 +147,15 @@ public class DisplayManager : NetworkBehaviour
 
     /// <summary>
     /// Shows or hides the points overview of all rounds
+    /// Sets the size of the component automatically by the number of rounds 
     /// </summary>
     [ClientRpc]
-    public void RpcToggleRoundsOverview(bool isActive)
+    public void RpcToggleRoundsOverview(bool isActive, int rounds)
     {
+        if(isActive){
+            var rt = roundsOverview_text.GetComponent(typeof(RectTransform)) as RectTransform;
+            rt.sizeDelta = new Vector2 (50 + 100 * rounds, rt.rect.height);
+        }
         roundsOverview.SetActive(isActive);
     }
 

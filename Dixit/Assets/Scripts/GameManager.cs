@@ -20,11 +20,8 @@ public class GameManager : NetworkBehaviour
     private readonly Dictionary<UInt32, string> answers = new Dictionary<UInt32, string>();
     private readonly Dictionary<UInt32, UInt32> choices = new Dictionary<UInt32, UInt32>();
     private readonly Dictionary<UInt32, int> points = new Dictionary<UInt32, int>();
-    private readonly Dictionary<UInt32, int> roundPoints = new Dictionary<UInt32, int>();
+    private Dictionary<UInt32, int>[] roundPoints;
 
-    //for storing points sorted by value
-    private List<KeyValuePair<UInt32, int>> pointsList;
-    private List<KeyValuePair<UInt32, int>> roundPointsList;
     private readonly MultivalDictionaty<UInt32, UInt32> sameAnswers = new MultivalDictionaty<UInt32, UInt32>();
 
     private int PlayerCount => GetPlayers().Count();
@@ -117,11 +114,22 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void StartGame()
     {
+        //initializes roundpoints
+        roundPoints = new Dictionary<UInt32, int>[numberOfRounds];
+        for (int i = 0; i < numberOfRounds; i++)
+        {
+            roundPoints[i] = new Dictionary<UInt32, int>();
+        }
+
         //initializes PlayerCanvas
         foreach ((Player p, int idx) in GetPlayersIndexed())
         {
             points.Add(p.netIdentity.netId, 0);
-            roundPoints.Add(p.netIdentity.netId, 0);
+
+            for (int i = 0; i < numberOfRounds; i++)
+            {
+                roundPoints[i].Add(p.netIdentity.netId, 0);   
+            }
         }
 
         displayManager.UpdateScoreHeader(1);
@@ -180,12 +188,13 @@ public class GameManager : NetworkBehaviour
         Debug.Log("End Of Game");
 
         // show total scores
+        UpdateScoreResultsOverlay(true);
         displayManager.RpcUpdateScoreHeaderText("~ Gesamtübersicht ~");
-        foreach ((Player p, int index) in GetPlayersIndexed())
-        {
-            displayManager.UpdateTextPanelEntryGameEnd(index, p.PlayerName, points[p.netIdentity.netId]);
-            displayManager.RpcToggleRestartExit(true);
-        }
+
+        displayManager.RpcToggleRoundsOverview(true,numberOfRounds);
+
+        displayManager.RpcToggleRestartExit(true);
+
         displayManager.RpcResultOverlaySetActive(true);
 
         //TODO: add scores to framework/ player Info
@@ -201,7 +210,12 @@ public class GameManager : NetworkBehaviour
         if (NetworkManager.singleton.numPlayers == playersReady)
         {
             points.Clear();
-            roundPoints.Clear();
+            for (int i = 0; i < numberOfRounds; i++)
+            {
+                roundPoints[i].Clear();   
+            }
+
+            displayManager.RpcToggleRoundsOverview(false, numberOfRounds);
             displayManager.RpcResultOverlaySetActive(false);
             displayManager.RpcToggleRestartExit(false);
             StartGame();
@@ -333,7 +347,7 @@ public class GameManager : NetworkBehaviour
 
         displayManager.RpcHighlightCard(this.netIdentity.netId);
 
-        UpdateScoreResultsOverlay();
+        UpdateScoreResultsOverlay(false);
         UpdatePlayerCanvas();
 
         StartCoroutine(WaitAndShowResults());
@@ -347,24 +361,6 @@ public class GameManager : NetworkBehaviour
 
     private bool AnswerIsEmpty(UInt32 p) =>
         (answers.ContainsKey(p) && answers[p] == "");
-
-    /// <summary>
-    /// Updates the PlayerCanvas with new scores and rankings in all clients
-    /// </summary>
-    private void UpdatePlayerCanvas()
-    {
-        pointsList = points.ToList();
-        pointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
-
-        int idx = PlayerCount - 1;
-        foreach (KeyValuePair<UInt32, int> points in pointsList)
-        {
-            string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
-            string playerPoints = points.Value.ToString();
-            displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
-            idx--;
-        }
-    }
 
     private IEnumerator WaitAndShowResults()
     {
@@ -413,32 +409,59 @@ public class GameManager : NetworkBehaviour
         answers.Clear();
         choices.Clear();
         sameAnswers.Clear();
-        foreach (UInt32 p in roundPoints.Keys.ToArray())
-            roundPoints[p] = 0;
+    }
+
+     /// <summary>
+    /// Updates PlayerCanvas with new scores and ranking in all clients
+    /// </summary>
+    private void UpdatePlayerCanvas()
+    {
+        var pointsList = points.ToList();
+        pointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+
+        int idx = PlayerCount - 1;
+        foreach (KeyValuePair<UInt32, int> points in pointsList)
+        {
+            string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
+            string playerPoints = points.Value.ToString();
+            displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
+            idx--;
+        }
     }
 
     /// <summary>
     /// Updates ScoreResultsOverlay with new scores and ranking in all clients
     /// </summary>
-    private void UpdateScoreResultsOverlay()
+    private void UpdateScoreResultsOverlay(bool gameend)
     {
-        roundPointsList = roundPoints.ToList();
-        roundPointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
+        var list = gameend? points.ToList() : roundPoints[currentRound].ToList();
+        list.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
         displayManager.UpdateScoreHeader(currentRound + 1);
 
-        int idx = PlayerCount - 1;
-        foreach (KeyValuePair<UInt32, int> roundPoints in roundPointsList)
+        int idx = 0;
+        foreach (KeyValuePair<UInt32, int> points in list)
         {
-            string player = GetIdentity(roundPoints.Key).GetComponent<Player>().PlayerName;
-            int playerPoints = roundPoints.Value;
-            displayManager.UpdateTextPanelEntry(idx, player, playerPoints);
-            idx--;
+            string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
+            int playerPoints = points.Value;
+            displayManager.UpdateTextPanelEntry(idx, player, playerPoints, gameend);
+            
+
+            if(gameend)
+            {
+                var p_roundpoints = new int[numberOfRounds];
+                for (int i = 0; i < numberOfRounds; i++)
+                    p_roundpoints[i] = roundPoints[i][points.Key];
+
+                displayManager.RpcSetRoundOverview(idx == 0, numberOfRounds, p_roundpoints);
+            }
+
+            idx++;
         }
     }
 
     private void GetPoints(UInt32 player, int newPoints)
     {
-        roundPoints[player] += newPoints;
+        roundPoints[currentRound][player] += newPoints;
         points[player] += newPoints;
     }
 

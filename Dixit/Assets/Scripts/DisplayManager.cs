@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
@@ -38,6 +40,9 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     public GameObject continueButton;
 
+    public GameObject roundsOverview;
+    public GameObject roundsOverview_text;
+
     [Client]
     public override void OnStartLocalPlayer()
     {
@@ -72,25 +77,51 @@ public class DisplayManager : NetworkBehaviour
 
     /// <summary>
     /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
-    /// Shows a + before positive values.
-    /// For round point view.
+    /// Shows a + befor positive values.
+    /// For round point view and final point view.
+    /// </summary>
+    [Server]
+    public void UpdateTextPanelEntry(int idx, string player, int points, bool gameend) =>
+        RpcUpdateTextPanelEntry(idx, player, points, gameend);
+
+    /// <summary>
+    /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
+    /// Shows no + before positive values.
+    /// If game is'nt won already.
     /// </summary>
     [Server]
     public void UpdateTextPanelEntry(int idx, string player, int points) =>
         RpcUpdateTextPanelEntry(idx, player, points, false);
 
     /// <summary>
-    /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score
-    /// Shows no + before positive values.
-    /// For final point view.
+    /// Sets and Formats the overview of all rounds for one player
     /// </summary>
-    [Server]
-    public void UpdateTextPanelEntryGameEnd(int idx, string player, int points) =>
-        RpcUpdateTextPanelEntry(idx, player, points, true);
+    [ClientRpc]
+    public void RpcSetRoundOverview(bool first, int rounds, int[] roundpoints)
+    { 
+        var text_Component = roundsOverview_text.GetComponent<TMP_Text>();
+        var formated = "";
+        if(first){
+            text_Component.text = "";
+            for (int i = 0; i < rounds; i++)
+            {
+                formated += "R" + (i+1) + "\t";
+            }
+            formated += "\n";
+        }
+
+        for (int i = 0; i < rounds; i++)
+        {
+            formated += roundpoints[i] + "\t";
+        }
+        formated += "\n\n";
+
+        text_Component.text += formated;
+    }
 
     /// <summary>
     /// Updates a TextPanelEntry (in ScoreResultOverlay) with given index, playername and score.
-    /// Shows a + befor positive values if gameEnd is false.
+    /// Shows a + before positive values if gameEnd is false.
     /// </summary>
     [ClientRpc]
     private void RpcUpdateTextPanelEntry(int idx, string player, int points, bool gameEnd)
@@ -110,7 +141,24 @@ public class DisplayManager : NetworkBehaviour
         continueButton.SetActive(!isActive);
         exitButton.SetActive(isActive);
         restartButton.SetActive(isActive);
+        
+        restartButton.GetComponent<Button>().interactable = isActive;
     }
+
+    /// <summary>
+    /// Shows or hides the points overview of all rounds
+    /// Sets the size of the component automatically by the number of rounds 
+    /// </summary>
+    [ClientRpc]
+    public void RpcToggleRoundsOverview(bool isActive, int rounds)
+    {
+        if(isActive){
+            var rt = roundsOverview_text.GetComponent(typeof(RectTransform)) as RectTransform;
+            rt.sizeDelta = new Vector2 (50 + 100 * rounds, rt.rect.height);
+        }
+        roundsOverview.SetActive(isActive);
+    }
+
 
     /// <summary>
     /// Opens the result overlay for all players.

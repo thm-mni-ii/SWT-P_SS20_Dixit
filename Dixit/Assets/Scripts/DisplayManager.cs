@@ -8,6 +8,11 @@ using UnityEngine.UI;
 using Mirror;
 using TMPro;
 
+    /// <summary>
+    /// Shows, hides and updates UI elements on screen.
+    /// Also deletes and updates cards after they have been spawen by the <c>GameManager</c>.
+    /// \author SWT-P_SS_20_Dixit
+    /// </summary>
 public class DisplayManager : NetworkBehaviour
 {
     /// <summary>

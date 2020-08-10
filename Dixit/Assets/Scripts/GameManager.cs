@@ -648,7 +648,7 @@ public class GameManager : NetworkBehaviour
 
     /// <summary>
     /// Generates an array of <c>maxIdx</c> length.
-    /// <param name="maxIdx"> The length of the array<\param>
+    /// <param name="maxIdx"> The length of the array</param>
     /// <returns>The random-number array</returns>
     /// </summary>
     /// \author SWT-P_SS_20_Dixit

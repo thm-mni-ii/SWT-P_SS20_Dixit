@@ -107,10 +107,10 @@ public class Player : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
-    public void TargetSendNotification(string massage)
+    public void TargetSendNotification(string message)
     {
         var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
-        notifiction.text = messageActive ? notifiction.text + "\n---\n" + massage : massage;
+        notifiction.text = messageActive ? notifiction.text + "\n---\n" + message : message;
         StartCoroutine(ShowNotificationAndWait(5));
     }
 

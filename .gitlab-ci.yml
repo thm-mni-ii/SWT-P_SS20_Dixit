@@ -7,14 +7,10 @@ stages:
 variables:
   GIT_SUBMODULE_STRATEGY: normal
   DOXYGEN_DIR: Documentation/doxygen
-  PROJECT_DIR: Dixit
 
 
 build_docs:
   stage: build
-  only:
-    changes:
-      - $PROJECT_DIR
   before_script:
     - apk update
     - apk add git doxygen ttf-freefont graphviz # pdf2svg
@@ -28,8 +24,6 @@ build_docs:
 github_pages:
   stage: deploy
   only:
-    changes:
-      - $PROJECT_DIR
     refs:
       - master
   variables:

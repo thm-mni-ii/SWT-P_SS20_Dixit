@@ -9,24 +9,28 @@ namespace Tests
 {
     public class GameManagerTest
     {
-        private GameManager gameManager;
+        public GameServer gameServer;
+        private bool serverStarted = false;
 
         [SetUp]
         public void Setup()
         {
-            GameObject gameManagerGameObject = MonoBehaviour.Instantiate(Resources.Load("Prefabs/GameManager")) as GameObject;
-            gameManager = gameManagerGameObject.GetComponent<GameManager>();
+            if(!serverStarted)
+            {
+                GameObject gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
+                gameServer = gso.GetComponent<GameServer>();
+                gameServer.StartHost();
+                serverStarted = true;
+
+                gameServer.OnClientConnect(new NetworkConnectionToClient(2));
+            }
         }
 
-        [TearDown]
-        public void Teardown()
+        [UnityTest]
+        public IEnumerator RandomQuestionTest()
         {
-            Object.Destroy(gameManager.gameObject);
-        }
-
-        [Test]
-        public void RandomQuestionTest()
-        {
+            yield return new WaitForFixedUpdate();
+            var gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
             for (int m = 0; m < 100; m++)
             {
                 var randomQuestions = gameManager.GetRandomQuestionIdxArray(30);
@@ -35,10 +39,18 @@ namespace Tests
                 {
                     for (int k = 0; k < i; k++)
                     {
-                        Assert.AreNotEqual(randomQuestions[k], randomQuestions[i]);
+                        Assert.AreNotEqual(randomQuestions[k], randomQuestions[i], "Array not unique");
                     }
                 }
             }
+        }
+
+        [UnityTest]
+        public IEnumerator CardsSpawned()
+        {
+            yield return new WaitForSeconds(2f);
+            Assert.NotNull(GameObject.FindGameObjectWithTag("QuestionCard"), "No QuestionCard spawned");
+            Assert.NotNull(GameObject.FindGameObjectWithTag("InputCard"), "No InputCard spawned");
         }
     }
 }

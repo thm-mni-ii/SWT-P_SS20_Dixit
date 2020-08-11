@@ -7,6 +7,7 @@ using UnityEngine;
 public class NotificationCanvas : MonoBehaviour
 {
     [NonSerialized]public Notification notification;
+    public BoxCollider2D collider;
 
     private Vector2 initialSize;
 
@@ -27,6 +28,8 @@ public class NotificationCanvas : MonoBehaviour
     {
         _rectTransform = GetComponent<RectTransform>();
         initialSize = _rectTransform.sizeDelta;
+        collider.offset = initialSize / -2;
+        collider.size = initialSize;
         showShort();
     }
 

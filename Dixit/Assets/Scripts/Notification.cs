@@ -22,4 +22,11 @@ public class Notification
         this.notificationLong = notificationLong;
         this.notificationShort = notificationShort;
     }
+
+    public Notification()
+    {
+        this.notificationType = NotificationTypes.regular;
+        this.notificationLong = "DefaultLongNotification";
+        this.notificationShort = "Default";
+    }
 }

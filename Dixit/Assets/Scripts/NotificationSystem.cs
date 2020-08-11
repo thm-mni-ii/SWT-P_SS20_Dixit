@@ -7,29 +7,31 @@ public class NotificationSystem : MonoBehaviour
 {
     public GameObject NotificationPrefab;
     public RectTransform notificationSpace;
-    const int maxNotifications = 4;
+    const int maxNotifications = 5;
 
     private float notificationHeight;
     private float notificationWidth;
     
-    public Color regularColor;
-    public Color warningColor;
-    public Color goodColor;
-    public Color badColor;
-    
-    private List<GameObject> notifications = new List<GameObject>();
+    public Color regularColor = Color.black;
+    public Color warningColor = Color.yellow;
+    public Color goodColor = Color.green;
+    public Color badColor = Color.red;
+
+    private Queue<GameObject> notifications = new Queue<GameObject>();
 
     public void addNotification(Notification notification)
     {
         if (notifications.Count == maxNotifications)
         {
-            notifications.RemoveAt(0);
+            Destroy(notifications.Dequeue());
+
         }
         GameObject notif = Instantiate(NotificationPrefab,notificationSpace);
         notif.GetComponentInChildren<NotificationCanvas>().notification=notification;
         notif.GetComponent<RectTransform>().sizeDelta = new Vector2(notificationWidth,notificationHeight);
-        notifications.Add(notif);
         notif.GetComponent<NotificationCanvas>().init();
+        notifications.Enqueue(notif);
+        
         updateNotifications();
     }
 
@@ -38,13 +40,30 @@ public class NotificationSystem : MonoBehaviour
         int i = 0;
         foreach (GameObject notif in notifications)
         {
-            //Setzt die Position relativ zum Anker abhängig von den bestehenden notifications
-            Debug.Log("Position at:"+-(notifications.Count * (notificationSpace.rect.height / maxNotifications)));
             notif.GetComponent<RectTransform>().localPosition = new Vector3(0,-(i * (notificationSpace.rect.height / maxNotifications)));
-            //notif.GetComponent<RectTransform>().anchoredPosition.Set(0, -(notifications.Count * (notificationSpace.rect.height / maxNotifications)));
             i++;
         }
     }
+
+    public void RemoveNotification()
+    {
+        Debug.Log("Count:"+notifications.Count);
+        GameObject temp = notifications.Dequeue();
+        Destroy(temp);
+        updateNotifications();
+    }
+
+    /*public void compressNotifications()
+    {
+        List<GameObject> temp = new List<GameObject>(maxNotifications);
+        foreach (GameObject notif in notifications)
+        {
+            if(notif != null)
+            temp.Add(notif);
+        }
+
+        notifications = temp;
+    }*/
 
     // Start is called before the first frame update
     void Start()

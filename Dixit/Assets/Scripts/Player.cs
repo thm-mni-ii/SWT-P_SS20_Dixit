@@ -109,9 +109,9 @@ public class Player : NetworkBehaviour
     /// <param name="message">The content of the notification</param>
     /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
-    public void TargetSendNotification(string message)
+    public void TargetSendNotification(Notification notification)
     {
-        notificationSystem.GetComponent<NotificationSystem>().addNotification(new Notification(Notification.NotificationTypes.regular,message,"short"));
+        notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
         /*var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
         notifiction.text = messageActive ? notifiction.text + "\n---\n" + message : message;
         StartCoroutine(ShowNotificationAndWait(5));*/

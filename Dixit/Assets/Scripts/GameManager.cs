@@ -287,6 +287,16 @@ public class GameManager : NetworkBehaviour
             }
         }
     }
+    private IEnumerator CheckScoreTimerStart()
+    {
+        while (playersReady < 2)
+        { 
+            yield return new WaitForSeconds(1f);
+        }
+        StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
+        timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
+        
+    }
 
     private void ChooseAnswerPhase()
     {
@@ -384,12 +394,13 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator WaitAndShowResults()
     {
-        StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
-        timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
+        StartCoroutine(CheckScoreTimerStart());
         int secs = 3;
         if (answers.Count == 1) secs = 5;
         yield return new WaitForSeconds(secs);
         displayManager.RpcResultOverlaySetActive(true);
+        
+            
     }
 
     private IEnumerator WaitAndChangePhase()

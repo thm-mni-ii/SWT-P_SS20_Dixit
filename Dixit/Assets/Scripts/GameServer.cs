@@ -133,4 +133,9 @@ public class GameServer : NetworkManager
         localPlayerInfo = new PlayerInfo("Mustermann", true);
     }
 
+    public override void OnStartClient()
+    {
+        GetComponent<NetworkManagerHUD>().enabled = false;
+    }
+
 }

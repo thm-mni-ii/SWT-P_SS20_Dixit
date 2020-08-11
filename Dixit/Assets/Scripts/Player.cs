@@ -12,6 +12,7 @@ using TMPro;
 /// \author SWT-P_SS_20_Dixit
 public class Player : NetworkBehaviour
 {
+    private GameObject notificationSystem;
     private static readonly Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
     /// <summary>
     /// The local player in each client
@@ -52,8 +53,9 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         //Initialzie notification system
-        notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
-        notifictionCanvas.SetActive(false);
+        notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem");
+        /*notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
+        notifictionCanvas.SetActive(false);*/
     }
 
     /// <summary>
@@ -109,9 +111,10 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetSendNotification(string message)
     {
-        var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
+        notificationSystem.GetComponent<NotificationSystem>().addNotification(new Notification(Notification.NotificationTypes.regular,message,"short"));
+        /*var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
         notifiction.text = messageActive ? notifiction.text + "\n---\n" + message : message;
-        StartCoroutine(ShowNotificationAndWait(5));
+        StartCoroutine(ShowNotificationAndWait(5));*/
     }
 
     /// <summary>

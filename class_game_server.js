@@ -1,6 +1,7 @@
 var class_game_server =
 [
     [ "OnServerAddPlayer", "class_game_server.html#ac384484a4fbd72d8e3ee6afee57d3dd5", null ],
+    [ "OnStartClient", "class_game_server.html#a47bed051613fbfae87d91e09e8c88e0d", null ],
     [ "Start", "class_game_server.html#aaf2d9dc28894649bc14dd873b8058e52", null ],
     [ "GameManager", "class_game_server.html#a3210381f7662dc5d6c6980a74d327b9d", null ],
     [ "LocalPlayerInfo", "class_game_server.html#a2e2b7beb56a63f8686e6c9a55c93d7ef", null ],

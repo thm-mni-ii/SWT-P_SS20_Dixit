@@ -551,7 +551,7 @@ public class GameManager : NetworkBehaviour
         //filter out duplicate answers
         foreach (var givenAnswer in answers)
         {
-            if (answer.ToLower() == givenAnswer.Value.ToLower())
+            if (AnswersAreEqual(answer, givenAnswer.Value))
             {
                 // if player gave correct answer, the player get -1 points
                 if (givenAnswer.Key == this.netId)
@@ -680,6 +680,76 @@ public class GameManager : NetworkBehaviour
         }
 
         return randomQuestionIdxList.ToArray();
+    }
+
+   
+    /// <summary>
+    /// Checks if anwers  are equals.
+    /// Ignores Upper and Lower case of the answers.
+    /// Consideres numbers lower then 1000 in digits and german words equal.
+    /// </summary>
+    /// <param name="s1"> The first answer</param>
+    /// <param name="s2"> The second answer</param>
+    /// <returns>Whehter the answers are equal</returns>
+    /// \author SWT-P_SS_20_Dixit
+    public bool AnswersAreEqual(string s1, string s2)
+    {
+        // do not check lower or upper
+        s1 = s1.ToLower();
+        s2 = s2.ToLower();
+
+        // numbers as words or digits are equal
+        s1 = AllNumbersInGermanWords(s1);
+        s2 = AllNumbersInGermanWords(s2);
+
+        return s1 == s2;
+    }
+
+    private string AllNumbersInGermanWords(string s)
+    {
+       
+        string[] words = s.Split(' ');
+
+        for (int i = 0; i < words.Length; i++)
+        {
+            var num  = 0;
+            if(int.TryParse(words[i], out num))
+            {
+                words[i]  = numberToGermanWord(num);
+            }
+        }
+    
+        return string.Join(" ", words);
+    }
+
+    //TODO: This should be a private, but testable method
+    public string numberToGermanWord(int num) => numberToGermanWord(num, true);
+    
+
+    private string numberToGermanWord(int num, bool first)
+    {
+        var digitToWord = new string[]{"", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun"};
+        var special = new string[] {"null", "eins", "zwan", "drei", "vier", "fünf", "sech", "sieb", "acht", "neun"};
+        
+        var s="";
+
+        if (num < 10)
+            s = first && num < 2? special[num] : digitToWord[num];
+        else if (num == 11)
+            s = "elf";
+        else if (num == 12)
+            s = "zwölf";
+        else if(num < 20)
+            s = (num == 10? "" : special[num%10]) + "zehn";
+        else if(num < 100)
+        {
+            if (num % 10 != 0)
+                s = numberToGermanWord(num%10, false) + "und";
+                       
+            s+= special[num/10] + (num/10==3? "ß" : "z") + "ig";
+        }
+       
+        return s;
     }
 }
 

@@ -748,6 +748,11 @@ public class GameManager : NetworkBehaviour
                        
             s+= special[num/10] + (num/10==3? "ß" : "z") + "ig";
         }
+        else if(num < 1000)
+        {
+            s= digitToWord[num/100] + "hundert" + numberToGermanWord(num%100, false);
+
+        }
        
         return s;
     }

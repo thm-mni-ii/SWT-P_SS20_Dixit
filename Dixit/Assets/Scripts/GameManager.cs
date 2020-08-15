@@ -25,7 +25,6 @@ public class GameManager : NetworkBehaviour
 
     //for storing points sorted by value
     private List<KeyValuePair<UInt32, int>> pointsList;
-    private List<KeyValuePair<UInt32, int>> roundPointsList;
     private readonly MultivalDictionary<UInt32, UInt32> sameAnswers = new MultivalDictionary<UInt32, UInt32>();
 
     private int PlayerCount => Utils.GetPlayers().Count();
@@ -219,7 +218,19 @@ public class GameManager : NetworkBehaviour
 
         displayManager.RpcResultOverlaySetActive(true);
 
-        //TODO: add scores to framework/ player Info
+        
+        //send scores to framework
+        int idx = 0;
+        var winnerName = "";
+        foreach (KeyValuePair<UInt32, int> points in pointsList)
+        {
+            Player player = GetIdentity(points.Key).GetComponent<Player>();
+            if(idx==0) winnerName = player.PlayerName;
+
+            player.TargetSendResults(idx, winnerName);
+            
+            idx++;
+        }
     }
 
     /// <summary>
@@ -497,7 +508,7 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     private void UpdatePlayerCanvas()
     {
-        var pointsList = points.ToList();
+        pointsList = points.ToList();
         pointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
 
         int idx = PlayerCount - 1;
@@ -519,6 +530,8 @@ public class GameManager : NetworkBehaviour
         var list = gameend? points.ToList() : roundPoints[currentRound].ToList();
         list.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
         displayManager.UpdateScoreHeader(currentRound + 1);
+
+        if(gameend) pointsList = list;
 
         int idx = 0;
         foreach (KeyValuePair<UInt32, int> points in list)

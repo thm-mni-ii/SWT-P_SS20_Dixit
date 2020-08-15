@@ -1,6 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using Mirror;
+using Mirror.Websocket;
+using SimpleJSON;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 /// <summary>
@@ -14,12 +21,7 @@ public class GameServer : NetworkManager
     /// the player that started the game.
     /// NOTE: This is not important for development.
     /// </summary>
-    private const string FILE_NAME = "PlayerInfo.txt";
-
-    /// <summary>
-    /// Stores the information of the player that started the game.
-    /// </summary>
-    private PlayerInfo localPlayerInfo;
+    private const string FILE_NAME = "Info.txt";
 
     /// <summary>
     /// Defines how long the game server will try to connect the client before quitting the application.
@@ -31,10 +33,33 @@ public class GameServer : NetworkManager
     /// </summary>
     private float disconnectTimer;
 
-    public PlayerInfo LocalPlayerInfo => localPlayerInfo;
-    public static GameServer Instance => (GameServer)singleton;
+    /// <summary>
+    /// Stores information about the player.
+    /// </summary>
+    private JSONNode playerInfos;
 
     /// <summary>
+    /// Stores information about the game.
+    /// </summary>
+    private JSONNode gameInfos;
+
+    /// <summary>
+    /// Stores if the local player is the host.
+    /// </summary>
+    private bool isHost;
+
+    /// <summary>
+    /// Signals if the game can be quit.
+    /// </summary>
+    private bool readyToQuit;
+
+    public JSONNode PlayerInfos => playerInfos;
+
+    public JSONNode GameInfos => gameInfos;
+
+    public static GameServer Instance => (GameServer) singleton;
+
+       /// <summary>
     /// The number of player that want to play the game. The Server will wait until that number of players joined the game
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -57,11 +82,14 @@ public class GameServer : NetworkManager
     {
         base.Start();
 
-        LoadPlayerInfoMockup();
+        readyToQuit = false;
+        isHost = false;
 
-        /*LoadPlayerInfo();
+        LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
 
-        if (localPlayerInfo.isHost)
+        /*LoadPlayerInfo();             // <- FOR RELEASE
+
+        if (isHost)
         {
             StartHost();
         }
@@ -80,7 +108,7 @@ public class GameServer : NetworkManager
             : Instantiate(playerPrefab);
 
         Player p = player.GetComponent<Player>();
-        p.PlayerName = localPlayerInfo.name;
+        p.PlayerName = playerInfos["name"].Value;
 
         NetworkServer.AddPlayerForConnection(conn, player);
 
@@ -90,6 +118,7 @@ public class GameServer : NetworkManager
             gameManager.StartGame();
         }
     }
+
     /// <summary>
     /// Update is called once per frame.
     /// Checks if the local player is a client and not connected.
@@ -97,7 +126,8 @@ public class GameServer : NetworkManager
     /// </summary>
     private void Update()
     {
-        if (!localPlayerInfo.isHost && !NetworkClient.isConnected)
+        // Try connecting if not host
+        if (!isHost && !NetworkClient.isConnected)
         {
             disconnectTimer -= Time.deltaTime;
 
@@ -108,6 +138,23 @@ public class GameServer : NetworkManager
 
             StartClient();
         }
+
+        // Try quitting
+        if (readyToQuit)
+        {
+            if (isHost)
+            {
+                // Host waits for all players to quit first
+                if (NetworkServer.connections.Count <= 1)
+                {
+                    Application.Quit();
+                }
+            }
+            else
+            {
+                Application.Quit();
+            }
+        }
     }
 
     /// <summary>
@@ -116,8 +163,32 @@ public class GameServer : NetworkManager
     /// </summary>
     private void LoadPlayerInfo()
     {
-        StreamReader file = new StreamReader(Application.dataPath + @"\..\..\..\Framework\" + FILE_NAME);
-        localPlayerInfo = (PlayerInfo)JsonUtility.FromJson(file.ReadLine(), typeof(PlayerInfo));
+        // Read file
+        string filePath = "";
+        switch (SystemInfo.operatingSystemFamily)
+        {
+            case OperatingSystemFamily.Windows:
+                filePath = Application.dataPath + @"\..\..\..\..\Framework\Windows\" + FILE_NAME;
+                break;
+            case OperatingSystemFamily.Linux:
+                filePath = Application.dataPath + @"\..\..\..\..\Framework\Linux\" + FILE_NAME;
+                break;
+            case OperatingSystemFamily.MacOSX:
+                filePath = Application.dataPath + @"\..\..\..\..\Framework\MACOSX\" + FILE_NAME;
+                break;
+            default:
+                throw new ArgumentException("Illegal OS !");
+        }
+
+        StreamReader file = new StreamReader(filePath);
+        JSONNode jsonFile = JSON.Parse(file.ReadLine());
+
+        // Load data
+        isHost = jsonFile["playerInfo"]["isHost"].AsBool;
+        playerInfos = jsonFile["playerInfo"];
+        gameInfos = jsonFile["gameInfo"];
+
+        // Close file
         file.Close();
         File.Delete(FILE_NAME);
     }
@@ -130,12 +201,44 @@ public class GameServer : NetworkManager
     /// </summary>
     private void LoadPlayerInfoMockup()
     {
-        localPlayerInfo = new PlayerInfo("Mustermann", true);
+        isHost = true;
+        playerInfos = new JSONObject();
+        playerInfos.Add("name", "Mustermann");
     }
 
+    /// <summary>
+    /// Handles the results of the game and sets the readyToQuit flag.
+    /// Needs the placement of the local player and the name of the winning player
+    /// and writes them into a JSON that is used to give rewards in the framework.
+    /// IMPORTANT: THIS HAS TO BE CALLED AT THE END OF THE GAME!
+    /// </summary>
+    /// <param name="localPlayerWinningPlacement">Placement of the local player</param>
+    /// <param name="nameOfWinner">Name of the winner</param>
+    public void HandleGameResults(int localPlayerWinningPlacement, string nameOfWinner)
+    {
+        // Create file
+        if (File.Exists(FILE_NAME))
+        {
+            File.Delete(FILE_NAME);
+        }
+        
+        var sr = File.CreateText(FILE_NAME);
+
+        // Write file
+        JSONObject fileJson = new JSONObject();
+
+        fileJson.Add("placement", localPlayerWinningPlacement);
+        fileJson.Add("nameOfWinner", nameOfWinner);
+
+        sr.Write(fileJson.ToString());
+        sr.Close();
+
+        readyToQuit = true;
+    }
+    
     public override void OnStartClient()
     {
         GetComponent<NetworkManagerHUD>().enabled = false;
     }
-
+    
 }

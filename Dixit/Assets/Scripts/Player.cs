@@ -126,6 +126,12 @@ public class Player : NetworkBehaviour
         }
     }
 
+    [TargetRpc]
+    public void TargetSendResults(int placement, string nameOfWinner)
+    {
+       GameServer.Instance.HandleGameResults(placement, nameOfWinner);
+    }
+
     /// <summary>
     /// Quits the game
     /// </summary>

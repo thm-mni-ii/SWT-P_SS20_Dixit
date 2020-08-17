@@ -238,6 +238,7 @@ public class DisplayManager : NetworkBehaviour
         foreach (var card in cards)
         {
             card.DisableSelectInput();
+            card.ShowName();
 
             if (card.id == correctCard)
             {

@@ -24,6 +24,9 @@ public class Card : NetworkBehaviour
     [SyncVar, HideInInspector]
     public string text;
 
+    [SyncVar, HideInInspector]
+    public string playerName;
+
     /// <summary>
     /// If it is has a possible answer written on it, the <c>netId</c> of the player who gave it
     /// </summary>
@@ -79,6 +82,8 @@ public class Card : NetworkBehaviour
     private GameObject selectAnswerBtn;
     [SerializeField]
     private TMPro.TMP_Text questionText;
+    [SerializeField]
+    private TMPro.TMP_Text playerNameText;
 
     /// <summary>
     /// On Client Start the Card will be identified and the needed Compentens will be activated, all other deactivated.
@@ -111,6 +116,7 @@ public class Card : NetworkBehaviour
                 {
                     writeAnswerGo.SetActive(false);
                     selectAnswerGo.SetActive(true);
+                    playerNameText.enabled = false;
 
                     selectAnswerText.text = text;
                     break;
@@ -266,5 +272,11 @@ public class Card : NetworkBehaviour
     public void DisableSelectInput()
     {
         selectAnswerBtn.SetActive(false);
+    }
+
+    public void ShowName()
+    {
+        playerNameText.text = playerName;
+        playerNameText.enabled = true;
     }
 }

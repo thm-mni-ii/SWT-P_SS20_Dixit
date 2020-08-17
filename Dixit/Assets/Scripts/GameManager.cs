@@ -634,6 +634,7 @@ public class GameManager : NetworkBehaviour
             card.id = answer.Key;
             card.type = Card.CardType.Answer;
             card.startFacedown = true;
+            card.playerName = card.id == this.netId ? "" : GetIdentity(card.id).GetComponent<Player>().PlayerName;
 
             NetworkServer.Spawn(cardGo);
             card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));

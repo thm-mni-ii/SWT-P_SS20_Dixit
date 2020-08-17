@@ -723,10 +723,10 @@ public class GameManager : NetworkBehaviour
     }
 
     //TODO: This should be a private, but testable method
-    public string numberToGermanWord(int num) => numberToGermanWord(num, true);
+    public string numberToGermanWord(int num) => numberToGermanWord(num, true, false);
     
 
-    private string numberToGermanWord(int num, bool first)
+    private string numberToGermanWord(int num, bool first, bool isBehindHundert)
     {
         var digitToWord = new string[]{"", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun"};
         var special = new string[] {"null", "eins", "zwan", "drei", "vier", "fünf", "sech", "sieb", "acht", "neun"};
@@ -734,7 +734,7 @@ public class GameManager : NetworkBehaviour
         var s="";
 
         if (num < 10)
-            s = first && num < 2? special[num] : digitToWord[num];
+            s = isBehindHundert && num == 1? special[num] : (first && num < 2? special[num] : digitToWord[num]);
         else if (num == 11)
             s = "elf";
         else if (num == 12)
@@ -744,15 +744,16 @@ public class GameManager : NetworkBehaviour
         else if(num < 100)
         {
             if (num % 10 != 0)
-                s = numberToGermanWord(num%10, false) + "und";
+                s = numberToGermanWord(num%10, false, false) + "und";
                        
             s+= special[num/10] + (num/10==3? "ß" : "z") + "ig";
         }
         else if(num < 1000)
         {
-            s= digitToWord[num/100] + "hundert" + numberToGermanWord(num%100, false);
+            s= digitToWord[num/100] + "hundert" + numberToGermanWord(num%100, false, true);
 
         }
+        s= num + "";
        
         return s;
     }

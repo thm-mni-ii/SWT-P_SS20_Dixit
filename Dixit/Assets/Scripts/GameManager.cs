@@ -220,12 +220,12 @@ public class GameManager : NetworkBehaviour
 
         
         //send scores to framework
-        int idx = 0;
+        int idx = 1;
         var winnerName = "";
         foreach (KeyValuePair<UInt32, int> points in pointsList)
         {
             Player player = GetIdentity(points.Key).GetComponent<Player>();
-            if(idx==0) winnerName = player.PlayerName;
+            if(idx==1) winnerName = player.PlayerName;
 
             player.TargetSendResults(idx, winnerName);
             

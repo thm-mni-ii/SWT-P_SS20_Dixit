@@ -190,6 +190,7 @@ namespace Tests
             Assert.AreEqual(gameManager.numberToGermanWord(75), "fünfundsiebzig");
             Assert.AreEqual(gameManager.numberToGermanWord(99), "neunundneunzig");
             Assert.AreEqual(gameManager.numberToGermanWord(100), "einhundert");
+            Assert.AreEqual(gameManager.numberToGermanWord(101), "einhunderteins");
             Assert.AreEqual(gameManager.numberToGermanWord(234), "zweihundertvierunddreißig");
             Assert.AreEqual(gameManager.numberToGermanWord(999), "neunhundertneunundneunzig");
         }

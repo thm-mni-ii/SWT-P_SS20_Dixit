@@ -28,7 +28,7 @@ public class GameManager : NetworkBehaviour
     private List<KeyValuePair<UInt32, int>> roundPointsList;
     private readonly MultivalDictionary<UInt32, UInt32> sameAnswers = new MultivalDictionary<UInt32, UInt32>();
 
-    private int PlayerCount => GetPlayers().Count();
+    private int PlayerCount => Utils.GetPlayers().Count();
 
     /// <summary>
     /// The singleton instance of the GameManager
@@ -139,7 +139,7 @@ public class GameManager : NetworkBehaviour
         }
 
         //initializes PlayerCanvas
-        foreach ((Player p, int idx) in GetPlayersIndexed())
+        foreach ((Player p, int idx) in Utils.GetPlayersIndexed())
         {
             points.Add(p.netIdentity.netId, 0);
 
@@ -150,7 +150,7 @@ public class GameManager : NetworkBehaviour
         }
 
         displayManager.UpdateScoreHeader(1);
-        foreach ((Player p, int index) in GetPlayersIndexed())
+        foreach ((Player p, int index) in Utils.GetPlayersIndexed())
         {
             displayManager.RpcUpdatePlayerCanvasEntry(index, p.PlayerName, "0");
             displayManager.UpdateTextPanelEntry(index, p.PlayerName, 0);
@@ -162,7 +162,7 @@ public class GameManager : NetworkBehaviour
         loadQuestionSet.ContinueWithOnMainThread(t =>
         {
             //get random idx array for questions
-            indexesOfQuestion = GetRandomQuestionIdxArray(QuestionSet.QuestionCount);
+            indexesOfQuestion = Utils.GetRandomQuestionIdxArray(QuestionSet.QuestionCount, numberOfRounds);
 
             //Start the first round
             currentPhase = Phase.WriteAnswer;
@@ -287,6 +287,7 @@ public class GameManager : NetworkBehaviour
             }
         }
     }
+    
     private IEnumerator CheckScoreTimerStart()
     {
         while (playersReady < 2)
@@ -301,9 +302,9 @@ public class GameManager : NetworkBehaviour
     private void ChooseAnswerPhase()
     {
         // check if any player gave no answer
-        foreach (var p in GetPlayers())
+        foreach (var p in Utils.GetPlayers())
         {
-            if (!GaveAnswer(p))
+            if (!Utils.GaveAnswer(p, answers, sameAnswers))
             {
                 // if player gave no answer, he gets -1 points
                 GetPoints(p.netId, -1);
@@ -312,7 +313,7 @@ public class GameManager : NetworkBehaviour
                 UpdatePlayerCanvas();
             }
 
-            if (AnswerIsEmpty(p.netId)) answers.Remove(p.netId);
+            if (Utils.AnswerIsEmpty(p.netId, answers)) answers.Remove(p.netId);
         }
 
         //delete input card at client
@@ -326,7 +327,7 @@ public class GameManager : NetworkBehaviour
             answers.Add(this.netId, correctAnswer);
 
             //Messagesystem Alert not enough answers, resolve round and show correct answer
-            foreach (var p in GetPlayers())
+            foreach (var p in Utils.GetPlayers())
             {
                 p.TargetSendNotification("Es wurden nicht genug Antworten abgegeben.");
             }
@@ -353,7 +354,7 @@ public class GameManager : NetworkBehaviour
             UInt32 answerId = choice.Value;
 
             //player choose own answer -> -1 point
-            if (ClickedOnOwnAnswer(playerId, answerId))
+            if (Utils.ClickedOnOwnAnswer(playerId, answerId, sameAnswers))
             {
                 GetPoints(playerId, -1);
             }
@@ -383,14 +384,7 @@ public class GameManager : NetworkBehaviour
         StartCoroutine(WaitAndShowResults());
     }
 
-    private bool ClickedOnOwnAnswer(UInt32 clicker, UInt32 clickedOn) =>
-        (clicker == clickedOn) || (sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker));
-
-    private bool GaveAnswer(Player p) =>
-        (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
-
-    private bool AnswerIsEmpty(UInt32 p) =>
-        (answers.ContainsKey(p) && answers[p] == "");
+    
 
     private IEnumerator WaitAndShowResults()
     {
@@ -456,7 +450,7 @@ public class GameManager : NetworkBehaviour
         int idx = PlayerCount - 1;
         foreach (KeyValuePair<UInt32, int> points in pointsList)
         {
-            string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
+            string player = Utils.GetIdentity(points.Key).GetComponent<Player>().PlayerName;
             string playerPoints = points.Value.ToString();
             displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
             idx--;
@@ -476,7 +470,7 @@ public class GameManager : NetworkBehaviour
         int idx = 0;
         foreach (KeyValuePair<UInt32, int> points in list)
         {
-            string player = GetIdentity(points.Key).GetComponent<Player>().PlayerName;
+            string player = Utils.GetIdentity(points.Key).GetComponent<Player>().PlayerName;
             int playerPoints = points.Value;
             displayManager.UpdateTextPanelEntry(idx, player, playerPoints, gameend);
 
@@ -501,37 +495,12 @@ public class GameManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Gets the list of Players in the current Game.
-    /// <returns>The list of players.</returns>
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    private IEnumerable<Player> GetPlayers() =>
-        NetworkServer.connections.Values.Select(c => c.identity.gameObject.GetComponent<Player>());
-
-    /// <summary>
-    /// Gets the list of Players in the current Game together with their indices.
-    /// <returns>The list of players as IEnumerable of ValueTuple<Player, int>.</returns>
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    private IEnumerable<ValueTuple<Player, int>> GetPlayersIndexed() =>
-        GetPlayers().Select(ValueTuple.Create<Player, int>);
-
-    /// <summary>
-    /// Gets the NetworkIdentity component of an object with the specified netId
-    /// </summary>
-    /// <param name="netId"> The Identity to be searched for </param>
-    /// <returns> The NetworkIdentity </returns>
-    /// \author SWT-P_SS_20_Dixit
-    private NetworkIdentity GetIdentity(UInt32 netId) =>
-        NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
-
-    /// <summary>
     /// Logs the given Answer of a Player during the WriteAnwer Phase.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public void LogAnswer(UInt32 playerId, string answer)
     {
-        var player = GetIdentity(playerId).GetComponent<Player>();
+        var player = Utils.GetIdentity(playerId).GetComponent<Player>();
         if (currentPhase != Phase.WriteAnswer)
         {
             Debug.LogWarning($"LogAnswer (WriteAnswer Phase) called during {currentPhase} by player {playerId}!");
@@ -623,7 +592,7 @@ public class GameManager : NetworkBehaviour
 
         var answersArray = answers.ToArray();
 
-        ShuffleArray(answersArray);
+        Utils.ShuffleArray(answersArray);
 
         foreach (var answer in answersArray)
         {
@@ -643,61 +612,5 @@ public class GameManager : NetworkBehaviour
 
             index++;
         }
-    }
-
-    private void ShuffleArray<T>(T[] array)
-    {
-        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
-        for (int t = 0; t < array.Length; t++)
-        {
-            T tmp = array[t];
-            int r = Random.Range(t, array.Length);
-            array[t] = array[r];
-            array[r] = tmp;
-        }
-    }
-
-    /// <summary>
-    /// Generates an array of <c>maxIdx</c> length.
-    /// </summary>
-    /// <param name="maxIdx"> The length of the array</param>
-    /// <returns>The random-number array</returns>
-    /// \author SWT-P_SS_20_Dixit
-    public int[] GetRandomQuestionIdxArray(int maxIdx)
-    {
-        var randomQuestionIdxList = new List<int>(numberOfRounds);
-
-        for (int i = 0; i < numberOfRounds; i++)
-        {
-            //get a random value which is not in the array yet and place it in the array for the round
-            int randomQuestionIdx;
-            do
-            {
-                randomQuestionIdx = Random.Range(0, maxIdx);
-            } while (randomQuestionIdxList.Contains(randomQuestionIdx));
-
-            randomQuestionIdxList.Add(randomQuestionIdx);
-        }
-
-        return randomQuestionIdxList.ToArray();
-    }
-}
-
-/// <summary>
-/// A Dictionary that contains Lists of type <c>TValue</c> as Values
-/// </summary>
-/// \author SWT-P_SS_20_Dixit
-class MultivalDictionary<TKey, TValue> : Dictionary<TKey, List<TValue>>
-{
-    /// <summary>
-    /// Add add a Value to the Dictionary. If the Key allready exists, add the value to the list of values associated with the key
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public void Add(TKey key, TValue value)
-    {
-        if (!this.ContainsKey(key))
-            this.Add(key, new List<TValue>());
-
-        this[key].Add(value);
     }
 }

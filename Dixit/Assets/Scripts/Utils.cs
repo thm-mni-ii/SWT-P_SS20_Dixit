@@ -8,12 +8,16 @@ using Random = UnityEngine.Random;
 
 public static class Utils
 {
+<<<<<<< HEAD
     /// <summary>
     /// Shuffles an array with the Kuth shuffle algorithm
     /// </summary>
     /// <param name="array"> The array to be shuffled</param>
     /// \author SWT-P_SS_20_Dixit
     public static void ShuffleArray<T>(T[] array)
+=======
+  public static void ShuffleArray<T>(T[] array)
+>>>>>>> 9414318... Moved some methods to the new utils class
     {
         // Knuth shuffle algorithm :: courtesy of Wikipedia :)
         for (int t = 0; t < array.Length; t++)
@@ -25,7 +29,11 @@ public static class Utils
         }
     }
 
+<<<<<<< HEAD
     /// <summary>
+=======
+      /// <summary>
+>>>>>>> 9414318... Moved some methods to the new utils class
     /// Generates an array of <c>maxIdx</c> length.
     /// </summary>
     /// <param name="maxIdx"> The length of the array</param>

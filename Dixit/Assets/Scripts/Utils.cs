@@ -14,6 +14,7 @@ public static class Utils
     /// <param name="array"> The array to be shuffled</param>
     /// \author SWT-P_SS_20_Dixit
     public static void ShuffleArray<T>(T[] array)
+    {
         for (int t = 0; t < array.Length; t++)
         {
             T tmp = array[t];

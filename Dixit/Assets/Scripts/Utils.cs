@@ -8,9 +8,13 @@ using Random = UnityEngine.Random;
 
 public static class Utils
 {
-  public static void ShuffleArray<T>(T[] array)
+    /// <summary>
+    /// Shuffles an array with the Kuth shuffle algorithm
+    /// </summary>
+    /// <param name="array"> The array to be shuffled</param>
+    /// \author SWT-P_SS_20_Dixit
+    public static void ShuffleArray<T>(T[] array)
     {
-        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
         for (int t = 0; t < array.Length; t++)
         {
             T tmp = array[t];
@@ -20,7 +24,7 @@ public static class Utils
         }
     }
 
-      /// <summary>
+    /// <summary>
     /// Generates an array of <c>maxIdx</c> length.
     /// </summary>
     /// <param name="maxIdx"> The length of the array</param>
@@ -70,12 +74,35 @@ public static class Utils
     public static NetworkIdentity GetIdentity(UInt32 netId) =>
         NetworkServer.connections.Values.Where(c => c.identity.netId == netId).Select(c => c.identity).First();
 
+    /// <summary>
+    /// Checks wether a player has clicked on there own answer
+    /// </summary>
+    /// <param name="clicker"> The player who clicked on the answer card </param>
+    /// <param name="clickedOn"> The answer card the player clicked on </param>
+    /// <param name="sameAnswers"> A dictionary to store all duplicate answers </param>
+    /// <returns> If the player gave a duplicate answer </returns>
+    /// \author SWT-P_SS_20_Dixit
     public static bool ClickedOnOwnAnswer(UInt32 clicker, UInt32 clickedOn, MultivalDictionary<UInt32, UInt32> sameAnswers) =>
         (clicker == clickedOn) || (sameAnswers.ContainsKey(clickedOn) && sameAnswers[clickedOn].Contains(clicker));
 
+    /// <summary>
+    /// Checks wether a player gave an answer
+    /// </summary>
+    /// <param name="p"> The player in question </param>
+    /// <param name="answers"> A dictionary that stores all answers </param>
+    /// <param name="sameAnswers"> A dictionary to store all duplicate answers </param>
+    /// <returns> If the player gave an answer </returns>
+    /// \author SWT-P_SS_20_Dixit
     public static bool GaveAnswer(Player p, Dictionary<UInt32, string> answers, MultivalDictionary<UInt32, UInt32> sameAnswers)  =>
         (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
 
+    /// <summary>
+    /// Checks wether a player gave an empty answer
+    /// </summary>
+    /// <param name="p"> The player in question </param>
+    /// <param name="answers"> A dictionary that stores all answers </param>
+    /// <returns> If the player gave an empty answer </returns>
+    /// \author SWT-P_SS_20_Dixit
     public static bool AnswerIsEmpty(UInt32 p, Dictionary<UInt32, string> answers) =>
         (answers.ContainsKey(p) && answers[p] == "");
 }

@@ -15,6 +15,7 @@ public static class Utils
     /// \author SWT-P_SS_20_Dixit
     public static void ShuffleArray<T>(T[] array)
     {
+        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
         for (int t = 0; t < array.Length; t++)
         {
             T tmp = array[t];

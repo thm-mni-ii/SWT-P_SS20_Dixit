@@ -7,8 +7,20 @@ using UnityEngine.UIElements;
 
 public class NotificationCanvas : MonoBehaviour
 {
+    /// <summary>
+    /// The notification to be displayed on this canvas
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Notification notification;
+    /// <summary>
+    /// The collider of the notification, used for mouse events.
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public BoxCollider2D collider;
+    /// <summary>
+    /// The notification system that manages this notification
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public NotificationSystem notificationSystem;
 
     private Vector2 initialSize;
@@ -21,7 +33,10 @@ public class NotificationCanvas : MonoBehaviour
         notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem").GetComponent<NotificationSystem>();
     }
 
-
+    /// <summary>
+    /// Initializes this object and its properties
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void init()
     {
         _rectTransform = GetComponent<RectTransform>();
@@ -48,12 +63,19 @@ public class NotificationCanvas : MonoBehaviour
         
         showShort();
     }
-
+    /// <summary>
+    /// Causes the notification canvas to display the short notification
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void showShort()
     {
         _tmpug.text = notification.notificationShort;
         _rectTransform.sizeDelta = initialSize;
     }
+    /// <summary>
+    /// Causes the notification canvas to display the long notification
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void showLong()
     {
         _tmpug.text = notification.notificationLong;

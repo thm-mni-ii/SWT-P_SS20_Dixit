@@ -15,19 +15,19 @@ public class CountdownTimer : NetworkBehaviour
     [SerializeField] private Text timerTextField;
 
     /// <summary>
-    /// A Unity Event for the timeout in the giving anwer phase.
+    /// A Unity Event for the timeout in the giving answer phase.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public UnityEvent OnTimeoutGiveAnswer = new UnityEvent();
 
     /// <summary>
-    /// A Unity Event for the timeout in the select anwer phase
+    /// A Unity Event for the timeout in the select answer phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public UnityEvent OnTimeoutSelectAnswer = new UnityEvent();
 
     /// <summary>
-    /// A Unity Event for the timeout of the timer in the scroe screen.
+    /// A Unity Event for the timeout of the timer in the score screen.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public UnityEvent OnTimeoutScoreScreen = new UnityEvent();

@@ -11,6 +11,7 @@ namespace Tests
     public class GameServerTest
     {
         public GameServer gameServer;
+        public GameManager gameManager;
         private bool serverStarted = false;
 
         [SetUp]
@@ -18,9 +19,11 @@ namespace Tests
         {
             if(!serverStarted)
             {
-                GameObject gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
+                var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
                 gameServer.StartHost();
+                var gm = MonoBehaviour.Instantiate(Resources.Load("Prefabs/GameManager")) as GameObject;
+                gameManager= gm.GetComponent<GameManager>();
                 serverStarted = true;
             }
         }
@@ -40,20 +43,17 @@ namespace Tests
         }
 
         [UnityTest]
-        public IEnumerator HostPlayerAdded()
-        {
-            yield return new WaitForFixedUpdate();
-            Assert.AreEqual(1, NetworkServer.connections.Count, "No connection added");
-            Assert.AreEqual(1, gameServer.numPlayers, "No player added");
-        }
-
-        [UnityTest]
         public IEnumerator ClientPlayerAdded()
         {
-            yield return new WaitForSeconds(2f);
-            Assert.AreEqual(2, gameServer.numPlayers, "No player added");
+            yield return new WaitForSeconds(1f);
+            var conn = new NetworkConnectionToClient(2);
+            NetworkServer.AddConnection(conn);
+            var p = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Player")) as GameObject;
+            if(!NetworkServer.AddPlayerForConnection(conn, p)) Debug.Log("-------------ADD FAILED");
+            yield return new WaitForFixedUpdate();
             Assert.AreEqual(2, NetworkServer.connections.Count, "No connection added");
-        }
+            Assert.AreEqual(2, gameServer.numPlayers, "No player added");
 
+        }
     }
 }

@@ -888,7 +888,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: d51201f9b6049cc4e9b66205d27e8bd4, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -973,8 +973,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter text...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d51201f9b6049cc4e9b66205d27e8bd4, type: 2}
+  m_sharedMaterial: {fileID: -5970036427946727527, guid: d51201f9b6049cc4e9b66205d27e8bd4,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1404,7 +1405,7 @@ MonoBehaviour:
     linkCount: 0
     lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1486,8 +1487,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 454bf76cdb44c6b4bb4122350bf7e898, type: 2}
-  m_sharedMaterial: {fileID: -612548196713042592, guid: 454bf76cdb44c6b4bb4122350bf7e898,
+  m_fontAsset: {fileID: 11400000, guid: d51201f9b6049cc4e9b66205d27e8bd4, type: 2}
+  m_sharedMaterial: {fileID: -5970036427946727527, guid: d51201f9b6049cc4e9b66205d27e8bd4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

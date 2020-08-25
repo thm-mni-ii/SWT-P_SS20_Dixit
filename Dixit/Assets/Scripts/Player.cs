@@ -33,6 +33,12 @@ public class Player : NetworkBehaviour
     public string PlayerName { get; set; }
 
     /// <summary>
+    /// The placement of the player
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public int Placement { get; set; }
+
+    /// <summary>
     /// The <c>GameManager</c>
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -126,28 +132,13 @@ public class Player : NetworkBehaviour
         }
     }
 
-    [TargetRpc]
-    public void TargetSendResults(int placement, string nameOfWinner)
-    {
-       GameServer.Instance.HandleGameResults(placement, nameOfWinner);
-    }
-
     /// <summary>
-    /// Quits the game
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public void KillGame()
-    {
-        Application.Quit();
-    }
-
-    /// <summary>
-    /// Tells the server that this clients wants to restart the game
+    /// Finish the game send results to the framework.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Command]
-    public void CmdRestart()
+    public void CmdFinishGame()
     {
-        gameManager.Restart();
+        GameServer.Instance.HandleGameResults(Placement, gameManager.GetNameOfWinner());
     }
 }

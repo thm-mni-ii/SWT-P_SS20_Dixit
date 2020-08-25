@@ -171,10 +171,10 @@ public class GameServer : NetworkManager
                 filePath = Application.dataPath + @"\..\..\..\..\Framework\Windows\" + FILE_NAME;
                 break;
             case OperatingSystemFamily.Linux:
-                filePath = Application.dataPath + @"\..\..\..\..\Framework\Linux\" + FILE_NAME;
+                filePath = Application.dataPath + @"/../../../../Framework/Linux/" + FILE_NAME;
                 break;
             case OperatingSystemFamily.MacOSX:
-                filePath = Application.dataPath + @"\..\..\..\..\Framework\MACOSX\" + FILE_NAME;
+                filePath = Application.dataPath + @"/../../../../Framework/MACOSX/" + FILE_NAME;
                 break;
             default:
                 throw new ArgumentException("Illegal OS !");

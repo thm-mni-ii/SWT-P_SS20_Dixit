@@ -214,47 +214,26 @@ public class GameManager : NetworkBehaviour
 
         displayManager.RpcToggleRoundsOverview(true,numberOfRounds);
 
-        displayManager.RpcToggleRestartExit(true);
+        displayManager.RpcToggleExit(true);
 
         displayManager.RpcResultOverlaySetActive(true);
 
-        
-        //send scores to framework
+        //set placements of Players
         int idx = 1;
-        var winnerName = "";
         foreach (KeyValuePair<UInt32, int> points in pointsList)
         {
             Player player = GetIdentity(points.Key).GetComponent<Player>();
-            if(idx==1) winnerName = player.PlayerName;
-
-            player.TargetSendResults(idx, winnerName);
-            
+            player.Placement = idx;
             idx++;
         }
     }
 
     /// <summary>
-    /// Called when every player has clicked on "Nochmal".
-    /// Clears all points and restarts the game loop.
+    /// Returns the name of the winner.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public void Restart()
-    {
-        playersReady++;
-        if (NetworkManager.singleton.numPlayers == playersReady)
-        {
-            points.Clear();
-            for (int i = 0; i < numberOfRounds; i++)
-            {
-                roundPoints[i].Clear();
-            }
-
-            displayManager.RpcToggleRoundsOverview(false, numberOfRounds);
-            displayManager.RpcResultOverlaySetActive(false);
-            displayManager.RpcToggleRestartExit(false);
-            StartGame();
-        }
-    }
+    public string GetNameOfWinner() => GetIdentity(pointsList[0].Key).GetComponent<Player>().PlayerName; 
+    
 
     private void WriteAnswerPhase(Question question)
     {

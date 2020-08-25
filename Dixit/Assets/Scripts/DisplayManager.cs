@@ -20,7 +20,15 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ScoreHeader;
+    /// <summary>
+    /// Content Component of the Explanations ScrollView
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ExplanationTMP;
+    /// <summary>
+    /// ScrollView for Explanations
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject Explanations;
     /// <summary>
     /// GameObjects corresponding to the playernames and overall scores displayed on top right of the screen
@@ -39,6 +47,10 @@ public class DisplayManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     public GameObject TextPanel;
     private int roundnumber=0;
+    /// <summary>
+    /// Score Overlay Canvas UI element
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject resultOverlayCanvas;
 
     /// <summary>
@@ -56,10 +68,25 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject continueButton;
+    /// <summary>
+    /// Button at the side of the score overlay panel; toggles Explanation Screen
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject explanationButton;
+    /// <summary>
+    /// Button at the side of the score overlay panel; toggles Score Screen
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject scoreButton;
-
+    /// <summary>
+    /// Canvas for all round results overview
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject roundsOverview;
+    /// <summary>
+    /// Textfield for all round results overview
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject roundsOverview_text;
 
     [Client]

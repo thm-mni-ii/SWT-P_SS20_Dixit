@@ -10,6 +10,7 @@ TagManager:
   - ScoreResultOverlay
   - GameManager
   - NotificationCanvas
+  - NotificationSystem
   layers:
   - Default
   - TransparentFX

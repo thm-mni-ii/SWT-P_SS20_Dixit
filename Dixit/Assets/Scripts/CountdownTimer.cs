@@ -1,6 +1,7 @@
 ﻿﻿/* created by: SWT-P_SS_20_Dixit */
 using System;
 using Mirror;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,22 +13,22 @@ using UnityEngine.UI;
 /// \author SWT-P_SS_20_Dixit
 public class CountdownTimer : NetworkBehaviour
 {
-    [SerializeField] private Text timerTextField;
+    [SerializeField] private TextMeshProUGUI[] timerTextFields;
 
     /// <summary>
-    /// A Unity Event for the timeout in the giving anwer phase.
+    /// A Unity Event for the timeout in the giving answer phase.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public UnityEvent OnTimeoutGiveAnswer = new UnityEvent();
 
     /// <summary>
-    /// A Unity Event for the timeout in the select anwer phase
+    /// A Unity Event for the timeout in the select answer phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public UnityEvent OnTimeoutSelectAnswer = new UnityEvent();
 
     /// <summary>
-    /// A Unity Event for the timeout of the timer in the scroe screen.
+    /// A Unity Event for the timeout of the timer in the score screen.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public UnityEvent OnTimeoutScoreScreen = new UnityEvent();
@@ -61,7 +62,6 @@ public class CountdownTimer : NetworkBehaviour
     [Server]
     private void passSecond()
     {
-        timerTextField.text = _timer + "s";
         RpcUpdateTimerTextfield(_timer);
         if (_timer <= 0)
         {
@@ -99,7 +99,7 @@ public class CountdownTimer : NetworkBehaviour
         {
             this.timerMode = timerMode;
             _timer = startingTime;
-            timerTextField.text = _timer + "s";
+            RpcUpdateTimerTextfield(_timer);
             if (isServer)
             {
                 InvokeRepeating(nameof(passSecond), 0f, 1f);
@@ -119,6 +119,9 @@ public class CountdownTimer : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdateTimerTextfield(int timer)
     {
-        timerTextField.text = timer + "s";
+        foreach (var textField in timerTextFields)
+        {
+            textField.text = timer + "s";
+        }
     }
 }

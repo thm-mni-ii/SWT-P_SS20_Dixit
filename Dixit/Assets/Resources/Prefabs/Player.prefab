@@ -62,6 +62,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  m_cardPrefab: {fileID: 9127835124013797395, guid: c6c8b40c827157b309aef091b64d162c,
-    type: 3}
+  notificationSystem: {fileID: 0}
   gameManager: {fileID: 0}

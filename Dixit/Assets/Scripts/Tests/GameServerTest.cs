@@ -46,7 +46,6 @@ namespace Tests
             yield return new WaitForSeconds(1f);
             var conn = new NetworkConnectionToClient(2);
             NetworkServer.AddConnection(conn);
-            //var p = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Player")) as GameObject;
             gameServer.OnServerAddPlayer(conn);
             yield return new WaitForFixedUpdate();
             Assert.AreEqual(2, NetworkServer.connections.Count, "No connection added");

@@ -289,7 +289,7 @@ public class GameManager : NetworkBehaviour
     }
     private IEnumerator CheckScoreTimerStart()
     {
-        while (playersReady < 2)
+        while (playersReady < PlayerCount/2)
         { 
             yield return new WaitForSeconds(1f);
         }

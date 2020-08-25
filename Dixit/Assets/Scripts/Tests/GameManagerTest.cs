@@ -196,6 +196,14 @@ namespace Tests
         }
 
         [Test]
+        public void LevenshteinTest()
+        {   
+            Assert.AreEqual(gameManager.levenshtein("fall", "fall"), 0);
+            Assert.AreEqual(gameManager.levenshtein("Hallo", "Hello"), 1);
+            Assert.AreEqual(gameManager.levenshtein("Ein Stein", "Einstein"), 2);
+        }
+
+        [Test]
         public void EqualityTest()
         {
             Assert.IsTrue(gameManager.AnswersAreEqual("aussage", "Aussage"));
@@ -207,6 +215,12 @@ namespace Tests
             Assert.IsTrue(gameManager.AnswersAreEqual("fünfunddreißig grad", "35 grad"));
 
             Assert.IsTrue(gameManager.AnswersAreEqual("Beinhaltet 18 Liter", "beinhaltet achtzehn Liter"));
+
+            Assert.IsTrue(gameManager.AnswersAreEqual("Liter", "Lieter"));
+
+            Assert.IsTrue(gameManager.AnswersAreEqual("Ja", "Je"));
+
+            Assert.IsFalse(gameManager.AnswersAreEqual("Ein Horn", "Einhorn"));
         }
     }
 }

@@ -24,6 +24,9 @@ public class NotificationCanvas : MonoBehaviour
     public NotificationSystem notificationSystem;
 
     private Vector2 initialSize;
+   
+    [SerializeField]
+    private Animator animator;
 
     private RectTransform _rectTransform;
     private TextMeshProUGUI _tmpug;
@@ -60,8 +63,7 @@ public class NotificationCanvas : MonoBehaviour
                 _tmpug.color = notificationSystem.warningColor;
                 break;
         }
-        
-        showShort();
+        _tmpug.text = notification.notificationShort;
     }
     /// <summary>
     /// Causes the notification canvas to display the short notification
@@ -69,8 +71,8 @@ public class NotificationCanvas : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void showShort()
     {
+        animator.Play("Shrink");
         _tmpug.text = notification.notificationShort;
-        _rectTransform.sizeDelta = initialSize;
     }
     /// <summary>
     /// Causes the notification canvas to display the long notification
@@ -78,8 +80,8 @@ public class NotificationCanvas : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void showLong()
     {
+        animator.Play("Grow");
         _tmpug.text = notification.notificationLong;
-        _rectTransform.sizeDelta = initialSize*new Vector2(2.7f,1);
     }
 
     private void OnMouseEnter()
@@ -90,6 +92,11 @@ public class NotificationCanvas : MonoBehaviour
     private void OnMouseExit()
     {
         showShort();
+    }
+
+    public void FadeOut()
+    {
+        animator.Play("FadeOut");
     }
 
     private void OnMouseDown()

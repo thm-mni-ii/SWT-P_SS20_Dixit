@@ -27,7 +27,7 @@ public class NotificationSystem : MonoBehaviour
 
     private float notificationHeight;
     private float notificationWidth;
-    
+
     /// <summary>
     /// The colors the different notification zypes are to be displayed in
     /// </summary>
@@ -78,6 +78,12 @@ public class NotificationSystem : MonoBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public void RemoveNotification()
+    { 
+        notifications.Peek().GetComponent<NotificationCanvas>().FadeOut();
+        Invoke(nameof(DestroyNotificationAndUpdate),0.25f);
+    }
+
+    private void DestroyNotificationAndUpdate()
     {
         Destroy(notifications.Dequeue());
         updateNotifications();

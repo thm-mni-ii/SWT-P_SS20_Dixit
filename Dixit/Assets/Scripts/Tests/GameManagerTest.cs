@@ -29,7 +29,7 @@ namespace Tests
         {
             for (int m = 0; m < 100; m++)
             {
-                var randomQuestions = gameManager.GetRandomQuestionIdxArray(30);
+                var randomQuestions = Utils.GetRandomQuestionIdxArray(30, gameManager.numberOfRounds);
 
                 for (int i = 0; i < randomQuestions.Length; i++)
                 {

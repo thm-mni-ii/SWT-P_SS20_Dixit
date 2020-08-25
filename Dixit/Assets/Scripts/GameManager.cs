@@ -687,6 +687,7 @@ public class GameManager : NetworkBehaviour
     /// Checks if anwers  are equals.
     /// Ignores Upper and Lower case of the answers.
     /// Consideres numbers lower then 1000 in digits and german words equal.
+    /// Uses the levenshtein algorithm for ignoring of 1 spelling mistake.
     /// </summary>
     /// <param name="s1"> The first answer</param>
     /// <param name="s2"> The second answer</param>
@@ -694,6 +695,9 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     public bool AnswersAreEqual(string s1, string s2)
     {
+        if(levenshtein(s1,s2) <= 1)
+            return true;
+
         // do not check lower or upper
         s1 = s1.ToLower();
         s2 = s2.ToLower();
@@ -753,10 +757,60 @@ public class GameManager : NetworkBehaviour
             s= digitToWord[num/100] + "hundert" + numberToGermanWord(num%100, false, true);
 
         }
-        s= num + "";
+        else s= num + "";
        
         return s;
     }
+
+
+    /// <summary>
+    /// The Levenshtein Algorithm.
+    /// Source: https://www.eximiaco.tech/en/2019/11/17/computing-the-levenshtein-edit-distance-of-two-strings-using-c/.
+    /// It take two stings and returns and int for the edit distance.
+    /// </summary>
+    /// <param name="s1"> The first string</param>
+    /// <param name="s2"> The second string</param>
+    /// <returns>The edit distance</returns>
+    public int levenshtein(string first,string second)
+    {
+        if (first.Length == 0)
+        {
+            return second.Length;
+        }
+
+        if (second.Length == 0)
+        {
+            return first.Length;
+        }
+
+        var d = new int[first.Length + 1, second.Length + 1];
+        for (var i = 0; i <= first.Length; i++)
+        {
+            d[i, 0] = i;
+        }
+
+        for (var j = 0; j <= second.Length; j++)
+        {
+            d[0, j] = j;
+        }
+
+        for (var i = 1; i <= first.Length; i++)
+        {
+            for (var j = 1; j <= second.Length; j++)
+            { 
+                var cost = (second[j - 1] == first[i - 1]) ? 0 : 1; 
+                d[i, j] = Min( 
+                    d[i - 1, j] + 1, 
+                    d[i, j - 1] + 1, 
+                    d[i - 1, j - 1] + cost 
+                ); 
+            } 
+        } 
+        return d[first.Length, second.Length]; 
+    } 
+
+    private static int Min(int e1, int e2, int e3) =>
+        Math.Min(Math.Min(e1, e2), e3);
 }
 
 /// <summary>

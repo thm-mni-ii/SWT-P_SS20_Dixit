@@ -20,7 +20,7 @@ public class GameManager : NetworkBehaviour
 {
     private readonly Dictionary<UInt32, string> answers = new Dictionary<UInt32, string>();
     private readonly Dictionary<UInt32, UInt32> choices = new Dictionary<UInt32, UInt32>();
-    private readonly Dictionary<UInt32, int> points = new Dictionary<UInt32, int>();
+    public Dictionary<UInt32, int> points { get; } = new Dictionary<UInt32, int>();
     private Dictionary<UInt32, int>[] roundPoints;
 
     //for storing points sorted by value

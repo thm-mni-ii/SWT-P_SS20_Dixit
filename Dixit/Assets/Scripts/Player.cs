@@ -1,4 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -12,7 +13,11 @@ using TMPro;
 /// \author SWT-P_SS_20_Dixit
 public class Player : NetworkBehaviour
 {
-    private static readonly Lazy<Player> _localPlayer = new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
+    private GameObject notificationSystem;
+
+    private static readonly Lazy<Player> _localPlayer =
+        new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
+
     /// <summary>
     /// The local player in each client
     /// </summary>
@@ -30,6 +35,7 @@ public class Player : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameManager gameManager;
+
     private GameObject notifictionCanvas;
 
     /// <summary>
@@ -37,6 +43,7 @@ public class Player : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public Card SelectedCard { set; private get; }
+
     private bool messageActive = false;
 
     /// <summary>
@@ -52,8 +59,9 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         //Initialzie notification system
-        notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
-        notifictionCanvas.SetActive(false);
+        notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem");
+        /*notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
+        notifictionCanvas.SetActive(false);*/
     }
 
     /// <summary>
@@ -107,39 +115,9 @@ public class Player : NetworkBehaviour
     /// <param name="message">The content of the notification</param>
     /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
-    public void TargetSendNotification(string message)
+    public void TargetSendNotification(Notification notification)
     {
-        var notifiction = notifictionCanvas.GetComponentsInChildren<TextMeshProUGUI>()[0];
-        notifiction.text = messageActive ? notifiction.text + "\n---\n" + message : message;
-        StartCoroutine(ShowNotificationAndWait(5));
-    }
-
-    /// <summary>
-    /// Displays a notification for the given <c>time</c>
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    [Client]
-    private IEnumerator ShowNotificationAndWait(int time)
-    {
-        notifictionCanvas.SetActive(true);
-
-        if (messageActive)
-        {
-            var wait = System.Diagnostics.Stopwatch.StartNew();
-            while (messageActive)
-            {
-                yield return null;
-            }
-            notifictionCanvas.SetActive(true);
-            wait.Stop();
-
-            time -= (int)(wait.ElapsedMilliseconds / 1000);
-        }
-
-        messageActive = true;
-        yield return new WaitForSeconds(time);
-        notifictionCanvas.SetActive(false);
-        messageActive = false;
+        notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
     }
 
     /// <summary>
@@ -160,5 +138,4 @@ public class Player : NetworkBehaviour
     {
         gameManager.Restart();
     }
-
 }

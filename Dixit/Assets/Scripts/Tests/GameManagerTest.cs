@@ -21,8 +21,6 @@ namespace Tests
                 gameServer = gso.GetComponent<GameServer>();
                 gameServer.StartHost();
                 serverStarted = true;
-
-                gameServer.OnClientConnect(new NetworkConnectionToClient(2));
             }
         }
 
@@ -48,6 +46,10 @@ namespace Tests
         [UnityTest]
         public IEnumerator CardsSpawned()
         {
+            yield return new WaitForSeconds(1f);
+            var conn = new NetworkConnectionToClient(2);
+            NetworkServer.AddConnection(conn);
+            gameServer.OnServerAddPlayer(conn);
             yield return new WaitForSeconds(2f);
             Assert.NotNull(GameObject.FindGameObjectWithTag("QuestionCard"), "No QuestionCard spawned");
             Assert.NotNull(GameObject.FindGameObjectWithTag("InputCard"), "No InputCard spawned");

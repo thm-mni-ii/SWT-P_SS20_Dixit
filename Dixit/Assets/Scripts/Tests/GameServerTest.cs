@@ -22,8 +22,6 @@ namespace Tests
                 var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
                 gameServer.StartHost();
-                var gm = MonoBehaviour.Instantiate(Resources.Load("Prefabs/GameManager")) as GameObject;
-                gameManager= gm.GetComponent<GameManager>();
                 serverStarted = true;
             }
         }
@@ -48,8 +46,8 @@ namespace Tests
             yield return new WaitForSeconds(1f);
             var conn = new NetworkConnectionToClient(2);
             NetworkServer.AddConnection(conn);
-            var p = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Player")) as GameObject;
-            if(!NetworkServer.AddPlayerForConnection(conn, p)) Debug.Log("-------------ADD FAILED");
+            //var p = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Player")) as GameObject;
+            gameServer.OnServerAddPlayer(conn);
             yield return new WaitForFixedUpdate();
             Assert.AreEqual(2, NetworkServer.connections.Count, "No connection added");
             Assert.AreEqual(2, gameServer.numPlayers, "No player added");

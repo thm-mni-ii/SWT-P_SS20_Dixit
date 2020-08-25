@@ -339,13 +339,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &225759693 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6663500104432778371, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+  m_CorrespondingSourceObject: {fileID: 736082364263809392, guid: f88226e001e7c6b478b8ff5f1177e5d8,
     type: 3}
   m_PrefabInstance: {fileID: 225759682}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &225759694 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1793749972554034009, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+  m_CorrespondingSourceObject: {fileID: 7621947334258889042, guid: f88226e001e7c6b478b8ff5f1177e5d8,
     type: 3}
   m_PrefabInstance: {fileID: 225759682}
   m_PrefabAsset: {fileID: 0}
@@ -355,9 +355,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 225759682}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &225759696 stripped
+--- !u!1 &225759696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 796913547706873528, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225759697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6280389371289493547, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &225759698 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6145474403142260260, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+  m_CorrespondingSourceObject: {fileID: 349672888040955343, guid: f88226e001e7c6b478b8ff5f1177e5d8,
     type: 3}
   m_PrefabInstance: {fileID: 225759682}
   m_PrefabAsset: {fileID: 0}
@@ -711,7 +723,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   ScoreHeader: {fileID: 225759683}
-  Explanation: {fileID: 225759696}
+  ExplanationTMP: {fileID: 225759698}
+  Explanations: {fileID: 225759697}
   PlayerCanvasEntry:
   - {fileID: 775535048}
   - {fileID: 775535047}
@@ -729,10 +742,10 @@ MonoBehaviour:
   exitButton: {fileID: 225759686}
   restartButton: {fileID: 225759685}
   continueButton: {fileID: 225759684}
+  explanationButton: {fileID: 225759696}
+  scoreButton: {fileID: 225759694}
   roundsOverview: {fileID: 1666257379}
   roundsOverview_text: {fileID: 225759693}
-  explanationButton: {fileID: 0}
-  scoreButton: {fileID: 0}
 --- !u!114 &716002894
 MonoBehaviour:
   m_ObjectHideFlags: 0

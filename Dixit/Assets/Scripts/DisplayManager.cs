@@ -20,7 +20,8 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ScoreHeader;
-    public TextMeshProUGUI Explanation;
+    public TextMeshProUGUI ExplanationTMP;
+    public GameObject Explanations;
     /// <summary>
     /// GameObjects corresponding to the playernames and overall scores displayed on top right of the screen
     /// </summary>
@@ -155,9 +156,8 @@ public class DisplayManager : NetworkBehaviour
     private void RpcUpdateTextPanelEntry(int idx, string player, int points, bool gameEnd)
     {
         TextMeshProUGUI[] entry = TextPanelEntry[idx].GetComponentsInChildren<TextMeshProUGUI>(true);
-        entry[0].enabled = true;
-        entry[1].text = player;
-        entry[2].text = ((!gameEnd && points > 0) ? "+" : "") + points;
+        entry[0].text = player;
+        entry[1].text = ((!gameEnd && points > 0) ? "+" : "") + points;
     }
 
     /// <summary>
@@ -197,8 +197,7 @@ public class DisplayManager : NetworkBehaviour
         explanationButton.SetActive(!isActive);
         scoreButton.SetActive(isActive);
         TextPanel.SetActive(!isActive);
-        Explanation.enabled = isActive;
-        Explanation.gameObject.SetActive(isActive);
+        Explanations.SetActive(isActive);
         ScoreHeader.text = isActive ? "~ Wissenswertes ~" : "~ Punkte in Runde "+roundnumber+" ~";
     }
 
@@ -217,7 +216,7 @@ public class DisplayManager : NetworkBehaviour
     [ClientRpc]
     public void RpcUpdateExplanation(String explanation)
     {
-        Explanation.text = explanation;
+        ExplanationTMP.text = explanation;
     }
 
     /// <summary>

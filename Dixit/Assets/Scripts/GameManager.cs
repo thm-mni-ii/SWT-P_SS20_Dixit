@@ -290,7 +290,7 @@ public class GameManager : NetworkBehaviour
     
     private IEnumerator CheckScoreTimerStart()
     {
-        while (playersReady < 2)
+        while (playersReady < PlayerCount/2)
         { 
             yield return new WaitForSeconds(1f);
         }
@@ -309,7 +309,7 @@ public class GameManager : NetworkBehaviour
                 // if player gave no answer, he gets -1 points
                 GetPoints(p.netId, -1);
                 //send Message to this player
-                p.TargetSendNotification("Es muss eine Antwort abgegeben werden.");
+                p.TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Es muss eine Antwort abgegeben werden!","-1 Punkt"));
                 UpdatePlayerCanvas();
             }
 
@@ -329,7 +329,7 @@ public class GameManager : NetworkBehaviour
             //Messagesystem Alert not enough answers, resolve round and show correct answer
             foreach (var p in Utils.GetPlayers())
             {
-                p.TargetSendNotification("Es wurden nicht genug Antworten abgegeben.");
+                p.TargetSendNotification(new Notification(Notification.NotificationTypes.warning,"Es wurden nicht genügend Antworten abgegeben.","+0 Punkte"));
             }
 
             //Send answer to clients
@@ -513,7 +513,7 @@ public class GameManager : NetworkBehaviour
             // if player gave no answer, he gets -1 points
             GetPoints(playerId, -1);
             //send Message to this player
-            player.TargetSendNotification("Es muss eine Antwort abgegeben werden.");
+            player.TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Es muss eine Antwort abgegeben werden!","-1 Punkt"));
             UpdatePlayerCanvas();
         }
 
@@ -527,7 +527,7 @@ public class GameManager : NetworkBehaviour
                 {
                     GetPoints(playerId, -1);
                     //send notification
-                    player.TargetSendNotification("Es muss eine falsche Antwort abgegeben werden.");
+                    player.TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Es muss eine falsche Antwort abgegeben werden!","-1 Punkt"));
                     UpdatePlayerCanvas();
                 }
 

@@ -349,6 +349,7 @@ public class GameManager : NetworkBehaviour
 
     private void EvaluationPhase()
     {
+        Dictionary<UInt32, int> numOfSuccessfulDeceptionsPerPlayer = new Dictionary<uint, int>();
         // eval points
         foreach (var choice in choices)
         {
@@ -359,16 +360,28 @@ public class GameManager : NetworkBehaviour
             if (Utils.ClickedOnOwnAnswer(playerId, answerId, sameAnswers))
             {
                 GetPoints(playerId, -1);
+                Utils.GetIdentity(playerId).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Du hast deine eigene Antwort ausgewählt...","-"+1+" Punkte"));
             }
             //player choose right answer -> +3 points
             else if (answerId == this.netId)
             {
                 GetPoints(playerId, 3);
+                Utils.GetIdentity(playerId).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.good,"Gut! Du hast die richtige Antwort gewählt!","+"+3+" Punkte"));
             }
             else
             {
                 //player choose answer of other player -> other player get +1 point
                 GetPoints(answerId, 1);
+                if (numOfSuccessfulDeceptionsPerPlayer.ContainsKey(answerId))
+                {
+                    numOfSuccessfulDeceptionsPerPlayer[answerId]++;
+                }
+                else
+                {
+                    numOfSuccessfulDeceptionsPerPlayer.Add(answerId,0);
+                    numOfSuccessfulDeceptionsPerPlayer[answerId]++;
+                }
+
                 //all players who gave this anwer get +1 point
                 if (sameAnswers.ContainsKey(answerId))
                 {
@@ -376,6 +389,19 @@ public class GameManager : NetworkBehaviour
                         GetPoints(p, 1);
                 }
             }
+        }
+        
+        foreach (var p in numOfSuccessfulDeceptionsPerPlayer)
+        {
+            if (p.Value == 0)
+            {
+                Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.regular,"Niemand hat auf deine Antwort geklickt.","+"+0+" Punkte"));
+            }
+            else
+            {
+                Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.good,"Sehr gut, du hast "+p.Value+" deiner Mitspieler getäuscht","+"+p.Value+" Punkte"));
+            }
+
         }
 
         UpdateCards();

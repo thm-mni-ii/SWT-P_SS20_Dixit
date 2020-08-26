@@ -108,7 +108,7 @@ public static class Utils
 
    
     /// <summary>
-    /// Checks if anwers  are equals.
+    /// Checks if anwers are equals.
     /// Ignores Upper and Lower case of the answers.
     /// Consideres numbers lower then 1000 in digits and german words equal.
     /// Uses the levenshtein algorithm for ignoring of 1 spelling mistake.
@@ -140,10 +140,10 @@ public static class Utils
 
         for (int i = 0; i < words.Length; i++)
         {
-            var num  = 0;
+            var num = 0;
             if(int.TryParse(words[i], out num))
             {
-                words[i]  = numberToGermanWord(num);
+                words[i] = numberToGermanWord(num);
             }
         }
     
@@ -212,30 +212,30 @@ public static class Utils
             return first.Length;
         }
 
-        var d = new int[first.Length + 1, second.Length + 1];
-        for (var i = 0; i <= first.Length; i++)
+        var current = 1;
+        var previous = 0;
+        var r = new int[2, second.Length + 1];
+        for (var i = 0; i <= second.Length; i++)
         {
-            d[i, 0] = i;
+            r[previous, i] = i;
         }
 
-        for (var j = 0; j <= second.Length; j++)
+        for (var i = 0; i < first.Length; i++)
         {
-            d[0, j] = j;
-        }
+            r[current, 0] = i + 1;
 
-        for (var i = 1; i <= first.Length; i++)
-        {
-            for (var j = 1; j <= second.Length; j++)
+            for (var j = 1; j <= second.Length; j++) 
             { 
-                var cost = (second[j - 1] == first[i - 1]) ? 0 : 1; 
-                d[i, j] = Min( 
-                    d[i - 1, j] + 1, 
-                    d[i, j - 1] + 1, 
-                    d[i - 1, j - 1] + cost 
-                ); 
+                var cost = (second[j - 1] == first[i]) ? 0 : 1; 
+                r[current, j] = Min( 
+                    r[previous, j] + 1, 
+                    r[current, j - 1] + 1, 
+                    r[previous, j - 1] + cost ); 
             } 
+            previous = (previous + 1) % 2; 
+            current = (current + 1) % 2; 
         } 
-        return d[first.Length, second.Length]; 
+        return r[previous, second.Length]; 
     } 
 
     private static int Min(int e1, int e2, int e3) =>

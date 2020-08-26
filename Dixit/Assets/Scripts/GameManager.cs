@@ -520,7 +520,7 @@ public class GameManager : NetworkBehaviour
         //filter out duplicate answers
         foreach (var givenAnswer in answers)
         {
-            if (answer.ToLower() == givenAnswer.Value.ToLower())
+            if (Utils.AnswersAreEqual(answer, givenAnswer.Value))
             {
                 // if player gave correct answer, the player get -1 points
                 if (givenAnswer.Key == this.netId)

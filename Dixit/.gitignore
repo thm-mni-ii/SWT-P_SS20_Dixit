@@ -13,6 +13,9 @@
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 ![Aa]ssets/**/*.meta
 
+#All tests scence
+Assets/InitTestScene*
+
 # Depricated directory for generaded assets; used by firebase unity sdk
 [Aa]ssets/StreamingAssets*
 

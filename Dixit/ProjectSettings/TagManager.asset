@@ -4,13 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - InputCard
-  - AnswerCard
-  - QuestionCard
+  - DisplayManager
+  - NotificationCanvas
   - ScoreResultOverlay
   - GameManager
-  - NotificationCanvas
-  - DisplayManager
+  - NotificationSystem
+  - InputCard
+  - QuestionCard
+  - AnswerCard
   layers:
   - Default
   - TransparentFX

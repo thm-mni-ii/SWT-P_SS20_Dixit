@@ -178,6 +178,7 @@ public class GameManager : NetworkBehaviour
     private void StartRound()
     {
         displayManager.RpcResultOverlaySetActive(false);
+        displayManager.RpcToggleExplanation(false);
 
         currentRound++;
 
@@ -193,6 +194,7 @@ public class GameManager : NetworkBehaviour
             {
                 Debug.Log(l.Result.QuestionText);
                 answers.Add(this.netIdentity.netId, l.Result.Answer);
+                displayManager.RpcUpdateExplanation(l.Result.Explanation);
                 WriteAnswerPhase(l.Result);
             });
     }
@@ -402,12 +404,21 @@ public class GameManager : NetworkBehaviour
 
         }
 
-        displayManager.RpcHighlightCard(this.netIdentity.netId);
+        UpdateCards();
 
         UpdateScoreResultsOverlay(false);
         UpdatePlayerCanvas();
 
         StartCoroutine(WaitAndShowResults());
+    }
+    
+    private void UpdateCards()
+    {
+        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
+        foreach (var card in cards)
+        {
+            displayManager.RpcUpdateCard(this.netId, card.gameObject, choices.Values.Where(c => c == card.id).Count());
+        }
     }
 
     
@@ -546,7 +557,7 @@ public class GameManager : NetworkBehaviour
         //filter out duplicate answers
         foreach (var givenAnswer in answers)
         {
-            if (answer.ToLower() == givenAnswer.Value.ToLower())
+            if (Utils.AnswersAreEqual(answer, givenAnswer.Value))
             {
                 // if player gave correct answer, the player get -1 points
                 if (givenAnswer.Key == this.netId)
@@ -629,6 +640,7 @@ public class GameManager : NetworkBehaviour
             card.id = answer.Key;
             card.type = Card.CardType.Answer;
             card.startFacedown = true;
+            card.playerName = card.id == this.netId ? "" : Utils.GetIdentity(card.id).GetComponent<Player>().PlayerName;
 
             NetworkServer.Spawn(cardGo);
             card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));

@@ -21,6 +21,16 @@ public class DisplayManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ScoreHeader;
     /// <summary>
+    /// Content Component of the Explanations ScrollView
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextMeshProUGUI ExplanationTMP;
+    /// <summary>
+    /// ScrollView for Explanations
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public GameObject Explanations;
+    /// <summary>
     /// GameObjects corresponding to the playernames and overall scores displayed on top right of the screen
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -33,6 +43,12 @@ public class DisplayManager : NetworkBehaviour
 
     /// <summary>
     /// Canvas for the TextPanelEntry's in the result panel
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public GameObject TextPanel;
+    private int roundnumber=0;
+    /// <summary>
+    /// Score Overlay Canvas UI element
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject resultOverlayCanvas;
@@ -52,13 +68,31 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject continueButton;
-
+    /// <summary>
+    /// Button at the side of the score overlay panel; toggles Explanation Screen
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public GameObject explanationButton;
+    /// <summary>
+    /// Button at the side of the score overlay panel; toggles Score Screen
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public GameObject scoreButton;
+    /// <summary>
+    /// Canvas for all round results overview
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject roundsOverview;
+    /// <summary>
+    /// Textfield for all round results overview
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public GameObject roundsOverview_text;
 
     [Client]
     public override void OnStartLocalPlayer()
     {
+        explanationButton.SetActive(true);
         exitButton.SetActive(false);
         restartButton.SetActive(false);
     }
@@ -68,8 +102,11 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Server]
-    public void UpdateScoreHeader(int roundNumber) =>
+    public void UpdateScoreHeader(int roundNumber)
+    {
+        roundnumber = roundNumber;
         RpcUpdateScoreHeaderText($"~ Punkte in Runde {roundNumber} ~");
+    }
 
     /// <summary>
     /// Updates the ScoreHeader (in ScoreResultOverlay) with given text
@@ -146,9 +183,8 @@ public class DisplayManager : NetworkBehaviour
     private void RpcUpdateTextPanelEntry(int idx, string player, int points, bool gameEnd)
     {
         TextMeshProUGUI[] entry = TextPanelEntry[idx].GetComponentsInChildren<TextMeshProUGUI>(true);
-        entry[0].enabled = true;
-        entry[1].text = player;
-        entry[2].text = ((!gameEnd && points > 0) ? "+" : "") + points;
+        entry[0].text = player;
+        entry[1].text = ((!gameEnd && points > 0) ? "+" : "") + points;
     }
 
     /// <summary>
@@ -159,6 +195,8 @@ public class DisplayManager : NetworkBehaviour
     public void RpcToggleRestartExit(bool isActive)
     {
         continueButton.SetActive(!isActive);
+        explanationButton.SetActive(!isActive);
+        scoreButton.SetActive(!isActive);
         exitButton.SetActive(isActive);
         restartButton.SetActive(isActive);
 
@@ -179,6 +217,34 @@ public class DisplayManager : NetworkBehaviour
         roundsOverview.SetActive(isActive);
     }
 
+    /// <summary>
+    /// Switches between visible explanation screen and visible score screen
+    /// </summary>
+    public void ToggleExplanation(bool isActive){
+        explanationButton.SetActive(!isActive);
+        scoreButton.SetActive(isActive);
+        TextPanel.SetActive(!isActive);
+        Explanations.SetActive(isActive);
+        ScoreHeader.text = isActive ? "~ Wissenswertes ~" : "~ Punkte in Runde "+roundnumber+" ~";
+    }
+
+    /// <summary>
+    /// Switches between visible explanation screen and visible score screen for every Player
+    /// </summary>
+    [ClientRpc]
+    public void RpcToggleExplanation(bool isActive)
+    {
+        ToggleExplanation(isActive);
+    }
+
+    /// <summary>
+    /// Updates the explanation text content in the overlay
+    /// </summary>
+    [ClientRpc]
+    public void RpcUpdateExplanation(String explanation)
+    {
+        ExplanationTMP.text = explanation;
+    }
 
     /// <summary>
     /// Opens the result overlay for all players.
@@ -228,21 +294,21 @@ public class DisplayManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Highlights the correct answer cards for all players.
+    /// Shows the number of players who clicked a card and the name of the player who the answer on this card.
+    /// Highlights the correct card.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
-    public void RpcHighlightCard(UInt32 correctCard)
+    public void RpcUpdateCard(UInt32 correctCard, GameObject currCard, int stamps)
     {
-        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
-        foreach (var card in cards)
-        {
-            card.DisableSelectInput();
+        var card = currCard.GetComponent<Card>();
+        card.DisableSelectInput();
+        card.ShowName();
+        card.ShowStamps(stamps);
 
-            if (card.id == correctCard)
-            {
-                card.HighlightCorrect();
-            }
+        if (card.id == correctCard)
+        {
+            card.HighlightCorrect();
         }
     }
 }

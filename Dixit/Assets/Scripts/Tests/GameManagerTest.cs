@@ -28,25 +28,6 @@ namespace Tests
         }
 
         [UnityTest]
-        public IEnumerator RandomQuestionTest()
-        {
-            yield return new WaitForFixedUpdate();
-            var gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-            for (int m = 0; m < 100; m++)
-            {
-                var randomQuestions = Utils.GetRandomQuestionIdxArray(30, gameManager.numberOfRounds);
-
-                for (int i = 0; i < randomQuestions.Length; i++)
-                {
-                    for (int k = 0; k < i; k++)
-                    {
-                        Assert.AreNotEqual(randomQuestions[k], randomQuestions[i], "Array not unique");
-                    }
-                }
-            }
-        }
-
-        [UnityTest]
         public IEnumerator GameTest()
         {
             yield return new WaitForSeconds(1f);

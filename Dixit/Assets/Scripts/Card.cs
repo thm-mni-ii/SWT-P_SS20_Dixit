@@ -24,6 +24,9 @@ public class Card : NetworkBehaviour
     [SyncVar, HideInInspector]
     public string text;
 
+    [SyncVar, HideInInspector]
+    public string playerName;
+
     /// <summary>
     /// If it is has a possible answer written on it, the <c>netId</c> of the player who gave it
     /// </summary>
@@ -79,6 +82,10 @@ public class Card : NetworkBehaviour
     private GameObject selectAnswerBtn;
     [SerializeField]
     private TMPro.TMP_Text questionText;
+    [SerializeField]
+    private TMPro.TMP_Text playerNameText;
+    [SerializeField]  
+    private GameObject[]ClickedStamps;
 
     /// <summary>
     /// On Client Start the Card will be identified and the needed Compentens will be activated, all other deactivated.
@@ -111,6 +118,11 @@ public class Card : NetworkBehaviour
                 {
                     writeAnswerGo.SetActive(false);
                     selectAnswerGo.SetActive(true);
+                    playerNameText.enabled = false;
+                    foreach(var stamp in ClickedStamps)
+                    {
+                        stamp.SetActive(false);
+                    }
 
                     selectAnswerText.text = text;
                     break;
@@ -266,5 +278,25 @@ public class Card : NetworkBehaviour
     public void DisableSelectInput()
     {
         selectAnswerBtn.SetActive(false);
+    }
+    /// <summary>
+    /// Shows the name of the player who gave that answer
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public void ShowName()
+    {
+        playerNameText.text = playerName;
+        playerNameText.enabled = true;
+    }
+    /// <summary>
+    /// Shows one stamp for each player who clicken on that answer
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public void ShowStamps(int correctAnswers)
+    {
+        for (int i = 0; i < correctAnswers; i++)
+        {
+            ClickedStamps[i].SetActive(true);
+        }
     }
 }

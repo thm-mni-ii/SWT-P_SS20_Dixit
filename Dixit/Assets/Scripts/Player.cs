@@ -35,8 +35,7 @@ public class Player : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameManager gameManager;
-
-    private GameObject notifictionCanvas;
+    private GameObject notificationCanvas;
 
     /// <summary>
     /// The currently selected card. Used in the "ChooseAnswer" phase

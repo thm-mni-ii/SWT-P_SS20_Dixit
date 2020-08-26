@@ -376,12 +376,21 @@ public class GameManager : NetworkBehaviour
             }
         }
 
-        displayManager.RpcHighlightCard(this.netIdentity.netId);
+        UpdateCards();
 
         UpdateScoreResultsOverlay(false);
         UpdatePlayerCanvas();
 
         StartCoroutine(WaitAndShowResults());
+    }
+    
+    private void UpdateCards()
+    {
+        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
+        foreach (var card in cards)
+        {
+            displayManager.RpcUpdateCard(this.netId, card.gameObject, choices.Values.Where(c => c == card.id).Count());
+        }
     }
 
     
@@ -603,6 +612,7 @@ public class GameManager : NetworkBehaviour
             card.id = answer.Key;
             card.type = Card.CardType.Answer;
             card.startFacedown = true;
+            card.playerName = card.id == this.netId ? "" : GetIdentity(card.id).GetComponent<Player>().PlayerName;
 
             NetworkServer.Spawn(cardGo);
             card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));

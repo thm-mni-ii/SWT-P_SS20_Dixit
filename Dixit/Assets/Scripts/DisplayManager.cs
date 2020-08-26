@@ -228,21 +228,21 @@ public class DisplayManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Highlights the correct answer cards for all players.
+    /// Shows the number of players who clicked a card and the name of the player who the answer on this card.
+    /// Highlights the correct card.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
-    public void RpcHighlightCard(UInt32 correctCard)
+    public void RpcUpdateCard(UInt32 correctCard, GameObject currCard, int stamps)
     {
-        var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
-        foreach (var card in cards)
-        {
-            card.DisableSelectInput();
+        var card = currCard.GetComponent<Card>();
+        card.DisableSelectInput();
+        card.ShowName();
+        card.ShowStamps(stamps);
 
-            if (card.id == correctCard)
-            {
-                card.HighlightCorrect();
-            }
+        if (card.id == correctCard)
+        {
+            card.HighlightCorrect();
         }
     }
 }

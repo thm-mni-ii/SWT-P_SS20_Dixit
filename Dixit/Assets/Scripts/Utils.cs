@@ -119,16 +119,16 @@ public static class Utils
     /// \author SWT-P_SS_20_Dixit
     public static bool AnswersAreEqual(string s1, string s2)
     {
+        // numbers as words or digits are equal
+        s1 = AllNumbersInGermanWords(s1);
+        s2 = AllNumbersInGermanWords(s2);
+
         if(levenshtein(s1,s2) <= 1)
             return true;
 
         // do not check lower or upper
         s1 = s1.ToLower();
         s2 = s2.ToLower();
-
-        // numbers as words or digits are equal
-        s1 = AllNumbersInGermanWords(s1);
-        s2 = AllNumbersInGermanWords(s2);
 
         return s1 == s2;
     }

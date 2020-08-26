@@ -178,6 +178,7 @@ public class GameManager : NetworkBehaviour
     private void StartRound()
     {
         displayManager.RpcResultOverlaySetActive(false);
+        displayManager.RpcToggleExplanation(false);
 
         currentRound++;
 
@@ -193,6 +194,7 @@ public class GameManager : NetworkBehaviour
             {
                 Debug.Log(l.Result.QuestionText);
                 answers.Add(this.netIdentity.netId, l.Result.Answer);
+                displayManager.RpcUpdateExplanation(l.Result.Explanation);
                 WriteAnswerPhase(l.Result);
             });
     }
@@ -612,7 +614,7 @@ public class GameManager : NetworkBehaviour
             card.id = answer.Key;
             card.type = Card.CardType.Answer;
             card.startFacedown = true;
-            card.playerName = card.id == this.netId ? "" : GetIdentity(card.id).GetComponent<Player>().PlayerName;
+            card.playerName = card.id == this.netId ? "" : Utils.GetIdentity(card.id).GetComponent<Player>().PlayerName;
 
             NetworkServer.Spawn(cardGo);
             card.RpcSlideToPosition(new Vector3((float)xPosition, -100, -2));

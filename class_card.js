@@ -18,9 +18,12 @@ var class_card =
     [ "OnStartClient", "class_card.html#ad98e869c733f57b22d6470a2410a370e", null ],
     [ "RpcFlip", "class_card.html#a8e248eae5f0363abf63fdb0d3bbe44be", null ],
     [ "RpcSlideToPosition", "class_card.html#a78d676acc03df986003007e1a53344f8", null ],
+    [ "ShowName", "class_card.html#acded12e48c3fa3a0d4e187fee074cdde", null ],
+    [ "ShowStamps", "class_card.html#ac6121e9ec26fd0133ca5e910418b89f5", null ],
     [ "correctColour", "class_card.html#a5aeac40f29a262deb2968709e8f8a5ce", null ],
     [ "defalutColor", "class_card.html#a439e765e63063acb43ee9735eeabe7b7", null ],
     [ "id", "class_card.html#a106fc53dbbcb75c0c4fa89f964f55167", null ],
+    [ "playerName", "class_card.html#adc406312f8e36069be90265a7d3e2f12", null ],
     [ "startFacedown", "class_card.html#a98dd958f8c723435d2153fc0744b79dd", null ],
     [ "text", "class_card.html#a7688d0469a1ac65d923ead8373994e85", null ],
     [ "type", "class_card.html#ad1eec501ef5c770decb91a83d18934a7", null ]

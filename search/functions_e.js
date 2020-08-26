@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['updatescoreheader_161',['UpdateScoreHeader',['../class_display_manager.html#a5255018d12b2483111436302136f5719',1,'DisplayManager']]],
-  ['updatetextpanelentry_162',['UpdateTextPanelEntry',['../class_display_manager.html#aca6c122855927d9978622de6f6ac856b',1,'DisplayManager.UpdateTextPanelEntry(int idx, string player, int points, bool gameend)'],['../class_display_manager.html#a381a7618d9651b8ca9adff415b036214',1,'DisplayManager.UpdateTextPanelEntry(int idx, string player, int points)']]]
+  ['targetsendnotification_200',['TargetSendNotification',['../class_player.html#ac2dc8a9da3b74a871b8e6f567d6a73ef',1,'Player']]],
+  ['toggleexplanation_201',['ToggleExplanation',['../class_display_manager.html#aa2323b0d2472eb7e0916e2edeacfed66',1,'DisplayManager.ToggleExplanation()'],['../class_player_input.html#ae0eebae1c90abeadea870b5b228a16fd',1,'PlayerInput.ToggleExplanation()']]]
 ];

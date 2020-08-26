@@ -86,6 +86,7 @@ $(document).ready(function(){initNavTree('class_game_manager.html',''); initResi
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_game_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GameManager Class Reference</div>  </div>
@@ -127,9 +128,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ade9f1021041092448871aa745a339745"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ade9f1021041092448871aa745a339745">ChangePhase</a> ()</td></tr>
 <tr class="memdesc:ade9f1021041092448871aa745a339745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes Phase in the <a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a> and calls the Corresponding RPC-Call  <a href="class_game_manager.html#ade9f1021041092448871aa745a339745">More...</a><br /></td></tr>
 <tr class="separator:ade9f1021041092448871aa745a339745"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12d920e174879f2f78dc774997d68392"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a12d920e174879f2f78dc774997d68392">GetRandomQuestionIdxArray</a> (int maxIdx)</td></tr>
-<tr class="memdesc:a12d920e174879f2f78dc774997d68392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates an array of <code>maxIdx</code> length.  <a href="class_game_manager.html#a12d920e174879f2f78dc774997d68392">More...</a><br /></td></tr>
-<tr class="separator:a12d920e174879f2f78dc774997d68392"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -169,6 +167,12 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:ad3e717f4fb0f378b969f4457de81f23e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_game_manager.html">GameManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ad3e717f4fb0f378b969f4457de81f23e">Instance</a> =&gt; _instance.Value</td></tr>
 <tr class="memdesc:ad3e717f4fb0f378b969f4457de81f23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The singleton instance of the <a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a>  <a href="class_game_manager.html#ad3e717f4fb0f378b969f4457de81f23e">More...</a><br /></td></tr>
 <tr class="separator:ad3e717f4fb0f378b969f4457de81f23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a79f7b25ad70fdb4cdbc3056f60ae8a9b"><td class="memItemLeft" align="right" valign="top"><a id="a79f7b25ad70fdb4cdbc3056f60ae8a9b"></a>
+Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>points</b> = new Dictionary&lt;UInt32, int&gt;()<code> [get]</code></td></tr>
+<tr class="separator:a79f7b25ad70fdb4cdbc3056f60ae8a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The GameManger keeps track of all given Answers and Changes the current Phase of the Game. It only exists on the Server. </p>
@@ -198,42 +202,6 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Changes Phase in the <a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a> and calls the Corresponding RPC-Call </p>
-<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
-
-</div>
-</div>
-<a id="a12d920e174879f2f78dc774997d68392"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12d920e174879f2f78dc774997d68392">&#9670;&nbsp;</a></span>GetRandomQuestionIdxArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int [] GameManager.GetRandomQuestionIdxArray </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>maxIdx</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Generates an array of <code>maxIdx</code> length. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">maxIdx</td><td>The length of the array</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The random-number array</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
@@ -662,7 +630,7 @@ Static Public Attributes</h2></td></tr>
 			<ul>
 				<li class="navelem"><a class="el" href="class_game_manager.html">GameManager</a></li>
 				<li class="footer">
-					Generated on Wed Aug 12 2020 06:06:28 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Wed Aug 26 2020 18:32:46 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

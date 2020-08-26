@@ -8,7 +8,8 @@ var searchData=
   ['cmdgiveanswer_7',['CmdGiveAnswer',['../class_player.html#a6da72ff9a31d486131c3520fa96fe566',1,'Player']]],
   ['cmdplayerisready_8',['CmdPlayerIsReady',['../class_player.html#a132f6dcedf8ddc34609844a1d72ac06c',1,'Player']]],
   ['cmdrestart_9',['CmdRestart',['../class_player.html#adca54fdb6ca396bc5629c44d21b94bac',1,'Player']]],
-  ['continuebutton_10',['continueButton',['../class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640',1,'DisplayManager']]],
-  ['correctcolour_11',['correctColour',['../class_card.html#a5aeac40f29a262deb2968709e8f8a5ce',1,'Card']]],
-  ['countdowntimer_12',['CountdownTimer',['../class_countdown_timer.html',1,'']]]
+  ['collider_10',['collider',['../class_notification_canvas.html#a64957d4f261e84bb6af1764671c00b10',1,'NotificationCanvas']]],
+  ['continuebutton_11',['continueButton',['../class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640',1,'DisplayManager']]],
+  ['correctcolour_12',['correctColour',['../class_card.html#a5aeac40f29a262deb2968709e8f8a5ce',1,'Card']]],
+  ['countdowntimer_13',['CountdownTimer',['../class_countdown_timer.html',1,'']]]
 ];

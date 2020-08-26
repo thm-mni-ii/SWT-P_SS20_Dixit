@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['answer_198',['Answer',['../class_question.html#a3912c6258ab1e7e89090534b38f3540d',1,'Question']]]
+  ['difficulty_257',['Difficulty',['../class_question.html#aaf428164bde2ab9d36dda12a63534445',1,'Question']]],
+  ['docent_258',['Docent',['../class_question_set.html#a0336d0c5e22f594ace3e71d8aa274cd5',1,'QuestionSet']]]
 ];

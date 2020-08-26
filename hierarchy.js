@@ -5,6 +5,8 @@ var hierarchy =
     ] ],
     [ "MonoBehaviour", null, [
       [ "DatabaseSetup", "class_database_setup.html", null ],
+      [ "NotificationCanvas", "class_notification_canvas.html", null ],
+      [ "NotificationSystem", "class_notification_system.html", null ],
       [ "PlayerInput", "class_player_input.html", null ]
     ] ],
     [ "MultivalDictionary< UInt32, UInt32 >", "class_multival_dictionary.html", null ],
@@ -18,6 +20,7 @@ var hierarchy =
     [ "NetworkManager", null, [
       [ "GameServer", "class_game_server.html", null ]
     ] ],
+    [ "Notification", "class_notification.html", null ],
     [ "PlayerInfo", "class_player_info.html", null ],
     [ "Question", "class_question.html", null ],
     [ "QuestionSet", "class_question_set.html", null ]

@@ -30,7 +30,7 @@ public class Player : NetworkBehaviour
     /// The name of the player
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public string PlayerName { get; set; }
+    public string PlayerName = null;
 
     /// <summary>
     /// The placement of the player
@@ -66,6 +66,15 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem");
+
+        PlayerName = ((GameServer) NetworkManager.singleton).PlayerInfos.name;
+        CmdSendName(PlayerName);
+    }
+
+    [Command]
+    public void CmdSendName(string name)
+    { 
+        PlayerName = name;
     }
 
     /// <summary>
@@ -130,6 +139,12 @@ public class Player : NetworkBehaviour
         {
             notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
         }
+    }
+
+    [ClientRpc]
+    public void RpcSetNameOfNewPlayer(string playerName)
+    {
+        PlayerName = playerName;
     }
 
     /// <summary>

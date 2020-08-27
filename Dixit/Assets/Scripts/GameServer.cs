@@ -36,7 +36,7 @@ public class GameServer : NetworkManager
     /// <summary>
     /// Stores information about the player.
     /// </summary>
-    private JSONNode playerInfos;
+    private PlayerInfo playerInfos;
 
     /// <summary>
     /// Stores information about the game.
@@ -53,7 +53,7 @@ public class GameServer : NetworkManager
     /// </summary>
     private bool readyToQuit;
 
-    public JSONNode PlayerInfos => playerInfos;
+    public PlayerInfo PlayerInfos => playerInfos;
 
     public JSONNode GameInfos => gameInfos;
 
@@ -85,9 +85,9 @@ public class GameServer : NetworkManager
         readyToQuit = false;
         isHost = false;
 
-        LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
+        //LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
 
-        /*LoadPlayerInfo();             // <- FOR RELEASE
+        LoadPlayerInfo();             // <- FOR RELEASE
 
         if (isHost)
         {
@@ -96,9 +96,10 @@ public class GameServer : NetworkManager
         else
         {
             disconnectTimer = disconnectWaitTime;
-        }*/
+        }
 
     }
+
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
@@ -107,16 +108,35 @@ public class GameServer : NetworkManager
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
             : Instantiate(playerPrefab);
 
-        Player p = player.GetComponent<Player>();
-        p.PlayerName = playerInfos["name"].Value;
-
         NetworkServer.AddPlayerForConnection(conn, player);
 
         if (numPlayers == playersWantToPlay)
-        {
-            GameManager gameManager = GameManager.Instance;
-            gameManager.StartGame();
+        {   
+            StartCoroutine("WaitAndStart");
         }
+    }
+
+    private IEnumerator WaitAndStart()
+    {
+        foreach (var p in Utils.GetPlayers())
+        {
+            while(p.PlayerName == null || p.PlayerName == "")
+                yield return new WaitForSeconds(0.5f);
+        }
+
+        foreach (var p in Utils.GetPlayers())
+        {
+            p.RpcSetNameOfNewPlayer(p.PlayerName);
+        }
+
+        GameManager gameManager = GameManager.Instance;
+
+        gameManager.questionSetID = gameInfos["Question Set"];
+        gameManager.numberOfRounds = gameInfos["Rounds"];
+        gameManager.timerForGiveAnswer = gameInfos["Answer Time"];
+        gameManager.timerToChooseAnswer = gameInfos["Picking Time"];
+
+        gameManager.StartGame();
     }
 
     /// <summary>
@@ -171,10 +191,10 @@ public class GameServer : NetworkManager
                 filePath = Application.dataPath + @"\..\..\..\..\Framework\Windows\" + FILE_NAME;
                 break;
             case OperatingSystemFamily.Linux:
-                filePath = Application.dataPath + @"/../../../../Framework/Linux/" + FILE_NAME;
+                filePath = Application.dataPath + "/../../../../Framework/Linux/" + FILE_NAME;
                 break;
             case OperatingSystemFamily.MacOSX:
-                filePath = Application.dataPath + @"/../../../../Framework/MACOSX/" + FILE_NAME;
+                filePath = Application.dataPath + "/../../../../Framework/MACOSX/" + FILE_NAME;
                 break;
             default:
                 throw new ArgumentException("Illegal OS !");
@@ -185,7 +205,7 @@ public class GameServer : NetworkManager
 
         // Load data
         isHost = jsonFile["playerInfo"]["isHost"].AsBool;
-        playerInfos = jsonFile["playerInfo"];
+        playerInfos = new PlayerInfo(jsonFile["playerInfo"]["name"], isHost);
         gameInfos = jsonFile["gameInfo"];
 
         // Close file
@@ -201,9 +221,7 @@ public class GameServer : NetworkManager
     /// </summary>
     private void LoadPlayerInfoMockup()
     {
-        isHost = true;
-        playerInfos = new JSONObject();
-        playerInfos.Add("name", "Mustermann");
+        playerInfos = new PlayerInfo("Mustermann", true);
     }
 
     /// <summary>

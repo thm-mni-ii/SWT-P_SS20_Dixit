@@ -75,17 +75,17 @@ public class GameManager : NetworkBehaviour
     /// Initial value of the Timer at the start of the "GiveAnswer" Phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerForGiveAnswer = 30;
+    public int timerForGiveAnswer { get; set;} = 30;
     /// <summary>
     /// Initial value of the Time at the start of the "ChoseAnswer" Phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerToChooseAnswer = 20;
+    public int timerToChooseAnswer { get; set;} = 20;
     /// <summary>
     /// Initial value of the Timer when the score result overlay is diplayed
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerToCheckResults = 10;
+    public int timerToCheckResults { get; set;} = 10;
 
     /// <summary>
     /// The number rounds (i.e Questions) the game should last
@@ -138,7 +138,7 @@ public class GameManager : NetworkBehaviour
             roundPoints[i] = new Dictionary<UInt32, int>();
         }
 
-        //initializes PlayerCanvas
+        //initializes points and roundpoints
         foreach ((Player p, int idx) in Utils.GetPlayersIndexed())
         {
             points.Add(p.netIdentity.netId, 0);
@@ -149,13 +149,7 @@ public class GameManager : NetworkBehaviour
             }
         }
 
-        displayManager.UpdateScoreHeader(1);
-        foreach ((Player p, int index) in Utils.GetPlayersIndexed())
-        {
-            displayManager.RpcUpdatePlayerCanvasEntry(index, p.PlayerName, "0");
-            displayManager.UpdateTextPanelEntry(index, p.PlayerName, 0);
-        }
-
+        UpdatePlayerCanvas();
 
         currentRound = -1;
         //wait until the question set is loaded
@@ -222,7 +216,7 @@ public class GameManager : NetworkBehaviour
         int idx = 1;
         foreach (KeyValuePair<UInt32, int> points in pointsList)
         {
-            Player player = GetIdentity(points.Key).GetComponent<Player>();
+            Player player = Utils.GetIdentity(points.Key).GetComponent<Player>();
             player.Placement = idx;
             idx++;
         }
@@ -232,7 +226,7 @@ public class GameManager : NetworkBehaviour
     /// Returns the name of the winner.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public string GetNameOfWinner() => GetIdentity(pointsList[0].Key).GetComponent<Player>().PlayerName; 
+    public string GetNameOfWinner() => Utils.GetIdentity(pointsList[0].Key).GetComponent<Player>().PlayerName; 
     
 
     private void WriteAnswerPhase(Question question)

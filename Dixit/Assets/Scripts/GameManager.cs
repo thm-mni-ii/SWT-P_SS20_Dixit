@@ -179,7 +179,7 @@ public class GameManager : NetworkBehaviour
     {
         displayManager.RpcResultOverlaySetActive(false);
         displayManager.RpcToggleExplanation(false);
-        displayManager.scoreScreenWasActive = false;
+        displayManager.RpcSetScoreScreenWasActive(false);
         displayManager.RpcToggleOptions(false);
 
         currentRound++;

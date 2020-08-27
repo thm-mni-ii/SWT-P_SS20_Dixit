@@ -1,4 +1,5 @@
 ﻿/*Created by: LifeIsJourney on GitHub (https://github.com/LifeIsJourney/Scripts/blob/master/TiggleUISimple.cs)*/
+/* Toggle Prefab based on: https://github.com/Kalxoznik/Unity-Toggle-controller/blob/master/Toggle/Assets/Prefabs/Toggle.prefab */
 
 using System;
 using System.Collections;

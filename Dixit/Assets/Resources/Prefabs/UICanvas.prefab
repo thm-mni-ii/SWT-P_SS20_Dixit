@@ -3352,6 +3352,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicToggle
       objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224340200432122086, guid: 6233c25d2168e7547a9c0d873603ee34,
         type: 3}
       propertyPath: m_LocalPosition.x

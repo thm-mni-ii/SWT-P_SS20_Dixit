@@ -267,7 +267,8 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible/invisible Options Screen
     /// </summary>
-    public void ToggleOptions(bool isActive){
+    public void ToggleOptions(bool isActive)
+    {
         activateOptionsButton.interactable = !isActive;
         if(isActive){
             scoreScreenWasActive = resultOverlayCanvas.activeSelf;
@@ -287,6 +288,16 @@ public class DisplayManager : NetworkBehaviour
     {
         ToggleOptions(isActive);
     }
+
+    /// <summary>
+    /// Sets ScoreScreenWasActive variable for every player
+    /// </summary>
+    [ClientRpc]
+    public void RpcSetScoreScreenWasActive(Boolean active)
+    {
+        scoreScreenWasActive = active;
+    }
+
 
     /// <summary>
     /// Opens the result overlay for all players.

@@ -30,6 +30,7 @@ public class GameManager : NetworkBehaviour
 
     private int PlayerCount => Utils.GetPlayers().Count();
 
+
     /// <summary>
     /// The singleton instance of the GameManager
     /// </summary>
@@ -269,6 +270,14 @@ public class GameManager : NetworkBehaviour
         timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
 
         //wait for all players to send answer or get timeout
+        
+        if (currentRound == 0)
+        {
+            foreach (var p in Utils.GetPlayers())
+            {
+                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular,"Geb' eine falsche Antwort, die aber trotzdem plausibel klingt.","1. Antwort Geben"));
+            }
+        }
     }
 
     private IEnumerator CheckEarlyTimeout(Phase forPhase)
@@ -303,6 +312,13 @@ public class GameManager : NetworkBehaviour
 
     private void ChooseAnswerPhase()
     {
+        if (currentRound == 0)
+        {
+            foreach (var p in Utils.GetPlayers())
+            {
+                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular,"Wähle die Antwort aus, von der du glaubst, dass es die Richtige ist.","2. Antwort Wählen"));
+            }
+        }
         // check if any player gave no answer
         foreach (var p in Utils.GetPlayers())
         {

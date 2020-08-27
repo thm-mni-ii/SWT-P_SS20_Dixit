@@ -14,6 +14,8 @@ using TMPro;
 public class Player : NetworkBehaviour
 {
     private GameObject notificationSystem;
+    
+    private bool enableTutorial = true;
 
     private static readonly Lazy<Player> _localPlayer =
         new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
@@ -57,10 +59,7 @@ public class Player : NetworkBehaviour
     [Client]
     public override void OnStartLocalPlayer()
     {
-        //Initialzie notification system
         notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem");
-        /*notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
-        notifictionCanvas.SetActive(false);*/
     }
 
     /// <summary>
@@ -117,6 +116,13 @@ public class Player : NetworkBehaviour
     public void TargetSendNotification(Notification notification)
     {
         notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
+    }
+    public void TargetSendTutorialNotification(Notification notification)
+    {
+        if (enableTutorial)
+        {
+            notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
+        }
     }
 
     /// <summary>

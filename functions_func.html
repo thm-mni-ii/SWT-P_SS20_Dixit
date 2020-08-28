@@ -104,14 +104,14 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>ClickContinueButton()
 : <a class="el" href="class_player_input.html#af83a496e5be9d630fbbeaba884afc727">PlayerInput</a>
 </li>
+<li>CmdFinishGame()
+: <a class="el" href="class_player.html#a60174377c5e6a73165bedf697cbbab53">Player</a>
+</li>
 <li>CmdGiveAnswer()
 : <a class="el" href="class_player.html#a6da72ff9a31d486131c3520fa96fe566">Player</a>
 </li>
 <li>CmdPlayerIsReady()
 : <a class="el" href="class_player.html#a132f6dcedf8ddc34609844a1d72ac06c">Player</a>
-</li>
-<li>CmdRestart()
-: <a class="el" href="class_player.html#adca54fdb6ca396bc5629c44d21b94bac">Player</a>
 </li>
 </ul>
 
@@ -141,6 +141,9 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>GetNameOfWinner()
+: <a class="el" href="class_game_manager.html#a9a3fd3b81a40f75a24743ffb94d631d4">GameManager</a>
+</li>
 <li>GetQuestion()
 : <a class="el" href="class_question_set.html#aaeb40915049875e84ca365b55695724f">QuestionSet</a>
 </li>
@@ -151,6 +154,9 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_h"></a>- h -</h3><ul>
+<li>HandleGameResults()
+: <a class="el" href="class_game_server.html#a55136cf3bb10a2faefea02723413b3fd">GameServer</a>
+</li>
 <li>HighlightCard()
 : <a class="el" href="class_card.html#af98dd54e9fc944c3e65336b8131fc9d7">Card</a>
 </li>
@@ -175,13 +181,6 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 </li>
 <li>InstantFlipFaceup()
 : <a class="el" href="class_card.html#a2bbc7e8acb3ffc325dafc3f615e8fc67">Card</a>
-</li>
-</ul>
-
-
-<h3><a id="index_k"></a>- k -</h3><ul>
-<li>KillGame()
-: <a class="el" href="class_player.html#a61ec43f6dadd02f80cf25143e253ed35">Player</a>
 </li>
 </ul>
 
@@ -218,10 +217,6 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>RemoveNotification()
 : <a class="el" href="class_notification_system.html#a1f36772a918a0d7b334f52060b602bea">NotificationSystem</a>
 </li>
-<li>Restart()
-: <a class="el" href="class_game_manager.html#a1cbb012b22180860880a659142a0cd07">GameManager</a>
-, <a class="el" href="class_player_input.html#a9e6cf2c200e3f01bef9581ca68d44fdd">PlayerInput</a>
-</li>
 <li>RetrieveQuestion()
 : <a class="el" href="class_question.html#a55acea326292e1cc3f8d9d7d69fc3ca9">Question</a>
 </li>
@@ -249,11 +244,11 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>RpcSlideToPosition()
 : <a class="el" href="class_card.html#a78d676acc03df986003007e1a53344f8">Card</a>
 </li>
+<li>RpcToggleExit()
+: <a class="el" href="class_display_manager.html#ac96aa8bd1f9970c6bf756084831555a4">DisplayManager</a>
+</li>
 <li>RpcToggleExplanation()
 : <a class="el" href="class_display_manager.html#a295af77c32320feef855594d581bc141">DisplayManager</a>
-</li>
-<li>RpcToggleRestartExit()
-: <a class="el" href="class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3">DisplayManager</a>
 </li>
 <li>RpcToggleRoundsOverview()
 : <a class="el" href="class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6">DisplayManager</a>
@@ -308,6 +303,9 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>TargetSendNotification()
 : <a class="el" href="class_player.html#ac2dc8a9da3b74a871b8e6f567d6a73ef">Player</a>
 </li>
+<li>TargetSendResults()
+: <a class="el" href="class_player.html#a55cf8163f7a65bced6bb38808fdcfd58">Player</a>
+</li>
 <li>ToggleExplanation()
 : <a class="el" href="class_display_manager.html#aa2323b0d2472eb7e0916e2edeacfed66">DisplayManager</a>
 , <a class="el" href="class_player_input.html#ae0eebae1c90abeadea870b5b228a16fd">PlayerInput</a>
@@ -332,7 +330,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 		<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
 			<ul>
 				<li class="footer">
-					Generated on Fri Aug 28 2020 13:35:18 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Fri Aug 28 2020 17:31:37 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

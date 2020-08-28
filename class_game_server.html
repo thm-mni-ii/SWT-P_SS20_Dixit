@@ -109,17 +109,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac384484a4fbd72d8e3ee6afee57d3dd5"><td class="memItemLeft" align="right" valign="top"><a id="ac384484a4fbd72d8e3ee6afee57d3dd5"></a>
 override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnServerAddPlayer</b> (NetworkConnection conn)</td></tr>
 <tr class="separator:ac384484a4fbd72d8e3ee6afee57d3dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55136cf3bb10a2faefea02723413b3fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_server.html#a55136cf3bb10a2faefea02723413b3fd">HandleGameResults</a> (int localPlayerWinningPlacement, string nameOfWinner)</td></tr>
+<tr class="memdesc:a55136cf3bb10a2faefea02723413b3fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the results of the game and sets the readyToQuit flag. Needs the placement of the local player and the name of the winning player and writes them into a JSON that is used to give rewards in the framework. IMPORTANT: THIS HAS TO BE CALLED AT THE END OF THE GAME!  <a href="class_game_server.html#a55136cf3bb10a2faefea02723413b3fd">More...</a><br /></td></tr>
+<tr class="separator:a55136cf3bb10a2faefea02723413b3fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47bed051613fbfae87d91e09e8c88e0d"><td class="memItemLeft" align="right" valign="top"><a id="a47bed051613fbfae87d91e09e8c88e0d"></a>
 override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartClient</b> ()</td></tr>
 <tr class="separator:a47bed051613fbfae87d91e09e8c88e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a2e2b7beb56a63f8686e6c9a55c93d7ef"><td class="memItemLeft" align="right" valign="top"><a id="a2e2b7beb56a63f8686e6c9a55c93d7ef"></a>
-<a class="el" href="class_player_info.html">PlayerInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>LocalPlayerInfo</b> =&gt; localPlayerInfo</td></tr>
-<tr class="separator:a2e2b7beb56a63f8686e6c9a55c93d7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a749a880cc80db48812b2984daaf08b44"><td class="memItemLeft" align="right" valign="top"><a id="a749a880cc80db48812b2984daaf08b44"></a>
+<a class="el" href="class_player_info.html">PlayerInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PlayerInfos</b> =&gt; playerInfos</td></tr>
+<tr class="separator:a749a880cc80db48812b2984daaf08b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec94fdfad7e2d8b07ffc32c3c9fe14e8"><td class="memItemLeft" align="right" valign="top"><a id="aec94fdfad7e2d8b07ffc32c3c9fe14e8"></a>
+JSONNode&#160;</td><td class="memItemRight" valign="bottom"><b>GameInfos</b> =&gt; gameInfos</td></tr>
+<tr class="separator:aec94fdfad7e2d8b07ffc32c3c9fe14e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a0f3b744d39e0cdded6dd140bdf4eb0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_server.html#a3a0f3b744d39e0cdded6dd140bdf4eb0">playersWantToPlay</a> = 2</td></tr>
-<tr class="memdesc:a3a0f3b744d39e0cdded6dd140bdf4eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of player that want to play the game. The Server will wait until that number of players joined the game  <a href="class_game_server.html#a3a0f3b744d39e0cdded6dd140bdf4eb0">More...</a><br /></td></tr>
 <tr class="separator:a3a0f3b744d39e0cdded6dd140bdf4eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3210381f7662dc5d6c6980a74d327b9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game_manager.html">GameManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_server.html#a3210381f7662dc5d6c6980a74d327b9d">GameManager</a></td></tr>
 <tr class="memdesc:a3210381f7662dc5d6c6980a74d327b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <code><a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a></code>  <a href="class_game_server.html#a3210381f7662dc5d6c6980a74d327b9d">More...</a><br /></td></tr>
@@ -128,12 +133,57 @@ Public Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a3c162a8b059401bcf5b5585c97e8ad1c"><td class="memItemLeft" align="right" valign="top"><a id="a3c162a8b059401bcf5b5585c97e8ad1c"></a>
-static <a class="el" href="class_game_server.html">GameServer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b> =&gt; (<a class="el" href="class_game_server.html">GameServer</a>)singleton</td></tr>
+static <a class="el" href="class_game_server.html">GameServer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b> =&gt; (<a class="el" href="class_game_server.html">GameServer</a>) singleton</td></tr>
 <tr class="separator:a3c162a8b059401bcf5b5585c97e8ad1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class represents a game server. The server starts automatically and loads the player prefab into the online scene. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a55136cf3bb10a2faefea02723413b3fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55136cf3bb10a2faefea02723413b3fd">&#9670;&nbsp;</a></span>HandleGameResults()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameServer.HandleGameResults </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>localPlayerWinningPlacement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>nameOfWinner</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles the results of the game and sets the readyToQuit flag. Needs the placement of the local player and the name of the winning player and writes them into a JSON that is used to give rewards in the framework. IMPORTANT: THIS HAS TO BE CALLED AT THE END OF THE GAME! </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">localPlayerWinningPlacement</td><td>Placement of the local player</td></tr>
+    <tr><td class="paramname">nameOfWinner</td><td>Name of the winner</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aaf2d9dc28894649bc14dd873b8058e52"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaf2d9dc28894649bc14dd873b8058e52">&#9670;&nbsp;</a></span>Start()</h2>
 
@@ -195,7 +245,8 @@ static <a class="el" href="class_game_server.html">GameServer</a>&#160;</td><td 
       </table>
 </div><div class="memdoc">
 
-<p>The number of player that want to play the game. The Server will wait until that number of players joined the game </p>
+<p></p>
+<p>The number of player that want to play the game. The Server will wait until that number of players joined the game</p>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
@@ -210,7 +261,7 @@ static <a class="el" href="class_game_server.html">GameServer</a>&#160;</td><td 
 			<ul>
 				<li class="navelem"><a class="el" href="class_game_server.html">GameServer</a></li>
 				<li class="footer">
-					Generated on Fri Aug 28 2020 13:35:18 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Fri Aug 28 2020 17:31:37 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

@@ -123,9 +123,9 @@ override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartLocal
 <tr class="memitem:ad754b0231ab6a69ca6b01bbfed165c5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d">RpcSetRoundOverview</a> (bool first, int rounds, int[] roundpoints)</td></tr>
 <tr class="memdesc:ad754b0231ab6a69ca6b01bbfed165c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets and Formats the overview of all rounds for one player  <a href="class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d">More...</a><br /></td></tr>
 <tr class="separator:ad754b0231ab6a69ca6b01bbfed165c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fb5636f3f56eb8ce6746d153fc4d1f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3">RpcToggleRestartExit</a> (bool isActive)</td></tr>
-<tr class="memdesc:a4fb5636f3f56eb8ce6746d153fc4d1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switches between continue button (isActive = false) and exit + restart buttons (isActive = false).  <a href="class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3">More...</a><br /></td></tr>
-<tr class="separator:a4fb5636f3f56eb8ce6746d153fc4d1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac96aa8bd1f9970c6bf756084831555a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ac96aa8bd1f9970c6bf756084831555a4">RpcToggleExit</a> (bool isActive)</td></tr>
+<tr class="memdesc:ac96aa8bd1f9970c6bf756084831555a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switches between continue button (isActive = false) and exit button (isActive = true).  <a href="class_display_manager.html#ac96aa8bd1f9970c6bf756084831555a4">More...</a><br /></td></tr>
+<tr class="separator:ac96aa8bd1f9970c6bf756084831555a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a38e6fa6e724035f8d3e4269805d3c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6">RpcToggleRoundsOverview</a> (bool isActive, int rounds)</td></tr>
 <tr class="memdesc:a2a38e6fa6e724035f8d3e4269805d3c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows or hides the points overview of all rounds Sets the size of the component automatically by the number of rounds  <a href="class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6">More...</a><br /></td></tr>
 <tr class="separator:a2a38e6fa6e724035f8d3e4269805d3c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,9 +180,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a8978d1558f30519e68f4bb0d00cbed55"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a8978d1558f30519e68f4bb0d00cbed55">exitButton</a></td></tr>
 <tr class="memdesc:a8978d1558f30519e68f4bb0d00cbed55"><td class="mdescLeft">&#160;</td><td class="mdescRight">The "Beenden" Button on the result panel displayed when the game ends  <a href="class_display_manager.html#a8978d1558f30519e68f4bb0d00cbed55">More...</a><br /></td></tr>
 <tr class="separator:a8978d1558f30519e68f4bb0d00cbed55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a679fb30a60a9b618b6d32462b2cfedc2"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a679fb30a60a9b618b6d32462b2cfedc2">restartButton</a></td></tr>
-<tr class="memdesc:a679fb30a60a9b618b6d32462b2cfedc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The "Nochmal" Button on the result panel displayed when the game ends  <a href="class_display_manager.html#a679fb30a60a9b618b6d32462b2cfedc2">More...</a><br /></td></tr>
-<tr class="separator:a679fb30a60a9b618b6d32462b2cfedc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8b821945ce43f70da98e09a98cfa640"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640">continueButton</a></td></tr>
 <tr class="memdesc:ae8b821945ce43f70da98e09a98cfa640"><td class="mdescLeft">&#160;</td><td class="mdescRight">The "Weiter" Button at the bottom of the score overlay panel  <a href="class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640">More...</a><br /></td></tr>
 <tr class="separator:ae8b821945ce43f70da98e09a98cfa640"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -360,6 +357,35 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac96aa8bd1f9970c6bf756084831555a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac96aa8bd1f9970c6bf756084831555a4">&#9670;&nbsp;</a></span>RpcToggleExit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayManager.RpcToggleExit </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isActive</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Switches between continue button (isActive = false) and exit button (isActive = true). </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
 <a id="a295af77c32320feef855594d581bc141"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a295af77c32320feef855594d581bc141">&#9670;&nbsp;</a></span>RpcToggleExplanation()</h2>
 
@@ -385,35 +411,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Switches between visible explanation screen and visible score screen for every <a class="el" href="class_player.html" title="Represents a Player in the Game. Communicates with the GameManager to log Answers and change the curr...">Player</a> </p>
-
-</div>
-</div>
-<a id="a4fb5636f3f56eb8ce6746d153fc4d1f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fb5636f3f56eb8ce6746d153fc4d1f3">&#9670;&nbsp;</a></span>RpcToggleRestartExit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void DisplayManager.RpcToggleRestartExit </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isActive</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Switches between continue button (isActive = false) and exit + restart buttons (isActive = false). </p>
-<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -834,23 +831,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a679fb30a60a9b618b6d32462b2cfedc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a679fb30a60a9b618b6d32462b2cfedc2">&#9670;&nbsp;</a></span>restartButton</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">GameObject DisplayManager.restartButton</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The "Nochmal" Button on the result panel displayed when the game ends </p>
-<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
-
-</div>
-</div>
 <a id="a64291e78158f5523471edff64da982dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64291e78158f5523471edff64da982dc">&#9670;&nbsp;</a></span>resultOverlayCanvas</h2>
 
@@ -980,7 +960,7 @@ Public Attributes</h2></td></tr>
 			<ul>
 				<li class="navelem"><a class="el" href="class_display_manager.html">DisplayManager</a></li>
 				<li class="footer">
-					Generated on Fri Aug 28 2020 13:35:18 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Fri Aug 28 2020 17:31:37 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

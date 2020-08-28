@@ -1,21 +1,12 @@
 var searchData=
 [
-  ['removenotification_173',['RemoveNotification',['../class_notification_system.html#a1f36772a918a0d7b334f52060b602bea',1,'NotificationSystem']]],
-  ['restart_174',['Restart',['../class_game_manager.html#a1cbb012b22180860880a659142a0cd07',1,'GameManager.Restart()'],['../class_player_input.html#a9e6cf2c200e3f01bef9581ca68d44fdd',1,'PlayerInput.Restart()']]],
-  ['retrievequestion_175',['RetrieveQuestion',['../class_question.html#a55acea326292e1cc3f8d9d7d69fc3ca9',1,'Question']]],
-  ['retrievequestionset_176',['RetrieveQuestionSet',['../class_question_set.html#a7d7c2c0083762c6f23bff0f72f74ae5b',1,'QuestionSet']]],
-  ['rpcdeleteallanswercards_177',['RpcDeleteAllAnswerCards',['../class_display_manager.html#a914fd7408e299f64c9ec828a01375115',1,'DisplayManager']]],
-  ['rpcdeleteinputcard_178',['RpcDeleteInputCard',['../class_display_manager.html#aba0b827b3e42a74962dea56f1e8aedb9',1,'DisplayManager']]],
-  ['rpcdeletequestioncard_179',['RpcDeleteQuestionCard',['../class_display_manager.html#a4522dc196daddc23c27be02ffa770016',1,'DisplayManager']]],
-  ['rpcflip_180',['RpcFlip',['../class_card.html#a8e248eae5f0363abf63fdb0d3bbe44be',1,'Card']]],
-  ['rpcresultoverlaysetactive_181',['RpcResultOverlaySetActive',['../class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2',1,'DisplayManager']]],
-  ['rpcsetroundoverview_182',['RpcSetRoundOverview',['../class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d',1,'DisplayManager']]],
-  ['rpcslidetoposition_183',['RpcSlideToPosition',['../class_card.html#a78d676acc03df986003007e1a53344f8',1,'Card']]],
-  ['rpctoggleexplanation_184',['RpcToggleExplanation',['../class_display_manager.html#a295af77c32320feef855594d581bc141',1,'DisplayManager']]],
-  ['rpctogglerestartexit_185',['RpcToggleRestartExit',['../class_display_manager.html#a4fb5636f3f56eb8ce6746d153fc4d1f3',1,'DisplayManager']]],
-  ['rpctoggleroundsoverview_186',['RpcToggleRoundsOverview',['../class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6',1,'DisplayManager']]],
-  ['rpcupdatecard_187',['RpcUpdateCard',['../class_display_manager.html#a0ec8dcdb4997726f1fa574db434079d6',1,'DisplayManager']]],
-  ['rpcupdateexplanation_188',['RpcUpdateExplanation',['../class_display_manager.html#ace3d599ab3921a836fdf0ca67619cc55',1,'DisplayManager']]],
-  ['rpcupdateplayercanvasentry_189',['RpcUpdatePlayerCanvasEntry',['../class_display_manager.html#acbdf5d0e137d948abe3f321329b057bf',1,'DisplayManager']]],
-  ['rpcupdatescoreheadertext_190',['RpcUpdateScoreHeaderText',['../class_display_manager.html#a98038a87694376a27a208c357d7c606c',1,'DisplayManager']]]
+  ['selectanswer_192',['SelectAnswer',['../class_player_input.html#a781dbad5f4bbd2d35c030aa17dfda358',1,'PlayerInput']]],
+  ['showlong_193',['showLong',['../class_notification_canvas.html#a797b890584f856def5ba62f9a2ac576c',1,'NotificationCanvas']]],
+  ['showname_194',['ShowName',['../class_card.html#acded12e48c3fa3a0d4e187fee074cdde',1,'Card']]],
+  ['showshort_195',['showShort',['../class_notification_canvas.html#acd6bd44860e6ebf62a45d46341ff3017',1,'NotificationCanvas']]],
+  ['showstamps_196',['ShowStamps',['../class_card.html#ac6121e9ec26fd0133ca5e910418b89f5',1,'Card']]],
+  ['start_197',['Start',['../class_game_server.html#aaf2d9dc28894649bc14dd873b8058e52',1,'GameServer']]],
+  ['startgame_198',['StartGame',['../class_game_manager.html#a9193c24424f6a10c7d9df407264ed4fa',1,'GameManager']]],
+  ['starttimer_199',['StartTimer',['../class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f',1,'CountdownTimer']]],
+  ['stoptimer_200',['StopTimer',['../class_countdown_timer.html#aaab26a56e1372c22d07359200847bae6',1,'CountdownTimer']]]
 ];

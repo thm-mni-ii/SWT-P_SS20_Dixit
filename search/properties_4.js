@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['playername_262',['PlayerName',['../class_player.html#adacf1854e9a36d16ab527e6969998e90',1,'Player']]]
+  ['placement_261',['Placement',['../class_player.html#a16d40fe31a11fc059a47849bb33566a4',1,'Player']]]
 ];

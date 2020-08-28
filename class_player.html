@@ -110,6 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a66fa765495c346749cfa295d3e416403"><td class="memItemLeft" align="right" valign="top"><a id="a66fa765495c346749cfa295d3e416403"></a>
 override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartLocalPlayer</b> ()</td></tr>
 <tr class="separator:a66fa765495c346749cfa295d3e416403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4daa8029f05a3374b5061c46ee1f9d28"><td class="memItemLeft" align="right" valign="top"><a id="a4daa8029f05a3374b5061c46ee1f9d28"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CmdSendName</b> (string name)</td></tr>
+<tr class="separator:a4daa8029f05a3374b5061c46ee1f9d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6da72ff9a31d486131c3520fa96fe566"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a6da72ff9a31d486131c3520fa96fe566">CmdGiveAnswer</a> (string answer)</td></tr>
 <tr class="memdesc:a6da72ff9a31d486131c3520fa96fe566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the given Answer from a <a class="el" href="class_player.html" title="Represents a Player in the Game. Communicates with the GameManager to log Answers and change the curr...">Player</a> to the <a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a>.  <a href="class_player.html#a6da72ff9a31d486131c3520fa96fe566">More...</a><br /></td></tr>
 <tr class="separator:a6da72ff9a31d486131c3520fa96fe566"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,15 +128,21 @@ override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartLocal
 <tr class="memitem:ac741cd36dc75025442cf98d47840e6a0"><td class="memItemLeft" align="right" valign="top"><a id="ac741cd36dc75025442cf98d47840e6a0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>TargetSendTutorialNotification</b> (<a class="el" href="class_notification.html">Notification</a> notification)</td></tr>
 <tr class="separator:ac741cd36dc75025442cf98d47840e6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61ec43f6dadd02f80cf25143e253ed35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a61ec43f6dadd02f80cf25143e253ed35">KillGame</a> ()</td></tr>
-<tr class="memdesc:a61ec43f6dadd02f80cf25143e253ed35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quits the game  <a href="class_player.html#a61ec43f6dadd02f80cf25143e253ed35">More...</a><br /></td></tr>
-<tr class="separator:a61ec43f6dadd02f80cf25143e253ed35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adca54fdb6ca396bc5629c44d21b94bac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#adca54fdb6ca396bc5629c44d21b94bac">CmdRestart</a> ()</td></tr>
-<tr class="memdesc:adca54fdb6ca396bc5629c44d21b94bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells the server that this clients wants to restart the game  <a href="class_player.html#adca54fdb6ca396bc5629c44d21b94bac">More...</a><br /></td></tr>
-<tr class="separator:adca54fdb6ca396bc5629c44d21b94bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33108b994e8f525373b4f3d9163e87e2"><td class="memItemLeft" align="right" valign="top"><a id="a33108b994e8f525373b4f3d9163e87e2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RpcSetNameOfNewPlayer</b> (string playerName)</td></tr>
+<tr class="separator:a33108b994e8f525373b4f3d9163e87e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60174377c5e6a73165bedf697cbbab53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a60174377c5e6a73165bedf697cbbab53">CmdFinishGame</a> ()</td></tr>
+<tr class="memdesc:a60174377c5e6a73165bedf697cbbab53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finish the game.  <a href="class_player.html#a60174377c5e6a73165bedf697cbbab53">More...</a><br /></td></tr>
+<tr class="separator:a60174377c5e6a73165bedf697cbbab53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55cf8163f7a65bced6bb38808fdcfd58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a55cf8163f7a65bced6bb38808fdcfd58">TargetSendResults</a> (string winner)</td></tr>
+<tr class="memdesc:a55cf8163f7a65bced6bb38808fdcfd58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send results to the framework  <a href="class_player.html#a55cf8163f7a65bced6bb38808fdcfd58">More...</a><br /></td></tr>
+<tr class="separator:a55cf8163f7a65bced6bb38808fdcfd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:adacf1854e9a36d16ab527e6969998e90"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#adacf1854e9a36d16ab527e6969998e90">PlayerName</a> = null</td></tr>
+<tr class="memdesc:adacf1854e9a36d16ab527e6969998e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the player  <a href="class_player.html#adacf1854e9a36d16ab527e6969998e90">More...</a><br /></td></tr>
+<tr class="separator:adacf1854e9a36d16ab527e6969998e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a066d7cff53913d18e6d335d0f7e7cdb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game_manager.html">GameManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a066d7cff53913d18e6d335d0f7e7cdb9">gameManager</a></td></tr>
 <tr class="memdesc:a066d7cff53913d18e6d335d0f7e7cdb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <code><a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a></code>  <a href="class_player.html#a066d7cff53913d18e6d335d0f7e7cdb9">More...</a><br /></td></tr>
 <tr class="separator:a066d7cff53913d18e6d335d0f7e7cdb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,9 +155,9 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:adacf1854e9a36d16ab527e6969998e90"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#adacf1854e9a36d16ab527e6969998e90">PlayerName</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:adacf1854e9a36d16ab527e6969998e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the player  <a href="class_player.html#adacf1854e9a36d16ab527e6969998e90">More...</a><br /></td></tr>
-<tr class="separator:adacf1854e9a36d16ab527e6969998e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16d40fe31a11fc059a47849bb33566a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a16d40fe31a11fc059a47849bb33566a4">Placement</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a16d40fe31a11fc059a47849bb33566a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The placement of the player  <a href="class_player.html#a16d40fe31a11fc059a47849bb33566a4">More...</a><br /></td></tr>
+<tr class="separator:a16d40fe31a11fc059a47849bb33566a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa52ba65c04f17c836e35b645f2910c75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_card.html">Card</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#aa52ba65c04f17c836e35b645f2910c75">SelectedCard</a><code> [set]</code></td></tr>
 <tr class="memdesc:aa52ba65c04f17c836e35b645f2910c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">The currently selected card. Used in the "ChooseAnswer" phase  <a href="class_player.html#aa52ba65c04f17c836e35b645f2910c75">More...</a><br /></td></tr>
 <tr class="separator:aa52ba65c04f17c836e35b645f2910c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,6 +191,34 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sends the answer selected during the "ChoseAnswer" phase to the <code><a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a></code> </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="a60174377c5e6a73165bedf697cbbab53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60174377c5e6a73165bedf697cbbab53">&#9670;&nbsp;</a></span>CmdFinishGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Player.CmdFinishGame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finish the game. </p>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
@@ -249,62 +286,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="adca54fdb6ca396bc5629c44d21b94bac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adca54fdb6ca396bc5629c44d21b94bac">&#9670;&nbsp;</a></span>CmdRestart()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Player.CmdRestart </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Tells the server that this clients wants to restart the game </p>
-<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
-
-</div>
-</div>
-<a id="a61ec43f6dadd02f80cf25143e253ed35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61ec43f6dadd02f80cf25143e253ed35">&#9670;&nbsp;</a></span>KillGame()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Player.KillGame </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Quits the game </p>
-<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
-
-</div>
-</div>
 <a id="a239ff35f6195f738a2a38358370c7672"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a239ff35f6195f738a2a38358370c7672">&#9670;&nbsp;</a></span>OnStartServer()</h2>
 
@@ -368,6 +349,35 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="a55cf8163f7a65bced6bb38808fdcfd58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55cf8163f7a65bced6bb38808fdcfd58">&#9670;&nbsp;</a></span>TargetSendResults()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Player.TargetSendResults </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>winner</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Send results to the framework </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a066d7cff53913d18e6d335d0f7e7cdb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a066d7cff53913d18e6d335d0f7e7cdb9">&#9670;&nbsp;</a></span>gameManager</h2>
@@ -411,9 +421,26 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Property Documentation</h2>
 <a id="adacf1854e9a36d16ab527e6969998e90"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adacf1854e9a36d16ab527e6969998e90">&#9670;&nbsp;</a></span>PlayerName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Player.PlayerName = null</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The name of the player </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
+<a id="a16d40fe31a11fc059a47849bb33566a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16d40fe31a11fc059a47849bb33566a4">&#9670;&nbsp;</a></span>Placement</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -422,7 +449,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string Player.PlayerName</td>
+          <td class="memname">int Player.Placement</td>
         </tr>
       </table>
   </td>
@@ -432,7 +459,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The name of the player </p>
+<p>The placement of the player </p>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
@@ -472,7 +499,7 @@ Properties</h2></td></tr>
 			<ul>
 				<li class="navelem"><a class="el" href="class_player.html">Player</a></li>
 				<li class="footer">
-					Generated on Fri Aug 28 2020 13:35:18 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Fri Aug 28 2020 17:31:37 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

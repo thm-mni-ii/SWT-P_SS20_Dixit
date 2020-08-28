@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['notification_170',['Notification',['../class_notification.html#a0ce0501f862b0f1e89cf26734cbafd3a',1,'Notification.Notification(NotificationTypes notificationType, string notificationLong, string notificationShort)'],['../class_notification.html#a27fd31507dd7c3a6309d213da00b1897',1,'Notification.Notification()']]]
+  ['onstartclient_173',['OnStartClient',['../class_card.html#ad98e869c733f57b22d6470a2410a370e',1,'Card']]],
+  ['onstartserver_174',['OnStartServer',['../class_game_manager.html#a9e998e4f3eb61fbfc0149a7d3cfaff4a',1,'GameManager.OnStartServer()'],['../class_player.html#a239ff35f6195f738a2a38358370c7672',1,'Player.OnStartServer()']]]
 ];

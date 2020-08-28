@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['onstartclient_62',['OnStartClient',['../class_card.html#ad98e869c733f57b22d6470a2410a370e',1,'Card']]],
-  ['onstartserver_63',['OnStartServer',['../class_game_manager.html#a9e998e4f3eb61fbfc0149a7d3cfaff4a',1,'GameManager.OnStartServer()'],['../class_player.html#a239ff35f6195f738a2a38358370c7672',1,'Player.OnStartServer()']]],
-  ['ontimeoutdefault_64',['OnTimeoutDefault',['../class_countdown_timer.html#a0d45723153631807778f44d8019dd506',1,'CountdownTimer']]],
-  ['ontimeoutgiveanswer_65',['OnTimeoutGiveAnswer',['../class_countdown_timer.html#a41935cffc3bf2444e5627677b61f9b7d',1,'CountdownTimer']]],
-  ['ontimeoutscorescreen_66',['OnTimeoutScoreScreen',['../class_countdown_timer.html#ab9ac3363a7918558c128e34c176244e1',1,'CountdownTimer']]],
-  ['ontimeoutselectanswer_67',['OnTimeoutSelectAnswer',['../class_countdown_timer.html#a4b3ff1321039b0fbd58a691bda375d98',1,'CountdownTimer']]]
+  ['placement_69',['Placement',['../class_player.html#a16d40fe31a11fc059a47849bb33566a4',1,'Player']]],
+  ['player_70',['Player',['../class_player.html',1,'']]],
+  ['playercanvasentry_71',['PlayerCanvasEntry',['../class_display_manager.html#a1fe608688e3831a291d18fa52b26374d',1,'DisplayManager']]],
+  ['playerinfo_72',['PlayerInfo',['../class_player_info.html',1,'']]],
+  ['playerinput_73',['PlayerInput',['../class_player_input.html',1,'']]],
+  ['playername_74',['PlayerName',['../class_player.html#adacf1854e9a36d16ab527e6969998e90',1,'Player']]],
+  ['playerswanttoplay_75',['playersWantToPlay',['../class_game_server.html#a3a0f3b744d39e0cdded6dd140bdf4eb0',1,'GameServer']]]
 ];

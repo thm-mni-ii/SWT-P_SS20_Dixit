@@ -1,14 +1,9 @@
 var searchData=
 [
-  ['name_51',['Name',['../class_question_set.html#aaa214fc59b671e91f73dd302bb4f833c',1,'QuestionSet']]],
-  ['notification_52',['Notification',['../class_notification.html',1,'Notification'],['../class_notification_canvas.html#aae539cdcd762e95e5ee9632225f4f108',1,'NotificationCanvas.notification()'],['../class_notification.html#a0ce0501f862b0f1e89cf26734cbafd3a',1,'Notification.Notification(NotificationTypes notificationType, string notificationLong, string notificationShort)'],['../class_notification.html#a27fd31507dd7c3a6309d213da00b1897',1,'Notification.Notification()']]],
-  ['notificationcanvas_53',['NotificationCanvas',['../class_notification_canvas.html',1,'']]],
-  ['notificationlong_54',['notificationLong',['../class_notification.html#af7e9d2dcb6b88d1db806ac97879339c5',1,'Notification']]],
-  ['notificationprefab_55',['NotificationPrefab',['../class_notification_system.html#a8a69e44f6312fc44b577cd19040bd744',1,'NotificationSystem']]],
-  ['notificationshort_56',['notificationShort',['../class_notification.html#abc1ec01f613658648f0b002429756a9e',1,'Notification']]],
-  ['notificationspace_57',['notificationSpace',['../class_notification_system.html#a2520bd5a0b820c2c34b581b7e33b0df1',1,'NotificationSystem']]],
-  ['notificationsystem_58',['NotificationSystem',['../class_notification_system.html',1,'NotificationSystem'],['../class_notification_canvas.html#a172811de40738d249ff5be08113655ef',1,'NotificationCanvas.notificationSystem()']]],
-  ['notificationtype_59',['notificationType',['../class_notification.html#ae6b668b5da6a595c3dd03fdbea45bf7e',1,'Notification']]],
-  ['notificationtypes_60',['NotificationTypes',['../class_notification.html#a05d2ebed04258594c8eecee6fcc753a9',1,'Notification']]],
-  ['numberofrounds_61',['numberOfRounds',['../class_game_manager.html#ade43917fdfb32ef7dd725565023caaf3',1,'GameManager']]]
+  ['onstartclient_63',['OnStartClient',['../class_card.html#ad98e869c733f57b22d6470a2410a370e',1,'Card']]],
+  ['onstartserver_64',['OnStartServer',['../class_game_manager.html#a9e998e4f3eb61fbfc0149a7d3cfaff4a',1,'GameManager.OnStartServer()'],['../class_player.html#a239ff35f6195f738a2a38358370c7672',1,'Player.OnStartServer()']]],
+  ['ontimeoutdefault_65',['OnTimeoutDefault',['../class_countdown_timer.html#a0d45723153631807778f44d8019dd506',1,'CountdownTimer']]],
+  ['ontimeoutgiveanswer_66',['OnTimeoutGiveAnswer',['../class_countdown_timer.html#a41935cffc3bf2444e5627677b61f9b7d',1,'CountdownTimer']]],
+  ['ontimeoutscorescreen_67',['OnTimeoutScoreScreen',['../class_countdown_timer.html#ab9ac3363a7918558c128e34c176244e1',1,'CountdownTimer']]],
+  ['ontimeoutselectanswer_68',['OnTimeoutSelectAnswer',['../class_countdown_timer.html#a4b3ff1321039b0fbd58a691bda375d98',1,'CountdownTimer']]]
 ];

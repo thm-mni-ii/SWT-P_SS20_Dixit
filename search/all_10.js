@@ -1,16 +1,15 @@
 var searchData=
 [
-  ['scorebutton_103',['scoreButton',['../class_display_manager.html#a1fb62f699140f11557e3fe69142d27d2',1,'DisplayManager']]],
-  ['scoreheader_104',['ScoreHeader',['../class_display_manager.html#a03a9fe661db155cb547ac129b83eff24',1,'DisplayManager']]],
-  ['selectanswer_105',['SelectAnswer',['../class_player_input.html#a781dbad5f4bbd2d35c030aa17dfda358',1,'PlayerInput']]],
-  ['selectedcard_106',['SelectedCard',['../class_player.html#aa52ba65c04f17c836e35b645f2910c75',1,'Player']]],
-  ['showlong_107',['showLong',['../class_notification_canvas.html#a797b890584f856def5ba62f9a2ac576c',1,'NotificationCanvas']]],
-  ['showname_108',['ShowName',['../class_card.html#acded12e48c3fa3a0d4e187fee074cdde',1,'Card']]],
-  ['showshort_109',['showShort',['../class_notification_canvas.html#acd6bd44860e6ebf62a45d46341ff3017',1,'NotificationCanvas']]],
-  ['showstamps_110',['ShowStamps',['../class_card.html#ac6121e9ec26fd0133ca5e910418b89f5',1,'Card']]],
-  ['start_111',['Start',['../class_game_server.html#aaf2d9dc28894649bc14dd873b8058e52',1,'GameServer']]],
-  ['startfacedown_112',['startFacedown',['../class_card.html#a98dd958f8c723435d2153fc0744b79dd',1,'Card']]],
-  ['startgame_113',['StartGame',['../class_game_manager.html#a9193c24424f6a10c7d9df407264ed4fa',1,'GameManager']]],
-  ['starttimer_114',['StartTimer',['../class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f',1,'CountdownTimer']]],
-  ['stoptimer_115',['StopTimer',['../class_countdown_timer.html#aaab26a56e1372c22d07359200847bae6',1,'CountdownTimer']]]
+  ['targetsendnotification_116',['TargetSendNotification',['../class_player.html#ac2dc8a9da3b74a871b8e6f567d6a73ef',1,'Player']]],
+  ['targetsendresults_117',['TargetSendResults',['../class_player.html#a55cf8163f7a65bced6bb38808fdcfd58',1,'Player']]],
+  ['text_118',['text',['../class_card.html#a7688d0469a1ac65d923ead8373994e85',1,'Card']]],
+  ['textpanel_119',['TextPanel',['../class_display_manager.html#af6b93b4b67c1313f4b9b1c2f82f0ccb9',1,'DisplayManager']]],
+  ['textpanelentry_120',['TextPanelEntry',['../class_display_manager.html#ab5cd5aee6e71c736e2e392716a92eaa2',1,'DisplayManager']]],
+  ['timer_121',['timer',['../class_game_manager.html#afa571c403e335f212cb87f55daba90aa',1,'GameManager']]],
+  ['timerforgiveanswer_122',['timerForGiveAnswer',['../class_game_manager.html#a634a07ff3b86a0202236e935cfa80b12',1,'GameManager']]],
+  ['timermodes_123',['timerModes',['../class_countdown_timer.html#aa4c1404928f4dfdf65f163a7b4a9ee8a',1,'CountdownTimer']]],
+  ['timertocheckresults_124',['timerToCheckResults',['../class_game_manager.html#a403d6dae4d1b52faa248c4ef301838ea',1,'GameManager']]],
+  ['timertochooseanswer_125',['timerToChooseAnswer',['../class_game_manager.html#a9a7054c93fe14d31ec9b9ae7bdc1a657',1,'GameManager']]],
+  ['toggleexplanation_126',['ToggleExplanation',['../class_display_manager.html#aa2323b0d2472eb7e0916e2edeacfed66',1,'DisplayManager.ToggleExplanation()'],['../class_player_input.html#ae0eebae1c90abeadea870b5b228a16fd',1,'PlayerInput.ToggleExplanation()']]],
+  ['type_127',['type',['../class_card.html#ad1eec501ef5c770decb91a83d18934a7',1,'Card']]]
 ];

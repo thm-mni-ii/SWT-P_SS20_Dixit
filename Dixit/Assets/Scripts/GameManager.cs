@@ -58,6 +58,27 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     public DisplayManager displayManager;
 
+    /// <summary>
+    /// PlayerCanvasNames Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer PlayerCanvasNames;
+    /// <summary>
+    /// PlayerCanvasScores Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer PlayerCanvasScores;
+    /// <summary>
+    /// ScoreResultsNames Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer ScoreResultsNames;
+    /// <summary>
+    /// ScoreResultsScores Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer ScoreResultsScores;
+
     private enum Phase
     {
         WriteAnswer,
@@ -154,7 +175,11 @@ public class GameManager : NetworkBehaviour
         foreach ((Player p, int index) in Utils.GetPlayersIndexed())
         {
             displayManager.RpcUpdatePlayerCanvasEntry(index, p.PlayerName, "0");
+            PlayerCanvasNames.RpcAssimilateSize();
+            PlayerCanvasScores.RpcAssimilateSize();
             displayManager.UpdateTextPanelEntry(index, p.PlayerName, 0);
+            ScoreResultsNames.RpcAssimilateSize();
+            ScoreResultsScores.RpcAssimilateSize();
         }
 
 
@@ -506,6 +531,8 @@ public class GameManager : NetworkBehaviour
             string player = Utils.GetIdentity(points.Key).GetComponent<Player>().PlayerName;
             string playerPoints = points.Value.ToString();
             displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
+            PlayerCanvasNames.RpcAssimilateSize();
+            PlayerCanvasScores.RpcAssimilateSize();
             idx--;
         }
     }
@@ -526,6 +553,8 @@ public class GameManager : NetworkBehaviour
             string player = Utils.GetIdentity(points.Key).GetComponent<Player>().PlayerName;
             int playerPoints = points.Value;
             displayManager.UpdateTextPanelEntry(idx, player, playerPoints, gameend);
+            ScoreResultsNames.RpcAssimilateSize();
+            ScoreResultsScores.RpcAssimilateSize();
 
 
             if(gameend)

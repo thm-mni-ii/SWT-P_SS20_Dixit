@@ -53,6 +53,11 @@ public class GameServer : NetworkManager
     /// </summary>
     private bool readyToQuit;
 
+    /// <summary>
+    /// Stores whether the client ties to connect at the moment.
+    /// </summary>
+    private bool tryingToConnect;
+
     public PlayerInfo PlayerInfos => playerInfos;
 
     public JSONNode GameInfos => gameInfos;
@@ -145,10 +150,12 @@ public class GameServer : NetworkManager
     /// If so the client tries to connect and the disconnect timer is updated.
     /// </summary>
     private void Update()
-    {
+    {   
         // Try connecting if not host
-        if (!isHost && !NetworkClient.isConnected)
+        if (!isHost && !NetworkClient.isConnected && !tryingToConnect)
         {
+            tryingToConnect= true;
+
             disconnectTimer -= Time.deltaTime;
 
             if (disconnectTimer <= 0f)
@@ -221,7 +228,14 @@ public class GameServer : NetworkManager
     /// </summary>
     private void LoadPlayerInfoMockup()
     {
-        playerInfos = new PlayerInfo("Mustermann", true);
+        isHost = true;
+        playerInfos = new PlayerInfo("Mustermann", isHost);
+
+        gameInfos = new JSONObject();
+        gameInfos.Add("Question Set", "1");
+        gameInfos.Add("Rounds", "4");
+        gameInfos.Add("Answer Time", "15");
+        gameInfos.Add("Picking Time", "15");
     }
 
     /// <summary>

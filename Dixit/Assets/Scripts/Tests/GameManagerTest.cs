@@ -38,7 +38,7 @@ namespace Tests
             gameManager.timerToChooseAnswer = 3;
 
             yield return CardsSpawned();
-            for(var i = 1 ; i <= 3 ; i++)
+            for(var i = 1; i <= 3; i++)
             {
                 yield return AnswersGiven(i);
                 yield return AnswersChosen(i);
@@ -50,7 +50,20 @@ namespace Tests
             var conn = new NetworkConnectionToClient(2);
             NetworkServer.AddConnection(conn);
             gameServer.OnServerAddPlayer(conn);
+
             yield return new WaitForSeconds(1f);
+
+            foreach((var player, var idx) in Utils.GetPlayersIndexed())
+            {
+                if(player.PlayerName == null || player.PlayerName =="")
+                {   
+                    player.PlayerName = "Mustermann" + idx;
+                    player.CmdSendName( "Mustermann" + idx);
+                }
+            }   
+
+            yield return new WaitForSeconds(1f);
+            
             Assert.NotNull(GameObject.FindGameObjectWithTag("QuestionCard"), "No QuestionCard spawned");
             Assert.NotNull(GameObject.FindGameObjectWithTag("InputCard"), "No InputCard spawned");
             yield return null;

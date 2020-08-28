@@ -148,12 +148,23 @@ public class Player : NetworkBehaviour
     }
 
     /// <summary>
-    /// Finish the game send results to the framework.
+    /// Finish the game.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Command]
     public void CmdFinishGame()
     {
-        GameServer.Instance.HandleGameResults(Placement, gameManager.GetNameOfWinner());
+        TargetSendResults(gameManager.GetNameOfWinner());
+    }
+
+
+    /// <summary>
+    /// Send results to the framework
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    [TargetRpc]
+    public void TargetSendResults(string winner)
+    {
+        GameServer.Instance.HandleGameResults(Placement,winner);
     }
 }

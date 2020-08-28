@@ -117,6 +117,7 @@ public class Player : NetworkBehaviour
     {
         notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
     }
+    [TargetRpc]
     public void TargetSendTutorialNotification(Notification notification)
     {
         if (enableTutorial)

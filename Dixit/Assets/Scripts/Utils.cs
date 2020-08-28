@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* created by: SWT-P_SS_20_Dixit */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,10 @@ using UnityEngine;
 using Mirror;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Utilities used throughout the program
+/// </summary>
+/// \author SWT-P_SS_20_Dixit
 public static class Utils
 {
     /// <summary>

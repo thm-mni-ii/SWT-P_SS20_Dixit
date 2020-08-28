@@ -1,10 +1,16 @@
-﻿using System;
+﻿/* created by: SWT-P_SS_20_Dixit */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Controlls the notifications shown during a game.
+/// Contains methods to show, animate or update notifications.
+/// </summary>
+/// \author SWT-P_SS_20_Dixit
 public class NotificationCanvas : MonoBehaviour
 {
     /// <summary>

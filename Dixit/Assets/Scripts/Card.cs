@@ -24,6 +24,10 @@ public class Card : NetworkBehaviour
     [SyncVar, HideInInspector]
     public string text;
 
+    /// <summary>
+    /// The name of the player
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [SyncVar, HideInInspector]
     public string playerName;
 

@@ -20,8 +20,12 @@ public class GameManager : NetworkBehaviour
 {
     private readonly Dictionary<UInt32, string> answers = new Dictionary<UInt32, string>();
     private readonly Dictionary<UInt32, UInt32> choices = new Dictionary<UInt32, UInt32>();
-    public Dictionary<UInt32, int> points { get; } = new Dictionary<UInt32, int>();
     private Dictionary<UInt32, int>[] roundPoints;
+    /// <summary>
+    /// Dictionary of the points each player has at any given time during the game
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public Dictionary<UInt32, int> points { get; } = new Dictionary<UInt32, int>();
 
     //for storing points sorted by value
     private List<KeyValuePair<UInt32, int>> pointsList;

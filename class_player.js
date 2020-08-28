@@ -8,6 +8,7 @@ var class_player =
     [ "OnStartLocalPlayer", "class_player.html#a66fa765495c346749cfa295d3e416403", null ],
     [ "OnStartServer", "class_player.html#a239ff35f6195f738a2a38358370c7672", null ],
     [ "TargetSendNotification", "class_player.html#ac2dc8a9da3b74a871b8e6f567d6a73ef", null ],
+    [ "TargetSendTutorialNotification", "class_player.html#ac741cd36dc75025442cf98d47840e6a0", null ],
     [ "gameManager", "class_player.html#a066d7cff53913d18e6d335d0f7e7cdb9", null ],
     [ "PlayerName", "class_player.html#adacf1854e9a36d16ab527e6969998e90", null ],
     [ "SelectedCard", "class_player.html#aa52ba65c04f17c836e35b645f2910c75", null ]

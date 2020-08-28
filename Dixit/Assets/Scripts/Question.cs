@@ -27,12 +27,16 @@ public class Question
     public int Difficulty { get; set; }
 
     /// <summary>
-    /// The correct answer of this question
+    /// An explanation for the correct answer
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public string Explanation { get; set; }
 
+    /// <summary>
+    /// The correct answer of this question
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public string Answer { get; set; }
 

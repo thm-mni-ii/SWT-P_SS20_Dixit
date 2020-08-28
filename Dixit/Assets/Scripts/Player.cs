@@ -110,7 +110,7 @@ public class Player : NetworkBehaviour
     /// <summary>
     /// Displays a Notification to the client
     /// </summary>
-    /// <param name="message">The content of the notification</param>
+    /// <param name="notification">The notification to send</param>
     /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
     public void TargetSendNotification(Notification notification)

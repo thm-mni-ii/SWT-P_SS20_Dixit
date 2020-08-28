@@ -230,6 +230,9 @@ MonoBehaviour:
   - {fileID: 449457969102196780, guid: 2c16eab075ec1a30a98e00d2f287541a, type: 3}
   - {fileID: 5975223065403753017, guid: 0f46702ca30561c00ab8197fa964e4c7, type: 3}
   - {fileID: 1191448203220248124, guid: 2fd74dfdcb8e90f23a6028fae337d3f7, type: 3}
+  disconnectWaitTime: 10
+  playersWantToPlay: 2
+  GameManager: {fileID: 0}
 --- !u!4 &270508680
 Transform:
   m_ObjectHideFlags: 0

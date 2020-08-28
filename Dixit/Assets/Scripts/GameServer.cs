@@ -90,9 +90,9 @@ public class GameServer : NetworkManager
         readyToQuit = false;
         isHost = false;
 
-        //LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
+        LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
 
-        LoadPlayerInfo();             // <- FOR RELEASE
+        /*LoadPlayerInfo();             // <- FOR RELEASE
 
         if (isHost)
         {
@@ -102,6 +102,7 @@ public class GameServer : NetworkManager
         {
             disconnectTimer = disconnectWaitTime;
         }
+        */
 
     }
 
@@ -233,7 +234,7 @@ public class GameServer : NetworkManager
 
         gameInfos = new JSONObject();
         gameInfos.Add("Question Set", "1");
-        gameInfos.Add("Rounds", "4");
+        gameInfos.Add("Rounds", "3");
         gameInfos.Add("Answer Time", "15");
         gameInfos.Add("Picking Time", "15");
     }

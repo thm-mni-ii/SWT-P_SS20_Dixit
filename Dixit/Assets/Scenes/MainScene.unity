@@ -316,12 +316,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 225759682}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &225759685 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1227358723152180610, guid: f88226e001e7c6b478b8ff5f1177e5d8,
-    type: 3}
-  m_PrefabInstance: {fileID: 225759682}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &225759686 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8393816216916409666, guid: f88226e001e7c6b478b8ff5f1177e5d8,
@@ -814,12 +808,13 @@ MonoBehaviour:
   TextPanel: {fileID: 225759695}
   resultOverlayCanvas: {fileID: 225759692}
   exitButton: {fileID: 225759699}
-  restartButton: {fileID: 225759685}
   continueButton: {fileID: 225759684}
   explanationButton: {fileID: 225759696}
   scoreButton: {fileID: 225759694}
   roundsOverview: {fileID: 1666257379}
   roundsOverview_text: {fileID: 225759693}
+  normalTimer: {fileID: 1882235392}
+  overlayTimer: {fileID: 1899029240}
 --- !u!114 &716002894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,7 +858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 509522603, guid: f61ee8159d5c422a89ff5cf088723f5b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -150.00212
+      value: -150.00214
       objectReference: {fileID: 0}
     - target: {fileID: 747145164811176752, guid: f61ee8159d5c422a89ff5cf088723f5b,
         type: 3}
@@ -1267,6 +1262,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11ad84ace0d3e84779747c133101fb2c, type: 3}
+--- !u!1 &1882235392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 747145166168994389, guid: f61ee8159d5c422a89ff5cf088723f5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 775535042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1899029240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8261602924943492783, guid: f88226e001e7c6b478b8ff5f1177e5d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 225759682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1020348514493271558
 MonoBehaviour:
   m_ObjectHideFlags: 0

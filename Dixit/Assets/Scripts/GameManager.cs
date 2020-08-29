@@ -231,6 +231,7 @@ public class GameManager : NetworkBehaviour
 
     private void WriteAnswerPhase(Question question)
     {
+        displayManager.RpcShowNormalTimer();
         //render question cards at client
         var cardGo = Instantiate(m_questionCardPrefab, new Vector3(0, 100, -1), Quaternion.identity);
         var card = cardGo.GetComponent<Card>();
@@ -289,6 +290,7 @@ public class GameManager : NetworkBehaviour
         { 
             yield return new WaitForSeconds(1f);
         }
+        displayManager.RpcShowOverlayTimer();
         StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
         timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
         
@@ -296,6 +298,7 @@ public class GameManager : NetworkBehaviour
 
     private void ChooseAnswerPhase()
     {
+        displayManager.RpcShowNormalTimer();
         if (currentRound == 0)
         {
             foreach (var p in Utils.GetPlayers())
@@ -349,6 +352,7 @@ public class GameManager : NetworkBehaviour
 
     private void EvaluationPhase()
     {
+        displayManager.RpcHideAllTimers();
         Dictionary<UInt32, int> numOfSuccessfulDeceptionsPerPlayer = new Dictionary<uint, int>();
         // eval points
         foreach (var choice in choices)

@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 2312984563237077726}
   - component: {fileID: 8830661676651628038}
   - component: {fileID: 8859666519553263088}
+  - component: {fileID: 1644676204520573071}
   m_Layer: 5
   m_Name: OptionsOverlay
   m_TagString: Untagged
@@ -1051,6 +1052,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1644676204520573071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999576614264446675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57566cd41879304798dfc3a8599687d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioMixer: {fileID: 24100000, guid: 25e23b91d02451841a6954c22bb21dce, type: 2}
+  m_muted: -80
+  m_unmuted: 0
 --- !u!1 &2824198034899174238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1078,7 @@ GameObject:
   - component: {fileID: 3164107867154647013}
   - component: {fileID: 7446306134146709309}
   - component: {fileID: 7850150379112832761}
+  - component: {fileID: 2558468266631285357}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -1129,6 +1146,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2558468266631285357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824198034899174238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57566cd41879304798dfc3a8599687d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioMixer: {fileID: 0}
+  m_muted: -80
+  m_unmuted: 0
 --- !u!1 &3234139972031079370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,6 +3404,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1644676204520573071}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ToggleMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 224340200432122086, guid: 6233c25d2168e7547a9c0d873603ee34,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3535,6 +3582,41 @@ PrefabInstance:
     - target: {fileID: 1500480367090248, guid: 6233c25d2168e7547a9c0d873603ee34, type: 3}
       propertyPath: m_Name
       value: SFXToggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1644676204520573071}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ToggleSfx
+      objectReference: {fileID: 0}
+    - target: {fileID: 114295614051445386, guid: 6233c25d2168e7547a9c0d873603ee34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 224340200432122086, guid: 6233c25d2168e7547a9c0d873603ee34,
         type: 3}

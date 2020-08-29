@@ -78,5 +78,21 @@ namespace Tests
 
             Assert.IsFalse(Utils.AnswersAreEqual("Ein Horn", "Einhorn"));
         }
+
+        [Test]
+        public void RemoveSpacesTest()
+        {
+            Assert.AreEqual("Hello World", Utils.RemoveSpaces("Hello  World"), "2 spaces");
+            Assert.AreEqual("Hello World", Utils.RemoveSpaces("Hello   World"), "3 spaces");
+            Assert.AreEqual("Hello World", Utils.RemoveSpaces(" Hello World"), "1 space at the start");
+            Assert.AreEqual("Hello World", Utils.RemoveSpaces("Hello World "), "1 space at the end");
+            Assert.AreEqual("Hello World", Utils.RemoveSpaces(" Hello World "), "1 space at start and end");
+            Assert.AreEqual("HelloWorld", Utils.RemoveSpaces(" HelloWorld "), "1 space at start and end (no moddle)");
+            Assert.AreEqual("HelloWorld", Utils.RemoveSpaces("HelloWorld "), "1 space at the end (no middle)");
+            Assert.AreEqual("HelloWorld", Utils.RemoveSpaces("HelloWorld  "), "2 spaces at the end (no middle)");
+            Assert.AreEqual("HelloWorld", Utils.RemoveSpaces("  HelloWorld"), "2 spaces at the start (no middle)");
+            Assert.AreEqual("HelloWorld", Utils.RemoveSpaces("  HelloWorld  "), "2 spaces at start and end (no middle)");
+            Assert.AreEqual("Hello World foo bar", Utils.RemoveSpaces("Hello  World foo bar"), "2 spaces and more words");
+        }
     }
 }

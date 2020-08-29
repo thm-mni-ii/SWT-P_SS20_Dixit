@@ -39,6 +39,16 @@ namespace Tests
             gameServer.OnServerAddPlayer(conn);
             yield return new WaitForSeconds(1f);
 
+            foreach((var player, var idx) in Utils.GetPlayersIndexed())
+            {
+                if(player.PlayerName == null || player.PlayerName =="")
+                {   
+                    player.PlayerName = "Mustermann" + idx;
+                    player.CmdSendName( "Mustermann" + idx);
+                }
+            }
+            yield return new WaitForSeconds(1f);
+
             questionGo = GameObject.FindGameObjectWithTag("QuestionCard");
             inputGo = GameObject.FindGameObjectWithTag("InputCard");
 

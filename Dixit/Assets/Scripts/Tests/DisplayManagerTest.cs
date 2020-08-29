@@ -27,6 +27,18 @@ namespace Tests
                 var conn = new NetworkConnectionToClient(2);
                 NetworkServer.AddConnection(conn);
                 gameServer.OnServerAddPlayer(conn);
+                
+                yield return new WaitForSeconds(1f);
+
+                foreach((var player, var idx) in Utils.GetPlayersIndexed())
+                {
+                    if(player.PlayerName == null || player.PlayerName =="")
+                    {   
+                        player.PlayerName = "Mustermann" + idx;
+                        player.CmdSendName( "Mustermann" + idx);
+                    }
+                }   
+
                 yield return new WaitForSeconds(1f);
                 displayManager = GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
                 gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -134,7 +146,7 @@ namespace Tests
 
         private IEnumerator Endscreen()
         {
-            displayManager.RpcToggleRestartExit(true);
+            displayManager.RpcToggleExit(true);
             yield return new WaitForEndOfFrame();
             Assert.IsFalse(displayManager.continueButton.activeInHierarchy, "Score Button is visible on endscreen");
             Assert.IsFalse(displayManager.explanationButton.activeInHierarchy, "Explanation button is visible on endscreen");

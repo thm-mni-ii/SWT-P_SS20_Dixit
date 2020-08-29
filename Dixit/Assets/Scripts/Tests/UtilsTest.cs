@@ -74,7 +74,7 @@ namespace Tests
 
             Assert.IsTrue(Utils.AnswersAreEqual("Liter", "Lieter"));
 
-            Assert.IsTrue(Utils.AnswersAreEqual("Ja", "Je"));
+            Assert.IsFalse(Utils.AnswersAreEqual("Ja", "Je"));
 
             Assert.IsFalse(Utils.AnswersAreEqual("Ein Horn", "Einhorn"));
         }

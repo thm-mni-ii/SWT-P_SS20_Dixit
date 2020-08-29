@@ -127,7 +127,7 @@ public static class Utils
         s1 = AllNumbersInGermanWords(s1);
         s2 = AllNumbersInGermanWords(s2);
 
-        if(levenshtein(s1,s2) <= 1)
+        if(levenshtein(s1,s2) <= Math.Min(s1.Length, s2.Length) * 0.2f)
             return true;
 
         // do not check lower or upper
@@ -137,6 +137,12 @@ public static class Utils
         return s1 == s2;
     }
 
+    /// <summary>
+    /// Removes reduntant spaces between words and trims spaces at the start and end of the answer.
+    /// </summary>
+    /// <param name="s"> The answer</param>
+    /// <returns>Whehter the answers are equal</returns>
+    /// \author SWT-P_SS_20_Dixit
     public static string RemoveSpaces(string s)
     {
         s = s.Trim();

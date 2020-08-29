@@ -1,4 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -20,21 +21,25 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ScoreHeader;
+
     /// <summary>
     /// Content Component of the Explanations ScrollView
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public TextMeshProUGUI ExplanationTMP;
+
     /// <summary>
     /// ScrollView for Explanations
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject Explanations;
+
     /// <summary>
     /// GameObjects corresponding to the playernames and overall scores displayed on top right of the screen
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject[] PlayerCanvasEntry = new GameObject[5];
+
     /// <summary>
     /// GameObject corresponding to the playernames and round scores on the panel shown at the end of each round
     /// </summary>
@@ -46,7 +51,9 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject TextPanel;
-    private int roundnumber=0;
+
+    private int roundnumber = 0;
+
     /// <summary>
     /// Score Overlay Canvas UI element
     /// </summary>
@@ -64,21 +71,25 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject exitButton;
+
     /// <summary>
     /// The "Weiter" Button at the bottom of the score overlay panel
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject continueButton;
+
     /// <summary>
     /// Button at the side of the score overlay panel; toggles Explanation Screen
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject explanationButton;
+
     /// <summary>
     /// Button at the side of the score overlay panel; toggles Score Screen
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject scoreButton;
+
     /// <summary>
     /// Button at the upper left corner of the screen; activates Options Screen
     /// </summary>
@@ -96,11 +107,24 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject roundsOverview;
+
     /// <summary>
     /// Textfield for all round results overview
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject roundsOverview_text;
+
+    /// <summary>
+    /// Timer that is visible during a round
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public GameObject normalTimer;
+
+    /// <summary>
+    /// Timer that is visible during eval phase
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public GameObject overlayTimer;
 
     [Client]
     public override void OnStartLocalPlayer()
@@ -168,12 +192,14 @@ public class DisplayManager : NetworkBehaviour
     {
         var text_Component = roundsOverview_text.GetComponent<TMP_Text>();
         var formated = "";
-        if(first){
+        if (first)
+        {
             text_Component.text = "";
             for (int i = 0; i < rounds; i++)
             {
-                formated += "R" + (i+1) + "\t";
+                formated += "R" + (i + 1) + "\t";
             }
+
             formated += "\n";
         }
 
@@ -181,6 +207,7 @@ public class DisplayManager : NetworkBehaviour
         {
             formated += roundpoints[i] + "\t";
         }
+
         formated += "\n\n";
 
         text_Component.text += formated;
@@ -219,22 +246,25 @@ public class DisplayManager : NetworkBehaviour
     [ClientRpc]
     public void RpcToggleRoundsOverview(bool isActive, int rounds)
     {
-        if(isActive){
+        if (isActive)
+        {
             var rt = roundsOverview_text.GetComponent(typeof(RectTransform)) as RectTransform;
-            rt.sizeDelta = new Vector2 (50 + 100 * rounds, rt.rect.height);
+            rt.sizeDelta = new Vector2(50 + 100 * rounds, rt.rect.height);
         }
+
         roundsOverview.SetActive(isActive);
     }
 
     /// <summary>
     /// Switches between visible explanation screen and visible score screen
     /// </summary>
-    public void ToggleExplanation(bool isActive){
+    public void ToggleExplanation(bool isActive)
+    {
         explanationButton.SetActive(!isActive);
         scoreButton.SetActive(isActive);
         TextPanel.SetActive(!isActive);
         Explanations.SetActive(isActive);
-        ScoreHeader.text = isActive ? "~ Wissenswertes ~" : "~ Punkte in Runde "+roundnumber+" ~";
+        ScoreHeader.text = isActive ? "~ Wissenswertes ~" : "~ Punkte in Runde " + roundnumber + " ~";
     }
 
     /// <summary>
@@ -354,5 +384,26 @@ public class DisplayManager : NetworkBehaviour
         {
             card.HighlightCorrect();
         }
+    }
+
+    [ClientRpc]
+    public void RpcShowOverlayTimer()
+    {
+        overlayTimer.SetActive(true);
+        normalTimer.SetActive(false);
+    }
+
+    [ClientRpc]
+    public void RpcShowNormalTimer()
+    {
+        normalTimer.SetActive(true);
+        overlayTimer.SetActive(false);
+    }
+
+    [ClientRpc]
+    public void RpcHideAllTimers()
+    {
+        overlayTimer.SetActive(false);
+        normalTimer.SetActive(false);
     }
 }

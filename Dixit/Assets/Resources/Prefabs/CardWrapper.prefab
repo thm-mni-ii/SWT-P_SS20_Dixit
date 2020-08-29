@@ -244,7 +244,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -100, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5727529173985177309}
+  - {fileID: 3589598560137494516}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -306,11 +306,11 @@ MonoBehaviour:
   correctColour: {fileID: 2100000, guid: a623cd2b4b99b435fbd39a63ff88948f, type: 2}
   defalutColor: {fileID: 2100000, guid: 9c0d0f31a3f19c302837815d9df219af, type: 2}
   startFacedown: 0
-  cardGo: {fileID: 5727529173985177290}
-  writeAnswerGo: {fileID: 5727529173985177351}
-  selectAnswerGo: {fileID: 5727529173985177480}
-  selectAnswerText: {fileID: 5727529173985176819}
-  selectAnswerBtn: {fileID: 5727529173985177525}
+  cardGo: {fileID: 3589598560137494520}
+  writeAnswerGo: {fileID: 3419335114597239371}
+  selectAnswerGo: {fileID: 5727529175075704815}
+  selectAnswerText: {fileID: 4741745533357124787}
+  selectAnswerBtn: {fileID: 5727529174285392349}
   questionText: {fileID: 0}
   playerNameText: {fileID: 2592013128852654176}
   ClickedStamps:
@@ -451,7 +451,7 @@ RectTransform:
   - {fileID: 8312039198646705473}
   - {fileID: 3076285501508468549}
   - {fileID: 4290136533623617555}
-  m_Father: {fileID: 5727529173985177081}
+  m_Father: {fileID: 5727529175075704814}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -693,7 +693,7 @@ RectTransform:
   m_LocalScale: {x: 0.8928572, y: 0.9000001, z: 1}
   m_Children:
   - {fileID: 6373838580329088333}
-  m_Father: {fileID: 5727529173985177081}
+  m_Father: {fileID: 5727529175075704814}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -775,7 +775,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SpielerName
+  m_text: SpieleName
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 454bf76cdb44c6b4bb4122350bf7e898, type: 2}
   m_sharedMaterial: {fileID: -612548196713042592, guid: 454bf76cdb44c6b4bb4122350bf7e898,
@@ -807,9 +807,9 @@ MonoBehaviour:
   m_fontSize: 120
   m_fontSizeBase: 120
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 100
+  m_fontSizeMax: 120
   m_fontStyle: 0
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -818,9 +818,9 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2592013128852654176}
-    characterCount: 11
+    characterCount: 10
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -1157,37 +1157,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6c8b40c827157b309aef091b64d162c, type: 3}
---- !u!4 &5727529173985177309 stripped
+--- !u!4 &3589598560137494516 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9127835124013797407, guid: c6c8b40c827157b309aef091b64d162c,
     type: 3}
   m_PrefabInstance: {fileID: 5727529173985177579}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5727529173985177351 stripped
+--- !u!1 &3419335114597239371 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6921942861269444000, guid: c6c8b40c827157b309aef091b64d162c,
     type: 3}
   m_PrefabInstance: {fileID: 5727529173985177579}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5727529173985177480 stripped
+--- !u!1 &5727529175075704815 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1090543620, guid: c6c8b40c827157b309aef091b64d162c,
     type: 3}
   m_PrefabInstance: {fileID: 5727529173985177579}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &5727529173985177081 stripped
+--- !u!224 &5727529175075704814 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1090543621, guid: c6c8b40c827157b309aef091b64d162c,
     type: 3}
   m_PrefabInstance: {fileID: 5727529173985177579}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5727529173985177525 stripped
+--- !u!1 &5727529174285392349 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 300234294, guid: c6c8b40c827157b309aef091b64d162c,
     type: 3}
   m_PrefabInstance: {fileID: 5727529173985177579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5727529173985176819 stripped
+--- !u!114 &4741745533357124787 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1059002323878626136, guid: c6c8b40c827157b309aef091b64d162c,
     type: 3}
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5727529173985177290 stripped
+--- !u!1 &3589598560137494520 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9127835124013797395, guid: c6c8b40c827157b309aef091b64d162c,
     type: 3}

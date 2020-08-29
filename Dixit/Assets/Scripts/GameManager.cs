@@ -57,6 +57,27 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     public DisplayManager displayManager;
 
+    /// <summary>
+    /// PlayerCanvasNames Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer PlayerCanvasNames;
+    /// <summary>
+    /// PlayerCanvasScores Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer PlayerCanvasScores;
+    /// <summary>
+    /// ScoreResultsNames Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer ScoreResultsNames;
+    /// <summary>
+    /// ScoreResultsScores Textgroup to be resized similarly
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public TextResizer ScoreResultsScores;
+
     private enum Phase
     {
         WriteAnswer,
@@ -235,6 +256,7 @@ public class GameManager : NetworkBehaviour
 
     private void WriteAnswerPhase(Question question)
     {
+        displayManager.RpcShowNormalTimer();
         //render question cards at client
         var cardGo = Instantiate(m_questionCardPrefab, new Vector3(0, 100, -1), Quaternion.identity);
         var card = cardGo.GetComponent<Card>();
@@ -293,6 +315,7 @@ public class GameManager : NetworkBehaviour
         { 
             yield return new WaitForSeconds(1f);
         }
+        displayManager.RpcShowOverlayTimer();
         StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
         timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
         
@@ -300,6 +323,7 @@ public class GameManager : NetworkBehaviour
 
     private void ChooseAnswerPhase()
     {
+        displayManager.RpcShowNormalTimer();
         if (currentRound == 0)
         {
             foreach (var p in Utils.GetPlayers())
@@ -353,6 +377,7 @@ public class GameManager : NetworkBehaviour
 
     private void EvaluationPhase()
     {
+        displayManager.RpcHideAllTimers();
         Dictionary<UInt32, int> numOfSuccessfulDeceptionsPerPlayer = new Dictionary<uint, int>();
         // eval points
         foreach (var choice in choices)
@@ -495,6 +520,8 @@ public class GameManager : NetworkBehaviour
             displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
             idx--;
         }
+        PlayerCanvasNames.RpcAssimilateSize();
+        PlayerCanvasScores.RpcAssimilateSize();
     }
 
     /// <summary>
@@ -516,7 +543,6 @@ public class GameManager : NetworkBehaviour
             int playerPoints = points.Value;
             displayManager.UpdateTextPanelEntry(idx, player, playerPoints, gameend);
 
-
             if(gameend)
             {
                 var p_roundpoints = new int[numberOfRounds];
@@ -528,6 +554,8 @@ public class GameManager : NetworkBehaviour
 
             idx++;
         }
+        ScoreResultsNames.RpcAssimilateSize();
+        ScoreResultsScores.RpcAssimilateSize();
     }
 
     private void GetPoints(UInt32 player, int newPoints)

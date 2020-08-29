@@ -65,11 +65,6 @@ public class DisplayManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     public GameObject exitButton;
     /// <summary>
-    /// The "Nochmal" Button on the result panel displayed when the game ends
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public GameObject restartButton;
-    /// <summary>
     /// The "Weiter" Button at the bottom of the score overlay panel
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -112,7 +107,6 @@ public class DisplayManager : NetworkBehaviour
     {
         explanationButton.SetActive(true);
         exitButton.SetActive(false);
-        restartButton.SetActive(false);
     }
 
     /// <summary>
@@ -206,19 +200,16 @@ public class DisplayManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Switches between continue button (isActive = false) and exit + restart buttons (isActive = false).
+    /// Switches between continue button (isActive = false) and exit button (isActive = true).
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
-    public void RpcToggleRestartExit(bool isActive)
+    public void RpcToggleExit(bool isActive)
     {
         continueButton.SetActive(!isActive);
         explanationButton.SetActive(!isActive);
         scoreButton.SetActive(!isActive);
         exitButton.SetActive(isActive);
-        restartButton.SetActive(isActive);
-
-        restartButton.GetComponent<Button>().interactable = isActive;
     }
 
     /// <summary>

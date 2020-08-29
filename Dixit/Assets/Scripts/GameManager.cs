@@ -25,10 +25,10 @@ public class GameManager : NetworkBehaviour
 
     //for storing points sorted by value
     private List<KeyValuePair<UInt32, int>> pointsList;
-    private List<KeyValuePair<UInt32, int>> roundPointsList;
     private readonly MultivalDictionary<UInt32, UInt32> sameAnswers = new MultivalDictionary<UInt32, UInt32>();
 
     private int PlayerCount => Utils.GetPlayers().Count();
+
 
     /// <summary>
     /// The singleton instance of the GameManager
@@ -75,17 +75,17 @@ public class GameManager : NetworkBehaviour
     /// Initial value of the Timer at the start of the "GiveAnswer" Phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerForGiveAnswer = 30;
+    public int timerForGiveAnswer { get; set;} = 30;
     /// <summary>
     /// Initial value of the Time at the start of the "ChoseAnswer" Phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerToChooseAnswer = 20;
+    public int timerToChooseAnswer { get; set;} = 20;
     /// <summary>
     /// Initial value of the Timer when the score result overlay is diplayed
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerToCheckResults = 10;
+    public int timerToCheckResults { get; set;} = 10;
 
     /// <summary>
     /// The number rounds (i.e Questions) the game should last
@@ -138,7 +138,7 @@ public class GameManager : NetworkBehaviour
             roundPoints[i] = new Dictionary<UInt32, int>();
         }
 
-        //initializes PlayerCanvas
+        //initializes points and roundpoints
         foreach ((Player p, int idx) in Utils.GetPlayersIndexed())
         {
             points.Add(p.netIdentity.netId, 0);
@@ -149,13 +149,7 @@ public class GameManager : NetworkBehaviour
             }
         }
 
-        displayManager.UpdateScoreHeader(1);
-        foreach ((Player p, int index) in Utils.GetPlayersIndexed())
-        {
-            displayManager.RpcUpdatePlayerCanvasEntry(index, p.PlayerName, "0");
-            displayManager.UpdateTextPanelEntry(index, p.PlayerName, 0);
-        }
-
+        UpdatePlayerCanvas();
 
         currentRound = -1;
         //wait until the question set is loaded
@@ -218,35 +212,26 @@ public class GameManager : NetworkBehaviour
 
         displayManager.RpcToggleRoundsOverview(true,numberOfRounds);
 
-        displayManager.RpcToggleRestartExit(true);
+        displayManager.RpcToggleExit(true);
 
         displayManager.RpcResultOverlaySetActive(true);
 
-        //TODO: add scores to framework/ player Info
+        //set placements of Players
+        int idx = 1;
+        foreach (KeyValuePair<UInt32, int> points in pointsList)
+        {
+            Player player = Utils.GetIdentity(points.Key).GetComponent<Player>();
+            player.Placement = idx;
+            idx++;
+        }
     }
 
     /// <summary>
-    /// Called when every player has clicked on "Nochmal".
-    /// Clears all points and restarts the game loop.
+    /// Returns the name of the winner.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public void Restart()
-    {
-        playersReady++;
-        if (NetworkManager.singleton.numPlayers == playersReady)
-        {
-            points.Clear();
-            for (int i = 0; i < numberOfRounds; i++)
-            {
-                roundPoints[i].Clear();
-            }
-
-            displayManager.RpcToggleRoundsOverview(false, numberOfRounds);
-            displayManager.RpcResultOverlaySetActive(false);
-            displayManager.RpcToggleRestartExit(false);
-            StartGame();
-        }
-    }
+    public string GetNameOfWinner() => Utils.GetIdentity(pointsList[0].Key).GetComponent<Player>().PlayerName; 
+    
 
     private void WriteAnswerPhase(Question question)
     {
@@ -273,6 +258,14 @@ public class GameManager : NetworkBehaviour
         timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
 
         //wait for all players to send answer or get timeout
+        
+        if (currentRound == 0)
+        {
+            foreach (var p in Utils.GetPlayers())
+            {
+                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular,"Geb' eine falsche Antwort, die aber trotzdem plausibel klingt.","1. Antwort Geben"));
+            }
+        }
     }
 
     private IEnumerator CheckEarlyTimeout(Phase forPhase)
@@ -307,6 +300,13 @@ public class GameManager : NetworkBehaviour
 
     private void ChooseAnswerPhase()
     {
+        if (currentRound == 0)
+        {
+            foreach (var p in Utils.GetPlayers())
+            {
+                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular,"Wähle die Antwort aus, von der du glaubst, dass es die Richtige ist.","2. Antwort Wählen"));
+            }
+        }
         // check if any player gave no answer
         foreach (var p in Utils.GetPlayers())
         {
@@ -484,7 +484,7 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     private void UpdatePlayerCanvas()
     {
-        var pointsList = points.ToList();
+        pointsList = points.ToList();
         pointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
 
         int idx = PlayerCount - 1;
@@ -506,6 +506,8 @@ public class GameManager : NetworkBehaviour
         var list = gameend? points.ToList() : roundPoints[currentRound].ToList();
         list.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
         displayManager.UpdateScoreHeader(currentRound + 1);
+
+        if(gameend) pointsList = list;
 
         int idx = 0;
         foreach (KeyValuePair<UInt32, int> points in list)

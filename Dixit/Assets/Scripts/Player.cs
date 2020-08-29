@@ -14,6 +14,8 @@ using TMPro;
 public class Player : NetworkBehaviour
 {
     private GameObject notificationSystem;
+    
+    private bool enableTutorial = true;
 
     private static readonly Lazy<Player> _localPlayer =
         new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
@@ -28,7 +30,13 @@ public class Player : NetworkBehaviour
     /// The name of the player
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public string PlayerName { get; set; }
+    public string PlayerName = null;
+
+    /// <summary>
+    /// The placement of the player
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public int Placement { get; set; }
 
     /// <summary>
     /// The <c>GameManager</c>
@@ -57,10 +65,16 @@ public class Player : NetworkBehaviour
     [Client]
     public override void OnStartLocalPlayer()
     {
-        //Initialzie notification system
         notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem");
-        /*notifictionCanvas = GameObject.FindGameObjectWithTag("NotificationCanvas");
-        notifictionCanvas.SetActive(false);*/
+
+        PlayerName = ((GameServer) NetworkManager.singleton).PlayerInfos.name;
+        CmdSendName(PlayerName);
+    }
+
+    [Command]
+    public void CmdSendName(string name)
+    { 
+        PlayerName = name;
     }
 
     /// <summary>
@@ -118,23 +132,39 @@ public class Player : NetworkBehaviour
     {
         notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
     }
-
-    /// <summary>
-    /// Quits the game
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public void KillGame()
+    [TargetRpc]
+    public void TargetSendTutorialNotification(Notification notification)
     {
-        Application.Quit();
+        if (enableTutorial)
+        {
+            notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSetNameOfNewPlayer(string playerName)
+    {
+        PlayerName = playerName;
     }
 
     /// <summary>
-    /// Tells the server that this clients wants to restart the game
+    /// Finish the game.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Command]
-    public void CmdRestart()
+    public void CmdFinishGame()
     {
-        gameManager.Restart();
+        TargetSendResults(gameManager.GetNameOfWinner());
+    }
+
+
+    /// <summary>
+    /// Send results to the framework
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    [TargetRpc]
+    public void TargetSendResults(string winner)
+    {
+        GameServer.Instance.HandleGameResults(Placement,winner);
     }
 }

@@ -127,7 +127,6 @@ public class Player : NetworkBehaviour
         gameManager.LogPlayerIsReady();
     }
 
-
     /// <summary>
     /// Displays a Notification to the client
     /// </summary>

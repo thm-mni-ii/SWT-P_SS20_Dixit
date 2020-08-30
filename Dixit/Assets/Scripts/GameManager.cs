@@ -276,7 +276,6 @@ public class GameManager : NetworkBehaviour
 
         // start timer
 
-        StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
         timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
 
         foreach (var p in Utils.GetPlayers())
@@ -295,25 +294,6 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    private IEnumerator CheckEarlyTimeout(Phase forPhase)
-    {
-        bool done = false;
-        while (currentPhase == forPhase && !done)
-        {
-            if (forPhase == Phase.WriteAnswer && answers.Count >= PlayerCount + 1 ||
-                forPhase == Phase.ChoseAnswer && choices.Count >= PlayerCount || forPhase == Phase.Evaluation &&
-                NetworkManager.singleton.numPlayers == playersReady)
-            {
-                timer.StopTimer();
-                done = true;
-            }
-            else
-            {
-                yield return new WaitForSeconds(1f);
-            }
-        }
-    }
-    
     private IEnumerator CheckScoreTimerStart()
     {
         while (playersReady < PlayerCount/2)
@@ -321,13 +301,13 @@ public class GameManager : NetworkBehaviour
             yield return new WaitForSeconds(1f);
         }
         displayManager.RpcShowOverlayTimer();
-        StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
         timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
         
     }
 
     private void ChooseAnswerPhase()
     {
+        playersReady = 0;
         displayManager.RpcShowNormalTimer();
         if (currentRound == 0)
         {
@@ -607,12 +587,14 @@ public class GameManager : NetworkBehaviour
                 }
 
                 sameAnswers.Add(givenAnswer.Key, playerId);
+                LogPlayerIsReady();
 
                 return;
             }
         }
 
         answers.Add(playerId, answer);
+        LogPlayerIsReady();
     }
 
     /// <summary>

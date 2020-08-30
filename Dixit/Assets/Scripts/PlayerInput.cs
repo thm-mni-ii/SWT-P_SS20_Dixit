@@ -49,6 +49,7 @@ public class PlayerInput : MonoBehaviour
         if(singleton != null)
         {
             Debug.LogError("Multible PlayerInputs detected!"); 
+            Destroy(gameObject);
         }
         else
         {
@@ -61,8 +62,8 @@ public class PlayerInput : MonoBehaviour
         if(canSubmit && Input.GetButtonUp("Submit"))
         {
             var card = GameObject.FindGameObjectWithTag("InputCard");
-            card.GetComponentInChildren<Card>().FlipFacedown();
-            GiveAnswer(card.GetComponent<TMP_InputField>());
+            card.GetComponent<Card>().FlipFacedown();
+            GiveAnswer(card.GetComponentInChildren<TMP_InputField>().text);
         }
 
         if(Input.GetButtonUp("Cancel"))
@@ -79,25 +80,6 @@ public class PlayerInput : MonoBehaviour
     public void GiveAnswer(string answer)
     {
         Player.LocalPlayer.GiveAnswer(answer);
-    }
-
-    /// <summary>
-    /// Sends the answer the player gave to the server
-    /// </summary>
-    /// <param name="answer">The text field the answer was written in.</param>
-    /// \author SWT-P_SS_20_Dixit
-    public void GiveAnswer(TMPro.TMP_InputField answer){
-        GiveAnswer(answer.text);
-    }
-
-    /// <summary>
-    /// Sends the id of the card the player chose to the server
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public void SelectAnswer()
-    {
-        var card = GetComponentInParent<Card>();
-        Player.LocalPlayer.ChooseAnswer(card);
     }
 
     /// <summary>

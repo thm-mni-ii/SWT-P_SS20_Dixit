@@ -279,6 +279,11 @@ public class GameManager : NetworkBehaviour
         StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
         timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
 
+        foreach (var p in Utils.GetPlayers())
+        {
+           p.TargetCanSubmit(true); 
+        }
+        
         //wait for all players to send answer or get timeout
         
         if (currentRound == 0)

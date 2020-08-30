@@ -290,7 +290,6 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     public void ToggleOptions(bool isActive)
     {
-        activateOptionsButton.interactable = !isActive;
         if(isActive){
             scoreScreenWasActive = resultOverlayCanvas.activeSelf;
             resultOverlayCanvas.SetActive(false);

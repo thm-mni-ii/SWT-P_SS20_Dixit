@@ -37,10 +37,16 @@ public class PlayerInput : MonoBehaviour
     public static PlayerInput singleton {get ; private set ;}
 
     /// <summary>
-    /// Is set true when the player is allowed to submit an answer
+    /// is set true when the player is allowed to submit an answer
     /// </summary>
-    /// \author SWT-P_SS_20_Dixit
+    /// \author swt-p_ss_20_dixit
     public bool canSubmit {get ; set ;} = false;
+
+    /// <summary>
+    /// is set true when the player click continue on the <c>ScoreResultsOberlay</c>
+    /// </summary>
+    /// \author swt-p_ss_20_dixit
+    public bool canContinue {get ; set ;} = false;
     
     private bool optionsOn = false;
 
@@ -59,11 +65,16 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if(canSubmit && Input.GetButtonUp("Submit"))
+        if(canSubmit && Input.GetKeyUp("return"))
         {
             var card = GameObject.FindGameObjectWithTag("InputCard");
             card.GetComponent<Card>().FlipFacedown();
             GiveAnswer(card.GetComponentInChildren<TMP_InputField>().text);
+        }
+
+        if(canContinue && Input.GetButtonUp("Submit"))
+        {
+            ClickContinueButton();
         }
 
         if(Input.GetButtonUp("Cancel"))

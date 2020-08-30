@@ -329,6 +329,7 @@ public class DisplayManager : NetworkBehaviour
         continueButton.GetComponent<Button>().interactable = true;
         resultOverlayCanvas.SetActive(isActive);
         ClientScene.localPlayer.GetComponent<Player>().SelectedCard = null;
+        PlayerInput.singleton.canContinue = isActive;
     }
 
     /// <summary>

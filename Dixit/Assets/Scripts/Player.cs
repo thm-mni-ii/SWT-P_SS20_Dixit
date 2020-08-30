@@ -15,6 +15,9 @@ public class Player : NetworkBehaviour
 {
     private GameObject notificationSystem;
 
+    /// <summary>
+    /// If the tutorial should be displayed
+    /// </summary>
     public bool enableTutorial = true;
 
     private static readonly Lazy<Player> _localPlayer =
@@ -68,6 +71,9 @@ public class Player : NetworkBehaviour
         CmdSendName(PlayerName);
     }
 
+    /// <summary>
+    /// Sends the player name of the local client to the server
+    /// </summary>
     [Command]
     public void CmdSendName(string name)
     {
@@ -144,6 +150,9 @@ public class Player : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// // will be removed
+    /// </summary>
     [ClientRpc]
     public void RpcSetNameOfNewPlayer(string playerName)
     {
@@ -168,6 +177,6 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetSendResults(string winner)
     {
-        GameServer.Instance.HandleGameResults(Placement, winner);
+        (NetworkManager.singleton as GameServer).HandleGameResults(Placement, winner);
     }
 }

@@ -55,8 +55,6 @@ public class GameServer : NetworkManager
     /// </summary>
     public JSONNode GameInfos { get; private set; }
 
-    public static GameServer Instance => (GameServer)singleton;
-
     /// <summary>
     /// The number of player that want to play the game. The Server will wait until that number of players joined the game
     /// </summary>

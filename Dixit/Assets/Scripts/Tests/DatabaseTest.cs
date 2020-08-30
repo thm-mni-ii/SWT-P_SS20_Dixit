@@ -43,7 +43,8 @@ namespace Tests
             //wait until the question set is loaded
             loadQuestionSet.ContinueWithOnMainThread(t =>
             {
-
+                Assert.NotNull(t);
+                ReadQuestion();              
             });
         }
 

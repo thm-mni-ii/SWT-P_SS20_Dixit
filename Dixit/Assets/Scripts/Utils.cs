@@ -124,11 +124,15 @@ public static class Utils
     /// \author SWT-P_SS_20_Dixit
     public static bool AnswersAreEqual(string s1, string s2)
     {
+        // remove reduntant spaces
+        s1 = RemoveSpaces(s1);
+        s2 = RemoveSpaces(s2);
+
         // numbers as words or digits are equal
         s1 = AllNumbersInGermanWords(s1);
         s2 = AllNumbersInGermanWords(s2);
 
-        if(levenshtein(s1,s2) <= 1)
+        if(levenshtein(s1,s2) <= Math.Min(s1.Length, s2.Length) * 0.2f)
             return true;
 
         // do not check lower or upper
@@ -136,6 +140,42 @@ public static class Utils
         s2 = s2.ToLower();
 
         return s1 == s2;
+    }
+
+    /// <summary>
+    /// Removes reduntant spaces between words and trims spaces at the start and end of the answer.
+    /// </summary>
+    /// <param name="s"> The answer</param>
+    /// <returns>Whehter the answers are equal</returns>
+    /// \author SWT-P_SS_20_Dixit
+    public static string RemoveSpaces(string s)
+    {
+        s = s.Trim();
+        bool wasSpace = false;
+        int until = s.Length;
+        int i = 0;
+        while(i < until)
+        {
+            if(s[i].Equals(' '))
+            {
+                if(wasSpace)
+                {
+                    s = s.Remove(i, 1);
+                    until--;
+                }
+                else
+                {
+                    i++;
+                }
+                wasSpace = true;
+            }
+            else
+            {
+                i++;
+                wasSpace = false;
+            }
+        }
+        return s;
     }
 
     private static string AllNumbersInGermanWords(string s)

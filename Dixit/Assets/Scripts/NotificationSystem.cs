@@ -29,17 +29,37 @@ public class NotificationSystem : MonoBehaviour
     private float notificationWidth;
 
     /// <summary>
-    /// The colors the different notification zypes are to be displayed in
+    /// Color for regular notification text
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public Color regularColor = Color.black;
+    /// <summary>
+    /// Color for warning notification text
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Color warningColor = Color.yellow;
+    /// <summary>
+    /// Color for positive notification text
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Color goodColor = Color.green;
+    /// <summary>
+    /// Color for negative notification text
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Color badColor = Color.red;
 
     private Queue<GameObject> notifications = new Queue<GameObject>();
 
+    /// <summary>
+    /// AudioSource for positive notification sound
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public AudioSource goodsound;
+    /// <summary>
+    /// AudioSource for negative notification sound
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public AudioSource badsound;
 
     /// <summary>

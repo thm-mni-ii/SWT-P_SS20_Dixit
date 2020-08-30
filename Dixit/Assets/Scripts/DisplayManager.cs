@@ -100,6 +100,10 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public Button deactivateOptionsButton;
+    /// <summary>
+    /// Indicates wether ScoreScreen was active or not when Options were toggled
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Boolean scoreScreenWasActive { get; set; } = false;
 
     /// <summary>

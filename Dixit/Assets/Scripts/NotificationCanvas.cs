@@ -100,6 +100,10 @@ public class NotificationCanvas : MonoBehaviour
         showShort();
     }
 
+    /// <summary>
+    /// Causes the notification canvas to fade out
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void FadeOut()
     {
         animator.Play("FadeOut");

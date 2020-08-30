@@ -79,7 +79,6 @@ public class NotificationSystem : MonoBehaviour
         int i = 0;
         foreach (GameObject notif in notifications)
         {
-            Debug.Log("penis");
             StartCoroutine(notif.GetComponent<NotificationCanvas>().slideToSupposedPosition(new Vector3(0,-(i * (notificationSpace.rect.height / maxNotifications)))));
             i++;
         }

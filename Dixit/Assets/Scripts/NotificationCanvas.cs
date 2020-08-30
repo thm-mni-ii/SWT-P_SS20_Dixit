@@ -106,7 +106,6 @@ public class NotificationCanvas : MonoBehaviour
     }
     public IEnumerator slideToSupposedPosition(Vector3 supposedPosition)
     {
-        Debug.Log("vagina");
         _supposedPosition = supposedPosition;
         while (transform.localPosition != _supposedPosition)
         {

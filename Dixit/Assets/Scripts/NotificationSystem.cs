@@ -79,7 +79,7 @@ public class NotificationSystem : MonoBehaviour
         int i = 0;
         foreach (GameObject notif in notifications)
         {
-            notif.GetComponent<RectTransform>().localPosition = new Vector3(0,-(i * (notificationSpace.rect.height / maxNotifications)));
+            StartCoroutine(notif.GetComponent<NotificationCanvas>().slideToSupposedPosition(new Vector3(0,-(i * (notificationSpace.rect.height / maxNotifications)))));
             i++;
         }
     }

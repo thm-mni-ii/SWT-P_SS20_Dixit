@@ -233,7 +233,7 @@ public class Card : NetworkBehaviour
     public void RpcSlideToPosition(Vector3 vector3)
     {
         _slideVector = vector3;
-        StartCoroutine("SlideToPosition");
+        StartCoroutine(SlideToPosition());
     }
 
     private IEnumerator SlideToPosition()

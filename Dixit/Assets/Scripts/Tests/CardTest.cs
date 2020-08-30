@@ -1,6 +1,6 @@
+/* created by: SWT-P_SS_20_Dixit */
 
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -15,14 +15,14 @@ namespace Tests
 
         public Card card;
 
-       public GameServer gameServer;
+        public GameServer gameServer;
         public GameManager gameManager;
         private bool serverStarted = false;
 
         [UnitySetUp]
         public IEnumerator Setup()
         {
-             if(!serverStarted)
+            if (!serverStarted)
             {
                 var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
@@ -42,12 +42,12 @@ namespace Tests
             gameServer.OnServerAddPlayer(conn);
             yield return new WaitForSeconds(1f);
 
-            foreach((var player, var idx) in Utils.GetPlayersIndexed())
+            foreach ((var player, var idx) in Utils.GetPlayersIndexed())
             {
-                if(player.PlayerName == null || player.PlayerName =="")
+                if (player.PlayerName == null || player.PlayerName == "")
                 {
                     player.PlayerName = "Mustermann" + idx;
-                    player.CmdSendName( "Mustermann" + idx);
+                    player.CmdSendName("Mustermann" + idx);
                 }
             }
             yield return new WaitForSeconds(1f);
@@ -78,38 +78,38 @@ namespace Tests
 
             inputGo.GetComponent<Card>().FlipFaceup();
             yield return new WaitForSeconds(3f);
-            Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
+            Assert.AreEqual((new Quaternion(0, 0, 0, -1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
 
             inputGo.GetComponent<Card>().FlipFacedown(2f);
             yield return new WaitForSeconds(1.5f);
-            Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
+            Assert.AreEqual((new Quaternion(0, 0, 0, -1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
             yield return new WaitForSeconds(1f);
-            Assert.AreEqual((new Quaternion(0,1,0,0)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
+            Assert.AreEqual((new Quaternion(0, 1, 0, 0)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
 
             inputGo.GetComponent<Card>().FlipFaceup(2f);
             yield return new WaitForSeconds(1.5f);
-            Assert.AreEqual((new Quaternion(0,1,0,0)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
+            Assert.AreEqual((new Quaternion(0, 1, 0, 0)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
             yield return new WaitForSeconds(1f);
-            Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
+            Assert.AreEqual((new Quaternion(0, 0, 0, -1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
         }
 
         [UnityTest]
         public IEnumerator SlideTest()
         {
-            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(100,0,-1));
+            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(100, 0, -1));
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual((new Vector3(100,0,-1)).ToString(), questionGo.transform.position.ToString());
+            Assert.AreEqual((new Vector3(100, 0, -1)).ToString(), questionGo.transform.position.ToString());
 
-            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(0,200,-1));
+            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(0, 200, -1));
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual((new Vector3(0,200,-1)).ToString(), (questionGo.transform.position).ToString());
+            Assert.AreEqual((new Vector3(0, 200, -1)).ToString(), (questionGo.transform.position).ToString());
 
-            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(-100,-200,-1));
+            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(-100, -200, -1));
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual((new Vector3(-100,-200,-1)).ToString(), questionGo.transform.position.ToString());
+            Assert.AreEqual((new Vector3(-100, -200, -1)).ToString(), questionGo.transform.position.ToString());
         }
 
     }

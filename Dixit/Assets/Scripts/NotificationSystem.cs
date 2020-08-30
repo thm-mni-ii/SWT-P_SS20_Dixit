@@ -1,8 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -71,23 +69,18 @@ public class NotificationSystem : MonoBehaviour
     public void AddNotification(Notification notification)
     {
         if (notifications.Count == maxNotifications)
-        {
             Destroy(notifications.Dequeue());
 
-        }
         GameObject notif = Instantiate(NotificationPrefab, notificationSpace);
         notif.GetComponentInChildren<NotificationCanvas>().notification = notification;
         notif.GetComponent<RectTransform>().sizeDelta = new Vector2(notificationWidth, notificationHeight);
         notif.GetComponent<NotificationCanvas>().Init();
         notifications.Enqueue(notif);
+
         if (notification.notificationType == Notification.NotificationTypes.good)
-        {
             goodsound.Play();
-        }
         else
-        {
             badsound.Play();
-        }
 
         UpdateNotifications();
     }
@@ -101,7 +94,7 @@ public class NotificationSystem : MonoBehaviour
         int i = 0;
         foreach (GameObject notif in notifications)
         {
-            StartCoroutine(notif.GetComponent<NotificationCanvas>().slideToSupposedPosition(new Vector3(0, -(i * (notificationSpace.rect.height / maxNotifications)))));
+            StartCoroutine(notif.GetComponent<NotificationCanvas>().SlideToSupposedPosition(new Vector3(0, -(i * (notificationSpace.rect.height / maxNotifications)))));
             i++;
         }
     }

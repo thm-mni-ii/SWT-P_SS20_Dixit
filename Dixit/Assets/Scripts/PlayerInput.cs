@@ -32,53 +32,49 @@ public class PlayerInput : MonoBehaviour
     /// The singelton of the Player Input
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public static PlayerInput singleton { get; private set; }
+    public static PlayerInput Singleton { get; private set; }
 
     /// <summary>
     /// is set true when the player is allowed to submit an answer
     /// </summary>
     /// \author swt-p_ss_20_dixit
-    public bool canSubmit { get; set; } = false;
+    public bool CanSubmit { get; set; } = false;
 
     /// <summary>
     /// is set true when the player click continue on the <c>ScoreResultsOberlay</c>
     /// </summary>
     /// \author swt-p_ss_20_dixit
-    public bool canContinue { get; set; } = false;
+    public bool CanContinue { get; set; } = false;
 
     private bool optionsOn = false;
 
     void Start()
     {
-        if (singleton != null)
+        if (Singleton != null)
         {
             Debug.LogError("Multible PlayerInputs detected!");
             Destroy(gameObject);
         }
         else
         {
-            singleton = this;
+            Singleton = this;
         }
     }
 
     void Update()
     {
-        if (canSubmit && Input.GetKeyUp("return"))
+        if (CanSubmit && Input.GetKeyUp("return"))
         {
             var card = GameObject.FindGameObjectWithTag("InputCard");
             card.GetComponent<Card>().FlipFacedown();
             GiveAnswer(card.GetComponentInChildren<TMP_InputField>().text);
         }
 
-        if (canContinue && Input.GetButtonUp("Submit"))
-        {
+        if (CanContinue && Input.GetButtonUp("Submit"))
             ClickContinueButton();
-        }
 
         if (Input.GetButtonUp("Cancel"))
-        {
             ToggleOptions();
-        }
     }
 
     /// <summary>
@@ -107,8 +103,8 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void EndGame()
     {
-       exitButton.interactable = false;
-       Player.LocalPlayer.CmdFinishGame();
+        exitButton.interactable = false;
+        Player.LocalPlayer.CmdFinishGame();
     }
 
     /// <summary>

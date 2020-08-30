@@ -1,10 +1,8 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 
 using System;
-using System.Collections;
 using UnityEngine;
 using Mirror;
-using TMPro;
 
 /// <summary>
 /// Represents a Player in the Game.
@@ -82,7 +80,7 @@ public class Player : NetworkBehaviour
 
     public void GiveAnswer(string answer)
     {
-        PlayerInput.singleton.canSubmit = false;
+        PlayerInput.Singleton.CanSubmit = false;
         CmdGiveAnswer(answer);
     }
 
@@ -193,6 +191,6 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetCanSubmit(bool canSubmit)
     {
-        PlayerInput.singleton.canSubmit = canSubmit;
+        PlayerInput.Singleton.CanSubmit = canSubmit;
     }
 }

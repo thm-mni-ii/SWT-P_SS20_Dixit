@@ -14,8 +14,11 @@ using TMPro;
 public class Player : NetworkBehaviour
 {
     private GameObject notificationSystem;
-    
-    private bool enableTutorial = true;
+
+    /// <summary>
+    /// If the tutorial should be displayed
+    /// </summary>
+    public bool enableTutorial = true;
 
     private static readonly Lazy<Player> _localPlayer =
         new Lazy<Player>(() => ClientScene.localPlayer.gameObject.GetComponent<Player>());
@@ -43,15 +46,12 @@ public class Player : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameManager gameManager;
-    private GameObject notificationCanvas;
 
     /// <summary>
     /// The currently selected card. Used in the "ChooseAnswer" phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public Card SelectedCard { set; private get; }
-
-    private bool messageActive = false;
 
     /// <summary>
     /// Called when the local Player Object has been set up
@@ -67,13 +67,16 @@ public class Player : NetworkBehaviour
     {
         notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem");
 
-        PlayerName = ((GameServer) NetworkManager.singleton).PlayerInfos.name;
+        PlayerName = ((GameServer)NetworkManager.singleton).PlayerInfos.name;
         CmdSendName(PlayerName);
     }
 
+    /// <summary>
+    /// Sends the player name of the local client to the server
+    /// </summary>
     [Command]
     public void CmdSendName(string name)
-    { 
+    {
         PlayerName = name;
     }
 
@@ -131,22 +134,31 @@ public class Player : NetworkBehaviour
     /// <summary>
     /// Displays a Notification to the client
     /// </summary>
-    /// <param name="message">The content of the notification</param>
+    /// <param name="notification">The notification to send</param>
     /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
     public void TargetSendNotification(Notification notification)
     {
-        notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
+        notificationSystem.GetComponent<NotificationSystem>().AddNotification(notification);
     }
+
+    /// <summary>
+    /// Displays a Notification for the tutorial to the client
+    /// </summary>
+    /// <param name="notification">The tutorial notification to send</param>
+    /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
     public void TargetSendTutorialNotification(Notification notification)
     {
         if (enableTutorial)
         {
-            notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
+            notificationSystem.GetComponent<NotificationSystem>().AddNotification(notification);
         }
     }
 
+    /// <summary>
+    /// // will be removed
+    /// </summary>
     [ClientRpc]
     public void RpcSetNameOfNewPlayer(string playerName)
     {
@@ -171,7 +183,7 @@ public class Player : NetworkBehaviour
     [TargetRpc]
     public void TargetSendResults(string winner)
     {
-        GameServer.Instance.HandleGameResults(Placement,winner);
+        (NetworkManager.singleton as GameServer).HandleGameResults(Placement, winner);
     }
 
     /// <summary>

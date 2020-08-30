@@ -1,6 +1,6 @@
-﻿using System;
+﻿/* created by: SWT-P_SS_20_Dixit */
+
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
@@ -18,7 +18,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            if(!serverStarted)
+            if (!serverStarted)
             {
                 GameObject gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
@@ -31,16 +31,16 @@ namespace Tests
         public IEnumerator GameTest()
         {
             yield return new WaitForSeconds(1f);
-            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
             yield return CardsSpawned();
 
-            gameManager.timerForGiveAnswer = 5;
-            gameManager.timerToCheckResults = 3;
-            gameManager.timerToChooseAnswer = 3;
+            gameManager.TimerForGiveAnswer = 5;
+            gameManager.TimerToCheckResults = 3;
+            gameManager.TimerToChooseAnswer = 3;
             gameManager.numberOfRounds = 4;
 
-            for(var i = 1; i <= 3; i++)
+            for (var i = 1; i <= 3; i++)
             {
                 yield return AnswersGiven(i);
                 yield return AnswersChosen(i);
@@ -55,17 +55,17 @@ namespace Tests
 
             yield return new WaitForSeconds(1f);
 
-            foreach((var player, var idx) in Utils.GetPlayersIndexed())
+            foreach ((var player, var idx) in Utils.GetPlayersIndexed())
             {
-                if(player.PlayerName == null || player.PlayerName =="")
-                {   
+                if (player.PlayerName == null || player.PlayerName == "")
+                {
                     player.PlayerName = "Mustermann" + idx;
-                    player.CmdSendName( "Mustermann" + idx);
+                    player.CmdSendName("Mustermann" + idx);
                 }
-            }   
+            }
 
             yield return new WaitForSeconds(1f);
-            
+
             Assert.NotNull(GameObject.FindGameObjectWithTag("QuestionCard"), "No QuestionCard spawned");
             Assert.NotNull(GameObject.FindGameObjectWithTag("InputCard"), "No InputCard spawned");
             yield return null;
@@ -73,54 +73,50 @@ namespace Tests
 
         private IEnumerator AnswersGiven(int round)
         {
-        yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);
 
             switch (round)
             {
                 case 1:
                 case 2:
-                {
-                    foreach((Player p, int i ) in Utils.GetPlayersIndexed())
                     {
-                        gameManager.LogAnswer(p.netId, $"Test {i}");
+                        foreach ((Player p, int i) in Utils.GetPlayersIndexed())
+                            gameManager.LogAnswer(p.netId, $"Test {i}");
+                        break;
                     }
-                    break;
-                }
                 case 3:
-                {
-                    //CORNERCASE: Give same answer
-                    foreach(Player p in Utils.GetPlayers())
                     {
-                        gameManager.LogAnswer(p.netId, "Test");
+                        //CORNERCASE: Give same answer
+                        foreach (Player p in Utils.GetPlayers())
+                            gameManager.LogAnswer(p.netId, "Test");
+                        break;
                     }
-                    break;
-                }
                 case 4:
-                {
-                    //CORNERCASE: Give no or empty anwser
-                    gameManager.LogAnswer(Utils.GetPlayers().First().netId, "");
-                    break;
-                }
+                    {
+                        //CORNERCASE: Give no or empty anwser
+                        gameManager.LogAnswer(Utils.GetPlayers().First().netId, "");
+                        break;
+                    }
                 default:
                     break;
             }
 
             yield return new WaitForSeconds(2f);
-           
-           switch (round)
-           {
+
+            switch (round)
+            {
                 case 1:
                 case 2:
                     Assert.AreEqual(3, GameObject.FindGameObjectsWithTag("AnswerCard").Length, "Wrong amount of possible answers");
                     break;
                 case 3:
                 case 4:
-                    yield return new WaitForSeconds(gameManager.timerForGiveAnswer - 2);
+                    yield return new WaitForSeconds(gameManager.TimerForGiveAnswer - 2);
                     break;
                 default:
                     break;
-           }
-            
+            }
+
             yield return null;
         }
 
@@ -130,59 +126,57 @@ namespace Tests
             switch (round)
             {
                 case 1:
-                {
-                    gameManager.LogAnswer(players[0].netId, gameManager.netId);
-                    gameManager.LogAnswer(players[1].netId, players[0].netId);
-                    break;
-                }
+                    {
+                        gameManager.LogAnswer(players[0].netId, gameManager.netId);
+                        gameManager.LogAnswer(players[1].netId, players[0].netId);
+                        break;
+                    }
                 case 2:
-                {
-                    //CORNERCASE: Player 0 clicked on own answer
-                    gameManager.LogAnswer(players[0].netId, players[0].netId);
+                    {
+                        //CORNERCASE: Player 0 clicked on own answer
+                        gameManager.LogAnswer(players[0].netId, players[0].netId);
 
-                    //CORNERCASE: Player 1 submitted no answer
-                    break;
-                }
+                        //CORNERCASE: Player 1 submitted no answer
+                        break;
+                    }
                 default:
                     break;
             }
 
-            var timer = GameObject.Find("TimerController").GetComponent<CountdownTimer>();
-            yield return new WaitForSeconds(gameManager.timerToChooseAnswer);
+            yield return new WaitForSeconds(gameManager.TimerToChooseAnswer);
 
             switch (round)
             {
                 case 1:
-                {
-                    Assert.AreEqual(4, gameManager.points[players[0].netId], "Correct answer + other player clicked on answer wrongly calculated");
-                    Assert.AreEqual(0, gameManager.points[players[1].netId], "No points should have been awarded");
-                    break;
-                }
+                    {
+                        Assert.AreEqual(4, gameManager.Points[players[0].netId], "Correct answer + other player clicked on answer wrongly calculated");
+                        Assert.AreEqual(0, gameManager.Points[players[1].netId], "No points should have been awarded");
+                        break;
+                    }
                 case 2:
-                {
-                    Assert.AreEqual(3, gameManager.points[players[0].netId], "Click on own answer should result in -1 point");
-                    Assert.AreEqual(0, gameManager.points[players[1].netId], "No points should be awarded");
-                    break;
-                }
+                    {
+                        Assert.AreEqual(3, gameManager.Points[players[0].netId], "Click on own answer should result in -1 point");
+                        Assert.AreEqual(0, gameManager.Points[players[1].netId], "No points should be awarded");
+                        break;
+                    }
                 case 3:
-                {
-                    Assert.AreEqual(3, gameManager.points[players[0].netId], "No points should be awarded");
-                    Assert.AreEqual(0, gameManager.points[players[1].netId], "No points should be awarded");
-                    break;
-                }
+                    {
+                        Assert.AreEqual(3, gameManager.Points[players[0].netId], "No points should be awarded");
+                        Assert.AreEqual(0, gameManager.Points[players[1].netId], "No points should be awarded");
+                        break;
+                    }
                 case 4:
-                    Assert.AreEqual(3, gameManager.points[players[0].netId], "Empty answer should result in -1 point");
-                    Assert.AreEqual(-1, gameManager.points[players[1].netId], "No answer should result in -1 point");
+                    Assert.AreEqual(3, gameManager.Points[players[0].netId], "Empty answer should result in -1 point");
+                    Assert.AreEqual(-1, gameManager.Points[players[1].netId], "No answer should result in -1 point");
                     break;
                 default:
                     break;
             }
 
-            foreach(var p in Utils.GetPlayers())
-            {
+            foreach (var _ in Utils.GetPlayers())
                 gameManager.LogPlayerIsReady();
-            }
-            yield return new WaitForSeconds(gameManager.timerToCheckResults);
+
+            yield return new WaitForSeconds(gameManager.TimerToCheckResults);
         }
     }
 }

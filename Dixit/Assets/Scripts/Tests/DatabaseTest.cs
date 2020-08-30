@@ -34,7 +34,7 @@ namespace Tests
             yield return new WaitForSeconds(1f);
 
             gameManager = GameObject.Find("GameManager");
-            
+
             loadQuestionSet = QuestionSet.RetrieveQuestionSet("0", gameManager.GetComponent<DatabaseSetup>().DB)
             .ContinueWithLogException();
         }
@@ -45,7 +45,7 @@ namespace Tests
             //wait until the question set is loaded
             loadQuestionSet.ContinueWithOnMainThread(t =>
             {
-                
+
             });
         }
 
@@ -63,6 +63,6 @@ namespace Tests
 
         }
 
-      
+
     }
 }

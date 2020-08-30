@@ -27,17 +27,17 @@ namespace Tests
                 var conn = new NetworkConnectionToClient(2);
                 NetworkServer.AddConnection(conn);
                 gameServer.OnServerAddPlayer(conn);
-                
+
                 yield return new WaitForSeconds(1f);
 
                 foreach((var player, var idx) in Utils.GetPlayersIndexed())
                 {
                     if(player.PlayerName == null || player.PlayerName =="")
-                    {   
+                    {
                         player.PlayerName = "Mustermann" + idx;
                         player.CmdSendName( "Mustermann" + idx);
                     }
-                }   
+                }
 
                 yield return new WaitForSeconds(1f);
                 displayManager = GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
@@ -88,7 +88,7 @@ namespace Tests
             yield return new WaitForSeconds(0.3f);
             var sro = GameObject.FindGameObjectWithTag("ScoreResultOverlay");
             Assert.IsTrue(sro.activeInHierarchy, "Score result overlay not active");
-            Assert.IsTrue(displayManager.continueButton.GetComponent<Button>().interactable, "Continue button not interactible"); 
+            Assert.IsTrue(displayManager.continueButton.GetComponent<Button>().interactable, "Continue button not interactible");
             Assert.IsFalse(displayManager.exitButton.activeInHierarchy, "Exit Button is visible");
 
             yield return UpdateScoreHeader();
@@ -153,7 +153,7 @@ namespace Tests
             Assert.IsFalse(displayManager.scoreButton.activeInHierarchy, "Score button is visible on endscreen");
             Assert.IsTrue(displayManager.exitButton.activeInHierarchy, "Exit button is not visible on endscreen");
         }
-            
+
         [UnityTest]
         public IEnumerator PlayerCanvasTest()
         {

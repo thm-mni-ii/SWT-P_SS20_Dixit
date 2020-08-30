@@ -1,10 +1,14 @@
-﻿using System;
+﻿/* created by: SWT-P_SS_20_Dixit */
+
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
+/// <summary>
+/// Controlls the notifications shown during a game.
+/// Contains methods to show, animate or update notifications.
+/// </summary>
+/// \author SWT-P_SS_20_Dixit
 public class NotificationCanvas : MonoBehaviour
 {
     /// <summary>
@@ -25,7 +29,7 @@ public class NotificationCanvas : MonoBehaviour
     private Vector3 _supposedPosition;
 
     private Vector2 initialSize;
-   
+
     [SerializeField]
     private Animator animator;
 
@@ -41,7 +45,7 @@ public class NotificationCanvas : MonoBehaviour
     /// Initializes this object and its properties
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public void init()
+    public void Init()
     {
         _rectTransform = GetComponent<RectTransform>();
         _tmpug = GetComponentInChildren<TextMeshProUGUI>();
@@ -70,7 +74,7 @@ public class NotificationCanvas : MonoBehaviour
     /// Causes the notification canvas to display the short notification
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public void showShort()
+    public void ShowShort()
     {
         animator.Play("Shrink");
         _tmpug.text = notification.notificationShort;
@@ -79,7 +83,7 @@ public class NotificationCanvas : MonoBehaviour
     /// Causes the notification canvas to display the long notification
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public void showLong()
+    public void ShowLong()
     {
         animator.Play("Grow");
         _tmpug.text = notification.notificationLong;
@@ -87,14 +91,18 @@ public class NotificationCanvas : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        showLong();
+        ShowLong();
     }
 
     private void OnMouseExit()
     {
-        showShort();
+        ShowShort();
     }
 
+    /// <summary>
+    /// Causes the notification canvas to fade out
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void FadeOut()
     {
         animator.Play("FadeOut");

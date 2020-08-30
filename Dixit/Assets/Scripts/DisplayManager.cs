@@ -1,9 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
@@ -100,7 +97,11 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public Button deactivateOptionsButton;
-    public Boolean scoreScreenWasActive { get; set; } = false;
+    /// <summary>
+    /// Indicates wether ScoreScreen was active or not when Options were toggled
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public bool ScoreScreenWasActive { get; set; } = false;
 
     /// <summary>
     /// Canvas for all round results overview
@@ -187,6 +188,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Sets and Formats the overview of all rounds for one player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcSetRoundOverview(bool first, int rounds, int[] roundpoints)
     {
@@ -243,6 +245,7 @@ public class DisplayManager : NetworkBehaviour
     /// Shows or hides the points overview of all rounds
     /// Sets the size of the component automatically by the number of rounds
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcToggleRoundsOverview(bool isActive, int rounds)
     {
@@ -258,6 +261,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible explanation screen and visible score screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ToggleExplanation(bool isActive)
     {
         explanationButton.SetActive(!isActive);
@@ -270,6 +274,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible explanation screen and visible score screen for every Player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcToggleExplanation(bool isActive)
     {
@@ -279,6 +284,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Updates the explanation text content in the overlay
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcUpdateExplanation(String explanation)
     {
@@ -288,10 +294,12 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible/invisible Options Screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ToggleOptions(bool isActive)
     {
-        if(isActive){
-            scoreScreenWasActive = resultOverlayCanvas.activeSelf;
+        if (isActive)
+        {
+            ScoreScreenWasActive = resultOverlayCanvas.activeSelf;
             resultOverlayCanvas.SetActive(false);
             OptionsOverlayCanvas.SetActive(true);
             OptionsOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeIn");
@@ -299,11 +307,9 @@ public class DisplayManager : NetworkBehaviour
         else
         {
             OptionsOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeOut");
-            Invoke(nameof(hideOptionsOverlay),0.25f); //necessary so the animation can play
-            if (scoreScreenWasActive)
-            {
+            Invoke(nameof(hideOptionsOverlay), 0.25f); //necessary so the animation can play
+            if (ScoreScreenWasActive)
                 resultOverlayCanvas.SetActive(true);
-            }
         }
     }
 
@@ -315,6 +321,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible/invisible Options Screen for every Player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcToggleOptions(bool isActive)
     {
@@ -324,10 +331,11 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Sets ScoreScreenWasActive variable for every player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
-    public void RpcSetScoreScreenWasActive(Boolean active)
+    public void RpcSetScoreScreenWasActive(bool active)
     {
-        scoreScreenWasActive = active;
+        ScoreScreenWasActive = active;
     }
 
 
@@ -342,7 +350,7 @@ public class DisplayManager : NetworkBehaviour
         if (!isActive)
         {
             resultOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeOut");
-            Invoke(nameof(hideScoreOverlay),0.25f); //necessary so the animation can play
+            Invoke(nameof(hideScoreOverlay), 0.25f); //necessary so the animation can play
         }
         else
         {
@@ -412,6 +420,10 @@ public class DisplayManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Makes Timer on ResultOverlay visible
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcShowOverlayTimer()
     {
@@ -419,6 +431,10 @@ public class DisplayManager : NetworkBehaviour
         normalTimer.SetActive(false);
     }
 
+    /// <summary>
+    /// Makes gameplay Timer visible
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcShowNormalTimer()
     {
@@ -426,6 +442,10 @@ public class DisplayManager : NetworkBehaviour
         overlayTimer.SetActive(false);
     }
 
+    /// <summary>
+    /// Makes all Timers invisible
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcHideAllTimers()
     {

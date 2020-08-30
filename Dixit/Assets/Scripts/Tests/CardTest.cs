@@ -14,7 +14,7 @@ namespace Tests
         public GameObject inputGo;
 
         public Card card;
-      
+
        public GameServer gameServer;
         public GameManager gameManager;
         private bool serverStarted = false;
@@ -45,7 +45,7 @@ namespace Tests
             foreach((var player, var idx) in Utils.GetPlayersIndexed())
             {
                 if(player.PlayerName == null || player.PlayerName =="")
-                {   
+                {
                     player.PlayerName = "Mustermann" + idx;
                     player.CmdSendName( "Mustermann" + idx);
                 }
@@ -63,7 +63,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator FlipTest()
         {
-           
+
             inputGo.GetComponent<Card>().InstantFlipFacedown();
             yield return new WaitForSeconds(1f);
             Assert.AreEqual(Quaternion.Euler(0, 180, 0).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
@@ -71,26 +71,26 @@ namespace Tests
             inputGo.GetComponent<Card>().InstantFlipFaceup();
             yield return new WaitForSeconds(1f);
             Assert.AreEqual(Quaternion.Euler(0, 0, 0).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
-           
+
             inputGo.GetComponent<Card>().FlipFacedown();
             yield return new WaitForSeconds(3f);
             Assert.AreEqual(Quaternion.Euler(0, 180, 0).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
 
             inputGo.GetComponent<Card>().FlipFaceup();
             yield return new WaitForSeconds(3f);
-            Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());  
+            Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
 
             inputGo.GetComponent<Card>().FlipFacedown(2f);
             yield return new WaitForSeconds(1.5f);
             Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
             yield return new WaitForSeconds(1f);
             Assert.AreEqual((new Quaternion(0,1,0,0)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
-            
+
             inputGo.GetComponent<Card>().FlipFaceup(2f);
             yield return new WaitForSeconds(1.5f);
             Assert.AreEqual((new Quaternion(0,1,0,0)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
             yield return new WaitForSeconds(1f);
-            Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());    
+            Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());
         }
 
         [UnityTest]

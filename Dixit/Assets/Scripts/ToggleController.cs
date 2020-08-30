@@ -1,9 +1,6 @@
 ﻿/*Created by: LifeIsJourney on GitHub (https://github.com/LifeIsJourney/Scripts/blob/master/TiggleUISimple.cs)*/
 /* Toggle Prefab based on: https://github.com/Kalxoznik/Unity-Toggle-controller/blob/master/Toggle/Assets/Prefabs/Toggle.prefab */
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ToggleController : MonoBehaviour
@@ -28,7 +25,7 @@ public class ToggleController : MonoBehaviour
     public void Awake()
     {
         handleTransform = handle.GetComponent<RectTransform>();
-        
+
         handleSize = handleTransform.sizeDelta.x;
         float toggleSizeX = toggle.sizeDelta.x;
         onPosX = (toggleSizeX / 2) - (handleSize / 2) - handleOffset;
@@ -89,7 +86,7 @@ public class ToggleController : MonoBehaviour
         return position;
     }
 
-	/* edited by: SWT-P_SS_20_Dixit */
+    /* edited by: SWT-P_SS_20_Dixit */
     void StopSwitching()
     {
         if (t > 1.0f)

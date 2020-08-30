@@ -1,10 +1,8 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Mirror;
 
 /// <summary>
 /// Handles Player input.
@@ -34,27 +32,27 @@ public class PlayerInput : MonoBehaviour
     /// The singelton of the Player Input
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public static PlayerInput singleton {get ; private set ;}
+    public static PlayerInput singleton { get; private set; }
 
     /// <summary>
     /// is set true when the player is allowed to submit an answer
     /// </summary>
     /// \author swt-p_ss_20_dixit
-    public bool canSubmit {get ; set ;} = false;
+    public bool canSubmit { get; set; } = false;
 
     /// <summary>
     /// is set true when the player click continue on the <c>ScoreResultsOberlay</c>
     /// </summary>
     /// \author swt-p_ss_20_dixit
-    public bool canContinue {get ; set ;} = false;
-    
+    public bool canContinue { get; set; } = false;
+
     private bool optionsOn = false;
 
     void Start()
     {
-        if(singleton != null)
+        if (singleton != null)
         {
-            Debug.LogError("Multible PlayerInputs detected!"); 
+            Debug.LogError("Multible PlayerInputs detected!");
             Destroy(gameObject);
         }
         else
@@ -65,24 +63,24 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if(canSubmit && Input.GetKeyUp("return"))
+        if (canSubmit && Input.GetKeyUp("return"))
         {
             var card = GameObject.FindGameObjectWithTag("InputCard");
             card.GetComponent<Card>().FlipFacedown();
             GiveAnswer(card.GetComponentInChildren<TMP_InputField>().text);
         }
 
-        if(canContinue && Input.GetButtonUp("Submit"))
+        if (canContinue && Input.GetButtonUp("Submit"))
         {
             ClickContinueButton();
         }
 
-        if(Input.GetButtonUp("Cancel"))
+        if (Input.GetButtonUp("Cancel"))
         {
             ToggleOptions();
         }
     }
-    
+
     /// <summary>
     /// Sends the answer the player gave to the server
     /// </summary>
@@ -116,6 +114,7 @@ public class PlayerInput : MonoBehaviour
     /// <summary>
     /// Switches between visible explanation screen and visible score screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ToggleExplanation(bool isActive)
     {
         displayManager.ToggleExplanation(isActive);

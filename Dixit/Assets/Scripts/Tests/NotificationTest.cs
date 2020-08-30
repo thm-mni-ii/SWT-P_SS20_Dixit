@@ -38,7 +38,7 @@ namespace Tests
             foreach((var player, var idx) in Utils.GetPlayersIndexed())
             {
                 if(player.PlayerName == null || player.PlayerName =="")
-                {   
+                {
                     player.PlayerName = "Mustermann" + idx;
                     player.CmdSendName( "Mustermann" + idx);
                 }
@@ -53,7 +53,7 @@ namespace Tests
         public IEnumerator ShowAndColorTest()
         {
             yield return new WaitForSeconds(1f);
-            
+
             Utils.GetPlayers().First().TargetSendNotification (
                 new Notification ( Notification.NotificationTypes.bad,
                                    "1","testBAD")
@@ -104,7 +104,7 @@ namespace Tests
                     found++;
                     Assert.AreEqual(notificationSystem.warningColor,tmp.color);
                 }
-                
+
             }
 
             Assert.AreEqual(4, found);
@@ -115,14 +115,14 @@ namespace Tests
         public IEnumerator ShowLongTest()
         {
             yield return new WaitForSeconds(0.5f);
-            
+
             Utils.GetPlayers().First().TargetSendNotification (
                 new Notification ( Notification.NotificationTypes.regular,
                                    "long explanation","short")
             );
 
             yield return new WaitForSeconds(0.5f);
-            
+
             foreach (Transform notification in notificationCanvas.transform)
             {
                 var canvas = notification.GetChild(0).gameObject;
@@ -139,7 +139,7 @@ namespace Tests
                     Assert.AreEqual("short", tmp.text);
 
                 }
-                
+
             }
         }
 
@@ -177,7 +177,7 @@ namespace Tests
             foreach (Transform notification in notificationCanvas.transform)
             {
                 if(notification.GetChild(0).gameObject.GetComponent<TMP_Text>().text == "testOne")
-                    found = true;                
+                    found = true;
             }
 
             Assert.IsTrue(found);
@@ -193,7 +193,7 @@ namespace Tests
             foreach (Transform notification in notificationCanvas.transform)
             {
                 if(notification.GetChild(0).gameObject.GetComponent<TMP_Text>().text == "testBAD")
-                    found = true;                
+                    found = true;
             }
 
             Assert.IsFalse(found);

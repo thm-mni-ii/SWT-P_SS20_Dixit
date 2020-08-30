@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿/* created by: SWT-P_SS_20_Dixit */
+
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,34 +31,54 @@ public class NotificationSystem : MonoBehaviour
     private float notificationWidth;
 
     /// <summary>
-    /// The colors the different notification zypes are to be displayed in
+    /// Color for regular notification text
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public Color regularColor = Color.black;
+    /// <summary>
+    /// Color for warning notification text
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Color warningColor = Color.yellow;
+    /// <summary>
+    /// Color for positive notification text
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Color goodColor = Color.green;
+    /// <summary>
+    /// Color for negative notification text
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public Color badColor = Color.red;
 
-    private Queue<GameObject> notifications = new Queue<GameObject>();
+    private readonly Queue<GameObject> notifications = new Queue<GameObject>();
 
+    /// <summary>
+    /// AudioSource for positive notification sound
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public AudioSource goodsound;
+    /// <summary>
+    /// AudioSource for negative notification sound
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public AudioSource badsound;
 
     /// <summary>
     /// Adds a notification to the queue and displays it
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public void addNotification(Notification notification)
+    public void AddNotification(Notification notification)
     {
         if (notifications.Count == maxNotifications)
         {
             Destroy(notifications.Dequeue());
 
         }
-        GameObject notif = Instantiate(NotificationPrefab,notificationSpace);
-        notif.GetComponentInChildren<NotificationCanvas>().notification=notification;
-        notif.GetComponent<RectTransform>().sizeDelta = new Vector2(notificationWidth,notificationHeight);
-        notif.GetComponent<NotificationCanvas>().init();
+        GameObject notif = Instantiate(NotificationPrefab, notificationSpace);
+        notif.GetComponentInChildren<NotificationCanvas>().notification = notification;
+        notif.GetComponent<RectTransform>().sizeDelta = new Vector2(notificationWidth, notificationHeight);
+        notif.GetComponent<NotificationCanvas>().Init();
         notifications.Enqueue(notif);
         if (notification.notificationType == Notification.NotificationTypes.good)
         {
@@ -67,19 +89,19 @@ public class NotificationSystem : MonoBehaviour
             badsound.Play();
         }
 
-        updateNotifications();
+        UpdateNotifications();
     }
 
     /// <summary>
     /// Moves all notifications to their respective positions
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public void updateNotifications()
+    public void UpdateNotifications()
     {
         int i = 0;
         foreach (GameObject notif in notifications)
         {
-            StartCoroutine(notif.GetComponent<NotificationCanvas>().slideToSupposedPosition(new Vector3(0,-(i * (notificationSpace.rect.height / maxNotifications)))));
+            StartCoroutine(notif.GetComponent<NotificationCanvas>().slideToSupposedPosition(new Vector3(0, -(i * (notificationSpace.rect.height / maxNotifications)))));
             i++;
         }
     }
@@ -89,22 +111,22 @@ public class NotificationSystem : MonoBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public void RemoveNotification()
-    { 
+    {
         notifications.Peek().GetComponent<NotificationCanvas>().FadeOut();
-        Invoke(nameof(DestroyNotificationAndUpdate),0.25f);
+        Invoke(nameof(DestroyNotificationAndUpdate), 0.25f);
     }
 
     private void DestroyNotificationAndUpdate()
     {
         Destroy(notifications.Dequeue());
-        updateNotifications();
+        UpdateNotifications();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         notificationWidth = notificationSpace.rect.width;
-        notificationHeight = (notificationSpace.rect.height / maxNotifications)-2;
+        notificationHeight = (notificationSpace.rect.height / maxNotifications) - 2;
     }
 
 }

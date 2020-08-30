@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 using Mirror;
-using Mirror.Websocket;
 using SimpleJSON;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 /// <summary>
@@ -26,22 +22,13 @@ public class GameServer : NetworkManager
     /// <summary>
     /// Defines how long the game server will try to connect the client before quitting the application.
     /// </summary>
-    [SerializeField] private float disconnectWaitTime;
+    [SerializeField]
+    private float disconnectWaitTime;
 
     /// <summary>
     /// Stores the time until disconnect.
     /// </summary>
     private float disconnectTimer;
-
-    /// <summary>
-    /// Stores information about the player.
-    /// </summary>
-    private PlayerInfo playerInfos;
-
-    /// <summary>
-    /// Stores information about the game.
-    /// </summary>
-    private JSONNode gameInfos;
 
     /// <summary>
     /// Stores if the local player is the host.
@@ -58,13 +45,17 @@ public class GameServer : NetworkManager
     /// </summary>
     private bool tryingToConnect;
 
-    public PlayerInfo PlayerInfos => playerInfos;
+    /// <summary>
+    /// Stores information about the player.
+    /// </summary>
+    public PlayerInfo PlayerInfos { get; private set; }
 
-    public JSONNode GameInfos => gameInfos;
+    /// <summary>
+    /// Stores information about the game.
+    /// </summary>
+    public JSONNode GameInfos { get; private set; }
 
-    public static GameServer Instance => (GameServer) singleton;
-
-       /// <summary>
+    /// <summary>
     /// The number of player that want to play the game. The Server will wait until that number of players joined the game
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -117,30 +108,24 @@ public class GameServer : NetworkManager
         NetworkServer.AddPlayerForConnection(conn, player);
 
         if (numPlayers == playersWantToPlay)
-        {   
-            StartCoroutine("WaitAndStart");
-        }
+            StartCoroutine(WaitAndStart());
     }
 
     private IEnumerator WaitAndStart()
     {
         foreach (var p in Utils.GetPlayers())
-        {
-            while(p.PlayerName == null || p.PlayerName == "")
+            while (p.PlayerName == null || p.PlayerName == "")
                 yield return new WaitForSeconds(0.5f);
-        }
 
         foreach (var p in Utils.GetPlayers())
-        {
             p.RpcSetNameOfNewPlayer(p.PlayerName);
-        }
 
         GameManager gameManager = GameManager.Instance;
 
-        gameManager.questionSetID = gameInfos["Question Set"];
-        gameManager.numberOfRounds = gameInfos["Rounds"];
-        gameManager.timerForGiveAnswer = gameInfos["Answer Time"];
-        gameManager.timerToChooseAnswer = gameInfos["Picking Time"];
+        gameManager.questionSetID = GameInfos["Question Set"];
+        gameManager.numberOfRounds = GameInfos["Rounds"];
+        gameManager.TimerForGiveAnswer = GameInfos["Answer Time"];
+        gameManager.TimerToChooseAnswer = GameInfos["Picking Time"];
 
         gameManager.StartGame();
     }
@@ -151,18 +136,16 @@ public class GameServer : NetworkManager
     /// If so the client tries to connect and the disconnect timer is updated.
     /// </summary>
     private void Update()
-    {   
+    {
         // Try connecting if not host
         if (!isHost && !NetworkClient.isConnected && !tryingToConnect)
         {
-            tryingToConnect= true;
+            tryingToConnect = true;
 
             disconnectTimer -= Time.deltaTime;
 
             if (disconnectTimer <= 0f)
-            {
                 Application.Quit();
-            }
 
             StartClient();
         }
@@ -174,9 +157,7 @@ public class GameServer : NetworkManager
             {
                 // Host waits for all players to quit first
                 if (NetworkServer.connections.Count <= 1)
-                {
                     Application.Quit();
-                }
             }
             else
             {
@@ -192,7 +173,7 @@ public class GameServer : NetworkManager
     private void LoadPlayerInfo()
     {
         // Read file
-        string filePath = "";
+        string filePath;
         switch (SystemInfo.operatingSystemFamily)
         {
             case OperatingSystemFamily.Windows:
@@ -213,8 +194,8 @@ public class GameServer : NetworkManager
 
         // Load data
         isHost = jsonFile["playerInfo"]["isHost"].AsBool;
-        playerInfos = new PlayerInfo(jsonFile["playerInfo"]["name"], isHost);
-        gameInfos = jsonFile["gameInfo"];
+        PlayerInfos = new PlayerInfo(jsonFile["playerInfo"]["name"], isHost);
+        GameInfos = jsonFile["gameInfo"];
 
         // Close file
         file.Close();
@@ -230,13 +211,13 @@ public class GameServer : NetworkManager
     private void LoadPlayerInfoMockup()
     {
         isHost = true;
-        playerInfos = new PlayerInfo("Mustermann", isHost);
+        PlayerInfos = new PlayerInfo("Mustermann", isHost);
 
-        gameInfos = new JSONObject();
-        gameInfos.Add("Question Set", "1");
-        gameInfos.Add("Rounds", "3");
-        gameInfos.Add("Answer Time", "15");
-        gameInfos.Add("Picking Time", "15");
+        GameInfos = new JSONObject();
+        GameInfos.Add("Question Set", "1");
+        GameInfos.Add("Rounds", "3");
+        GameInfos.Add("Answer Time", "15");
+        GameInfos.Add("Picking Time", "15");
     }
 
     /// <summary>
@@ -251,10 +232,8 @@ public class GameServer : NetworkManager
     {
         // Create file
         if (File.Exists(FILE_NAME))
-        {
             File.Delete(FILE_NAME);
-        }
-        
+
         var sr = File.CreateText(FILE_NAME);
 
         // Write file
@@ -268,10 +247,10 @@ public class GameServer : NetworkManager
 
         readyToQuit = true;
     }
-    
+
     public override void OnStartClient()
     {
         GetComponent<NetworkManagerHUD>().enabled = false;
     }
-    
+
 }

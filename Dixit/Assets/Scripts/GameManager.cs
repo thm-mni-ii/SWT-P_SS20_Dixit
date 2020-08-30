@@ -164,7 +164,6 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     private void StartRound()
     {
-        displayManager.RpcResultOverlaySetActive(false);
         displayManager.RpcToggleExplanation(false);
         displayManager.RpcSetScoreScreenWasActive(false);
         displayManager.RpcToggleOptions(false);
@@ -173,9 +172,13 @@ public class GameManager : NetworkBehaviour
 
         if (currentRound >= numberOfRounds)
         {
+            displayManager.RpcHideAllTimers();
             EndGame();
             return;
         }
+        displayManager.RpcResultOverlaySetActive(false);
+
+        
 
         //get Question for the current round
         QuestionSet.GetQuestion(indexesOfQuestion[currentRound]).ContinueWithLogException().ContinueWithOnMainThread(

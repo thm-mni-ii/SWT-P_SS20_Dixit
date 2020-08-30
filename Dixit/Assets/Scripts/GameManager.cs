@@ -294,17 +294,6 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    private IEnumerator CheckScoreTimerStart()
-    {
-        while (playersReady < PlayerCount/2)
-        { 
-            yield return new WaitForSeconds(1f);
-        }
-        displayManager.RpcShowOverlayTimer();
-        timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
-        
-    }
-
     private void ChooseAnswerPhase()
     {
         playersReady = 0;
@@ -439,7 +428,6 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator WaitAndShowResults()
     {
-        StartCoroutine(CheckScoreTimerStart());
         int secs = 3;
         if (answers.Count == 1) secs = 5;
         yield return new WaitForSeconds(secs);
@@ -459,6 +447,20 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public void LogPlayerIsReady()
+    {
+        playersReady++;
+        if(playersReady == (int)(PlayerCount/2 + 0.5f))
+        {
+            displayManager.RpcShowOverlayTimer();
+            timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
+        }
+        if (NetworkManager.singleton.numPlayers == playersReady)
+        {
+            timer.StopTimer();
+        }
+    }
+
+    private void LogPlayerAnswer()
     {
         playersReady++;
         if (NetworkManager.singleton.numPlayers == playersReady)
@@ -587,14 +589,14 @@ public class GameManager : NetworkBehaviour
                 }
 
                 sameAnswers.Add(givenAnswer.Key, playerId);
-                LogPlayerIsReady();
+                LogPlayerAnswer();
 
                 return;
             }
         }
 
         answers.Add(playerId, answer);
-        LogPlayerIsReady();
+        LogPlayerAnswer();
     }
 
     /// <summary>

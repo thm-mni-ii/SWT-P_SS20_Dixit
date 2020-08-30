@@ -104,12 +104,16 @@ public class NotificationCanvas : MonoBehaviour
     {
         notificationSystem.RemoveNotification();
     }
+    /// <summary>
+    /// Slides the notification to a given location.
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public IEnumerator slideToSupposedPosition(Vector3 supposedPosition)
     {
         _supposedPosition = supposedPosition;
         while (transform.localPosition != _supposedPosition)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, _supposedPosition, Time.deltaTime * 10);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, _supposedPosition, Time.deltaTime * 20);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }

@@ -116,24 +116,16 @@ public class GameManager : NetworkBehaviour
     private Task<QuestionSet> loadQuestionSet;
 
     /// <summary>
-    /// Called when the GameManger starts on the Server.
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public override void OnStartServer()
-    {
-        // Initializes QuestionSet from given ID
-        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB)
-            .ContinueWithLogException();
-    }
-
-
-    /// <summary>
     /// Executed when the game should start (after all players joined).
     /// Writes the playernames in the UI cavaces and loads the chosen question set
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public void StartGame()
     {
+        // Initializes QuestionSet from given ID
+        loadQuestionSet = QuestionSet.RetrieveQuestionSet(questionSetID, GetComponent<DatabaseSetup>().DB)
+            .ContinueWithLogException();
+
         //initializes roundpoints
         roundPoints = new Dictionary<UInt32, int>[numberOfRounds];
         for (int i = 0; i < numberOfRounds; i++)

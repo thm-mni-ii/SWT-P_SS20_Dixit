@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['scorebutton_257',['scoreButton',['../class_display_manager.html#a1fb62f699140f11557e3fe69142d27d2',1,'DisplayManager']]],
-  ['scoreheader_258',['ScoreHeader',['../class_display_manager.html#a03a9fe661db155cb547ac129b83eff24',1,'DisplayManager']]],
-  ['scoreresultsnames_259',['ScoreResultsNames',['../class_game_manager.html#a5d368860303a3df4a2229fe1d30ea3bd',1,'GameManager']]],
-  ['scoreresultsscores_260',['ScoreResultsScores',['../class_game_manager.html#a807de6996825ad0228a1dc1f60153cde',1,'GameManager']]],
-  ['startfacedown_261',['startFacedown',['../class_card.html#a98dd958f8c723435d2153fc0744b79dd',1,'Card']]]
+  ['regularcolor_269',['regularColor',['../class_notification_system.html#adb6a566e65868e87368993d2a3064e6c',1,'NotificationSystem']]],
+  ['resultoverlaycanvas_270',['resultOverlayCanvas',['../class_display_manager.html#a64291e78158f5523471edff64da982dc',1,'DisplayManager']]],
+  ['roundsoverview_271',['roundsOverview',['../class_display_manager.html#a32a815e71abfb7ac0b0dba9bdeb23d8e',1,'DisplayManager']]],
+  ['roundsoverview_5ftext_272',['roundsOverview_text',['../class_display_manager.html#a3573c85f6424d82291fbcfdc256be003',1,'DisplayManager']]]
 ];

@@ -7,7 +7,9 @@ var hierarchy =
       [ "DatabaseSetup", "class_database_setup.html", null ],
       [ "NotificationCanvas", "class_notification_canvas.html", null ],
       [ "NotificationSystem", "class_notification_system.html", null ],
-      [ "PlayerInput", "class_player_input.html", null ]
+      [ "PlayerInput", "class_player_input.html", null ],
+      [ "SoundControl", "class_sound_control.html", null ],
+      [ "ToggleController", "class_toggle_controller.html", null ]
     ] ],
     [ "MultivalDictionary< UInt32, UInt32 >", "class_multival_dictionary.html", null ],
     [ "NetworkBehaviour", null, [

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['id_226',['id',['../class_card.html#a106fc53dbbcb75c0c4fa89f964f55167',1,'Card']]],
-  ['instance_227',['Instance',['../class_game_manager.html#ad3e717f4fb0f378b969f4457de81f23e',1,'GameManager']]]
+  ['gamemanager_240',['gameManager',['../class_player.html#a066d7cff53913d18e6d335d0f7e7cdb9',1,'Player.gameManager()'],['../class_game_server.html#a3210381f7662dc5d6c6980a74d327b9d',1,'GameServer.GameManager()']]]
 ];

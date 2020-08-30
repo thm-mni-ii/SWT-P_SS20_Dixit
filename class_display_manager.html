@@ -85,6 +85,7 @@ $(document).ready(function(){initNavTree('class_display_manager.html',''); initR
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_display_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">DisplayManager Class Reference</div>  </div>
@@ -138,6 +139,15 @@ override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartLocal
 <tr class="memitem:ace3d599ab3921a836fdf0ca67619cc55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ace3d599ab3921a836fdf0ca67619cc55">RpcUpdateExplanation</a> (String explanation)</td></tr>
 <tr class="memdesc:ace3d599ab3921a836fdf0ca67619cc55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the explanation text content in the overlay  <a href="class_display_manager.html#ace3d599ab3921a836fdf0ca67619cc55">More...</a><br /></td></tr>
 <tr class="separator:ace3d599ab3921a836fdf0ca67619cc55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8b53b45250b2c64cca74b740c890227"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ae8b53b45250b2c64cca74b740c890227">ToggleOptions</a> (bool isActive)</td></tr>
+<tr class="memdesc:ae8b53b45250b2c64cca74b740c890227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switches between visible/invisible Options Screen  <a href="class_display_manager.html#ae8b53b45250b2c64cca74b740c890227">More...</a><br /></td></tr>
+<tr class="separator:ae8b53b45250b2c64cca74b740c890227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a978f6f5914db7af9c6b5a0fa38453e7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a978f6f5914db7af9c6b5a0fa38453e7b">RpcToggleOptions</a> (bool isActive)</td></tr>
+<tr class="memdesc:a978f6f5914db7af9c6b5a0fa38453e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switches between visible/invisible Options Screen for every <a class="el" href="class_player.html" title="Represents a Player in the Game. Communicates with the GameManager to log Answers and change the curr...">Player</a>  <a href="class_display_manager.html#a978f6f5914db7af9c6b5a0fa38453e7b">More...</a><br /></td></tr>
+<tr class="separator:a978f6f5914db7af9c6b5a0fa38453e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94774c87aa5fadbabc123dd6839609cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a94774c87aa5fadbabc123dd6839609cb">RpcSetScoreScreenWasActive</a> (Boolean active)</td></tr>
+<tr class="memdesc:a94774c87aa5fadbabc123dd6839609cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets ScoreScreenWasActive variable for every player  <a href="class_display_manager.html#a94774c87aa5fadbabc123dd6839609cb">More...</a><br /></td></tr>
+<tr class="separator:a94774c87aa5fadbabc123dd6839609cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a358e363cc69ac9b80c50e3800d115fe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2">RpcResultOverlaySetActive</a> (bool isActive)</td></tr>
 <tr class="memdesc:a358e363cc69ac9b80c50e3800d115fe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the result overlay for all players.  <a href="class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2">More...</a><br /></td></tr>
 <tr class="separator:a358e363cc69ac9b80c50e3800d115fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,6 +196,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a64291e78158f5523471edff64da982dc"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a64291e78158f5523471edff64da982dc">resultOverlayCanvas</a></td></tr>
 <tr class="memdesc:a64291e78158f5523471edff64da982dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Score Overlay Canvas UI element  <a href="class_display_manager.html#a64291e78158f5523471edff64da982dc">More...</a><br /></td></tr>
 <tr class="separator:a64291e78158f5523471edff64da982dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae200c91d334830629bb414a99d2b7c78"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#ae200c91d334830629bb414a99d2b7c78">OptionsOverlayCanvas</a></td></tr>
+<tr class="memdesc:ae200c91d334830629bb414a99d2b7c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Options Overlay Canvas UI element  <a href="class_display_manager.html#ae200c91d334830629bb414a99d2b7c78">More...</a><br /></td></tr>
+<tr class="separator:ae200c91d334830629bb414a99d2b7c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8978d1558f30519e68f4bb0d00cbed55"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a8978d1558f30519e68f4bb0d00cbed55">exitButton</a></td></tr>
 <tr class="memdesc:a8978d1558f30519e68f4bb0d00cbed55"><td class="mdescLeft">&#160;</td><td class="mdescRight">The "Beenden" Button on the result panel displayed when the game ends  <a href="class_display_manager.html#a8978d1558f30519e68f4bb0d00cbed55">More...</a><br /></td></tr>
 <tr class="separator:a8978d1558f30519e68f4bb0d00cbed55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,6 +211,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a1fb62f699140f11557e3fe69142d27d2"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a1fb62f699140f11557e3fe69142d27d2">scoreButton</a></td></tr>
 <tr class="memdesc:a1fb62f699140f11557e3fe69142d27d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Button at the side of the score overlay panel; toggles Score Screen  <a href="class_display_manager.html#a1fb62f699140f11557e3fe69142d27d2">More...</a><br /></td></tr>
 <tr class="separator:a1fb62f699140f11557e3fe69142d27d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ed7a3c3ca983bd4e291d11603a76d82"><td class="memItemLeft" align="right" valign="top">Button&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a6ed7a3c3ca983bd4e291d11603a76d82">activateOptionsButton</a></td></tr>
+<tr class="memdesc:a6ed7a3c3ca983bd4e291d11603a76d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Button at the upper left corner of the screen; activates Options Screen  <a href="class_display_manager.html#a6ed7a3c3ca983bd4e291d11603a76d82">More...</a><br /></td></tr>
+<tr class="separator:a6ed7a3c3ca983bd4e291d11603a76d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62f199381413a77c637e529e544acdd3"><td class="memItemLeft" align="right" valign="top">Button&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a62f199381413a77c637e529e544acdd3">deactivateOptionsButton</a></td></tr>
+<tr class="memdesc:a62f199381413a77c637e529e544acdd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Button at the bottom of the Options Screen; deactivates Options Screen  <a href="class_display_manager.html#a62f199381413a77c637e529e544acdd3">More...</a><br /></td></tr>
+<tr class="separator:a62f199381413a77c637e529e544acdd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32a815e71abfb7ac0b0dba9bdeb23d8e"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#a32a815e71abfb7ac0b0dba9bdeb23d8e">roundsOverview</a></td></tr>
 <tr class="memdesc:a32a815e71abfb7ac0b0dba9bdeb23d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvas for all round results overview  <a href="class_display_manager.html#a32a815e71abfb7ac0b0dba9bdeb23d8e">More...</a><br /></td></tr>
 <tr class="separator:a32a815e71abfb7ac0b0dba9bdeb23d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,6 +229,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:af8723d5cefbc800c777b9bb687acaef2"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_display_manager.html#af8723d5cefbc800c777b9bb687acaef2">overlayTimer</a></td></tr>
 <tr class="memdesc:af8723d5cefbc800c777b9bb687acaef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer that is visible during eval phase  <a href="class_display_manager.html#af8723d5cefbc800c777b9bb687acaef2">More...</a><br /></td></tr>
 <tr class="separator:af8723d5cefbc800c777b9bb687acaef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:af3667970e54ad941d97f7be7ede89c54"><td class="memItemLeft" align="right" valign="top"><a id="af3667970e54ad941d97f7be7ede89c54"></a>
+Boolean&#160;</td><td class="memItemRight" valign="bottom"><b>scoreScreenWasActive</b> = false<code> [get, set]</code></td></tr>
+<tr class="separator:af3667970e54ad941d97f7be7ede89c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Shows, hides and updates UI elements on screen. Also deletes and updates cards after they have been spawen by the <code><a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a></code>. </p>
@@ -372,6 +397,34 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a94774c87aa5fadbabc123dd6839609cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94774c87aa5fadbabc123dd6839609cb">&#9670;&nbsp;</a></span>RpcSetScoreScreenWasActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayManager.RpcSetScoreScreenWasActive </td>
+          <td>(</td>
+          <td class="paramtype">Boolean&#160;</td>
+          <td class="paramname"><em>active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets ScoreScreenWasActive variable for every player </p>
+
+</div>
+</div>
 <a id="ac96aa8bd1f9970c6bf756084831555a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac96aa8bd1f9970c6bf756084831555a4">&#9670;&nbsp;</a></span>RpcToggleExit()</h2>
 
@@ -426,6 +479,34 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Switches between visible explanation screen and visible score screen for every <a class="el" href="class_player.html" title="Represents a Player in the Game. Communicates with the GameManager to log Answers and change the curr...">Player</a> </p>
+
+</div>
+</div>
+<a id="a978f6f5914db7af9c6b5a0fa38453e7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a978f6f5914db7af9c6b5a0fa38453e7b">&#9670;&nbsp;</a></span>RpcToggleOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayManager.RpcToggleOptions </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isActive</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Switches between visible/invisible Options Screen for every <a class="el" href="class_player.html" title="Represents a Player in the Game. Communicates with the GameManager to log Answers and change the curr...">Player</a> </p>
 
 </div>
 </div>
@@ -634,6 +715,34 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae8b53b45250b2c64cca74b740c890227"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8b53b45250b2c64cca74b740c890227">&#9670;&nbsp;</a></span>ToggleOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DisplayManager.ToggleOptions </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isActive</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Switches between visible/invisible Options Screen </p>
+
+</div>
+</div>
 <a id="a5255018d12b2483111436302136f5719"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5255018d12b2483111436302136f5719">&#9670;&nbsp;</a></span>UpdateScoreHeader()</h2>
 
@@ -744,6 +853,23 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6ed7a3c3ca983bd4e291d11603a76d82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ed7a3c3ca983bd4e291d11603a76d82">&#9670;&nbsp;</a></span>activateOptionsButton</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Button DisplayManager.activateOptionsButton</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Button at the upper left corner of the screen; activates Options Screen </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
 <a id="ae8b821945ce43f70da98e09a98cfa640"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8b821945ce43f70da98e09a98cfa640">&#9670;&nbsp;</a></span>continueButton</h2>
 
@@ -757,6 +883,23 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The "Weiter" Button at the bottom of the score overlay panel </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="a62f199381413a77c637e529e544acdd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62f199381413a77c637e529e544acdd3">&#9670;&nbsp;</a></span>deactivateOptionsButton</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Button DisplayManager.deactivateOptionsButton</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Button at the bottom of the Options Screen; deactivates Options Screen </p>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
@@ -842,6 +985,23 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Timer that is visible during a round </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="ae200c91d334830629bb414a99d2b7c78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae200c91d334830629bb414a99d2b7c78">&#9670;&nbsp;</a></span>OptionsOverlayCanvas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject DisplayManager.OptionsOverlayCanvas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Options Overlay Canvas UI element </p>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
@@ -1009,7 +1169,7 @@ Public Attributes</h2></td></tr>
 			<ul>
 				<li class="navelem"><a class="el" href="class_display_manager.html">DisplayManager</a></li>
 				<li class="footer">
-					Generated on Sun Aug 30 2020 06:07:00 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun Aug 30 2020 12:39:48 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

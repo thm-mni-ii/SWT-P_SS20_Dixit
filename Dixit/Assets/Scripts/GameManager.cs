@@ -462,9 +462,9 @@ public class GameManager : NetworkBehaviour
         displayManager.RpcResultOverlaySetActive(true);            
     }
 
-    private IEnumerator WaitAndChangePhase()
+    private IEnumerator WaitAndChangePhase(float time = 1)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
         ChangePhase();
     }
 

@@ -312,6 +312,8 @@ GameObject:
   - component: {fileID: 3586121729446228279}
   - component: {fileID: 3583595874849043137}
   - component: {fileID: 6745186073795035070}
+  - component: {fileID: 622174698616180984}
+  - component: {fileID: 7739274512340775983}
   m_Layer: 5
   m_Name: OptionsOverlay
   m_TagString: Untagged
@@ -393,6 +395,37 @@ MonoBehaviour:
   m_AudioMixer: {fileID: 24100000, guid: 25e23b91d02451841a6954c22bb21dce, type: 2}
   m_muted: -80
   m_unmuted: 0
+--- !u!225 &622174698616180984
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834214178128357858}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &7739274512340775983
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834214178128357858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bbace1f2a4bbfdad88dcd7e496a02711, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8917134947516405669
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +760,18 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4243300395274327993, guid: 7d15e319b550a9048acdbf2d055b3fa8,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6036109922446919766, guid: 3c0d4c2fd9b9dbc4785c453385e11459,
+        type: 2}
+    - target: {fileID: 9117371367491611292, guid: 7d15e319b550a9048acdbf2d055b3fa8,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6036109922446919766, guid: 3c0d4c2fd9b9dbc4785c453385e11459,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d15e319b550a9048acdbf2d055b3fa8, type: 3}
 --- !u!224 &5949395750631041421 stripped

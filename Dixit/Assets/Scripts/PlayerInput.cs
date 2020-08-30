@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Mirror;
 
 /// <summary>
@@ -11,7 +12,77 @@ using Mirror;
 /// \author SWT-P_SS_20_Dixit
 public class PlayerInput : MonoBehaviour
 {
+    /// <summary>
+    /// The "Beenden" Button on the result panel displayed when the game ends
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public Button exitButton;
 
+    /// <summary>
+    /// The "Weiter" Button at the bottom of the score overlay panel
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public Button continueButton;
+
+    /// <summary>
+    /// The <c>DisplayManager</c>
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public DisplayManager displayManager;
+
+    /// <summary>
+    /// The singelton of the Player Input
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public static PlayerInput singleton {get ; private set ;}
+
+    /// <summary>
+    /// is set true when the player is allowed to submit an answer
+    /// </summary>
+    /// \author swt-p_ss_20_dixit
+    public bool canSubmit {get ; set ;} = false;
+
+    /// <summary>
+    /// is set true when the player click continue on the <c>ScoreResultsOberlay</c>
+    /// </summary>
+    /// \author swt-p_ss_20_dixit
+    public bool canContinue {get ; set ;} = false;
+    
+    private bool optionsOn = false;
+
+    void Start()
+    {
+        if(singleton != null)
+        {
+            Debug.LogError("Multible PlayerInputs detected!"); 
+            Destroy(gameObject);
+        }
+        else
+        {
+            singleton = this;
+        }
+    }
+
+    void Update()
+    {
+        if(canSubmit && Input.GetKeyUp("return"))
+        {
+            var card = GameObject.FindGameObjectWithTag("InputCard");
+            card.GetComponent<Card>().FlipFacedown();
+            GiveAnswer(card.GetComponentInChildren<TMP_InputField>().text);
+        }
+
+        if(canContinue && Input.GetButtonUp("Submit"))
+        {
+            ClickContinueButton();
+        }
+
+        if(Input.GetButtonUp("Cancel"))
+        {
+            ToggleOptions();
+        }
+    }
+    
     /// <summary>
     /// Sends the answer the player gave to the server
     /// </summary>
@@ -19,26 +90,7 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void GiveAnswer(string answer)
     {
-        Player.LocalPlayer.CmdGiveAnswer(answer);
-    }
-
-    /// <summary>
-    /// Sends the answer the player gave to the server
-    /// </summary>
-    /// <param name="answer">The text field the answer was written in.</param>
-    /// \author SWT-P_SS_20_Dixit
-    public void GiveAnswer(TMPro.TMP_InputField answer){
-        GiveAnswer(answer.text);
-    }
-
-    /// <summary>
-    /// Sends the id of the card the player chose to the server
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public void SelectAnswer()
-    {
-        var card = GetComponentInParent<Card>();
-        Player.LocalPlayer.ChooseAnswer(card);
+        Player.LocalPlayer.GiveAnswer(answer);
     }
 
     /// <summary>
@@ -47,7 +99,7 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void ClickContinueButton()
     {
-        this.GetComponent<Button>().interactable = false;
+        continueButton.interactable = false;
         Player.LocalPlayer.CmdPlayerIsReady();
     }
 
@@ -57,7 +109,7 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void EndGame()
     {
-       this.GetComponent<Button>().interactable = false;
+       exitButton.interactable = false;
        Player.LocalPlayer.CmdFinishGame();
     }
 
@@ -66,17 +118,15 @@ public class PlayerInput : MonoBehaviour
     /// </summary>
     public void ToggleExplanation(bool isActive)
     {
-        DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
-        displaymanager.ToggleExplanation(isActive);
+        displayManager.ToggleExplanation(isActive);
     }
 
     /// <summary>
     /// Switches between visible/invisible Options Screen
     /// </summary>
-    public void ToggleOptions(bool isActive)
+    public void ToggleOptions()
     {
-        DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
-        displaymanager.ToggleOptions(isActive);
+        displayManager.ToggleOptions(optionsOn = !optionsOn);
     }
 
 }

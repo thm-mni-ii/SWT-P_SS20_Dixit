@@ -290,7 +290,6 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     public void ToggleOptions(bool isActive)
     {
-        activateOptionsButton.interactable = !isActive;
         if(isActive){
             scoreScreenWasActive = resultOverlayCanvas.activeSelf;
             resultOverlayCanvas.SetActive(false);
@@ -351,6 +350,7 @@ public class DisplayManager : NetworkBehaviour
             resultOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeIn");
         }
         ClientScene.localPlayer.GetComponent<Player>().SelectedCard = null;
+        PlayerInput.singleton.canContinue = isActive;
     }
 
     private void hideScoreOverlay()

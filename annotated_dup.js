@@ -16,6 +16,5 @@ var annotated_dup =
     [ "Question", "class_question.html", "class_question" ],
     [ "QuestionSet", "class_question_set.html", "class_question_set" ],
     [ "SoundControl", "class_sound_control.html", "class_sound_control" ],
-    [ "TextResizer", "class_text_resizer.html", "class_text_resizer" ],
     [ "ToggleController", "class_toggle_controller.html", "class_toggle_controller" ]
 ];

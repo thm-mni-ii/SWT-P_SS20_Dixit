@@ -113,6 +113,9 @@ override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartLocal
 <tr class="memitem:a4daa8029f05a3374b5061c46ee1f9d28"><td class="memItemLeft" align="right" valign="top"><a id="a4daa8029f05a3374b5061c46ee1f9d28"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CmdSendName</b> (string name)</td></tr>
 <tr class="separator:a4daa8029f05a3374b5061c46ee1f9d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dab1423fe48c5979da0a528683ef0ae"><td class="memItemLeft" align="right" valign="top"><a id="a1dab1423fe48c5979da0a528683ef0ae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GiveAnswer</b> (string answer)</td></tr>
+<tr class="separator:a1dab1423fe48c5979da0a528683ef0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6da72ff9a31d486131c3520fa96fe566"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a6da72ff9a31d486131c3520fa96fe566">CmdGiveAnswer</a> (string answer)</td></tr>
 <tr class="memdesc:a6da72ff9a31d486131c3520fa96fe566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the given Answer from a <a class="el" href="class_player.html" title="Represents a Player in the Game. Communicates with the GameManager to log Answers and change the curr...">Player</a> to the <a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a>.  <a href="class_player.html#a6da72ff9a31d486131c3520fa96fe566">More...</a><br /></td></tr>
 <tr class="separator:a6da72ff9a31d486131c3520fa96fe566"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,6 +140,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>RpcSetNameOfNewPlayer
 <tr class="memitem:a55cf8163f7a65bced6bb38808fdcfd58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a55cf8163f7a65bced6bb38808fdcfd58">TargetSendResults</a> (string winner)</td></tr>
 <tr class="memdesc:a55cf8163f7a65bced6bb38808fdcfd58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send results to the framework  <a href="class_player.html#a55cf8163f7a65bced6bb38808fdcfd58">More...</a><br /></td></tr>
 <tr class="separator:a55cf8163f7a65bced6bb38808fdcfd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f9b9329e05e516f1684e35c42e0d9d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a5f9b9329e05e516f1684e35c42e0d9d4">TargetCanSubmit</a> (bool canSubmit)</td></tr>
+<tr class="memdesc:a5f9b9329e05e516f1684e35c42e0d9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <code>canSubmit</code> variable in the <code><a class="el" href="class_player_input.html" title="Handles Player input.">PlayerInput</a><code> sigleton </code></code> <a href="class_player.html#a5f9b9329e05e516f1684e35c42e0d9d4">More...</a><br /></td></tr>
+<tr class="separator:a5f9b9329e05e516f1684e35c42e0d9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -310,6 +316,35 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Called when the local <a class="el" href="class_player.html" title="Represents a Player in the Game. Communicates with the GameManager to log Answers and change the curr...">Player</a> Object has been set up </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="a5f9b9329e05e516f1684e35c42e0d9d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f9b9329e05e516f1684e35c42e0d9d4">&#9670;&nbsp;</a></span>TargetCanSubmit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Player.TargetCanSubmit </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>canSubmit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the <code>canSubmit</code> variable in the <code><a class="el" href="class_player_input.html" title="Handles Player input.">PlayerInput</a><code> sigleton </code></code></p>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
@@ -499,7 +534,7 @@ Properties</h2></td></tr>
 			<ul>
 				<li class="navelem"><a class="el" href="class_player.html">Player</a></li>
 				<li class="footer">
-					Generated on Sun Aug 30 2020 15:41:30 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun Aug 30 2020 16:22:15 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

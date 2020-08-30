@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['selectedcard_296',['SelectedCard',['../class_player.html#aa52ba65c04f17c836e35b645f2910c75',1,'Player']]]
+  ['questions_291',['Questions',['../class_question_set.html#a2d8697eec7fb3658dec968f9ea5c4a66',1,'QuestionSet']]],
+  ['questiontext_292',['QuestionText',['../class_question.html#a990bc1c8c975fa1c8e5c22eb13304a33',1,'Question']]]
 ];

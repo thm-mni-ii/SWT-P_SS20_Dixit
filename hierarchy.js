@@ -17,8 +17,7 @@ var hierarchy =
       [ "CountdownTimer", "class_countdown_timer.html", null ],
       [ "DisplayManager", "class_display_manager.html", null ],
       [ "GameManager", "class_game_manager.html", null ],
-      [ "Player", "class_player.html", null ],
-      [ "TextResizer", "class_text_resizer.html", null ]
+      [ "Player", "class_player.html", null ]
     ] ],
     [ "NetworkManager", null, [
       [ "GameServer", "class_game_server.html", null ]

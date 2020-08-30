@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['placement_293',['Placement',['../class_player.html#a16d40fe31a11fc059a47849bb33566a4',1,'Player']]]
+  ['name_289',['Name',['../class_question_set.html#aaa214fc59b671e91f73dd302bb4f833c',1,'QuestionSet']]]
 ];

@@ -156,6 +156,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6121e9ec26fd0133ca5e910418b89f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ac6121e9ec26fd0133ca5e910418b89f5">ShowStamps</a> (int correctAnswers)</td></tr>
 <tr class="memdesc:ac6121e9ec26fd0133ca5e910418b89f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows one stamp for each player who clicken on that answer  <a href="class_card.html#ac6121e9ec26fd0133ca5e910418b89f5">More...</a><br /></td></tr>
 <tr class="separator:ac6121e9ec26fd0133ca5e910418b89f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8450b91b65c8eccb5c689cb5ff6edc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#ae8450b91b65c8eccb5c689cb5ff6edc9">GiveAnswer</a> (TMPro.TMP_InputField answer)</td></tr>
+<tr class="memdesc:ae8450b91b65c8eccb5c689cb5ff6edc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the answer the player gave to the server  <a href="class_card.html#ae8450b91b65c8eccb5c689cb5ff6edc9">More...</a><br /></td></tr>
+<tr class="separator:ae8450b91b65c8eccb5c689cb5ff6edc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4586f61088a379d25d9bc856e31fb543"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_card.html#a4586f61088a379d25d9bc856e31fb543">SelectAnswer</a> ()</td></tr>
+<tr class="memdesc:a4586f61088a379d25d9bc856e31fb543"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the id of the card the player chose to the server  <a href="class_card.html#a4586f61088a379d25d9bc856e31fb543">More...</a><br /></td></tr>
+<tr class="separator:a4586f61088a379d25d9bc856e31fb543"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -362,6 +368,41 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>playerName</b></td>
   </dd>
 </dl>
 <p>&gt; </p><dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="ae8450b91b65c8eccb5c689cb5ff6edc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8450b91b65c8eccb5c689cb5ff6edc9">&#9670;&nbsp;</a></span>GiveAnswer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.GiveAnswer </td>
+          <td>(</td>
+          <td class="paramtype">TMPro.TMP_InputField&#160;</td>
+          <td class="paramname"><em>answer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sends the answer the player gave to the server </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">answer</td><td>The text field the answer was written in.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
 
 </div>
 </div>
@@ -639,6 +680,34 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>playerName</b></td>
 
 </div>
 </div>
+<a id="a4586f61088a379d25d9bc856e31fb543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4586f61088a379d25d9bc856e31fb543">&#9670;&nbsp;</a></span>SelectAnswer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Card.SelectAnswer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sends the id of the card the player chose to the server </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
 <a id="acded12e48c3fa3a0d4e187fee074cdde"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acded12e48c3fa3a0d4e187fee074cdde">&#9670;&nbsp;</a></span>ShowName()</h2>
 
@@ -809,7 +878,7 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>playerName</b></td>
 			<ul>
 				<li class="navelem"><a class="el" href="class_card.html">Card</a></li>
 				<li class="footer">
-					Generated on Sun Aug 30 2020 15:41:30 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun Aug 30 2020 16:22:15 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['difficulty_288',['Difficulty',['../class_question.html#aaf428164bde2ab9d36dda12a63534445',1,'Question']]],
-  ['docent_289',['Docent',['../class_question_set.html#a0336d0c5e22f594ace3e71d8aa274cd5',1,'QuestionSet']]]
+  ['cancontinue_283',['canContinue',['../class_player_input.html#a00d5e70744daca0d878ee886e2ba5774',1,'PlayerInput']]],
+  ['cansubmit_284',['canSubmit',['../class_player_input.html#a9ceae65d53e20c7f6f3ca52bb9a938c6',1,'PlayerInput']]]
 ];

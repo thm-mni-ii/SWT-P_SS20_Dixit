@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 300234298}
   - component: {fileID: 300234297}
   - component: {fileID: 300234296}
-  - component: {fileID: 300234299}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -120,7 +119,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300234299}
+      - m_Target: {fileID: 0}
         m_MethodName: SelectAnswer
         m_Mode: 1
         m_Arguments:
@@ -131,18 +130,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &300234299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300234294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc738c0bc7885e2728e74a9a1dd42dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &408795675
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +299,6 @@ GameObject:
   - component: {fileID: 773034933}
   - component: {fileID: 773034932}
   - component: {fileID: 773034931}
-  - component: {fileID: 357020394}
   m_Layer: 5
   m_Name: SubmitButton
   m_TagString: Untagged
@@ -420,7 +406,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 357020394}
+      - m_Target: {fileID: 0}
         m_MethodName: GiveAnswer
         m_Mode: 2
         m_Arguments:
@@ -431,18 +417,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &357020394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773034929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc738c0bc7885e2728e74a9a1dd42dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &857216005
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07994bfe8b0e4adb97d706de5dea48d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
@@ -734,7 +708,6 @@ GameObject:
   - component: {fileID: 4294172523381089564}
   - component: {fileID: 4732008267168048510}
   - component: {fileID: 1939344146778099453}
-  - component: {fileID: 533223278}
   m_Layer: 5
   m_Name: InputField (TMP)
   m_TagString: Untagged
@@ -895,18 +868,6 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 7
   m_InputValidator: {fileID: 0}
---- !u!114 &533223278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2783002544030761508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc738c0bc7885e2728e74a9a1dd42dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5317007862943300072
 GameObject:
   m_ObjectHideFlags: 0

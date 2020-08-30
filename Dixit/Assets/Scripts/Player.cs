@@ -80,6 +80,12 @@ public class Player : NetworkBehaviour
         PlayerName = name;
     }
 
+    public void GiveAnswer(string answer)
+    {
+        PlayerInput.singleton.canSubmit = false;
+        CmdGiveAnswer(answer);
+    }
+
     /// <summary>
     /// Sends the given Answer from a Player to the GameManager.
     /// </summary>
@@ -178,5 +184,15 @@ public class Player : NetworkBehaviour
     public void TargetSendResults(string winner)
     {
         (NetworkManager.singleton as GameServer).HandleGameResults(Placement, winner);
+    }
+
+    /// <summary>
+    /// Sets the <c>canSubmit</c> variable in the <c>PlayerInput<c/> sigleton
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    [TargetRpc]
+    public void TargetCanSubmit(bool canSubmit)
+    {
+        PlayerInput.singleton.canSubmit = canSubmit;
     }
 }

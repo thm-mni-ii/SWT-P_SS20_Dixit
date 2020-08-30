@@ -60,27 +60,6 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     public DisplayManager displayManager;
 
-    /// <summary>
-    /// PlayerCanvasNames Textgroup to be resized similarly
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public TextResizer PlayerCanvasNames;
-    /// <summary>
-    /// PlayerCanvasScores Textgroup to be resized similarly
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public TextResizer PlayerCanvasScores;
-    /// <summary>
-    /// ScoreResultsNames Textgroup to be resized similarly
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public TextResizer ScoreResultsNames;
-    /// <summary>
-    /// ScoreResultsScores Textgroup to be resized similarly
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public TextResizer ScoreResultsScores;
-
     private enum Phase
     {
         WriteAnswer,
@@ -282,6 +261,11 @@ public class GameManager : NetworkBehaviour
         StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
         timer.StartTimer(TimerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
 
+        foreach (var p in Utils.GetPlayers())
+        {
+           p.TargetCanSubmit(true);
+        }
+
         //wait for all players to send answer or get timeout
 
         if (currentRound == 0)
@@ -465,9 +449,9 @@ public class GameManager : NetworkBehaviour
         displayManager.RpcResultOverlaySetActive(true);
     }
 
-    private IEnumerator WaitAndChangePhase()
+    private IEnumerator WaitAndChangePhase(float time = 1)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
         ChangePhase();
     }
 
@@ -523,8 +507,6 @@ public class GameManager : NetworkBehaviour
             displayManager.RpcUpdatePlayerCanvasEntry(idx, player, playerPoints);
             idx--;
         }
-        PlayerCanvasNames.RpcAssimilateSize();
-        PlayerCanvasScores.RpcAssimilateSize();
     }
 
     /// <summary>
@@ -557,8 +539,6 @@ public class GameManager : NetworkBehaviour
 
             idx++;
         }
-        ScoreResultsNames.RpcAssimilateSize();
-        ScoreResultsScores.RpcAssimilateSize();
     }
 
     private void GetPoints(UInt32 player, int newPoints)

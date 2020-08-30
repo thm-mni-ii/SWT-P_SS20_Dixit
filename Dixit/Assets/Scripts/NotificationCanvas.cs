@@ -1,11 +1,8 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Controlls the notifications shown during a game.
@@ -29,6 +26,7 @@ public class NotificationCanvas : MonoBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public NotificationSystem notificationSystem;
+    private Vector3 _supposedPosition;
 
     private Vector2 initialSize;
 
@@ -113,5 +111,18 @@ public class NotificationCanvas : MonoBehaviour
     private void OnMouseDown()
     {
         notificationSystem.RemoveNotification();
+    }
+    /// <summary>
+    /// Slides the notification to a given location.
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public IEnumerator slideToSupposedPosition(Vector3 supposedPosition)
+    {
+        _supposedPosition = supposedPosition;
+        while (transform.localPosition != _supposedPosition)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, _supposedPosition, Time.deltaTime * 20);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 }

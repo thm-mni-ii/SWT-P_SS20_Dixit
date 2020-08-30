@@ -33,11 +33,12 @@ namespace Tests
             yield return new WaitForSeconds(1f);
             gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
+            yield return CardsSpawned();
+
             gameManager.TimerForGiveAnswer = 5;
             gameManager.TimerToCheckResults = 3;
             gameManager.TimerToChooseAnswer = 3;
-
-            yield return CardsSpawned();
+            gameManager.numberOfRounds = 4;
 
             for (var i = 1; i <= 3; i++)
             {
@@ -77,19 +78,22 @@ namespace Tests
             switch (round)
             {
                 case 1:
+                case 2:
                     {
                         foreach ((Player p, int i) in Utils.GetPlayersIndexed())
                             gameManager.LogAnswer(p.netId, $"Test {i}");
                         break;
                     }
-                case 2:
+                case 3:
                     {
+                        //CORNERCASE: Give same answer
                         foreach (Player p in Utils.GetPlayers())
                             gameManager.LogAnswer(p.netId, "Test");
                         break;
                     }
-                case 3:
+                case 4:
                     {
+                        //CORNERCASE: Give no or empty anwser
                         gameManager.LogAnswer(Utils.GetPlayers().First().netId, "");
                         break;
                     }
@@ -102,9 +106,11 @@ namespace Tests
             switch (round)
             {
                 case 1:
+                case 2:
                     Assert.AreEqual(3, GameObject.FindGameObjectsWithTag("AnswerCard").Length, "Wrong amount of possible answers");
                     break;
-                case 2:
+                case 3:
+                case 4:
                     yield return new WaitForSeconds(gameManager.TimerForGiveAnswer - 2);
                     break;
                 default:
@@ -125,6 +131,14 @@ namespace Tests
                         gameManager.LogAnswer(players[1].netId, players[0].netId);
                         break;
                     }
+                case 2:
+                    {
+                        //CORNERCASE: Player 0 clicked on own answer
+                        gameManager.LogAnswer(players[0].netId, players[0].netId);
+
+                        //CORNERCASE: Player 1 submitted no answer
+                        break;
+                    }
                 default:
                     break;
             }
@@ -141,11 +155,17 @@ namespace Tests
                     }
                 case 2:
                     {
-                        Assert.AreEqual(4, gameManager.Points[players[0].netId], "No points should be awarded");
+                        Assert.AreEqual(3, gameManager.Points[players[0].netId], "Click on own answer should result in -1 point");
                         Assert.AreEqual(0, gameManager.Points[players[1].netId], "No points should be awarded");
                         break;
                     }
                 case 3:
+                    {
+                        Assert.AreEqual(3, gameManager.Points[players[0].netId], "No points should be awarded");
+                        Assert.AreEqual(0, gameManager.Points[players[1].netId], "No points should be awarded");
+                        break;
+                    }
+                case 4:
                     Assert.AreEqual(3, gameManager.Points[players[0].netId], "Empty answer should result in -1 point");
                     Assert.AreEqual(-1, gameManager.Points[players[1].netId], "No answer should result in -1 point");
                     break;

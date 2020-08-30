@@ -64,6 +64,7 @@ public class PlayerInput : MonoBehaviour
     /// <summary>
     /// Switches between visible explanation screen and visible score screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ToggleExplanation(bool isActive)
     {
         DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
@@ -73,6 +74,7 @@ public class PlayerInput : MonoBehaviour
     /// <summary>
     /// Switches between visible/invisible Options Screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ToggleOptions(bool isActive)
     {
         DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();

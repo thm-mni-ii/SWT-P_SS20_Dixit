@@ -187,6 +187,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Sets and Formats the overview of all rounds for one player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcSetRoundOverview(bool first, int rounds, int[] roundpoints)
     {
@@ -243,6 +244,7 @@ public class DisplayManager : NetworkBehaviour
     /// Shows or hides the points overview of all rounds
     /// Sets the size of the component automatically by the number of rounds
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcToggleRoundsOverview(bool isActive, int rounds)
     {
@@ -258,6 +260,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible explanation screen and visible score screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ToggleExplanation(bool isActive)
     {
         explanationButton.SetActive(!isActive);
@@ -270,6 +273,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible explanation screen and visible score screen for every Player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcToggleExplanation(bool isActive)
     {
@@ -279,6 +283,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Updates the explanation text content in the overlay
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcUpdateExplanation(String explanation)
     {
@@ -288,6 +293,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible/invisible Options Screen
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     public void ToggleOptions(bool isActive)
     {
         activateOptionsButton.interactable = !isActive;
@@ -304,6 +310,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Switches between visible/invisible Options Screen for every Player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcToggleOptions(bool isActive)
     {
@@ -313,6 +320,7 @@ public class DisplayManager : NetworkBehaviour
     /// <summary>
     /// Sets ScoreScreenWasActive variable for every player
     /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcSetScoreScreenWasActive(Boolean active)
     {
@@ -386,6 +394,10 @@ public class DisplayManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Makes Timer on ResultOverlay visible
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcShowOverlayTimer()
     {
@@ -393,6 +405,10 @@ public class DisplayManager : NetworkBehaviour
         normalTimer.SetActive(false);
     }
 
+    /// <summary>
+    /// Makes gameplay Timer visible
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcShowNormalTimer()
     {
@@ -400,6 +416,10 @@ public class DisplayManager : NetworkBehaviour
         overlayTimer.SetActive(false);
     }
 
+    /// <summary>
+    /// Makes all Timers invisible
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
     public void RpcHideAllTimers()
     {

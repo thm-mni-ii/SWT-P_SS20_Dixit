@@ -147,9 +147,7 @@ public class GameManager : NetworkBehaviour
             Points.Add(p.netIdentity.netId, 0);
 
             for (int i = 0; i < numberOfRounds; i++)
-            {
                 roundPoints[i].Add(p.netIdentity.netId, 0);
-            }
         }
 
         UpdatePlayerCanvas();
@@ -259,22 +257,16 @@ public class GameManager : NetworkBehaviour
         // start timer
 
         StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
-        timer.StartTimer(TimerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
+        timer.StartTimer(TimerForGiveAnswer, CountdownTimer.TimerModes.giveAnswer);
 
         foreach (var p in Utils.GetPlayers())
-        {
-           p.TargetCanSubmit(true);
-        }
+            p.TargetCanSubmit(true);
 
         //wait for all players to send answer or get timeout
 
         if (currentRound == 0)
-        {
             foreach (var p in Utils.GetPlayers())
-            {
                 p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular, "Geb' eine falsche Antwort, die aber trotzdem plausibel klingt.", "1. Antwort Geben"));
-            }
-        }
     }
 
     private IEnumerator CheckEarlyTimeout(Phase forPhase)
@@ -304,7 +296,7 @@ public class GameManager : NetworkBehaviour
         }
         displayManager.RpcShowOverlayTimer();
         StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
-        timer.StartTimer(TimerToCheckResults, CountdownTimer.timerModes.scoreScreen);
+        timer.StartTimer(TimerToCheckResults, CountdownTimer.TimerModes.scoreScreen);
 
     }
 
@@ -314,9 +306,7 @@ public class GameManager : NetworkBehaviour
         if (currentRound == 0)
         {
             foreach (var p in Utils.GetPlayers())
-            {
                 p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular, "Wähle die Antwort aus, von der du glaubst, dass es die Richtige ist.", "2. Antwort Wählen"));
-            }
         }
         // check if any player gave no answer
         foreach (var p in Utils.GetPlayers())
@@ -330,7 +320,8 @@ public class GameManager : NetworkBehaviour
                 UpdatePlayerCanvas();
             }
 
-            if (Utils.AnswerIsEmpty(p.netId, answers)) answers.Remove(p.netId);
+            if (Utils.AnswerIsEmpty(p.netId, answers))
+                answers.Remove(p.netId);
         }
 
         //delete input card at client
@@ -345,9 +336,7 @@ public class GameManager : NetworkBehaviour
 
             //Messagesystem Alert not enough answers, resolve round and show correct answer
             foreach (var p in Utils.GetPlayers())
-            {
                 p.TargetSendNotification(new Notification(Notification.NotificationTypes.warning, "Es wurden nicht genügend Antworten abgegeben.", "+0 Punkte"));
-            }
 
             //Send answer to clients
             SendAnswers();
@@ -359,7 +348,7 @@ public class GameManager : NetworkBehaviour
         SendAnswers();
 
         // start timer
-        timer.StartTimer(TimerToChooseAnswer, CountdownTimer.timerModes.selectAnswer);
+        timer.StartTimer(TimerToChooseAnswer, CountdownTimer.TimerModes.selectAnswer);
     }
 
     private void EvaluationPhase()
@@ -410,13 +399,9 @@ public class GameManager : NetworkBehaviour
         foreach (var p in numOfSuccessfulDeceptionsPerPlayer)
         {
             if (p.Value == 0)
-            {
                 Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.regular, "Niemand hat auf deine Antwort geklickt.", "+" + 0 + " Punkte"));
-            }
             else
-            {
                 Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.good, "Sehr gut, du hast " + p.Value + " deiner Mitspieler getäuscht", "+" + p.Value + " Punkte"));
-            }
 
         }
 
@@ -432,9 +417,7 @@ public class GameManager : NetworkBehaviour
     {
         var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
         foreach (var card in cards)
-        {
             displayManager.RpcUpdateCard(this.netId, card.gameObject, choices.Values.Where(c => c == card.id).Count());
-        }
     }
 
 
@@ -464,9 +447,7 @@ public class GameManager : NetworkBehaviour
     {
         playersReady++;
         if (NetworkManager.singleton.numPlayers == playersReady)
-        {
             timer.StopTimer();
-        }
     }
 
     /// <summary>

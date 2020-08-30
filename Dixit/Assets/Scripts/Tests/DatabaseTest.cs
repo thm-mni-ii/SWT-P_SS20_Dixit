@@ -1,11 +1,9 @@
-﻿using System;
+﻿/* created by: SWT-P_SS_20_Dixit */
+
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using Mirror;
 using System.Threading.Tasks;
 using Firebase.Extensions;
 
@@ -23,7 +21,7 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-            if(!serverStarted)
+            if (!serverStarted)
             {
                 var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
@@ -51,18 +49,16 @@ namespace Tests
 
         public void ReadQuestion()
         {
-           QuestionSet.GetQuestion(0).ContinueWithLogException().ContinueWithOnMainThread(
-            l =>
-            {
-                Assert.NotNull(l.Result);
+            QuestionSet.GetQuestion(0).ContinueWithLogException().ContinueWithOnMainThread(
+             l =>
+             {
+                 Assert.NotNull(l.Result);
 
-                Assert.AreNotEqual("", l.Result.QuestionText);
-                Assert.AreNotEqual("", l.Result.Answer);
-            });
+                 Assert.AreNotEqual("", l.Result.QuestionText);
+                 Assert.AreNotEqual("", l.Result.Answer);
+             });
 
 
         }
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿/* created by: SWT-P_SS_20_Dixit */
+
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -17,7 +19,7 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator SetUp()
         {
-            if(!serverStarted)
+            if (!serverStarted)
             {
                 GameObject gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 var gameServer = gso.GetComponent<GameServer>();
@@ -30,21 +32,21 @@ namespace Tests
 
                 yield return new WaitForSeconds(1f);
 
-                foreach((var player, var idx) in Utils.GetPlayersIndexed())
+                foreach ((var player, var idx) in Utils.GetPlayersIndexed())
                 {
-                    if(player.PlayerName == null || player.PlayerName =="")
+                    if (player.PlayerName == null || player.PlayerName == "")
                     {
                         player.PlayerName = "Mustermann" + idx;
-                        player.CmdSendName( "Mustermann" + idx);
+                        player.CmdSendName("Mustermann" + idx);
                     }
                 }
 
                 yield return new WaitForSeconds(1f);
                 displayManager = GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
                 gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-                gameManager.timerForGiveAnswer = 5;
-                gameManager.timerToCheckResults = 3;
-                gameManager.timerToChooseAnswer = 3;
+                gameManager.TimerForGiveAnswer = 5;
+                gameManager.TimerToCheckResults = 3;
+                gameManager.TimerToChooseAnswer = 3;
             }
         }
 
@@ -58,7 +60,7 @@ namespace Tests
 
         private IEnumerator DeletedInputCard()
         {
-            foreach((Player p, int i ) in Utils.GetPlayersIndexed())
+            foreach ((Player p, int i) in Utils.GetPlayersIndexed())
             {
                 gameManager.LogAnswer(p.netId, $"Test {i}");
             }
@@ -69,9 +71,9 @@ namespace Tests
 
         private IEnumerator DeletedAnswerCards()
         {
-           displayManager.RpcDeleteAllAnswerCards();
-           yield return new WaitForFixedUpdate();
-           Assert.IsEmpty(GameObject.FindGameObjectsWithTag("AnswerCard"), "Answer cards not deleted");
+            displayManager.RpcDeleteAllAnswerCards();
+            yield return new WaitForFixedUpdate();
+            Assert.IsEmpty(GameObject.FindGameObjectsWithTag("AnswerCard"), "Answer cards not deleted");
         }
 
         private IEnumerator DeletedQuestionCard()
@@ -135,7 +137,7 @@ namespace Tests
             Assert.IsTrue(displayManager.scoreButton.activeInHierarchy, "Score button is not active in explanatioin");
             Assert.IsFalse(displayManager.TextPanel.activeInHierarchy, "Score display is active in explanation");
             Assert.IsTrue(displayManager.Explanations.activeInHierarchy, "Explanation is not active in explanation");
-            Assert.AreEqual ("Test Test", GameObject.Find("Explanation").GetComponent<TextMeshProUGUI>().text, "Explanation test not updated");
+            Assert.AreEqual("Test Test", GameObject.Find("Explanation").GetComponent<TextMeshProUGUI>().text, "Explanation test not updated");
             displayManager.RpcToggleExplanation(false);
             yield return new WaitForEndOfFrame();
             Assert.IsTrue(displayManager.explanationButton.activeInHierarchy, "Explain button is not active in score overview");

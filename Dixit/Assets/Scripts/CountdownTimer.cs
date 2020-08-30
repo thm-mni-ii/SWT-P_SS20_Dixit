@@ -45,7 +45,7 @@ public class CountdownTimer : NetworkBehaviour
     /// The differnt Timers are:  giveAnswer, selectAnswer, scoreScreen and a default timer.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public enum timerModes
+    public enum TimerModes
     {
         giveAnswer,
         selectAnswer,
@@ -53,7 +53,7 @@ public class CountdownTimer : NetworkBehaviour
         defaultMode
     }
 
-    private timerModes timerMode;
+    private TimerModes timerMode;
 
     /// <summary>
     /// This method is called every second once the timer starts
@@ -68,16 +68,16 @@ public class CountdownTimer : NetworkBehaviour
             CancelInvoke(nameof(PassSecond));
             switch (timerMode)
             {
-                case timerModes.giveAnswer:
+                case TimerModes.giveAnswer:
                     OnTimeoutGiveAnswer.Invoke();
                     break;
-                case timerModes.selectAnswer:
+                case TimerModes.selectAnswer:
                     OnTimeoutSelectAnswer.Invoke();
                     break;
-                case timerModes.scoreScreen:
+                case TimerModes.scoreScreen:
                     OnTimeoutScoreScreen.Invoke();
                     break;
-                case timerModes.defaultMode:
+                case TimerModes.defaultMode:
                     OnTimeoutDefault.Invoke();
                     break;
             }
@@ -93,17 +93,16 @@ public class CountdownTimer : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Server]
-    public void StartTimer(int startingTime, timerModes timerMode = timerModes.defaultMode)
+    public void StartTimer(int startingTime, TimerModes timerMode = TimerModes.defaultMode)
     {
         if (_timer == 0)
         {
             this.timerMode = timerMode;
             _timer = startingTime;
             RpcUpdateTimerTextfield(_timer);
+
             if (isServer)
-            {
                 InvokeRepeating(nameof(PassSecond), 0f, 1f);
-            }
         }
     }
     /// <summary>
@@ -120,8 +119,6 @@ public class CountdownTimer : NetworkBehaviour
     private void RpcUpdateTimerTextfield(int timer)
     {
         foreach (var textField in timerTextFields)
-        {
             textField.text = timer + "s";
-        }
     }
 }

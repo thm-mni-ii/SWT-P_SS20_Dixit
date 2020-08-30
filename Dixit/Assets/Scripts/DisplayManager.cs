@@ -198,17 +198,13 @@ public class DisplayManager : NetworkBehaviour
         {
             text_Component.text = "";
             for (int i = 0; i < rounds; i++)
-            {
                 formated += "R" + (i + 1) + "\t";
-            }
 
             formated += "\n";
         }
 
         for (int i = 0; i < rounds; i++)
-        {
             formated += roundpoints[i] + "\t";
-        }
 
         formated += "\n\n";
 
@@ -307,13 +303,13 @@ public class DisplayManager : NetworkBehaviour
         else
         {
             OptionsOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeOut");
-            Invoke(nameof(hideOptionsOverlay), 0.25f); //necessary so the animation can play
+            Invoke(nameof(HideOptionsOverlay), 0.25f); //necessary so the animation can play
             if (ScoreScreenWasActive)
                 resultOverlayCanvas.SetActive(true);
         }
     }
 
-    private void hideOptionsOverlay()
+    private void HideOptionsOverlay()
     {
         OptionsOverlayCanvas.SetActive(false);
     }
@@ -350,7 +346,7 @@ public class DisplayManager : NetworkBehaviour
         if (!isActive)
         {
             resultOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeOut");
-            Invoke(nameof(hideScoreOverlay), 0.25f); //necessary so the animation can play
+            Invoke(nameof(HideScoreOverlay), 0.25f); //necessary so the animation can play
         }
         else
         {
@@ -358,10 +354,10 @@ public class DisplayManager : NetworkBehaviour
             resultOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeIn");
         }
         ClientScene.localPlayer.GetComponent<Player>().SelectedCard = null;
-        PlayerInput.singleton.canContinue = isActive;
+        PlayerInput.Singleton.CanContinue = isActive;
     }
 
-    private void hideScoreOverlay()
+    private void HideScoreOverlay()
     {
         resultOverlayCanvas.SetActive(false);
     }
@@ -396,9 +392,7 @@ public class DisplayManager : NetworkBehaviour
         var answerCards = GameObject.FindGameObjectsWithTag("AnswerCard");
 
         for (int i = 0; i < answerCards.Length; i++)
-        {
             Destroy(answerCards[i]);
-        }
     }
 
     /// <summary>
@@ -415,9 +409,7 @@ public class DisplayManager : NetworkBehaviour
         card.ShowStamps(stamps);
 
         if (card.id == correctCard)
-        {
             card.HighlightCorrect();
-        }
     }
 
     /// <summary>

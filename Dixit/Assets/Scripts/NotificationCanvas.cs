@@ -116,7 +116,7 @@ public class NotificationCanvas : MonoBehaviour
     /// Slides the notification to a given location.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public IEnumerator slideToSupposedPosition(Vector3 supposedPosition)
+    public IEnumerator SlideToSupposedPosition(Vector3 supposedPosition)
     {
         _supposedPosition = supposedPosition;
         while (transform.localPosition != _supposedPosition)

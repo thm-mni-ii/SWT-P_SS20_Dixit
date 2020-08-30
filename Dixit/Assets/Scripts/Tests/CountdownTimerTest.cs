@@ -1,10 +1,9 @@
+/* created by: SWT-P_SS_20_Dixit */
 
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using Mirror;
 using TMPro;
 
 namespace Tests
@@ -19,7 +18,7 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-             if(!serverStarted)
+            if (!serverStarted)
             {
                 var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
@@ -37,7 +36,7 @@ namespace Tests
         {
             var timer = GameObject.Find("UICanvas").transform.GetChild(2).GetChild(0).gameObject.GetComponent<TMP_Text>();
 
-            gameManager.timer.StartTimer (5, CountdownTimer.timerModes.defaultMode);
+            gameManager.timer.StartTimer(5, CountdownTimer.TimerModes.defaultMode);
             yield return new WaitForSeconds(0.5f);
             Assert.AreEqual("5s", timer.text);
 
@@ -50,6 +49,5 @@ namespace Tests
             yield return new WaitForSeconds(0.5f);
             Assert.AreEqual("0s", timer.text);
         }
-
     }
 }

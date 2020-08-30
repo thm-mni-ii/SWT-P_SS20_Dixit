@@ -61,6 +61,12 @@ public class DisplayManager : NetworkBehaviour
     public GameObject resultOverlayCanvas;
 
     /// <summary>
+    /// Options Overlay Canvas UI element
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public GameObject OptionsOverlayCanvas;
+
+    /// <summary>
     /// The "Beenden" Button on the result panel displayed when the game ends
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -83,6 +89,18 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public GameObject scoreButton;
+
+    /// <summary>
+    /// Button at the upper left corner of the screen; activates Options Screen
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public Button activateOptionsButton;
+    /// <summary>
+    /// Button at the bottom of the Options Screen; deactivates Options Screen
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public Button deactivateOptionsButton;
+    public Boolean scoreScreenWasActive { get; set; } = false;
 
     /// <summary>
     /// Canvas for all round results overview
@@ -266,6 +284,41 @@ public class DisplayManager : NetworkBehaviour
     {
         ExplanationTMP.text = explanation;
     }
+
+    /// <summary>
+    /// Switches between visible/invisible Options Screen
+    /// </summary>
+    public void ToggleOptions(bool isActive)
+    {
+        activateOptionsButton.interactable = !isActive;
+        if(isActive){
+            scoreScreenWasActive = resultOverlayCanvas.activeSelf;
+            resultOverlayCanvas.SetActive(false);
+        }
+        OptionsOverlayCanvas.SetActive(isActive);
+        if(!isActive){
+            resultOverlayCanvas.SetActive(scoreScreenWasActive);
+        }
+    }
+
+    /// <summary>
+    /// Switches between visible/invisible Options Screen for every Player
+    /// </summary>
+    [ClientRpc]
+    public void RpcToggleOptions(bool isActive)
+    {
+        ToggleOptions(isActive);
+    }
+
+    /// <summary>
+    /// Sets ScoreScreenWasActive variable for every player
+    /// </summary>
+    [ClientRpc]
+    public void RpcSetScoreScreenWasActive(Boolean active)
+    {
+        scoreScreenWasActive = active;
+    }
+
 
     /// <summary>
     /// Opens the result overlay for all players.

@@ -194,6 +194,8 @@ public class GameManager : NetworkBehaviour
     {
         displayManager.RpcResultOverlaySetActive(false);
         displayManager.RpcToggleExplanation(false);
+        displayManager.RpcSetScoreScreenWasActive(false);
+        displayManager.RpcToggleOptions(false);
 
         currentRound++;
 
@@ -226,6 +228,8 @@ public class GameManager : NetworkBehaviour
         // show total scores
         UpdateScoreResultsOverlay(true);
         displayManager.RpcUpdateScoreHeaderText("~ Gesamtübersicht ~");
+
+        displayManager.RpcToggleOptions(false);
 
         displayManager.RpcToggleRoundsOverview(true,numberOfRounds);
 
@@ -454,9 +458,8 @@ public class GameManager : NetworkBehaviour
         int secs = 3;
         if (answers.Count == 1) secs = 5;
         yield return new WaitForSeconds(secs);
-        displayManager.RpcResultOverlaySetActive(true);
-        
-            
+        displayManager.RpcToggleOptions(false);
+        displayManager.RpcResultOverlaySetActive(true);            
     }
 
     private IEnumerator WaitAndChangePhase()

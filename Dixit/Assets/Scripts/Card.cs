@@ -16,7 +16,7 @@ public class Card : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [SerializeField] private Animator anim;
-
+    [SerializeField] private AudioSource flipsound;
     /// <summary>
     /// The text written on this card
     /// </summary>
@@ -157,6 +157,7 @@ public class Card : NetworkBehaviour
     public void FlipFacedown()
     {
         anim.Play("FlipFacedown");
+        flipsound.Play();
     }
 
     /// <summary>
@@ -166,6 +167,7 @@ public class Card : NetworkBehaviour
     public void FlipFaceup()
     {
         anim.Play("FlipFaceup");
+        flipsound.Play();
     }
 
     /// <summary>

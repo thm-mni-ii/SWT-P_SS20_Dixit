@@ -70,4 +70,13 @@ public class PlayerInput : MonoBehaviour
         displaymanager.ToggleExplanation(isActive);
     }
 
+    /// <summary>
+    /// Switches between visible/invisible Options Screen
+    /// </summary>
+    public void ToggleOptions(bool isActive)
+    {
+        DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
+        displaymanager.ToggleOptions(isActive);
+    }
+
 }

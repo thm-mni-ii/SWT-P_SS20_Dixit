@@ -30,6 +30,7 @@ public class Player : NetworkBehaviour
     /// The name of the player
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
+    [SyncVar]
     public string PlayerName = null;
 
     /// <summary>
@@ -144,12 +145,6 @@ public class Player : NetworkBehaviour
         {
             notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
         }
-    }
-
-    [ClientRpc]
-    public void RpcSetNameOfNewPlayer(string playerName)
-    {
-        PlayerName = playerName;
     }
 
     /// <summary>

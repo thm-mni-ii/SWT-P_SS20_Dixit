@@ -130,11 +130,6 @@ public class GameServer : NetworkManager
                 yield return new WaitForSeconds(0.5f);
         }
 
-        foreach (var p in Utils.GetPlayers())
-        {
-            p.RpcSetNameOfNewPlayer(p.PlayerName);
-        }
-
         GameManager gameManager = GameManager.Instance;
 
         gameManager.questionSetID = gameInfos["Question Set"];

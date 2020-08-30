@@ -22,6 +22,7 @@ public class NotificationCanvas : MonoBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     public NotificationSystem notificationSystem;
+    private Vector3 _supposedPosition;
 
     private Vector2 initialSize;
    
@@ -102,5 +103,15 @@ public class NotificationCanvas : MonoBehaviour
     private void OnMouseDown()
     {
         notificationSystem.RemoveNotification();
+    }
+    public IEnumerator slideToSupposedPosition(Vector3 supposedPosition)
+    {
+        Debug.Log("vagina");
+        _supposedPosition = supposedPosition;
+        while (transform.localPosition != _supposedPosition)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, _supposedPosition, Time.deltaTime * 10);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 }

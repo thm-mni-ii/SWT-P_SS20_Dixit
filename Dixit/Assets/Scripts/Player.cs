@@ -14,7 +14,7 @@ using TMPro;
 public class Player : NetworkBehaviour
 {
     private GameObject notificationSystem;
-    
+
     private bool enableTutorial = true;
 
     private static readonly Lazy<Player> _localPlayer =
@@ -132,6 +132,12 @@ public class Player : NetworkBehaviour
     {
         notificationSystem.GetComponent<NotificationSystem>().addNotification(notification);
     }
+
+    /// <summary>
+    /// Displays a Notification for the tutorial to the client
+    /// </summary>
+    /// <param name="notification">The tutorial notification to send</param>
+    /// \author SWT-P_SS_20_Dixit
     [TargetRpc]
     public void TargetSendTutorialNotification(Notification notification)
     {

@@ -45,7 +45,7 @@ namespace Tests
 
             gameManager.TimerToCheckResults = 3;
 
-            for (var i = 1; i <= 3; i++)
+            for (var i = 1; i <= 4; i++)
             {
                 yield return AnswersGiven(i);
                 yield return AnswersChosen(i);
@@ -184,7 +184,7 @@ namespace Tests
                         break;
                     }
                 case 4:
-                    Assert.AreEqual(3, gameManager.Points[players[0].netId], "Empty answer should result in -1 point");
+                    Assert.AreEqual(2, gameManager.Points[players[0].netId], "Empty answer should result in -1 point");
                     Assert.AreEqual(-1, gameManager.Points[players[1].netId], "No answer should result in -1 point");
                     break;
                 default:

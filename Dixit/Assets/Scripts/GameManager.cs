@@ -465,8 +465,13 @@ public class GameManager : NetworkBehaviour
         playersReady++;
         if (NetworkManager.singleton.numPlayers == playersReady)
         {
-            timer.StopTimer();
+            Invoke(nameof(stopTimer),0.7f);
         }
+    }
+
+    private void stopTimer()
+    {
+        timer.StopTimer();
     }
 
     /// <summary>

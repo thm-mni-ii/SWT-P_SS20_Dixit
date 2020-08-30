@@ -1,10 +1,9 @@
 ﻿﻿/* created by: SWT-P_SS_20_Dixit */
-using System;
+
 using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 /// <summary>
 /// A timer that can be run in multiple modes, different events are triggered based on what mode it's in.
@@ -13,7 +12,8 @@ using UnityEngine.UI;
 /// \author SWT-P_SS_20_Dixit
 public class CountdownTimer : NetworkBehaviour
 {
-    [SerializeField] private TextMeshProUGUI[] timerTextFields;
+    [SerializeField]
+    private TextMeshProUGUI[] timerTextFields;
 
     /// <summary>
     /// A Unity Event for the timeout in the giving answer phase.
@@ -45,7 +45,7 @@ public class CountdownTimer : NetworkBehaviour
     /// The differnt Timers are:  giveAnswer, selectAnswer, scoreScreen and a default timer.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public enum timerModes
+    public enum TimerModes
     {
         giveAnswer,
         selectAnswer,
@@ -53,31 +53,31 @@ public class CountdownTimer : NetworkBehaviour
         defaultMode
     }
 
-    private timerModes timerMode;
+    private TimerModes timerMode;
 
     /// <summary>
     /// This method is called every second once the timer starts
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Server]
-    private void passSecond()
+    private void PassSecond()
     {
         RpcUpdateTimerTextfield(_timer);
         if (_timer <= 0)
         {
-            CancelInvoke(nameof(passSecond));
+            CancelInvoke(nameof(PassSecond));
             switch (timerMode)
             {
-                case timerModes.giveAnswer:
+                case TimerModes.giveAnswer:
                     OnTimeoutGiveAnswer.Invoke();
                     break;
-                case timerModes.selectAnswer:
+                case TimerModes.selectAnswer:
                     OnTimeoutSelectAnswer.Invoke();
                     break;
-                case timerModes.scoreScreen:
+                case TimerModes.scoreScreen:
                     OnTimeoutScoreScreen.Invoke();
                     break;
-                case timerModes.defaultMode:
+                case TimerModes.defaultMode:
                     OnTimeoutDefault.Invoke();
                     break;
             }
@@ -93,17 +93,16 @@ public class CountdownTimer : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Server]
-    public void StartTimer(int startingTime, timerModes timerMode = timerModes.defaultMode)
+    public void StartTimer(int startingTime, TimerModes timerMode = TimerModes.defaultMode)
     {
         if (_timer == 0)
         {
             this.timerMode = timerMode;
             _timer = startingTime;
             RpcUpdateTimerTextfield(_timer);
+
             if (isServer)
-            {
-                InvokeRepeating(nameof(passSecond), 0f, 1f);
-            }
+                InvokeRepeating(nameof(PassSecond), 0f, 1f);
         }
     }
     /// <summary>
@@ -120,8 +119,6 @@ public class CountdownTimer : NetworkBehaviour
     private void RpcUpdateTimerTextfield(int timer)
     {
         foreach (var textField in timerTextFields)
-        {
             textField.text = timer + "s";
-        }
     }
 }

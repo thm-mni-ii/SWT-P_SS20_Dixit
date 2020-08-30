@@ -1,6 +1,6 @@
+/* created by: SWT-P_SS_20_Dixit */
 
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -17,7 +17,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            if(!serverStarted)
+            if (!serverStarted)
             {
                 var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
@@ -29,8 +29,8 @@ namespace Tests
         [UnityTest]
         public IEnumerator ServerExists()
         {
-           Assert.NotNull(NetworkManager.singleton, "No server enabled");
-           yield return null;
+            Assert.NotNull(NetworkManager.singleton, "No server enabled");
+            yield return null;
         }
 
         [UnityTest]

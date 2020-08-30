@@ -1,4 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
+
 using UnityEngine;
 using System.Threading.Tasks;
 using Firebase.Firestore;
@@ -27,12 +28,16 @@ public class Question
     public int Difficulty { get; set; }
 
     /// <summary>
-    /// The correct answer of this question
+    /// An explanation for the correct answer
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public string Explanation { get; set; }
 
+    /// <summary>
+    /// The correct answer of this question
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
     [FirestoreProperty]
     public string Answer { get; set; }
 
@@ -46,7 +51,8 @@ public class Question
     {
         return reference.GetSnapshotAsync().ContinueWith((task) =>
         {
-            if (task.IsFaulted) throw task.Exception;
+            if (task.IsFaulted)
+                throw task.Exception;
 
             var snapshot = task.Result;
             if (!snapshot.Exists)

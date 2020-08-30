@@ -6,6 +6,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Mirror;
+using System.Reflection;
 
 namespace Tests
 {
@@ -15,14 +16,21 @@ namespace Tests
         public GameManager gameManager;
         private bool serverStarted = false;
 
-        [SetUp]
-        public void Setup()
+        [UnitySetUp]
+        public IEnumerator Setup()
         {
             if (!serverStarted)
             {
+                GameServer.TEST_MODE = true;
                 GameObject gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
                 gameServer.StartHost();
+                yield return new WaitForFixedUpdate();
+
+                gameServer.GameInfos["Rounds"] = 4;
+                gameServer.GameInfos["Picking Time"] = 3;
+                gameServer.GameInfos["Answer Time"] = 5;
+
                 serverStarted = true;
             }
         }
@@ -35,16 +43,26 @@ namespace Tests
 
             yield return CardsSpawned();
 
-            gameManager.TimerForGiveAnswer = 5;
             gameManager.TimerToCheckResults = 3;
-            gameManager.TimerToChooseAnswer = 3;
-            gameManager.numberOfRounds = 4;
 
             for (var i = 1; i <= 3; i++)
             {
                 yield return AnswersGiven(i);
                 yield return AnswersChosen(i);
             }
+        }
+
+        private FieldInfo GetField(System.Type type, string fieldName)
+        {
+            if (string.IsNullOrWhiteSpace(fieldName))
+                Assert.Fail("methodName cannot be null or whitespace");
+
+            var field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+
+            if (field == null)
+                Assert.Fail(string.Format("{0} method not found", fieldName));
+
+            return field;
         }
 
         private IEnumerator CardsSpawned()
@@ -57,14 +75,14 @@ namespace Tests
 
             foreach ((var player, var idx) in Utils.GetPlayersIndexed())
             {
-                if (player.PlayerName == null || player.PlayerName == "")
+                if (string.IsNullOrEmpty(player.PlayerName))
                 {
                     player.PlayerName = "Mustermann" + idx;
                     player.CmdSendName("Mustermann" + idx);
                 }
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
 
             Assert.NotNull(GameObject.FindGameObjectWithTag("QuestionCard"), "No QuestionCard spawned");
             Assert.NotNull(GameObject.FindGameObjectWithTag("InputCard"), "No InputCard spawned");

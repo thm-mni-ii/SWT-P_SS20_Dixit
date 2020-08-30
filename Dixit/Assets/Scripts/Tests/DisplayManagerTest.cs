@@ -21,6 +21,7 @@ namespace Tests
         {
             if (!serverStarted)
             {
+                GameServer.TEST_MODE = true;
                 GameObject gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 var gameServer = gso.GetComponent<GameServer>();
                 gameServer.StartHost();

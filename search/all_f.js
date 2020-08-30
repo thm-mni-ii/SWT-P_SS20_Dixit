@@ -10,10 +10,11 @@ var searchData=
   ['showname_119',['ShowName',['../class_card.html#acded12e48c3fa3a0d4e187fee074cdde',1,'Card']]],
   ['showshort_120',['showShort',['../class_notification_canvas.html#acd6bd44860e6ebf62a45d46341ff3017',1,'NotificationCanvas']]],
   ['showstamps_121',['ShowStamps',['../class_card.html#ac6121e9ec26fd0133ca5e910418b89f5',1,'Card']]],
-  ['soundcontrol_122',['SoundControl',['../class_sound_control.html',1,'']]],
-  ['start_123',['Start',['../class_game_server.html#aaf2d9dc28894649bc14dd873b8058e52',1,'GameServer']]],
-  ['startfacedown_124',['startFacedown',['../class_card.html#a98dd958f8c723435d2153fc0744b79dd',1,'Card']]],
-  ['startgame_125',['StartGame',['../class_game_manager.html#a9193c24424f6a10c7d9df407264ed4fa',1,'GameManager']]],
-  ['starttimer_126',['StartTimer',['../class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f',1,'CountdownTimer']]],
-  ['stoptimer_127',['StopTimer',['../class_countdown_timer.html#aaab26a56e1372c22d07359200847bae6',1,'CountdownTimer']]]
+  ['slidetosupposedposition_122',['slideToSupposedPosition',['../class_notification_canvas.html#adf65f8607acafbfe83adb344522097ca',1,'NotificationCanvas']]],
+  ['soundcontrol_123',['SoundControl',['../class_sound_control.html',1,'']]],
+  ['start_124',['Start',['../class_game_server.html#aaf2d9dc28894649bc14dd873b8058e52',1,'GameServer']]],
+  ['startfacedown_125',['startFacedown',['../class_card.html#a98dd958f8c723435d2153fc0744b79dd',1,'Card']]],
+  ['startgame_126',['StartGame',['../class_game_manager.html#a9193c24424f6a10c7d9df407264ed4fa',1,'GameManager']]],
+  ['starttimer_127',['StartTimer',['../class_countdown_timer.html#ab74898de54baea9dc5bb851ad1c1be1f',1,'CountdownTimer']]],
+  ['stoptimer_128',['StopTimer',['../class_countdown_timer.html#aaab26a56e1372c22d07359200847bae6',1,'CountdownTimer']]]
 ];

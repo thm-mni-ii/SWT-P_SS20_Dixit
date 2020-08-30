@@ -23,6 +23,7 @@ namespace Tests
         {
             if (!serverStarted)
             {
+                GameServer.TEST_MODE = true;
                 var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
                 gameServer.StartHost();
@@ -43,7 +44,8 @@ namespace Tests
             //wait until the question set is loaded
             loadQuestionSet.ContinueWithOnMainThread(t =>
             {
-
+                Assert.NotNull(t);
+                ReadQuestion();              
             });
         }
 

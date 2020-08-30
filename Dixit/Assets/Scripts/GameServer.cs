@@ -19,6 +19,8 @@ public class GameServer : NetworkManager
     /// </summary>
     private const string FILE_NAME = "Info.txt";
 
+    public static bool TEST_MODE = false;
+
     /// <summary>
     /// Defines how long the game server will try to connect the client before quitting the application.
     /// </summary>
@@ -81,20 +83,19 @@ public class GameServer : NetworkManager
         readyToQuit = false;
         isHost = false;
 
-        LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
-
-        /*LoadPlayerInfo();             // <- FOR RELEASE
-
-        if (isHost)
+        if (TEST_MODE)
         {
-            StartHost();
+            LoadPlayerInfoMockup();
         }
         else
         {
-            disconnectTimer = disconnectWaitTime;
-        }
-        */
+            LoadPlayerInfo();
 
+            if (isHost)
+                StartHost();
+            else
+                disconnectTimer = disconnectWaitTime;
+        }
     }
 
 

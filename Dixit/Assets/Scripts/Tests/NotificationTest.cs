@@ -23,6 +23,7 @@ namespace Tests
         {
             if (!serverStarted)
             {
+                GameServer.TEST_MODE = true;
                 var gso = MonoBehaviour.Instantiate(Resources.Load("Prefabs/NetworkManager")) as GameObject;
                 gameServer = gso.GetComponent<GameServer>();
                 gameServer.StartHost();
@@ -115,14 +116,14 @@ namespace Tests
         [UnityTest]
         public IEnumerator ShowLongTest()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
 
             Utils.GetPlayers().First().TargetSendNotification(
                 new Notification(Notification.NotificationTypes.regular,
                                    "long explanation", "short")
             );
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
 
             foreach (Transform notification in notificationCanvas.transform)
             {
@@ -132,11 +133,11 @@ namespace Tests
                 if (tmp.text == "short")
                 {
                     notification.GetComponent<NotificationCanvas>().ShowLong();
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1f);
                     Assert.AreEqual("long explanation", tmp.text);
 
                     notification.GetComponent<NotificationCanvas>().ShowShort();
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1f);
                     Assert.AreEqual("short", tmp.text);
 
                 }
@@ -147,6 +148,8 @@ namespace Tests
         [UnityTest]
         public IEnumerator ShowFiveTest()
         {
+            yield return new WaitForSeconds(1f);
+
             //test for more the five notifications the oldest is deleted
             Utils.GetPlayers().First().TargetSendNotification(
                 new Notification(Notification.NotificationTypes.regular,

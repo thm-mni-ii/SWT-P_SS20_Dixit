@@ -248,7 +248,6 @@ public class GameManager : NetworkBehaviour
 
         // start timer
 
-        StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
         timer.StartTimer(TimerForGiveAnswer, CountdownTimer.TimerModes.giveAnswer);
 
         foreach (var p in Utils.GetPlayers())
@@ -261,39 +260,9 @@ public class GameManager : NetworkBehaviour
                 p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular, "Geb' eine falsche Antwort, die aber trotzdem plausibel klingt.", "1. Antwort Geben"));
     }
 
-    private IEnumerator CheckEarlyTimeout(Phase forPhase)
-    {
-        bool done = false;
-        while (currentPhase == forPhase && !done)
-        {
-            if (forPhase == Phase.WriteAnswer && answers.Count >= PlayerCount + 1 ||
-                forPhase == Phase.ChoseAnswer && choices.Count >= PlayerCount || forPhase == Phase.Evaluation &&
-                NetworkManager.singleton.numPlayers == playersReady)
-            {
-                timer.StopTimer();
-                done = true;
-            }
-            else
-            {
-                yield return new WaitForSeconds(1f);
-            }
-        }
-    }
-
-    private IEnumerator CheckScoreTimerStart()
-    {
-        while (playersReady < PlayerCount / 2)
-        {
-            yield return new WaitForSeconds(1f);
-        }
-        displayManager.RpcShowOverlayTimer();
-        StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
-        timer.StartTimer(TimerToCheckResults, CountdownTimer.TimerModes.scoreScreen);
-
-    }
-
     private void ChooseAnswerPhase()
     {
+        playersReady = 0;
         displayManager.RpcShowNormalTimer();
         if (currentRound == 0)
         {
@@ -416,7 +385,6 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator WaitAndShowResults()
     {
-        StartCoroutine(CheckScoreTimerStart());
         int secs = 3;
         if (answers.Count == 1) secs = 5;
         yield return new WaitForSeconds(secs);
@@ -438,8 +406,27 @@ public class GameManager : NetworkBehaviour
     public void LogPlayerIsReady()
     {
         playersReady++;
+        if(playersReady == (int)(PlayerCount/2 + 0.5f))
+        {
+            displayManager.RpcShowOverlayTimer();
+            timer.StartTimer(TimerToCheckResults, CountdownTimer.TimerModes.scoreScreen);
+        }
         if (NetworkManager.singleton.numPlayers == playersReady)
             timer.StopTimer();
+    }
+
+    private void LogPlayerAnswer()
+    {
+        playersReady++;
+        if (NetworkManager.singleton.numPlayers == playersReady)
+        {
+            Invoke(nameof(stopTimer),0.7f);
+        }
+    }
+
+    private void stopTimer()
+    {
+        timer.StopTimer();
     }
 
     /// <summary>
@@ -558,12 +545,14 @@ public class GameManager : NetworkBehaviour
                 }
 
                 sameAnswers.Add(givenAnswer.Key, playerId);
+                LogPlayerAnswer();
 
                 return;
             }
         }
 
         answers.Add(playerId, answer);
+        LogPlayerAnswer();
     }
 
     /// <summary>

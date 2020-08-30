@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Dixit", "index.html", ]
+  [ "Qiscit", "index.html", ]
 ];
 
 var NAVTREEINDEX =

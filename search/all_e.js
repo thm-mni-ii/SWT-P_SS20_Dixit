@@ -1,26 +1,9 @@
 var searchData=
 [
-  ['regularcolor_89',['regularColor',['../class_notification_system.html#adb6a566e65868e87368993d2a3064e6c',1,'NotificationSystem']]],
-  ['removenotification_90',['RemoveNotification',['../class_notification_system.html#a1f36772a918a0d7b334f52060b602bea',1,'NotificationSystem']]],
-  ['resultoverlaycanvas_91',['resultOverlayCanvas',['../class_display_manager.html#a64291e78158f5523471edff64da982dc',1,'DisplayManager']]],
-  ['retrievequestion_92',['RetrieveQuestion',['../class_question.html#a55acea326292e1cc3f8d9d7d69fc3ca9',1,'Question']]],
-  ['retrievequestionset_93',['RetrieveQuestionSet',['../class_question_set.html#a7d7c2c0083762c6f23bff0f72f74ae5b',1,'QuestionSet']]],
-  ['roundsoverview_94',['roundsOverview',['../class_display_manager.html#a32a815e71abfb7ac0b0dba9bdeb23d8e',1,'DisplayManager']]],
-  ['roundsoverview_5ftext_95',['roundsOverview_text',['../class_display_manager.html#a3573c85f6424d82291fbcfdc256be003',1,'DisplayManager']]],
-  ['rpcdeleteallanswercards_96',['RpcDeleteAllAnswerCards',['../class_display_manager.html#a914fd7408e299f64c9ec828a01375115',1,'DisplayManager']]],
-  ['rpcdeleteinputcard_97',['RpcDeleteInputCard',['../class_display_manager.html#aba0b827b3e42a74962dea56f1e8aedb9',1,'DisplayManager']]],
-  ['rpcdeletequestioncard_98',['RpcDeleteQuestionCard',['../class_display_manager.html#a4522dc196daddc23c27be02ffa770016',1,'DisplayManager']]],
-  ['rpcflip_99',['RpcFlip',['../class_card.html#a8e248eae5f0363abf63fdb0d3bbe44be',1,'Card']]],
-  ['rpcresultoverlaysetactive_100',['RpcResultOverlaySetActive',['../class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2',1,'DisplayManager']]],
-  ['rpcsetroundoverview_101',['RpcSetRoundOverview',['../class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d',1,'DisplayManager']]],
-  ['rpcsetscorescreenwasactive_102',['RpcSetScoreScreenWasActive',['../class_display_manager.html#a94774c87aa5fadbabc123dd6839609cb',1,'DisplayManager']]],
-  ['rpcslidetoposition_103',['RpcSlideToPosition',['../class_card.html#a78d676acc03df986003007e1a53344f8',1,'Card']]],
-  ['rpctoggleexit_104',['RpcToggleExit',['../class_display_manager.html#ac96aa8bd1f9970c6bf756084831555a4',1,'DisplayManager']]],
-  ['rpctoggleexplanation_105',['RpcToggleExplanation',['../class_display_manager.html#a295af77c32320feef855594d581bc141',1,'DisplayManager']]],
-  ['rpctoggleoptions_106',['RpcToggleOptions',['../class_display_manager.html#a978f6f5914db7af9c6b5a0fa38453e7b',1,'DisplayManager']]],
-  ['rpctoggleroundsoverview_107',['RpcToggleRoundsOverview',['../class_display_manager.html#a2a38e6fa6e724035f8d3e4269805d3c6',1,'DisplayManager']]],
-  ['rpcupdatecard_108',['RpcUpdateCard',['../class_display_manager.html#a0ec8dcdb4997726f1fa574db434079d6',1,'DisplayManager']]],
-  ['rpcupdateexplanation_109',['RpcUpdateExplanation',['../class_display_manager.html#ace3d599ab3921a836fdf0ca67619cc55',1,'DisplayManager']]],
-  ['rpcupdateplayercanvasentry_110',['RpcUpdatePlayerCanvasEntry',['../class_display_manager.html#acbdf5d0e137d948abe3f321329b057bf',1,'DisplayManager']]],
-  ['rpcupdatescoreheadertext_111',['RpcUpdateScoreHeaderText',['../class_display_manager.html#a98038a87694376a27a208c357d7c606c',1,'DisplayManager']]]
+  ['question_98',['Question',['../class_question.html',1,'']]],
+  ['questioncount_99',['QuestionCount',['../class_question_set.html#a0d89c14f5f75cd180d1139278b76fc3a',1,'QuestionSet']]],
+  ['questions_100',['Questions',['../class_question_set.html#a2d8697eec7fb3658dec968f9ea5c4a66',1,'QuestionSet']]],
+  ['questionset_101',['QuestionSet',['../class_question_set.html',1,'QuestionSet'],['../class_game_manager.html#ac92b1930151916737c0a5bf7da180754',1,'GameManager.QuestionSet()']]],
+  ['questionsetid_102',['questionSetID',['../class_game_manager.html#a3bd3808d9a26df5fd23b2cb5ad0e2d48',1,'GameManager']]],
+  ['questiontext_103',['QuestionText',['../class_question.html#a990bc1c8c975fa1c8e5c22eb13304a33',1,'Question']]]
 ];

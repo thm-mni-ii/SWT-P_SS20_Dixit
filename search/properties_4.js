@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_289',['Name',['../class_question_set.html#aaa214fc59b671e91f73dd302bb4f833c',1,'QuestionSet']]]
+  ['gameinfos_338',['GameInfos',['../class_game_server.html#aec94fdfad7e2d8b07ffc32c3c9fe14e8',1,'GameServer']]]
 ];

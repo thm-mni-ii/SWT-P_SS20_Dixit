@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['db_233',['DB',['../class_database_setup.html#a3abc5d37fe6a6d36baafd183769e08c9',1,'DatabaseSetup']]],
-  ['deactivateoptionsbutton_234',['deactivateOptionsButton',['../class_display_manager.html#a62f199381413a77c637e529e544acdd3',1,'DisplayManager']]],
-  ['defalutcolor_235',['defalutColor',['../class_card.html#a439e765e63063acb43ee9735eeabe7b7',1,'Card']]],
-  ['displaymanager_236',['displayManager',['../class_game_manager.html#a895d431df4c677d524083afeff5f25a3',1,'GameManager.displayManager()'],['../class_player_input.html#a5b8cd56c9f30d889a31cb620f646f607',1,'PlayerInput.displayManager()']]]
+  ['collider_270',['collider',['../class_notification_canvas.html#a64957d4f261e84bb6af1764671c00b10',1,'NotificationCanvas']]],
+  ['continuebutton_271',['continueButton',['../class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640',1,'DisplayManager.continueButton()'],['../class_player_input.html#a4bfeb5a5dd050cce741a02f32cc94cac',1,'PlayerInput.continueButton()']]],
+  ['correctcolour_272',['correctColour',['../class_card.html#a5aeac40f29a262deb2968709e8f8a5ce',1,'Card']]]
 ];

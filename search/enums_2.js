@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timermodes_282',['timerModes',['../class_countdown_timer.html#aa4c1404928f4dfdf65f163a7b4a9ee8a',1,'CountdownTimer']]]
+  ['timermodes_331',['TimerModes',['../class_countdown_timer.html#abbd6aeb7b0b7815701561a8dfa35c489',1,'CountdownTimer']]]
 ];

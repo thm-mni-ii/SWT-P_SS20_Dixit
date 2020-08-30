@@ -1,8 +1,8 @@
 var class_notification_system =
 [
-    [ "addNotification", "class_notification_system.html#ab089c1c13bbc49b0033c4038d5c63ffc", null ],
+    [ "AddNotification", "class_notification_system.html#a27135c57bcf10fb1153780d3e6039129", null ],
     [ "RemoveNotification", "class_notification_system.html#a1f36772a918a0d7b334f52060b602bea", null ],
-    [ "updateNotifications", "class_notification_system.html#a1a558128c951835044e080f345b30ac9", null ],
+    [ "UpdateNotifications", "class_notification_system.html#a5f8887bf1910f92f655127a4f523cb5f", null ],
     [ "badColor", "class_notification_system.html#a213d0a7b699b4c78ad2eb01001aed895", null ],
     [ "badsound", "class_notification_system.html#a0b41aba892254e30239711a4f1072897", null ],
     [ "goodColor", "class_notification_system.html#aecacd42bcb490568be5e14db68ca4477", null ],

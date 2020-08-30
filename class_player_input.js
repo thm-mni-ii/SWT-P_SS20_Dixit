@@ -8,6 +8,6 @@ var class_player_input =
     [ "continueButton", "class_player_input.html#a4bfeb5a5dd050cce741a02f32cc94cac", null ],
     [ "displayManager", "class_player_input.html#a5b8cd56c9f30d889a31cb620f646f607", null ],
     [ "exitButton", "class_player_input.html#ab4dc14a5c204383d87bab5f00f2657f7", null ],
-    [ "canContinue", "class_player_input.html#a00d5e70744daca0d878ee886e2ba5774", null ],
-    [ "canSubmit", "class_player_input.html#a9ceae65d53e20c7f6f3ca52bb9a938c6", null ]
+    [ "CanContinue", "class_player_input.html#ae0255c551db5739bcbca4c20358de64f", null ],
+    [ "CanSubmit", "class_player_input.html#ab11628d5f61ab4101e885346418607cf", null ]
 ];

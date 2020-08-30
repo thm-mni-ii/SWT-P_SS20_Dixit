@@ -6,7 +6,6 @@ var class_game_manager =
     [ "LogAnswer", "class_game_manager.html#a04341ee720a617a3e79983bd823fc701", null ],
     [ "LogAnswer", "class_game_manager.html#a97ff93538ce04315a174431ec0ff2e55", null ],
     [ "LogPlayerIsReady", "class_game_manager.html#a809853b3aceeac1b7aa0187860e3ab50", null ],
-    [ "OnStartServer", "class_game_manager.html#a9e998e4f3eb61fbfc0149a7d3cfaff4a", null ],
     [ "StartGame", "class_game_manager.html#a9193c24424f6a10c7d9df407264ed4fa", null ],
     [ "displayManager", "class_game_manager.html#a895d431df4c677d524083afeff5f25a3", null ],
     [ "m_cardPrefab", "class_game_manager.html#a58b7df38a3af1256bfed9c99c871e678", null ],
@@ -15,8 +14,8 @@ var class_game_manager =
     [ "QuestionSet", "class_game_manager.html#ac92b1930151916737c0a5bf7da180754", null ],
     [ "questionSetID", "class_game_manager.html#a3bd3808d9a26df5fd23b2cb5ad0e2d48", null ],
     [ "timer", "class_game_manager.html#afa571c403e335f212cb87f55daba90aa", null ],
-    [ "points", "class_game_manager.html#a79f7b25ad70fdb4cdbc3056f60ae8a9b", null ],
-    [ "timerForGiveAnswer", "class_game_manager.html#a634a07ff3b86a0202236e935cfa80b12", null ],
-    [ "timerToCheckResults", "class_game_manager.html#a403d6dae4d1b52faa248c4ef301838ea", null ],
-    [ "timerToChooseAnswer", "class_game_manager.html#a9a7054c93fe14d31ec9b9ae7bdc1a657", null ]
+    [ "Points", "class_game_manager.html#a58d0068e41a8cfd5de24196c76f192ac", null ],
+    [ "TimerForGiveAnswer", "class_game_manager.html#af47b6241ad1b2e6441514e0cf51e128b", null ],
+    [ "TimerToCheckResults", "class_game_manager.html#a8a31f955bdfc455bce716004d1e2b1ec", null ],
+    [ "TimerToChooseAnswer", "class_game_manager.html#af1a2cdaad3f3251d48bf61a929c44c79", null ]
 ];

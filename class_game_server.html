@@ -86,6 +86,7 @@ $(document).ready(function(){initNavTree('class_game_server.html',''); initResiz
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_game_server-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GameServer Class Reference</div>  </div>
@@ -118,13 +119,8 @@ override void&#160;</td><td class="memItemRight" valign="bottom"><b>OnStartClien
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a749a880cc80db48812b2984daaf08b44"><td class="memItemLeft" align="right" valign="top"><a id="a749a880cc80db48812b2984daaf08b44"></a>
-<a class="el" href="class_player_info.html">PlayerInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PlayerInfos</b> =&gt; playerInfos</td></tr>
-<tr class="separator:a749a880cc80db48812b2984daaf08b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec94fdfad7e2d8b07ffc32c3c9fe14e8"><td class="memItemLeft" align="right" valign="top"><a id="aec94fdfad7e2d8b07ffc32c3c9fe14e8"></a>
-JSONNode&#160;</td><td class="memItemRight" valign="bottom"><b>GameInfos</b> =&gt; gameInfos</td></tr>
-<tr class="separator:aec94fdfad7e2d8b07ffc32c3c9fe14e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a0f3b744d39e0cdded6dd140bdf4eb0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_server.html#a3a0f3b744d39e0cdded6dd140bdf4eb0">playersWantToPlay</a> = 2</td></tr>
+<tr class="memdesc:a3a0f3b744d39e0cdded6dd140bdf4eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of player that want to play the game. The Server will wait until that number of players joined the game  <a href="class_game_server.html#a3a0f3b744d39e0cdded6dd140bdf4eb0">More...</a><br /></td></tr>
 <tr class="separator:a3a0f3b744d39e0cdded6dd140bdf4eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3210381f7662dc5d6c6980a74d327b9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game_manager.html">GameManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_server.html#a3210381f7662dc5d6c6980a74d327b9d">GameManager</a></td></tr>
 <tr class="memdesc:a3210381f7662dc5d6c6980a74d327b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <code><a class="el" href="class_game_manager.html" title="The GameManger keeps track of all given Answers and Changes the current Phase of the Game....">GameManager</a></code>  <a href="class_game_server.html#a3210381f7662dc5d6c6980a74d327b9d">More...</a><br /></td></tr>
@@ -132,9 +128,18 @@ JSONNode&#160;</td><td class="memItemRight" valign="bottom"><b>GameInfos</b> =&g
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a3c162a8b059401bcf5b5585c97e8ad1c"><td class="memItemLeft" align="right" valign="top"><a id="a3c162a8b059401bcf5b5585c97e8ad1c"></a>
-static <a class="el" href="class_game_server.html">GameServer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b> =&gt; (<a class="el" href="class_game_server.html">GameServer</a>) singleton</td></tr>
-<tr class="separator:a3c162a8b059401bcf5b5585c97e8ad1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af786e587297a732eeea79840d2f844f8"><td class="memItemLeft" align="right" valign="top"><a id="af786e587297a732eeea79840d2f844f8"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>TEST_MODE</b> = false</td></tr>
+<tr class="separator:af786e587297a732eeea79840d2f844f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a749a880cc80db48812b2984daaf08b44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_player_info.html">PlayerInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_server.html#a749a880cc80db48812b2984daaf08b44">PlayerInfos</a><code> [get]</code></td></tr>
+<tr class="memdesc:a749a880cc80db48812b2984daaf08b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores information about the player.  <a href="class_game_server.html#a749a880cc80db48812b2984daaf08b44">More...</a><br /></td></tr>
+<tr class="separator:a749a880cc80db48812b2984daaf08b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec94fdfad7e2d8b07ffc32c3c9fe14e8"><td class="memItemLeft" align="right" valign="top">JSONNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_server.html#aec94fdfad7e2d8b07ffc32c3c9fe14e8">GameInfos</a><code> [get]</code></td></tr>
+<tr class="memdesc:aec94fdfad7e2d8b07ffc32c3c9fe14e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores information about the game.  <a href="class_game_server.html#aec94fdfad7e2d8b07ffc32c3c9fe14e8">More...</a><br /></td></tr>
+<tr class="separator:aec94fdfad7e2d8b07ffc32c3c9fe14e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class represents a game server. The server starts automatically and loads the player prefab into the online scene. </p>
@@ -245,9 +250,57 @@ static <a class="el" href="class_game_server.html">GameServer</a>&#160;</td><td 
       </table>
 </div><div class="memdoc">
 
-<p></p>
-<p>The number of player that want to play the game. The Server will wait until that number of players joined the game</p>
+<p>The number of player that want to play the game. The Server will wait until that number of players joined the game </p>
 <dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
+<a id="aec94fdfad7e2d8b07ffc32c3c9fe14e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec94fdfad7e2d8b07ffc32c3c9fe14e8">&#9670;&nbsp;</a></span>GameInfos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">JSONNode GameServer.GameInfos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores information about the game. </p>
+
+</div>
+</div>
+<a id="a749a880cc80db48812b2984daaf08b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a749a880cc80db48812b2984daaf08b44">&#9670;&nbsp;</a></span>PlayerInfos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_player_info.html">PlayerInfo</a> GameServer.PlayerInfos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores information about the player. </p>
 
 </div>
 </div>
@@ -261,7 +314,7 @@ static <a class="el" href="class_game_server.html">GameServer</a>&#160;</td><td 
 			<ul>
 				<li class="navelem"><a class="el" href="class_game_server.html">GameServer</a></li>
 				<li class="footer">
-					Generated on Sun Aug 30 2020 16:43:47 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun Aug 30 2020 20:33:49 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

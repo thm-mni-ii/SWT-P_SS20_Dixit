@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['selectedcard_293',['SelectedCard',['../class_player.html#aa52ba65c04f17c836e35b645f2910c75',1,'Player']]],
-  ['singleton_294',['singleton',['../class_player_input.html#a630e2df5f14589bf0c09530cb8764d37',1,'PlayerInput']]]
+  ['placement_341',['Placement',['../class_player.html#a16d40fe31a11fc059a47849bb33566a4',1,'Player']]],
+  ['playerinfos_342',['PlayerInfos',['../class_game_server.html#a749a880cc80db48812b2984daaf08b44',1,'GameServer']]],
+  ['points_343',['Points',['../class_game_manager.html#a58d0068e41a8cfd5de24196c76f192ac',1,'GameManager']]]
 ];

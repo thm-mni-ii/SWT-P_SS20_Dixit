@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['questioncount_265',['QuestionCount',['../class_question_set.html#a0d89c14f5f75cd180d1139278b76fc3a',1,'QuestionSet']]],
-  ['questionset_266',['QuestionSet',['../class_game_manager.html#ac92b1930151916737c0a5bf7da180754',1,'GameManager']]],
-  ['questionsetid_267',['questionSetID',['../class_game_manager.html#a3bd3808d9a26df5fd23b2cb5ad0e2d48',1,'GameManager']]]
+  ['playercanvasentry_310',['PlayerCanvasEntry',['../class_display_manager.html#a1fe608688e3831a291d18fa52b26374d',1,'DisplayManager']]],
+  ['playername_311',['PlayerName',['../class_player.html#adacf1854e9a36d16ab527e6969998e90',1,'Player.PlayerName()'],['../class_card.html#adc406312f8e36069be90265a7d3e2f12',1,'Card.playerName()']]],
+  ['playerswanttoplay_312',['playersWantToPlay',['../class_game_server.html#a3a0f3b744d39e0cdded6dd140bdf4eb0',1,'GameServer']]]
 ];

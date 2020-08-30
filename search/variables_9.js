@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['ontimeoutdefault_256',['OnTimeoutDefault',['../class_countdown_timer.html#a0d45723153631807778f44d8019dd506',1,'CountdownTimer']]],
-  ['ontimeoutgiveanswer_257',['OnTimeoutGiveAnswer',['../class_countdown_timer.html#a41935cffc3bf2444e5627677b61f9b7d',1,'CountdownTimer']]],
-  ['ontimeoutscorescreen_258',['OnTimeoutScoreScreen',['../class_countdown_timer.html#ab9ac3363a7918558c128e34c176244e1',1,'CountdownTimer']]],
-  ['ontimeoutselectanswer_259',['OnTimeoutSelectAnswer',['../class_countdown_timer.html#a4b3ff1321039b0fbd58a691bda375d98',1,'CountdownTimer']]],
-  ['optionsoverlaycanvas_260',['OptionsOverlayCanvas',['../class_display_manager.html#ae200c91d334830629bb414a99d2b7c78',1,'DisplayManager']]],
-  ['overlaytimer_261',['overlayTimer',['../class_display_manager.html#af8723d5cefbc800c777b9bb687acaef2',1,'DisplayManager']]]
+  ['name_294',['name',['../class_player_info.html#af5b76fa1d188cbed574c1571c80e2bc3',1,'PlayerInfo']]],
+  ['normaltimer_295',['normalTimer',['../class_display_manager.html#a8883833123e277e613b20897440c8126',1,'DisplayManager']]],
+  ['notification_296',['notification',['../class_notification_canvas.html#aae539cdcd762e95e5ee9632225f4f108',1,'NotificationCanvas']]],
+  ['notificationlong_297',['notificationLong',['../class_notification.html#af7e9d2dcb6b88d1db806ac97879339c5',1,'Notification']]],
+  ['notificationprefab_298',['NotificationPrefab',['../class_notification_system.html#a8a69e44f6312fc44b577cd19040bd744',1,'NotificationSystem']]],
+  ['notificationshort_299',['notificationShort',['../class_notification.html#abc1ec01f613658648f0b002429756a9e',1,'Notification']]],
+  ['notificationspace_300',['notificationSpace',['../class_notification_system.html#a2520bd5a0b820c2c34b581b7e33b0df1',1,'NotificationSystem']]],
+  ['notificationsystem_301',['notificationSystem',['../class_notification_canvas.html#a172811de40738d249ff5be08113655ef',1,'NotificationCanvas']]],
+  ['notificationtype_302',['notificationType',['../class_notification.html#ae6b668b5da6a595c3dd03fdbea45bf7e',1,'Notification']]],
+  ['numberofrounds_303',['numberOfRounds',['../class_game_manager.html#ade43917fdfb32ef7dd725565023caaf3',1,'GameManager']]]
 ];

@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['m_5fcardprefab_51',['m_cardPrefab',['../class_game_manager.html#a58b7df38a3af1256bfed9c99c871e678',1,'GameManager']]],
-  ['m_5fquestioncardprefab_52',['m_questionCardPrefab',['../class_game_manager.html#a99610f15d2a91aab0969117e64ed7dc3',1,'GameManager']]],
-  ['module_53',['Module',['../class_question_set.html#adcf8c54fb5758407ccd22857c61c7c70',1,'QuestionSet']]],
-  ['multivaldictionary_54',['MultivalDictionary',['../class_multival_dictionary.html',1,'']]],
-  ['multivaldictionary_3c_20uint32_2c_20uint32_20_3e_55',['MultivalDictionary&lt; UInt32, UInt32 &gt;',['../class_multival_dictionary.html',1,'']]]
+  ['localplayer_58',['LocalPlayer',['../class_player.html#a738c23fefa8386ec9221d253c4cb23e4',1,'Player']]],
+  ['loganswer_59',['LogAnswer',['../class_game_manager.html#a97ff93538ce04315a174431ec0ff2e55',1,'GameManager.LogAnswer(UInt32 playerId, string answer)'],['../class_game_manager.html#a04341ee720a617a3e79983bd823fc701',1,'GameManager.LogAnswer(UInt32 player, UInt32 choice)']]],
+  ['logplayerisready_60',['LogPlayerIsReady',['../class_game_manager.html#a809853b3aceeac1b7aa0187860e3ab50',1,'GameManager']]]
 ];

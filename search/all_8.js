@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['localplayer_48',['LocalPlayer',['../class_player.html#a738c23fefa8386ec9221d253c4cb23e4',1,'Player']]],
-  ['loganswer_49',['LogAnswer',['../class_game_manager.html#a97ff93538ce04315a174431ec0ff2e55',1,'GameManager.LogAnswer(UInt32 playerId, string answer)'],['../class_game_manager.html#a04341ee720a617a3e79983bd823fc701',1,'GameManager.LogAnswer(UInt32 player, UInt32 choice)']]],
-  ['logplayerisready_50',['LogPlayerIsReady',['../class_game_manager.html#a809853b3aceeac1b7aa0187860e3ab50',1,'GameManager']]]
+  ['id_51',['id',['../class_card.html#a106fc53dbbcb75c0c4fa89f964f55167',1,'Card']]],
+  ['init_52',['Init',['../class_notification_canvas.html#a1ef27978c52c1764a7258f725b9febe5',1,'NotificationCanvas']]],
+  ['initiatecleanupevalphase_53',['InitiateCleanUpEvalPhase',['../class_game_manager.html#ac457d7c9387ad7630ab8bf4fa5f4695e',1,'GameManager']]],
+  ['instance_54',['Instance',['../class_game_manager.html#ad3e717f4fb0f378b969f4457de81f23e',1,'GameManager']]],
+  ['instantflipfacedown_55',['InstantFlipFacedown',['../class_card.html#acb6b9dd5322a448e2829a7ec018dfbe6',1,'Card']]],
+  ['instantflipfaceup_56',['InstantFlipFaceup',['../class_card.html#a2bbc7e8acb3ffc325dafc3f615e8fc67',1,'Card']]],
+  ['ishost_57',['isHost',['../class_player_info.html#a602c3264e96ed8499abc4faa8b9c44ce',1,'PlayerInfo']]]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['exitbutton_237',['exitButton',['../class_display_manager.html#a8978d1558f30519e68f4bb0d00cbed55',1,'DisplayManager.exitButton()'],['../class_player_input.html#ab4dc14a5c204383d87bab5f00f2657f7',1,'PlayerInput.exitButton()']]],
-  ['explanationbutton_238',['explanationButton',['../class_display_manager.html#afc2b5d84654f9079049da99d80da2708',1,'DisplayManager']]],
-  ['explanations_239',['Explanations',['../class_display_manager.html#a2bfcefd58120925a71b4ff815b7cddca',1,'DisplayManager']]],
-  ['explanationtmp_240',['ExplanationTMP',['../class_display_manager.html#a439d0762db80a9ea20eb87d5cf8a16a5',1,'DisplayManager']]]
+  ['db_273',['DB',['../class_database_setup.html#a3abc5d37fe6a6d36baafd183769e08c9',1,'DatabaseSetup']]],
+  ['deactivateoptionsbutton_274',['deactivateOptionsButton',['../class_display_manager.html#a62f199381413a77c637e529e544acdd3',1,'DisplayManager']]],
+  ['defalutcolor_275',['defalutColor',['../class_card.html#a439e765e63063acb43ee9735eeabe7b7',1,'Card']]],
+  ['displaymanager_276',['displayManager',['../class_game_manager.html#a895d431df4c677d524083afeff5f25a3',1,'GameManager.displayManager()'],['../class_player_input.html#a5b8cd56c9f30d889a31cb620f646f607',1,'PlayerInput.displayManager()']]]
 ];

@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['normaltimer_247',['normalTimer',['../class_display_manager.html#a8883833123e277e613b20897440c8126',1,'DisplayManager']]],
-  ['notification_248',['notification',['../class_notification_canvas.html#aae539cdcd762e95e5ee9632225f4f108',1,'NotificationCanvas']]],
-  ['notificationlong_249',['notificationLong',['../class_notification.html#af7e9d2dcb6b88d1db806ac97879339c5',1,'Notification']]],
-  ['notificationprefab_250',['NotificationPrefab',['../class_notification_system.html#a8a69e44f6312fc44b577cd19040bd744',1,'NotificationSystem']]],
-  ['notificationshort_251',['notificationShort',['../class_notification.html#abc1ec01f613658648f0b002429756a9e',1,'Notification']]],
-  ['notificationspace_252',['notificationSpace',['../class_notification_system.html#a2520bd5a0b820c2c34b581b7e33b0df1',1,'NotificationSystem']]],
-  ['notificationsystem_253',['notificationSystem',['../class_notification_canvas.html#a172811de40738d249ff5be08113655ef',1,'NotificationCanvas']]],
-  ['notificationtype_254',['notificationType',['../class_notification.html#ae6b668b5da6a595c3dd03fdbea45bf7e',1,'Notification']]],
-  ['numberofrounds_255',['numberOfRounds',['../class_game_manager.html#ade43917fdfb32ef7dd725565023caaf3',1,'GameManager']]]
+  ['m_5faudiomixer_289',['m_AudioMixer',['../class_sound_control.html#a5e962332ec5aacfeeb1af55deebc820f',1,'SoundControl']]],
+  ['m_5fcardprefab_290',['m_cardPrefab',['../class_game_manager.html#a58b7df38a3af1256bfed9c99c871e678',1,'GameManager']]],
+  ['m_5fmuted_291',['m_muted',['../class_sound_control.html#aa55b05d0cc91e10f6d8267f2902f4640',1,'SoundControl']]],
+  ['m_5fquestioncardprefab_292',['m_questionCardPrefab',['../class_game_manager.html#a99610f15d2a91aab0969117e64ed7dc3',1,'GameManager']]],
+  ['m_5funmuted_293',['m_unmuted',['../class_sound_control.html#a775c01c8b164db229569c8d84d626bb9',1,'SoundControl']]]
 ];

@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['gamemanager_33',['GameManager',['../class_game_manager.html',1,'GameManager'],['../class_game_server.html#a3210381f7662dc5d6c6980a74d327b9d',1,'GameServer.GameManager()'],['../class_player.html#a066d7cff53913d18e6d335d0f7e7cdb9',1,'Player.gameManager()']]],
-  ['gameserver_34',['GameServer',['../class_game_server.html',1,'']]],
-  ['getnameofwinner_35',['GetNameOfWinner',['../class_game_manager.html#a9a3fd3b81a40f75a24743ffb94d631d4',1,'GameManager']]],
-  ['getquestion_36',['GetQuestion',['../class_question_set.html#aaeb40915049875e84ca365b55695724f',1,'QuestionSet']]],
-  ['giveanswer_37',['GiveAnswer',['../class_card.html#ae8450b91b65c8eccb5c689cb5ff6edc9',1,'Card.GiveAnswer()'],['../class_player_input.html#a8598733b751ac107666d24b99eb9d567',1,'PlayerInput.GiveAnswer()']]]
+  ['fadeout_36',['FadeOut',['../class_notification_canvas.html#a994f0d2e4ba291f0be86a4e185b5f4e1',1,'NotificationCanvas']]],
+  ['flipfacedown_37',['FlipFacedown',['../class_card.html#ae187206d5a3a43ee0de408b4e3e029df',1,'Card.FlipFacedown()'],['../class_card.html#ab8e7a4f7725da0fc3e02bce3c003bebe',1,'Card.FlipFacedown(float time)']]],
+  ['flipfaceup_38',['FlipFaceup',['../class_card.html#aa34fb77b35539a427a7d071ab267ac66',1,'Card.FlipFaceup()'],['../class_card.html#a9575f8aaf207d8395775e617bd5eebeb',1,'Card.FlipFaceup(float time)']]]
 ];

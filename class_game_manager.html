@@ -104,9 +104,6 @@ Inheritance diagram for GameManager:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9e998e4f3eb61fbfc0149a7d3cfaff4a"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a9e998e4f3eb61fbfc0149a7d3cfaff4a">OnStartServer</a> ()</td></tr>
-<tr class="memdesc:a9e998e4f3eb61fbfc0149a7d3cfaff4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the GameManger starts on the Server.  <a href="class_game_manager.html#a9e998e4f3eb61fbfc0149a7d3cfaff4a">More...</a><br /></td></tr>
-<tr class="separator:a9e998e4f3eb61fbfc0149a7d3cfaff4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9193c24424f6a10c7d9df407264ed4fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a9193c24424f6a10c7d9df407264ed4fa">StartGame</a> ()</td></tr>
 <tr class="memdesc:a9193c24424f6a10c7d9df407264ed4fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executed when the game should start (after all players joined). Writes the playernames in the UI cavaces and loads the chosen question set  <a href="class_game_manager.html#a9193c24424f6a10c7d9df407264ed4fa">More...</a><br /></td></tr>
 <tr class="separator:a9193c24424f6a10c7d9df407264ed4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,18 +158,18 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a79f7b25ad70fdb4cdbc3056f60ae8a9b"><td class="memItemLeft" align="right" valign="top"><a id="a79f7b25ad70fdb4cdbc3056f60ae8a9b"></a>
-Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>points</b> = new Dictionary&lt;UInt32, int&gt;()<code> [get]</code></td></tr>
-<tr class="separator:a79f7b25ad70fdb4cdbc3056f60ae8a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a634a07ff3b86a0202236e935cfa80b12"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a634a07ff3b86a0202236e935cfa80b12">timerForGiveAnswer</a> = 30<code> [get, set]</code></td></tr>
-<tr class="memdesc:a634a07ff3b86a0202236e935cfa80b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial value of the Timer at the start of the "GiveAnswer" Phase  <a href="class_game_manager.html#a634a07ff3b86a0202236e935cfa80b12">More...</a><br /></td></tr>
-<tr class="separator:a634a07ff3b86a0202236e935cfa80b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a7054c93fe14d31ec9b9ae7bdc1a657"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a9a7054c93fe14d31ec9b9ae7bdc1a657">timerToChooseAnswer</a> = 20<code> [get, set]</code></td></tr>
-<tr class="memdesc:a9a7054c93fe14d31ec9b9ae7bdc1a657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial value of the Time at the start of the "ChoseAnswer" Phase  <a href="class_game_manager.html#a9a7054c93fe14d31ec9b9ae7bdc1a657">More...</a><br /></td></tr>
-<tr class="separator:a9a7054c93fe14d31ec9b9ae7bdc1a657"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a403d6dae4d1b52faa248c4ef301838ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a403d6dae4d1b52faa248c4ef301838ea">timerToCheckResults</a> = 10<code> [get, set]</code></td></tr>
-<tr class="memdesc:a403d6dae4d1b52faa248c4ef301838ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial value of the Timer when the score result overlay is diplayed  <a href="class_game_manager.html#a403d6dae4d1b52faa248c4ef301838ea">More...</a><br /></td></tr>
-<tr class="separator:a403d6dae4d1b52faa248c4ef301838ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d0068e41a8cfd5de24196c76f192ac"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a58d0068e41a8cfd5de24196c76f192ac">Points</a> = new Dictionary&lt;UInt32, int&gt;()<code> [get]</code></td></tr>
+<tr class="memdesc:a58d0068e41a8cfd5de24196c76f192ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dictionary of the points each player has at any given time during the game  <a href="class_game_manager.html#a58d0068e41a8cfd5de24196c76f192ac">More...</a><br /></td></tr>
+<tr class="separator:a58d0068e41a8cfd5de24196c76f192ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af47b6241ad1b2e6441514e0cf51e128b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#af47b6241ad1b2e6441514e0cf51e128b">TimerForGiveAnswer</a> = 30<code> [get, set]</code></td></tr>
+<tr class="memdesc:af47b6241ad1b2e6441514e0cf51e128b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial value of the Timer at the start of the "GiveAnswer" Phase  <a href="class_game_manager.html#af47b6241ad1b2e6441514e0cf51e128b">More...</a><br /></td></tr>
+<tr class="separator:af47b6241ad1b2e6441514e0cf51e128b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a2cdaad3f3251d48bf61a929c44c79"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#af1a2cdaad3f3251d48bf61a929c44c79">TimerToChooseAnswer</a> = 20<code> [get, set]</code></td></tr>
+<tr class="memdesc:af1a2cdaad3f3251d48bf61a929c44c79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial value of the Time at the start of the "ChoseAnswer" Phase  <a href="class_game_manager.html#af1a2cdaad3f3251d48bf61a929c44c79">More...</a><br /></td></tr>
+<tr class="separator:af1a2cdaad3f3251d48bf61a929c44c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a31f955bdfc455bce716004d1e2b1ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a8a31f955bdfc455bce716004d1e2b1ec">TimerToCheckResults</a> = 10<code> [get, set]</code></td></tr>
+<tr class="memdesc:a8a31f955bdfc455bce716004d1e2b1ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial value of the Timer when the score result overlay is diplayed  <a href="class_game_manager.html#a8a31f955bdfc455bce716004d1e2b1ec">More...</a><br /></td></tr>
+<tr class="separator:a8a31f955bdfc455bce716004d1e2b1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The GameManger keeps track of all given Answers and Changes the current Phase of the Game. It only exists on the Server. </p>
@@ -360,34 +357,6 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
 
 </div>
 </div>
-<a id="a9e998e4f3eb61fbfc0149a7d3cfaff4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e998e4f3eb61fbfc0149a7d3cfaff4a">&#9670;&nbsp;</a></span>OnStartServer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">override void GameManager.OnStartServer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Called when the GameManger starts on the Server. </p>
-<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
-
-</div>
-</div>
 <a id="a9193c24424f6a10c7d9df407264ed4fa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9193c24424f6a10c7d9df407264ed4fa">&#9670;&nbsp;</a></span>StartGame()</h2>
 
@@ -562,8 +531,8 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
-<a id="a634a07ff3b86a0202236e935cfa80b12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a634a07ff3b86a0202236e935cfa80b12">&#9670;&nbsp;</a></span>timerForGiveAnswer</h2>
+<a id="a58d0068e41a8cfd5de24196c76f192ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58d0068e41a8cfd5de24196c76f192ac">&#9670;&nbsp;</a></span>Points</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -572,7 +541,32 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int GameManager.timerForGiveAnswer = 30</td>
+          <td class="memname">Dictionary&lt;UInt32, int&gt; GameManager.Points = new Dictionary&lt;UInt32, int&gt;()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dictionary of the points each player has at any given time during the game </p>
+<dl class="section author"><dt>Author</dt><dd>SWT-P_SS_20_Dixit </dd></dl>
+
+</div>
+</div>
+<a id="af47b6241ad1b2e6441514e0cf51e128b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af47b6241ad1b2e6441514e0cf51e128b">&#9670;&nbsp;</a></span>TimerForGiveAnswer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameManager.TimerForGiveAnswer = 30</td>
         </tr>
       </table>
   </td>
@@ -587,8 +581,8 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
 
 </div>
 </div>
-<a id="a403d6dae4d1b52faa248c4ef301838ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a403d6dae4d1b52faa248c4ef301838ea">&#9670;&nbsp;</a></span>timerToCheckResults</h2>
+<a id="a8a31f955bdfc455bce716004d1e2b1ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a31f955bdfc455bce716004d1e2b1ec">&#9670;&nbsp;</a></span>TimerToCheckResults</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -597,7 +591,7 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int GameManager.timerToCheckResults = 10</td>
+          <td class="memname">int GameManager.TimerToCheckResults = 10</td>
         </tr>
       </table>
   </td>
@@ -612,8 +606,8 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
 
 </div>
 </div>
-<a id="a9a7054c93fe14d31ec9b9ae7bdc1a657"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a7054c93fe14d31ec9b9ae7bdc1a657">&#9670;&nbsp;</a></span>timerToChooseAnswer</h2>
+<a id="af1a2cdaad3f3251d48bf61a929c44c79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1a2cdaad3f3251d48bf61a929c44c79">&#9670;&nbsp;</a></span>TimerToChooseAnswer</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -622,7 +616,7 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int GameManager.timerToChooseAnswer = 20</td>
+          <td class="memname">int GameManager.TimerToChooseAnswer = 20</td>
         </tr>
       </table>
   </td>
@@ -647,7 +641,7 @@ Dictionary&lt; UInt32, int &gt;&#160;</td><td class="memItemRight" valign="botto
 			<ul>
 				<li class="navelem"><a class="el" href="class_game_manager.html">GameManager</a></li>
 				<li class="footer">
-					Generated on Sun Aug 30 2020 16:43:47 for Dixit by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun Aug 30 2020 20:33:49 for Dixit by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.18.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

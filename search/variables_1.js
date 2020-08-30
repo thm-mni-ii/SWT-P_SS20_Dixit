@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['collider_230',['collider',['../class_notification_canvas.html#a64957d4f261e84bb6af1764671c00b10',1,'NotificationCanvas']]],
-  ['continuebutton_231',['continueButton',['../class_display_manager.html#ae8b821945ce43f70da98e09a98cfa640',1,'DisplayManager.continueButton()'],['../class_player_input.html#a4bfeb5a5dd050cce741a02f32cc94cac',1,'PlayerInput.continueButton()']]],
-  ['correctcolour_232',['correctColour',['../class_card.html#a5aeac40f29a262deb2968709e8f8a5ce',1,'Card']]]
+  ['badcolor_268',['badColor',['../class_notification_system.html#a213d0a7b699b4c78ad2eb01001aed895',1,'NotificationSystem']]],
+  ['badsound_269',['badsound',['../class_notification_system.html#a0b41aba892254e30239711a4f1072897',1,'NotificationSystem']]]
 ];

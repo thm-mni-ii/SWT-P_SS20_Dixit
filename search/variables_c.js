@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['regularcolor_268',['regularColor',['../class_notification_system.html#adb6a566e65868e87368993d2a3064e6c',1,'NotificationSystem']]],
-  ['resultoverlaycanvas_269',['resultOverlayCanvas',['../class_display_manager.html#a64291e78158f5523471edff64da982dc',1,'DisplayManager']]],
-  ['roundsoverview_270',['roundsOverview',['../class_display_manager.html#a32a815e71abfb7ac0b0dba9bdeb23d8e',1,'DisplayManager']]],
-  ['roundsoverview_5ftext_271',['roundsOverview_text',['../class_display_manager.html#a3573c85f6424d82291fbcfdc256be003',1,'DisplayManager']]]
+  ['questioncount_313',['QuestionCount',['../class_question_set.html#a0d89c14f5f75cd180d1139278b76fc3a',1,'QuestionSet']]],
+  ['questionset_314',['QuestionSet',['../class_game_manager.html#ac92b1930151916737c0a5bf7da180754',1,'GameManager']]],
+  ['questionsetid_315',['questionSetID',['../class_game_manager.html#a3bd3808d9a26df5fd23b2cb5ad0e2d48',1,'GameManager']]]
 ];

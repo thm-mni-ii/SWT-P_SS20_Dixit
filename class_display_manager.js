@@ -7,7 +7,7 @@ var class_display_manager =
     [ "RpcHideAllTimers", "class_display_manager.html#a33758c9a9a11c9d41cf8d1e1941dfe82", null ],
     [ "RpcResultOverlaySetActive", "class_display_manager.html#a358e363cc69ac9b80c50e3800d115fe2", null ],
     [ "RpcSetRoundOverview", "class_display_manager.html#ad754b0231ab6a69ca6b01bbfed165c5d", null ],
-    [ "RpcSetScoreScreenWasActive", "class_display_manager.html#a94774c87aa5fadbabc123dd6839609cb", null ],
+    [ "RpcSetScoreScreenWasActive", "class_display_manager.html#a99e8d99f99bf700875cc43b7541dcdf1", null ],
     [ "RpcShowNormalTimer", "class_display_manager.html#a34e2419f8493e2147a3346fc1b1982c5", null ],
     [ "RpcShowOverlayTimer", "class_display_manager.html#ae97462faf95bd9f1861dcf5b85813fe3", null ],
     [ "RpcToggleExit", "class_display_manager.html#ac96aa8bd1f9970c6bf756084831555a4", null ],
@@ -41,5 +41,5 @@ var class_display_manager =
     [ "ScoreHeader", "class_display_manager.html#a03a9fe661db155cb547ac129b83eff24", null ],
     [ "TextPanel", "class_display_manager.html#af6b93b4b67c1313f4b9b1c2f82f0ccb9", null ],
     [ "TextPanelEntry", "class_display_manager.html#ab5cd5aee6e71c736e2e392716a92eaa2", null ],
-    [ "scoreScreenWasActive", "class_display_manager.html#af3667970e54ad941d97f7be7ede89c54", null ]
+    [ "ScoreScreenWasActive", "class_display_manager.html#a628d571b904c76d6dec3dbea55f63116", null ]
 ];

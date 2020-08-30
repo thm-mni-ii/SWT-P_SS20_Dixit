@@ -233,7 +233,7 @@ public class Card : NetworkBehaviour
     public void RpcSlideToPosition(Vector3 vector3)
     {
         _slideVector = vector3;
-        StartCoroutine("SlideToPosition");
+        StartCoroutine(SlideToPosition());
     }
 
     private IEnumerator SlideToPosition()
@@ -300,5 +300,23 @@ public class Card : NetworkBehaviour
         {
             ClickedStamps[i].SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// Sends the answer the player gave to the server
+    /// </summary>
+    /// <param name="answer">The text field the answer was written in.</param>
+    /// \author SWT-P_SS_20_Dixit
+    public void GiveAnswer(TMPro.TMP_InputField answer){
+        Player.LocalPlayer.GiveAnswer(answer.text);
+    }
+
+    /// <summary>
+    /// Sends the id of the card the player chose to the server
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public void SelectAnswer()
+    {
+        Player.LocalPlayer.ChooseAnswer(this);
     }
 }

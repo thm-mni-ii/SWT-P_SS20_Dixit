@@ -290,15 +290,26 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     public void ToggleOptions(bool isActive)
     {
-        activateOptionsButton.interactable = !isActive;
         if(isActive){
             scoreScreenWasActive = resultOverlayCanvas.activeSelf;
             resultOverlayCanvas.SetActive(false);
+            OptionsOverlayCanvas.SetActive(true);
+            OptionsOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeIn");
         }
-        OptionsOverlayCanvas.SetActive(isActive);
-        if(!isActive){
-            resultOverlayCanvas.SetActive(scoreScreenWasActive);
+        else
+        {
+            OptionsOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeOut");
+            Invoke(nameof(hideOptionsOverlay),0.25f); //necessary so the animation can play
+            if (scoreScreenWasActive)
+            {
+                resultOverlayCanvas.SetActive(true);
+            }
         }
+    }
+
+    private void hideOptionsOverlay()
+    {
+        OptionsOverlayCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -328,8 +339,23 @@ public class DisplayManager : NetworkBehaviour
     public void RpcResultOverlaySetActive(bool isActive)
     {
         continueButton.GetComponent<Button>().interactable = true;
-        resultOverlayCanvas.SetActive(isActive);
+        if (!isActive)
+        {
+            resultOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeOut");
+            Invoke(nameof(hideScoreOverlay),0.25f); //necessary so the animation can play
+        }
+        else
+        {
+            resultOverlayCanvas.SetActive(true);
+            resultOverlayCanvas.GetComponent<Animator>().Play("CanvasFadeIn");
+        }
         ClientScene.localPlayer.GetComponent<Player>().SelectedCard = null;
+        PlayerInput.singleton.canContinue = isActive;
+    }
+
+    private void hideScoreOverlay()
+    {
+        resultOverlayCanvas.SetActive(false);
     }
 
     /// <summary>

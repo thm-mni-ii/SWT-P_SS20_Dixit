@@ -1,4 +1,5 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
+
 using UnityEngine;
 using System.Threading.Tasks;
 using Firebase.Firestore;
@@ -50,7 +51,8 @@ public class Question
     {
         return reference.GetSnapshotAsync().ContinueWith((task) =>
         {
-            if (task.IsFaulted) throw task.Exception;
+            if (task.IsFaulted)
+                throw task.Exception;
 
             var snapshot = task.Result;
             if (!snapshot.Exists)

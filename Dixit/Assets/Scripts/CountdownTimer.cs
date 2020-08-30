@@ -1,10 +1,9 @@
 ﻿﻿/* created by: SWT-P_SS_20_Dixit */
-using System;
+
 using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 /// <summary>
 /// A timer that can be run in multiple modes, different events are triggered based on what mode it's in.
@@ -13,7 +12,8 @@ using UnityEngine.UI;
 /// \author SWT-P_SS_20_Dixit
 public class CountdownTimer : NetworkBehaviour
 {
-    [SerializeField] private TextMeshProUGUI[] timerTextFields;
+    [SerializeField]
+    private TextMeshProUGUI[] timerTextFields;
 
     /// <summary>
     /// A Unity Event for the timeout in the giving answer phase.
@@ -60,12 +60,12 @@ public class CountdownTimer : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Server]
-    private void passSecond()
+    private void PassSecond()
     {
         RpcUpdateTimerTextfield(_timer);
         if (_timer <= 0)
         {
-            CancelInvoke(nameof(passSecond));
+            CancelInvoke(nameof(PassSecond));
             switch (timerMode)
             {
                 case timerModes.giveAnswer:
@@ -102,7 +102,7 @@ public class CountdownTimer : NetworkBehaviour
             RpcUpdateTimerTextfield(_timer);
             if (isServer)
             {
-                InvokeRepeating(nameof(passSecond), 0f, 1f);
+                InvokeRepeating(nameof(PassSecond), 0f, 1f);
             }
         }
     }

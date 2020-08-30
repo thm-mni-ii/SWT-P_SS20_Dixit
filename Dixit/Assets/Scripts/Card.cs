@@ -1,4 +1,5 @@
 /* created by: SWT-P_SS_20_Dixit */
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -15,8 +16,16 @@ public class Card : NetworkBehaviour
     /// The Animator playing the animations of the card
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    [SerializeField] private Animator anim;
-    [SerializeField] private AudioSource flipsound;
+    [SerializeField]
+    private Animator anim;
+
+    /// <summary>
+    /// The sound playing while flipping the card
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    [SerializeField]
+    private AudioSource flipsound;
+
     /// <summary>
     /// The text written on this card
     /// </summary>
@@ -88,8 +97,8 @@ public class Card : NetworkBehaviour
     private TMPro.TMP_Text questionText;
     [SerializeField]
     private TMPro.TMP_Text playerNameText;
-    [SerializeField]  
-    private GameObject[]ClickedStamps;
+    [SerializeField]
+    private GameObject[] ClickedStamps;
 
     /// <summary>
     /// On Client Start the Card will be identified and the needed Compentens will be activated, all other deactivated.
@@ -123,7 +132,7 @@ public class Card : NetworkBehaviour
                     writeAnswerGo.SetActive(false);
                     selectAnswerGo.SetActive(true);
                     playerNameText.enabled = false;
-                    foreach(var stamp in ClickedStamps)
+                    foreach (var stamp in ClickedStamps)
                     {
                         stamp.SetActive(false);
                     }
@@ -145,7 +154,7 @@ public class Card : NetworkBehaviour
         anim.Play("InstantFlipFacedown");
     }
 
-   /// <summary>
+    /// <summary>
     /// A instant flip faceup of the card.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit

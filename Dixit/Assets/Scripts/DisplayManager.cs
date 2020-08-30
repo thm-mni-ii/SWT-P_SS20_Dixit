@@ -1,9 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
@@ -104,7 +101,7 @@ public class DisplayManager : NetworkBehaviour
     /// Indicates wether ScoreScreen was active or not when Options were toggled
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public Boolean scoreScreenWasActive { get; set; } = false;
+    public bool ScoreScreenWasActive { get; set; } = false;
 
     /// <summary>
     /// Canvas for all round results overview
@@ -301,13 +298,15 @@ public class DisplayManager : NetworkBehaviour
     public void ToggleOptions(bool isActive)
     {
         activateOptionsButton.interactable = !isActive;
-        if(isActive){
-            scoreScreenWasActive = resultOverlayCanvas.activeSelf;
+        if (isActive)
+        {
+            ScoreScreenWasActive = resultOverlayCanvas.activeSelf;
             resultOverlayCanvas.SetActive(false);
         }
         OptionsOverlayCanvas.SetActive(isActive);
-        if(!isActive){
-            resultOverlayCanvas.SetActive(scoreScreenWasActive);
+        if (!isActive)
+        {
+            resultOverlayCanvas.SetActive(ScoreScreenWasActive);
         }
     }
 
@@ -326,9 +325,9 @@ public class DisplayManager : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
-    public void RpcSetScoreScreenWasActive(Boolean active)
+    public void RpcSetScoreScreenWasActive(bool active)
     {
-        scoreScreenWasActive = active;
+        ScoreScreenWasActive = active;
     }
 
 

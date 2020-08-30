@@ -28,7 +28,7 @@ public class ToggleController : MonoBehaviour
     public void Awake()
     {
         handleTransform = handle.GetComponent<RectTransform>();
-        
+
         handleSize = handleTransform.sizeDelta.x;
         float toggleSizeX = toggle.sizeDelta.x;
         onPosX = (toggleSizeX / 2) - (handleSize / 2) - handleOffset;
@@ -89,7 +89,7 @@ public class ToggleController : MonoBehaviour
         return position;
     }
 
-	/* edited by: SWT-P_SS_20_Dixit */
+    /* edited by: SWT-P_SS_20_Dixit */
     void StopSwitching()
     {
         if (t > 1.0f)

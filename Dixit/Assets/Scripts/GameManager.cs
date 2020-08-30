@@ -8,7 +8,6 @@ using System.Linq;
 using UnityEngine;
 using Mirror;
 using Firebase.Extensions;
-using Random = UnityEngine.Random;
 
 
 /// <summary>
@@ -25,7 +24,7 @@ public class GameManager : NetworkBehaviour
     /// Dictionary of the points each player has at any given time during the game
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public Dictionary<UInt32, int> points { get; } = new Dictionary<UInt32, int>();
+    public Dictionary<UInt32, int> Points { get; } = new Dictionary<UInt32, int>();
 
     //for storing points sorted by value
     private List<KeyValuePair<UInt32, int>> pointsList;
@@ -100,17 +99,17 @@ public class GameManager : NetworkBehaviour
     /// Initial value of the Timer at the start of the "GiveAnswer" Phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerForGiveAnswer { get; set;} = 30;
+    public int TimerForGiveAnswer { get; set; } = 30;
     /// <summary>
     /// Initial value of the Time at the start of the "ChoseAnswer" Phase
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerToChooseAnswer { get; set;} = 20;
+    public int TimerToChooseAnswer { get; set; } = 20;
     /// <summary>
     /// Initial value of the Timer when the score result overlay is diplayed
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public int timerToCheckResults { get; set;} = 10;
+    public int TimerToCheckResults { get; set; } = 10;
 
     /// <summary>
     /// The number rounds (i.e Questions) the game should last
@@ -166,7 +165,7 @@ public class GameManager : NetworkBehaviour
         //initializes points and roundpoints
         foreach ((Player p, int idx) in Utils.GetPlayersIndexed())
         {
-            points.Add(p.netIdentity.netId, 0);
+            Points.Add(p.netIdentity.netId, 0);
 
             for (int i = 0; i < numberOfRounds; i++)
             {
@@ -235,7 +234,7 @@ public class GameManager : NetworkBehaviour
 
         displayManager.RpcToggleOptions(false);
 
-        displayManager.RpcToggleRoundsOverview(true,numberOfRounds);
+        displayManager.RpcToggleRoundsOverview(true, numberOfRounds);
 
         displayManager.RpcToggleExit(true);
 
@@ -255,8 +254,8 @@ public class GameManager : NetworkBehaviour
     /// Returns the name of the winner.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public string GetNameOfWinner() => Utils.GetIdentity(pointsList[0].Key).GetComponent<Player>().PlayerName; 
-    
+    public string GetNameOfWinner() => Utils.GetIdentity(pointsList[0].Key).GetComponent<Player>().PlayerName;
+
 
     private void WriteAnswerPhase(Question question)
     {
@@ -281,15 +280,15 @@ public class GameManager : NetworkBehaviour
         // start timer
 
         StartCoroutine(CheckEarlyTimeout(Phase.WriteAnswer));
-        timer.StartTimer(timerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
+        timer.StartTimer(TimerForGiveAnswer, CountdownTimer.timerModes.giveAnswer);
 
         //wait for all players to send answer or get timeout
-        
+
         if (currentRound == 0)
         {
             foreach (var p in Utils.GetPlayers())
             {
-                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular,"Geb' eine falsche Antwort, die aber trotzdem plausibel klingt.","1. Antwort Geben"));
+                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular, "Geb' eine falsche Antwort, die aber trotzdem plausibel klingt.", "1. Antwort Geben"));
             }
         }
     }
@@ -312,17 +311,17 @@ public class GameManager : NetworkBehaviour
             }
         }
     }
-    
+
     private IEnumerator CheckScoreTimerStart()
     {
-        while (playersReady < PlayerCount/2)
-        { 
+        while (playersReady < PlayerCount / 2)
+        {
             yield return new WaitForSeconds(1f);
         }
         displayManager.RpcShowOverlayTimer();
         StartCoroutine(CheckEarlyTimeout(Phase.Evaluation));
-        timer.StartTimer(timerToCheckResults, CountdownTimer.timerModes.scoreScreen);
-        
+        timer.StartTimer(TimerToCheckResults, CountdownTimer.timerModes.scoreScreen);
+
     }
 
     private void ChooseAnswerPhase()
@@ -332,7 +331,7 @@ public class GameManager : NetworkBehaviour
         {
             foreach (var p in Utils.GetPlayers())
             {
-                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular,"Wähle die Antwort aus, von der du glaubst, dass es die Richtige ist.","2. Antwort Wählen"));
+                p.TargetSendTutorialNotification(new Notification(Notification.NotificationTypes.regular, "Wähle die Antwort aus, von der du glaubst, dass es die Richtige ist.", "2. Antwort Wählen"));
             }
         }
         // check if any player gave no answer
@@ -343,7 +342,7 @@ public class GameManager : NetworkBehaviour
                 // if player gave no answer, he gets -1 points
                 GetPoints(p.netId, -1);
                 //send Message to this player
-                p.TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Es muss eine Antwort abgegeben werden!","-1 Punkt"));
+                p.TargetSendNotification(new Notification(Notification.NotificationTypes.bad, "Es muss eine Antwort abgegeben werden!", "-1 Punkt"));
                 UpdatePlayerCanvas();
             }
 
@@ -363,7 +362,7 @@ public class GameManager : NetworkBehaviour
             //Messagesystem Alert not enough answers, resolve round and show correct answer
             foreach (var p in Utils.GetPlayers())
             {
-                p.TargetSendNotification(new Notification(Notification.NotificationTypes.warning,"Es wurden nicht genügend Antworten abgegeben.","+0 Punkte"));
+                p.TargetSendNotification(new Notification(Notification.NotificationTypes.warning, "Es wurden nicht genügend Antworten abgegeben.", "+0 Punkte"));
             }
 
             //Send answer to clients
@@ -376,7 +375,7 @@ public class GameManager : NetworkBehaviour
         SendAnswers();
 
         // start timer
-        timer.StartTimer(timerToChooseAnswer, CountdownTimer.timerModes.selectAnswer);
+        timer.StartTimer(TimerToChooseAnswer, CountdownTimer.timerModes.selectAnswer);
     }
 
     private void EvaluationPhase()
@@ -393,13 +392,13 @@ public class GameManager : NetworkBehaviour
             if (Utils.ClickedOnOwnAnswer(playerId, answerId, sameAnswers))
             {
                 GetPoints(playerId, -1);
-                Utils.GetIdentity(playerId).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Du hast deine eigene Antwort ausgewählt...","-"+1+" Punkte"));
+                Utils.GetIdentity(playerId).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.bad, "Du hast deine eigene Antwort ausgewählt...", "-" + 1 + " Punkte"));
             }
             //player choose right answer -> +3 points
             else if (answerId == this.netId)
             {
                 GetPoints(playerId, 3);
-                Utils.GetIdentity(playerId).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.good,"Gut! Du hast die richtige Antwort gewählt!","+"+3+" Punkte"));
+                Utils.GetIdentity(playerId).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.good, "Gut! Du hast die richtige Antwort gewählt!", "+" + 3 + " Punkte"));
             }
             else
             {
@@ -411,7 +410,7 @@ public class GameManager : NetworkBehaviour
                 }
                 else
                 {
-                    numOfSuccessfulDeceptionsPerPlayer.Add(answerId,0);
+                    numOfSuccessfulDeceptionsPerPlayer.Add(answerId, 0);
                     numOfSuccessfulDeceptionsPerPlayer[answerId]++;
                 }
 
@@ -423,16 +422,16 @@ public class GameManager : NetworkBehaviour
                 }
             }
         }
-        
+
         foreach (var p in numOfSuccessfulDeceptionsPerPlayer)
         {
             if (p.Value == 0)
             {
-                Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.regular,"Niemand hat auf deine Antwort geklickt.","+"+0+" Punkte"));
+                Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.regular, "Niemand hat auf deine Antwort geklickt.", "+" + 0 + " Punkte"));
             }
             else
             {
-                Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.good,"Sehr gut, du hast "+p.Value+" deiner Mitspieler getäuscht","+"+p.Value+" Punkte"));
+                Utils.GetIdentity(p.Key).gameObject.GetComponent<Player>().TargetSendNotification(new Notification(Notification.NotificationTypes.good, "Sehr gut, du hast " + p.Value + " deiner Mitspieler getäuscht", "+" + p.Value + " Punkte"));
             }
 
         }
@@ -444,7 +443,7 @@ public class GameManager : NetworkBehaviour
 
         StartCoroutine(WaitAndShowResults());
     }
-    
+
     private void UpdateCards()
     {
         var cards = GameObject.FindGameObjectsWithTag("AnswerCard").Select(go => go.GetComponent<Card>());
@@ -454,7 +453,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    
+
 
     private IEnumerator WaitAndShowResults()
     {
@@ -463,7 +462,7 @@ public class GameManager : NetworkBehaviour
         if (answers.Count == 1) secs = 5;
         yield return new WaitForSeconds(secs);
         displayManager.RpcToggleOptions(false);
-        displayManager.RpcResultOverlaySetActive(true);            
+        displayManager.RpcResultOverlaySetActive(true);
     }
 
     private IEnumerator WaitAndChangePhase()
@@ -513,7 +512,7 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     private void UpdatePlayerCanvas()
     {
-        pointsList = points.ToList();
+        pointsList = Points.ToList();
         pointsList.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
 
         int idx = PlayerCount - 1;
@@ -534,11 +533,11 @@ public class GameManager : NetworkBehaviour
     /// \author SWT-P_SS_20_Dixit
     private void UpdateScoreResultsOverlay(bool gameend)
     {
-        var list = gameend? points.ToList() : roundPoints[currentRound].ToList();
+        var list = gameend ? Points.ToList() : roundPoints[currentRound].ToList();
         list.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
         displayManager.UpdateScoreHeader(currentRound + 1);
 
-        if(gameend) pointsList = list;
+        if (gameend) pointsList = list;
 
         int idx = 0;
         foreach (KeyValuePair<UInt32, int> points in list)
@@ -547,7 +546,7 @@ public class GameManager : NetworkBehaviour
             int playerPoints = points.Value;
             displayManager.UpdateTextPanelEntry(idx, player, playerPoints, gameend);
 
-            if(gameend)
+            if (gameend)
             {
                 var p_roundpoints = new int[numberOfRounds];
                 for (int i = 0; i < numberOfRounds; i++)
@@ -565,7 +564,7 @@ public class GameManager : NetworkBehaviour
     private void GetPoints(UInt32 player, int newPoints)
     {
         roundPoints[currentRound][player] += newPoints;
-        points[player] += newPoints;
+        Points[player] += newPoints;
     }
 
     /// <summary>
@@ -587,7 +586,7 @@ public class GameManager : NetworkBehaviour
             // if player gave no answer, he gets -1 points
             GetPoints(playerId, -1);
             //send Message to this player
-            player.TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Es muss eine Antwort abgegeben werden!","-1 Punkt"));
+            player.TargetSendNotification(new Notification(Notification.NotificationTypes.bad, "Es muss eine Antwort abgegeben werden!", "-1 Punkt"));
             UpdatePlayerCanvas();
         }
 
@@ -601,7 +600,7 @@ public class GameManager : NetworkBehaviour
                 {
                     GetPoints(playerId, -1);
                     //send notification
-                    player.TargetSendNotification(new Notification(Notification.NotificationTypes.bad,"Es muss eine falsche Antwort abgegeben werden!","-1 Punkt"));
+                    player.TargetSendNotification(new Notification(Notification.NotificationTypes.bad, "Es muss eine falsche Antwort abgegeben werden!", "-1 Punkt"));
                     UpdatePlayerCanvas();
                 }
 

@@ -1,9 +1,7 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
-using Mirror;
 
 /// <summary>
 /// Handles Player input.
@@ -27,7 +25,8 @@ public class PlayerInput : MonoBehaviour
     /// </summary>
     /// <param name="answer">The text field the answer was written in.</param>
     /// \author SWT-P_SS_20_Dixit
-    public void GiveAnswer(TMPro.TMP_InputField answer){
+    public void GiveAnswer(TMPro.TMP_InputField answer)
+    {
         GiveAnswer(answer.text);
     }
 
@@ -47,7 +46,7 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void ClickContinueButton()
     {
-        this.GetComponent<Button>().interactable = false;
+        GetComponent<Button>().interactable = false;
         Player.LocalPlayer.CmdPlayerIsReady();
     }
 
@@ -57,8 +56,8 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void EndGame()
     {
-       this.GetComponent<Button>().interactable = false;
-       Player.LocalPlayer.CmdFinishGame();
+        GetComponent<Button>().interactable = false;
+        Player.LocalPlayer.CmdFinishGame();
     }
 
     /// <summary>
@@ -67,7 +66,7 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void ToggleExplanation(bool isActive)
     {
-        DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
+        DisplayManager displaymanager = GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
         displaymanager.ToggleExplanation(isActive);
     }
 
@@ -77,7 +76,7 @@ public class PlayerInput : MonoBehaviour
     /// \author SWT-P_SS_20_Dixit
     public void ToggleOptions(bool isActive)
     {
-        DisplayManager displaymanager = (DisplayManager) GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
+        DisplayManager displaymanager = GameObject.FindGameObjectWithTag("DisplayManager").GetComponent<DisplayManager>();
         displaymanager.ToggleOptions(isActive);
     }
 

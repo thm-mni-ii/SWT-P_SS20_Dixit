@@ -1,11 +1,6 @@
 ﻿/* created by: SWT-P_SS_20_Dixit */
 
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using Mirror;
 using TMPro;
 
@@ -16,7 +11,9 @@ using TMPro;
 public class TextResizer : NetworkBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI[] TextGroup;
+    [SerializeField]
+    private TextMeshProUGUI[] TextGroup;
+
     private float smallestFontSize;
 
     /// <summary>
@@ -26,12 +23,12 @@ public class TextResizer : NetworkBehaviour
     [ClientRpc]
     public void RpcAssimilateSize()
     {
-        foreach(TextMeshProUGUI text in TextGroup)
+        foreach (TextMeshProUGUI text in TextGroup)
         {
             smallestFontSize = text.fontSize < smallestFontSize ? text.fontSize : smallestFontSize;
         }
 
-        foreach(TextMeshProUGUI text in TextGroup)
+        foreach (TextMeshProUGUI text in TextGroup)
         {
             text.fontSize = smallestFontSize;
         }
@@ -43,8 +40,9 @@ public class TextResizer : NetworkBehaviour
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [ClientRpc]
-    public void RpcToggleAutoSize(Boolean activate){
-        foreach(TextMeshProUGUI text in TextGroup)
+    public void RpcToggleAutoSize(bool activate)
+    {
+        foreach (TextMeshProUGUI text in TextGroup)
         {
             text.enableAutoSizing = activate;
         }

@@ -44,9 +44,8 @@ public static class Utils
             //get a random value which is not in the array yet and place it in the array for the round
             int randomQuestionIdx;
             do
-            {
                 randomQuestionIdx = Random.Range(0, maxIdx);
-            } while (randomQuestionIdxList.Contains(randomQuestionIdx));
+            while (randomQuestionIdxList.Contains(randomQuestionIdx));
 
             randomQuestionIdxList.Add(randomQuestionIdx);
         }
@@ -98,8 +97,8 @@ public static class Utils
     /// <param name="sameAnswers"> A dictionary to store all duplicate answers </param>
     /// <returns> If the player gave an answer </returns>
     /// \author SWT-P_SS_20_Dixit
-    public static bool GaveAnswer(Player p, Dictionary<UInt32, string> answers, MultivalDictionary<UInt32, UInt32> sameAnswers)  =>
-        (answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId)));
+    public static bool GaveAnswer(Player p, Dictionary<UInt32, string> answers, MultivalDictionary<UInt32, UInt32> sameAnswers) =>
+        answers.ContainsKey(p.netId) || sameAnswers.Any(pair => pair.Value.Contains(p.netId));
 
     /// <summary>
     /// Checks wether a player gave an empty answer
@@ -109,9 +108,8 @@ public static class Utils
     /// <returns> If the player gave an empty answer </returns>
     /// \author SWT-P_SS_20_Dixit
     public static bool AnswerIsEmpty(UInt32 p, Dictionary<UInt32, string> answers) =>
-        (answers.ContainsKey(p) && answers[p] == "");
+        answers.ContainsKey(p) && answers[p] == "";
 
-   
     /// <summary>
     /// Checks if anwers are equals.
     /// Ignores Upper and Lower case of the answers.
@@ -132,7 +130,7 @@ public static class Utils
         s1 = AllNumbersInGermanWords(s1);
         s2 = AllNumbersInGermanWords(s2);
 
-        if(levenshtein(s1,s2) <= Math.Min(s1.Length, s2.Length) * 0.2f)
+        if (Levenshtein(s1, s2) <= Math.Min(s1.Length, s2.Length) * 0.2f)
             return true;
 
         // do not check lower or upper
@@ -154,11 +152,11 @@ public static class Utils
         bool wasSpace = false;
         int until = s.Length;
         int i = 0;
-        while(i < until)
+        while (i < until)
         {
-            if(s[i].Equals(' '))
+            if (s[i].Equals(' '))
             {
-                if(wasSpace)
+                if (wasSpace)
                 {
                     s = s.Remove(i, 1);
                     until--;
@@ -180,18 +178,15 @@ public static class Utils
 
     private static string AllNumbersInGermanWords(string s)
     {
-       
+
         string[] words = s.Split(' ');
 
         for (int i = 0; i < words.Length; i++)
         {
-            var num = 0;
-            if(int.TryParse(words[i], out num))
-            {
-                words[i] = numberToGermanWord(num);
-            }
+            if (int.TryParse(words[i], out int num))
+                words[i] = NumberToGermanWord(num);
         }
-    
+
         return string.Join(" ", words);
     }
 
@@ -201,38 +196,36 @@ public static class Utils
     /// <param name="s1"> The number to covert to a word</param>
     /// <returns>The german word for a number.</returns>
     /// \author SWT-P_SS_20_Dixit
-    public static string numberToGermanWord(int num) => numberToGermanWord(num, true, false);
-    
+    public static string NumberToGermanWord(int num) => NumberToGermanWord(num, true, false);
 
-    private static string numberToGermanWord(int num, bool first, bool isBehindHundert)
+
+    private static string NumberToGermanWord(int num, bool first, bool isBehindHundert)
     {
-        var digitToWord = new string[]{"", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun"};
-        var special = new string[] {"null", "eins", "zwan", "drei", "vier", "fünf", "sech", "sieb", "acht", "neun"};
-        
-        var s="";
+        var digitToWord = new string[] { "", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun" };
+        var special = new string[] { "null", "eins", "zwan", "drei", "vier", "fünf", "sech", "sieb", "acht", "neun" };
+
+        var s = "";
 
         if (num < 10)
-            s = isBehindHundert && num == 1? special[num] : (first && num < 2? special[num] : digitToWord[num]);
+            s = isBehindHundert && num == 1 ? special[num] : (first && num < 2 ? special[num] : digitToWord[num]);
         else if (num == 11)
             s = "elf";
         else if (num == 12)
             s = "zwölf";
-        else if(num < 20)
-            s = (num == 10? "" : special[num%10]) + "zehn";
-        else if(num < 100)
+        else if (num < 20)
+            s = (num == 10 ? "" : special[num % 10]) + "zehn";
+        else if (num < 100)
         {
             if (num % 10 != 0)
-                s = numberToGermanWord(num%10, false, false) + "und";
-                       
-            s+= special[num/10] + (num/10==3? "ß" : "z") + "ig";
-        }
-        else if(num < 1000)
-        {
-            s= digitToWord[num/100] + "hundert" + numberToGermanWord(num%100, false, true);
+                s = NumberToGermanWord(num % 10, false, false) + "und";
 
+            s += special[num / 10] + (num / 10 == 3 ? "ß" : "z") + "ig";
         }
-        else s= num + "";
-       
+        else if (num < 1000)
+            s = digitToWord[num / 100] + "hundert" + NumberToGermanWord(num % 100, false, true);
+        else
+            s = num + "";
+
         return s;
     }
 
@@ -245,43 +238,39 @@ public static class Utils
     /// <param name="s1"> The first string</param>
     /// <param name="s2"> The second string</param>
     /// <returns>The edit distance</returns>
-    public static int levenshtein(string first,string second)
+    public static int Levenshtein(string first, string second)
     {
         if (first.Length == 0)
-        {
             return second.Length;
-        }
 
         if (second.Length == 0)
-        {
             return first.Length;
-        }
 
-        var current = 1;
-        var previous = 0;
+        int current = 1;
+        int previous = 0;
         var r = new int[2, second.Length + 1];
-        for (var i = 0; i <= second.Length; i++)
-        {
-            r[previous, i] = i;
-        }
 
-        for (var i = 0; i < first.Length; i++)
+        for (int i = 0; i <= second.Length; i++)
+            r[previous, i] = i;
+
+        for (int i = 0; i < first.Length; i++)
         {
             r[current, 0] = i + 1;
 
-            for (var j = 1; j <= second.Length; j++) 
-            { 
-                var cost = (second[j - 1] == first[i]) ? 0 : 1; 
-                r[current, j] = Min( 
-                    r[previous, j] + 1, 
-                    r[current, j - 1] + 1, 
-                    r[previous, j - 1] + cost ); 
-            } 
-            previous = (previous + 1) % 2; 
-            current = (current + 1) % 2; 
-        } 
-        return r[previous, second.Length]; 
-    } 
+            for (int j = 1; j <= second.Length; j++)
+            {
+                int cost = (second[j - 1] == first[i]) ? 0 : 1;
+                r[current, j] = Min(
+                    r[previous, j] + 1,
+                    r[current, j - 1] + 1,
+                    r[previous, j - 1] + cost
+                );
+            }
+            previous = (previous + 1) % 2;
+            current = (current + 1) % 2;
+        }
+        return r[previous, second.Length];
+    }
 
     private static int Min(int e1, int e2, int e3) =>
         Math.Min(Math.Min(e1, e2), e3);
@@ -299,8 +288,8 @@ public class MultivalDictionary<TKey, TValue> : Dictionary<TKey, List<TValue>>
     /// \author SWT-P_SS_20_Dixit
     public void Add(TKey key, TValue value)
     {
-        if (!this.ContainsKey(key))
-            this.Add(key, new List<TValue>());
+        if (!ContainsKey(key))
+            Add(key, new List<TValue>());
 
         this[key].Add(value);
     }

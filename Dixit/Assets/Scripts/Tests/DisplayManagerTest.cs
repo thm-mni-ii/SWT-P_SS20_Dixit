@@ -85,7 +85,7 @@ namespace Tests
         public IEnumerator CorrectScoreResultOverlay()
         {
             displayManager.RpcResultOverlaySetActive(true);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.3f);
             var sro = GameObject.FindGameObjectWithTag("ScoreResultOverlay");
             Assert.IsTrue(sro.activeInHierarchy, "Score result overlay not active");
             Assert.IsTrue(displayManager.continueButton.GetComponent<Button>().interactable, "Continue button not interactible"); 
@@ -97,7 +97,7 @@ namespace Tests
             yield return Endscreen();
 
             displayManager.RpcResultOverlaySetActive(false);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.3f);
             Assert.IsFalse(sro.activeInHierarchy, "Score result overlay still active");
         }
 

@@ -19,8 +19,8 @@ namespace Tests
         public GameManager gameManager;
         private bool serverStarted = false;
 
-        [SetUp]
-        public void Setup()
+        [UnitySetUp]
+        public IEnumerator Setup()
         {
              if(!serverStarted)
             {
@@ -29,6 +29,9 @@ namespace Tests
                 gameServer.StartHost();
                 serverStarted = true;
             }
+
+            yield return new WaitForSeconds(1f);
+            yield return CardsSpawned();
         }
 
 
@@ -60,8 +63,6 @@ namespace Tests
         [UnityTest]
         public IEnumerator FlipTest()
         {
-            yield return new WaitForSeconds(1f);
-            yield return CardsSpawned();
            
             inputGo.GetComponent<Card>().InstantFlipFacedown();
             yield return new WaitForSeconds(1f);

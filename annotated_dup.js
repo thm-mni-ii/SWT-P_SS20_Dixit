@@ -14,5 +14,6 @@ var annotated_dup =
     [ "PlayerInfo", "class_player_info.html", "class_player_info" ],
     [ "PlayerInput", "class_player_input.html", "class_player_input" ],
     [ "Question", "class_question.html", "class_question" ],
-    [ "QuestionSet", "class_question_set.html", "class_question_set" ]
+    [ "QuestionSet", "class_question_set.html", "class_question_set" ],
+    [ "TextResizer", "class_text_resizer.html", "class_text_resizer" ]
 ];

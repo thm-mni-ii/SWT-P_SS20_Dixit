@@ -58,17 +58,7 @@ public class PlayerInput : MonoBehaviour
     public void EndGame()
     {
        this.GetComponent<Button>().interactable = false;
-       Player.LocalPlayer.KillGame();
-    }
-
-    /// <summary>
-    /// Signals that the player clicked on the "restart" button
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public void Restart()
-    {
-       this.GetComponent<Button>().interactable = false;
-       Player.LocalPlayer.CmdRestart();
+       Player.LocalPlayer.CmdFinishGame();
     }
 
     /// <summary>

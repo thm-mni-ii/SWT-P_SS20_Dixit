@@ -30,7 +30,13 @@ public class Player : NetworkBehaviour
     /// The name of the player
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
-    public string PlayerName { get; set; }
+    public string PlayerName = null;
+
+    /// <summary>
+    /// The placement of the player
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    public int Placement { get; set; }
 
     /// <summary>
     /// The <c>GameManager</c>
@@ -60,6 +66,15 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         notificationSystem = GameObject.FindGameObjectWithTag("NotificationSystem");
+
+        PlayerName = ((GameServer) NetworkManager.singleton).PlayerInfos.name;
+        CmdSendName(PlayerName);
+    }
+
+    [Command]
+    public void CmdSendName(string name)
+    { 
+        PlayerName = name;
     }
 
     /// <summary>
@@ -126,22 +141,30 @@ public class Player : NetworkBehaviour
         }
     }
 
-    /// <summary>
-    /// Quits the game
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public void KillGame()
+    [ClientRpc]
+    public void RpcSetNameOfNewPlayer(string playerName)
     {
-        Application.Quit();
+        PlayerName = playerName;
     }
 
     /// <summary>
-    /// Tells the server that this clients wants to restart the game
+    /// Finish the game.
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
     [Command]
-    public void CmdRestart()
+    public void CmdFinishGame()
     {
-        gameManager.Restart();
+        TargetSendResults(gameManager.GetNameOfWinner());
+    }
+
+
+    /// <summary>
+    /// Send results to the framework
+    /// </summary>
+    /// \author SWT-P_SS_20_Dixit
+    [TargetRpc]
+    public void TargetSendResults(string winner)
+    {
+        GameServer.Instance.HandleGameResults(Placement,winner);
     }
 }

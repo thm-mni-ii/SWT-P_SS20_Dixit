@@ -92,5 +92,24 @@ namespace Tests
             Assert.AreEqual((new Quaternion(0,0,0,-1)).ToString(), inputGo.transform.GetChild(0).transform.rotation.ToString());    
         }
 
+        [UnityTest]
+        public IEnumerator SlideTest()
+        {
+            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(100,0,-1));
+            yield return new WaitForSeconds(3f);
+
+            Assert.AreEqual((new Vector3(100,0,-1)).ToString(), questionGo.transform.position.ToString());
+
+            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(0,200,-1));
+            yield return new WaitForSeconds(3f);
+
+            Assert.AreEqual((new Vector3(0,200,-1)).ToString(), (questionGo.transform.position).ToString());
+
+            questionGo.GetComponent<Card>().RpcSlideToPosition(new Vector3(-100,-200,-1));
+            yield return new WaitForSeconds(3f);
+
+            Assert.AreEqual((new Vector3(-100,-200,-1)).ToString(), questionGo.transform.position.ToString());
+        }
+
     }
 }

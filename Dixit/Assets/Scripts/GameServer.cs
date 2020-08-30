@@ -117,9 +117,6 @@ public class GameServer : NetworkManager
             while (p.PlayerName == null || p.PlayerName == "")
                 yield return new WaitForSeconds(0.5f);
 
-        foreach (var p in Utils.GetPlayers())
-            p.RpcSetNameOfNewPlayer(p.PlayerName);
-
         GameManager gameManager = GameManager.Instance;
 
         gameManager.questionSetID = GameInfos["Question Set"];

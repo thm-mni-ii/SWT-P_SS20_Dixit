@@ -31,6 +31,7 @@ public class Player : NetworkBehaviour
     /// The name of the player
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
+    [SyncVar]
     public string PlayerName = null;
 
     /// <summary>
@@ -128,7 +129,6 @@ public class Player : NetworkBehaviour
         gameManager.LogPlayerIsReady();
     }
 
-
     /// <summary>
     /// Displays a Notification to the client
     /// </summary>
@@ -152,15 +152,6 @@ public class Player : NetworkBehaviour
         {
             notificationSystem.GetComponent<NotificationSystem>().AddNotification(notification);
         }
-    }
-
-    /// <summary>
-    /// // will be removed
-    /// </summary>
-    [ClientRpc]
-    public void RpcSetNameOfNewPlayer(string playerName)
-    {
-        PlayerName = playerName;
     }
 
     /// <summary>

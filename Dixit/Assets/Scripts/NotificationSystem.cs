@@ -39,6 +39,9 @@ public class NotificationSystem : MonoBehaviour
 
     private Queue<GameObject> notifications = new Queue<GameObject>();
 
+    public AudioSource goodsound;
+    public AudioSource badsound;
+
     /// <summary>
     /// Adds a notification to the queue and displays it
     /// </summary>
@@ -55,7 +58,15 @@ public class NotificationSystem : MonoBehaviour
         notif.GetComponent<RectTransform>().sizeDelta = new Vector2(notificationWidth,notificationHeight);
         notif.GetComponent<NotificationCanvas>().init();
         notifications.Enqueue(notif);
-        
+        if (notification.notificationType == Notification.NotificationTypes.good)
+        {
+            goodsound.Play();
+        }
+        else
+        {
+            badsound.Play();
+        }
+
         updateNotifications();
     }
 

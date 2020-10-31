@@ -58,12 +58,6 @@ public class GameServer : NetworkManager
     public JSONNode GameInfos { get; private set; }
 
     /// <summary>
-    /// The number of player that want to play the game. The Server will wait until that number of players joined the game
-    /// </summary>
-    /// \author SWT-P_SS_20_Dixit
-    public int playersWantToPlay = 2;
-
-    /// <summary>
     /// The <c>GameManager</c>
     /// </summary>
     /// \author SWT-P_SS_20_Dixit
@@ -108,7 +102,7 @@ public class GameServer : NetworkManager
 
         NetworkServer.AddPlayerForConnection(conn, player);
 
-        if (numPlayers == playersWantToPlay)
+        if (numPlayers == GameInfos["playerAmount"])
             StartCoroutine(WaitAndStart());
     }
 
@@ -216,6 +210,7 @@ public class GameServer : NetworkManager
         GameInfos.Add("Rounds", "3");
         GameInfos.Add("Answer Time", "15");
         GameInfos.Add("Picking Time", "15");
+        GameInfos.Add("playerAmount", "2");
     }
 
     /// <summary>

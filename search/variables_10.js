@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['warningcolor_328',['warningColor',['../class_notification_system.html#a1f0d4f08d14b02883fa2904c8ad1339d',1,'NotificationSystem']]]
+  ['warningcolor_326',['warningColor',['../class_notification_system.html#a1f0d4f08d14b02883fa2904c8ad1339d',1,'NotificationSystem']]]
 ];
